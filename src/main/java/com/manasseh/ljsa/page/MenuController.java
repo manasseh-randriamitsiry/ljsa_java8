@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -35,7 +34,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         classe_btn.setText("classe");
     }
     public void etudiant() {
-//        loadContent("etudiant");
+        loadContent("etudiant");
         home_btn.setStyle("-fx-background-color: #99CC66");
         home_btn.setStyle("-fx-background-color: #99CC66");
         profs_btn.setStyle("-fx-background-color: #99CC66");
@@ -115,7 +114,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         stage.setIconified(true);
     }
 
-    public void close(MouseEvent event) {
+    public void close() {
         System.exit(0);
     }
 
