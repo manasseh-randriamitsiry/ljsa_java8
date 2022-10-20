@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<Pane fx:id="menu_pane" prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.HomeController">
+   <children>
+      <Label fx:id="text" layoutX="37.0" layoutY="14.0" text="Maison">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Pane layoutX="37.0" layoutY="84.0" prefHeight="212.0" prefWidth="200.0" styleClass="input1" stylesheets="@../style.css">
+         <children>
+            <Label layoutX="47.0" layoutY="22.0" text="ETUDIANT">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="nb_etudiant" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="90.0" prefHeight="52.0" prefWidth="188.0" text="10">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="290.0" layoutY="84.0" prefHeight="212.0" prefWidth="200.0" styleClass="input1" stylesheets="@../style.css">
+         <children>
+            <Label layoutX="65.0" layoutY="21.0" text="PROFS">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="nb_profs" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="90.0" prefHeight="52.0" prefWidth="188.0" text="10">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="540.0" layoutY="84.0" prefHeight="212.0" prefWidth="200.0" styleClass="input1" stylesheets="@../style.css">
+         <children>
+            <Label layoutX="47.0" layoutY="22.0" text="REUSSITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="taux_reuissite" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="90.0" prefHeight="52.0" prefWidth="188.0" text="70">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>

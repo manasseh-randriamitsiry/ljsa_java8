@@ -1,0 +1,70 @@
+.root{
+    -fx-background-color: #F8F9F9;
+
+}
+.table{
+
+}
+.table-view .column-header{
+    -fx-background-color: #CC9966;
+    -fx-pref-height : 40px;
+}
+#btnOK{
+    -fx-background-color: "red";
+    -fx-color: "black";
+}
+
+#container{
+    -fx-background-radius: 20px 0px 20px 0px;
+    -fx-background-color: #E5E8E8;
+}
+
+.sidebar{
+    -fx-background-color: #F7DC6F;
+    -fx-background-radius: 0px 20px 20px 0px;
+}
+
+.button{
+    -fx-text-color: "black";
+    -fx-background-color: #99CC66;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.button:focused{
+    -fx-text-color: "black";
+    -fx-background-color: #996699;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.btn-danger{
+    -fx-text-color: "black";
+    -fx-background-color: #FF6666;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.items{
+    -fx-background-color: "green";
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.body{
+    -fx-background-radius: 0px 20px 20px 20px;
+    -fx-background-color: #E5E8E8;
+}
+
+.input{
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-background-color: "white";
+    -fx-border-radius: 20px 20px 20px 20px;
+}
+
+.input1{
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-background-color:  #F8F9F9;
+    -fx-border-color : #0099CC;
+    -fx-border-radius: 20px 20px 20px 20px;
+}
