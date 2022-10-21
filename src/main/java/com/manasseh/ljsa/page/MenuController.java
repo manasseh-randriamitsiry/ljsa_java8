@@ -43,7 +43,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         classe_btn.setText("classe");
     }
     public void terminale() {
-//        loadContent("terminale");
+        loadContent("terminale");
         classe_btn.setText("Classe >Terminale");
         home_btn.setStyle("-fx-background-color: #99CC66");
         home_btn.setStyle("-fx-background-color: #99CC66");
@@ -71,7 +71,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: #99CC66");
     }
     public void matiere(){
-//        loadContent("matiere");
+        loadContent("matiere");
         home_btn.setStyle("-fx-background-color: #99CC66");
         home_btn.setStyle("-fx-background-color: #99CC66");
         profs_btn.setStyle("-fx-background-color: #99CC66");
@@ -80,13 +80,13 @@ public class MenuController extends ActivateDrag implements Initializable {
         classe_btn.setText("classe");
     }
     public void profs() {
-        classe_btn.setText("classe");
-//        loadContent("profs");
+        loadContent("profs");
         home_btn.setStyle("-fx-background-color: #99CC66");
         home_btn.setStyle("-fx-background-color: #99CC66");
         profs_btn.setStyle("-fx-background-color: #996699");
         etudiant_btn.setStyle("-fx-background-color: #99CC66");
         matiere_btn.setStyle("-fx-background-color: #99CC66");
+        classe_btn.setText("classe");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

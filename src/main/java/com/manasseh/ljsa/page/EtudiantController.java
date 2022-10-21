@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.model.*;
@@ -102,7 +101,7 @@ public class EtudiantController implements Initializable {
                             dltBtn.setOnAction(event -> {
                                 action_pane.setVisible(false);
                                 try {
-                                    dao.delete(getTableView().getItems().get(getIndex()).id, "etudiants", "id");
+                                    dao.delete(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
                                     refresh();
                                     } catch (java.sql.SQLIntegrityConstraintViolationException exception ) {
                                     popUp.error("information", "Erreur durant le suppression, etudiant en cours d'utilisation");
@@ -178,8 +177,7 @@ public class EtudiantController implements Initializable {
     public FilteredList<Etudiant> activerRecherche(){
         FilteredList<Etudiant> filteredList = new FilteredList<>(listEtudiant,a->true);
         recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(etudiant -> {
-            if ((newValue.isEmpty()
-                    || newValue.isEmpty())
+            if (newValue.isEmpty()
                     || etudiant.getNom_etudiant().toUpperCase().contains(newValue.toUpperCase())
                     || etudiant.getPrenom_etudiant().toLowerCase().contains(newValue.toLowerCase())
                     || etudiant.getN_mat_etudiant().toUpperCase().contains(newValue.toUpperCase())

@@ -9,17 +9,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfbb41a6-bed2-4ec0-a2c1-e99654c755b9" name="Changes" comment="ljsa with java*">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/DAOInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Etudiant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/EtudiantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ljsa_java_8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ljsa_java_8.xml" afterDir="false" />
+    <list default="true" id="cfbb41a6-bed2-4ec0-a2c1-e99654c755b9" name="Changes" comment="everything in place">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/MatiereDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/ProfDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/BulletinController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Matiere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Prof.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Terminale.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/MatiereController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/ProfController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/SecondeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Etudiant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/EtudiantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/EtudiantController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/etudiant.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/etudiant.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/Bulletin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/Bulletin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/matiere.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/matiere.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/premiere.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/premiere.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/profs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/profs.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/seconde.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/seconde.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,24 +60,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manasseh/IdeaProjects/ljsa_java_8/src/main/java/com/manasseh/ljsa/page&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3689655&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/Users/manasseh/IdeaProjects/ljsa_java_8/src/main/java/com/manasseh/ljsa/model",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3689655"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model" />
       <recent name="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page" />
       <recent name="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa" />
       <recent name="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/controller" />
-      <recent name="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.manasseh.ljsa.page" />
     </key>
   </component>
   <component name="RunManager">
@@ -92,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666298777844</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ljsa with java*">
+      <created>1666301138279</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666301138279</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,6 +131,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ljsa with java*" />
-    <option name="LAST_COMMIT_MESSAGE" value="ljsa with java*" />
+    <MESSAGE value="everything in place" />
+    <option name="LAST_COMMIT_MESSAGE" value="everything in place" />
   </component>
 </project>

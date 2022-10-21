@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="profsPane" onZoom="#zoomText" prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manasseh.page.ProfController">
+<Pane fx:id="profsPane" onZoom="#zoomText" prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.ProfController">
    <children>
       <Label fx:id="professeur" layoutX="90.0" layoutY="30.0" text="Professeurs">
          <font>
