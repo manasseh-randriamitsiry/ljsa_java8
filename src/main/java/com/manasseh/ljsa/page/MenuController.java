@@ -52,7 +52,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: #99CC66");
     }
     public void premiere() {
-//        loadContent("premiere");
+        loadContent("premiere");
         classe_btn.setText("Classe >Premiere");
         home_btn.setStyle("-fx-background-color: #99CC66");
         home_btn.setStyle("-fx-background-color: #99CC66");
@@ -62,7 +62,7 @@ public class MenuController extends ActivateDrag implements Initializable {
     }
 
     public void seconde() {
-//        loadContent("seconde");
+        loadContent("seconde");
         classe_btn.setText("Classe >Seconde");
         home_btn.setStyle("-fx-background-color: #99CC66");
         home_btn.setStyle("-fx-background-color: #99CC66");

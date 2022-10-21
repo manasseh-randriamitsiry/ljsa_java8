@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import com.manasseh.ljsa.utils.PopUp;
-
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
