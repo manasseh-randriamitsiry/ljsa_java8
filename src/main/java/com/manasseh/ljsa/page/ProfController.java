@@ -136,8 +136,7 @@ public class ProfController implements Initializable{
     public FilteredList<Prof> activerRecherche(){
         FilteredList<Prof> filteredList = new FilteredList<>(profList,prof -> true);
         recherche_input.textProperty().addListener((Observable,oldValue,newValue)-> filteredList.setPredicate(prof ->{
-            if (
-                    prof.getNom_prof().toUpperCase().contains(newValue.toUpperCase())
+            if (prof.getNom_prof().toUpperCase().contains(newValue.toUpperCase())
                     || prof.getPrenom_prof().toLowerCase().contains(newValue.toLowerCase())
                     || prof.getN_mat().toUpperCase().contains(newValue.toUpperCase()))
             {
