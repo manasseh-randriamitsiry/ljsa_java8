@@ -17,7 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import manasseh.utils.AutoCompleteComboBoxListener;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -211,6 +210,7 @@ public class SecondeController implements Initializable{
     }
     public void afficherPaneAjout(){
         btn_action.setText("Ajouter +");
+        seconde_label.setText("Seconde: Ajout");
         action_pane.setVisible(true);
         new FadeInRight(action_pane).play();
     }
