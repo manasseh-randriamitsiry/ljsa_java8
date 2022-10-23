@@ -42,8 +42,8 @@ public class EtudiantController implements Initializable {
     public TableColumn<Etudiant,Etudiant> action_column;
     public TextField recherche_input;
     public Label etudiant_label;
-    public ComboBox  serie_input;
-    public ComboBox classe_input;
+    public ComboBox<Object>  serie_input;
+    public ComboBox<Object> classe_input;
     public Label id_label;
     public Pane pane_etudiant;
     EtudiantDAO dao = new EtudiantDAO();
@@ -58,7 +58,7 @@ public class EtudiantController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listSerie();
-        String items[] = {"Seconde","Première","Terminale"};
+        String[] items = {"Seconde","Première","Terminale"};
         classe_input.getItems().addAll(items);
         refresh();
         numero_matricule_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getN_mat_etudiant()));
@@ -68,57 +68,54 @@ public class EtudiantController implements Initializable {
         serie_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getSerie_etudiant()));
         date_nais_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDate_nais_etudiant()));
 
-        Callback<TableColumn<Etudiant,Etudiant>, TableCell<Etudiant,Etudiant>> newColumn = (TableColumn<Etudiant, Etudiant> param) ->{
-                TableCell<Etudiant, Etudiant> tableCell = new TableCell<Etudiant,Etudiant>() {
-                    @Override
-                    public void updateItem(Etudiant item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            final Button editBtn = new Button("Editer");
-                            final Button dltBtn = new Button("Supprimer");
-                            dltBtn.setStyle("-fx-background-color:#FF6666");
-                            editBtn.setOnAction(event -> {
-                                try {
-                                    etudiant = table_etudiant.getSelectionModel().getSelectedItem();
-                                    etudiant_label.setText("Etudiant: edition");
-                                    btn_action.setText("Mettre à jour");
-                                    setTexts(etudiant.getId(),
-                                            etudiant.getN_mat_etudiant(),
-                                            etudiant.getNom_etudiant(),
-                                            etudiant.getPrenom_etudiant(),
-                                            etudiant.getClasse_etudiant(),
-                                            etudiant.getSerie_etudiant(),
-                                            etudiant.getDate_nais_etudiant());
-                                    action_pane.setVisible(true);
-                                    new FadeInRight(action_pane).play();
-                                } catch (NullPointerException e) {
-                                    popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
-                                }
-                            });
-                            dltBtn.setOnAction(event -> {
-                                action_pane.setVisible(false);
-                                try {
-                                    dao.delete(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
-                                    refresh();
-                                    } catch (java.sql.SQLIntegrityConstraintViolationException exception ) {
-                                    popUp.error("information", "Erreur durant le suppression, etudiant en cours d'utilisation");
-                                } catch (SQLException | ClassNotFoundException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            });
-                            HBox hb = new HBox();
-                            hb.setSpacing(2);
-                            hb.setStyle("-fx-alignment:center");
-                            hb.getChildren().addAll(editBtn, dltBtn);
-                            setGraphic(hb);
-                            setText(null);
+        Callback<TableColumn<Etudiant,Etudiant>, TableCell<Etudiant,Etudiant>> newColumn = (TableColumn<Etudiant, Etudiant> param) -> new TableCell<Etudiant,Etudiant>() {
+            @Override
+            public void updateItem(Etudiant item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    final Button editBtn = new Button("Editer");
+                    final Button dltBtn = new Button("Supprimer");
+                    dltBtn.setStyle("-fx-background-color:#FF6666");
+                    editBtn.setOnAction(event -> {
+                        try {
+                            etudiant = getTableView().getItems().get(getIndex());
+                            etudiant_label.setText("Etudiant: edition");
+                            btn_action.setText("Mettre à jour");
+                            setTexts(etudiant.getId(),
+                                    etudiant.getN_mat_etudiant(),
+                                    etudiant.getNom_etudiant(),
+                                    etudiant.getPrenom_etudiant(),
+                                    etudiant.getClasse_etudiant(),
+                                    etudiant.getSerie_etudiant(),
+                                    etudiant.getDate_nais_etudiant());
+                            action_pane.setVisible(true);
+                            new FadeInRight(action_pane).play();
+                        } catch (NullPointerException e) {
+                            popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                         }
-                    }
-                };
-                return tableCell;
+                    });
+                    dltBtn.setOnAction(event -> {
+                        action_pane.setVisible(false);
+                        try {
+                            dao.delete(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
+                            refresh();
+                            } catch (java.sql.SQLIntegrityConstraintViolationException exception ) {
+                            popUp.error("information", "Erreur durant le suppression, etudiant en cours d'utilisation");
+                        } catch (SQLException | ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    HBox hb = new HBox();
+                    hb.setSpacing(2);
+                    hb.setStyle("-fx-alignment:center");
+                    hb.getChildren().addAll(editBtn, dltBtn);
+                    setGraphic(hb);
+                    setText(null);
+                }
+            }
         };
         action_column.setCellFactory(newColumn);
         // fin creation de bouton
@@ -174,7 +171,7 @@ public class EtudiantController implements Initializable {
         nom_input.setText("");
         prenom_input.setText("");
     }
-    public FilteredList<Etudiant> activerRecherche(){
+    public void activerRecherche(){
         FilteredList<Etudiant> filteredList = new FilteredList<>(listEtudiant,a->true);
         recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(etudiant -> {
             if (newValue.isEmpty()
@@ -190,7 +187,6 @@ public class EtudiantController implements Initializable {
         SortedList<Etudiant> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(table_etudiant.comparatorProperty());
         table_etudiant.setItems(sortedList);
-        return filteredList;
     }
     public void ajoutEtudiant() {
         action_pane.setVisible(true);

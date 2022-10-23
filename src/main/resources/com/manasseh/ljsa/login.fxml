@@ -13,26 +13,30 @@
 
 <BorderPane onMouseClicked="#getCursorPosition" prefHeight="600.0" prefWidth="350.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.LoginController">
    <center>
-      <Pane fx:id="loginPane" onMouseDragged="#activateDrag" onMousePressed="#getCursorPosition" prefHeight="600.0" prefWidth="350.0" styleClass="body" stylesheets="@style.css" BorderPane.alignment="CENTER">
-         <children>
-            <PasswordField fx:id="password" layoutX="54.0" layoutY="323.0" prefHeight="42.0" prefWidth="245.0" promptText="Mot de passe" styleClass="input" stylesheets="@style.css" />
-            <TextField fx:id="username" layoutX="54.0" layoutY="249.0" prefHeight="42.0" prefWidth="245.0" promptText="Nom d'utilisateur" styleClass="input" stylesheets="@style.css" />
-            <Button layoutX="210.0" layoutY="448.0" mnemonicParsing="false" onAction="#auth" prefHeight="35.0" prefWidth="67.0" text="Login" />
-            <Button layoutX="76.0" layoutY="448.0" mnemonicParsing="false" onAction="#noAccount" prefHeight="35.0" prefWidth="113.0" style="-fx-background-color: #99CCCC;" text="Pas de compte?" />
-            <Label layoutX="113.0" layoutY="240.0" text="Nom d'utilisateur" />
-            <Label layoutX="113.0" layoutY="314.0" text="Mot de passe" />
-            <Circle fill="#FF6666" layoutX="336.0" layoutY="15.0" onMouseClicked="#close" radius="7.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <Label fx:id="info" alignment="CENTER" layoutX="-1.0" layoutY="519.0" prefHeight="81.0" prefWidth="350.0" text="contacter l'admin" visible="false">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="99.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/icons8-security_shield_green.png" />
-               </image>
-            </ImageView>
-         </children>
+      <Pane fx:id="loginPane" onMouseDragged="#activateDrag" onMousePressed="#getCursorPosition" prefHeight="600.0"
+            prefWidth="350.0" styleClass="body" stylesheets="@style.css" BorderPane.alignment="CENTER">
+         <PasswordField fx:id="password" layoutX="54.0" layoutY="323.0" prefHeight="42.0" prefWidth="245.0"
+                        promptText="Mot de passe" styleClass="input" stylesheets="@style.css"/>
+         <TextField fx:id="username" layoutX="54.0" layoutY="249.0" prefHeight="42.0" prefWidth="245.0"
+                    promptText="Nom d'utilisateur" styleClass="input" stylesheets="@style.css"/>
+         <Button layoutX="210.0" layoutY="448.0" mnemonicParsing="false" onAction="#auth" prefHeight="35.0"
+                 prefWidth="67.0" text="Login"/>
+         <Button layoutX="76.0" layoutY="448.0" mnemonicParsing="false" onAction="#noAccount" prefHeight="35.0"
+                 prefWidth="113.0" style="-fx-background-color: #99CCCC;" text="Pas de compte?"/>
+         <Label layoutX="113.0" layoutY="240.0" text="Nom d'utilisateur"/>
+         <Label layoutX="113.0" layoutY="314.0" text="Mot de passe"/>
+         <Circle fill="#FF6666" layoutX="336.0" layoutY="15.0" onMouseClicked="#close" radius="7.0" stroke="TRANSPARENT"
+                 strokeType="INSIDE"/>
+         <Label fx:id="info" alignment="CENTER" layoutX="-1.0" layoutY="519.0" prefHeight="81.0" prefWidth="350.0"
+                text="contacter l'admin" visible="false">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+         </Label>
+         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="99.0" layoutY="46.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@img/icons8-security_shield_green.png"/>
+         </ImageView>
       </Pane>
    </center>
 </BorderPane>

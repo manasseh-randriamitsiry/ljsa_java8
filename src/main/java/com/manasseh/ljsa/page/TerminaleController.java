@@ -41,7 +41,7 @@ public class TerminaleController implements Initializable{
             pc_input,
             phylo_input,
             ses_input;
-    public ComboBox annee_input,
+    public ComboBox<Object> annee_input,
             n_mat_input;
     public TableColumn<Terminale, String> trimestre_column,
             annee_column,
@@ -55,6 +55,8 @@ public class TerminaleController implements Initializable{
             mlg_column,
             n_mat_column,
             phylo_column,
+            total_column,
+            moyenne_column,
             phys_column;
     public Label  id_label;
     public Pane action_pane;
@@ -70,7 +72,7 @@ public class TerminaleController implements Initializable{
         refresh();
         clearInputs();
         new FadeOutRight(action_pane).play();
-        String items[] = {"2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033"
+        String[] items = {"2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033"
                 ,"2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047",
                 "2048","2049","2050","2051","2052","2053","2054","2055","2056","2057","2058","2059","2060","2061"};
         listEtudiant();
@@ -88,67 +90,66 @@ public class TerminaleController implements Initializable{
         svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
         frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrs().toString()));
         ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
+        total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
+        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
         annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 
-        Callback<TableColumn<Terminale,Terminale>, TableCell<Terminale,Terminale>> newColumn = (TableColumn<Terminale,Terminale> param) -> {
-                TableCell<Terminale, Terminale> tableCell = new TableCell<Terminale,Terminale>() {
-                    @Override
-                    public void updateItem(Terminale item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            final Button editBtn = new Button("Editer");
-                            final Button dltBtn = new Button("Supprimer");
-                            dltBtn.setStyle("-fx-background-color:#FF6666");
-                            editBtn.setOnAction(event -> {
-                                try {
-                                    terminale = table_terminale.getSelectionModel().getSelectedItem();
-                                    terminale_label.setText("Terminale: edition");
-                                    btn_action.setText("Mettre à jour");
-                                    setInputText(terminale.getId(),
-                                            terminale.getMalagasy(),
-                                            terminale.getFrs(),
-                                            terminale.getAnglais(),
-                                            terminale.getHistoGeo(),
-                                            terminale.getPhylosphie(),
-                                            terminale.getEps(),
-                                            terminale.getMathematique(),
-                                            terminale.getSpc(),
-                                            terminale.getSvt(),
-                                            terminale.getSes(),
-                                            terminale.getN_mat(),
-                                            terminale.getTrimestre(),
-                                            terminale.getAnnee_scolaire()
-                                            );
-                                    action_pane.setVisible(true);
-                                    new FadeInRight(action_pane).play();
-                                } catch (NullPointerException e) {
-                                    System.out.println(e);
-                                    popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
-                                }
-                            });
-                            dltBtn.setOnAction(event -> {
-                                action_pane.setVisible(false);
-                                try {
-                                    terminaleDAO.delete(getTableView().getItems().get(getIndex()).getId(), "terminale", "id");
-                                    refresh();
-                                } catch (SQLException | ClassNotFoundException exception) {
-                                    popUp.error("information", "veuillez selectionner une colonne avant de cliquer sur editer");
-                                }
-                            });
-                            HBox hb = new HBox();
-                            hb.setSpacing(5);
-                            hb.setStyle("-fx-alignment:center");
-                            hb.getChildren().addAll(editBtn, dltBtn);
-                            setGraphic(hb);
-                            setText(null);
+        Callback<TableColumn<Terminale,Terminale>, TableCell<Terminale,Terminale>> newColumn = (TableColumn<Terminale,Terminale> param) -> new TableCell<Terminale,Terminale>() {
+            @Override
+            public void updateItem(Terminale item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    final Button editBtn = new Button("Editer");
+                    final Button dltBtn = new Button("Supprimer");
+                    dltBtn.setStyle("-fx-background-color:#FF6666");
+                    editBtn.setOnAction(event -> {
+                        try {
+                            terminale = getTableView().getItems().get(getIndex());
+                            terminale_label.setText("Terminale: edition");
+                            btn_action.setText("Mettre à jour");
+                            setInputText(terminale.getId(),
+                                    terminale.getMalagasy(),
+                                    terminale.getFrs(),
+                                    terminale.getAnglais(),
+                                    terminale.getHistoGeo(),
+                                    terminale.getPhylosphie(),
+                                    terminale.getEps(),
+                                    terminale.getMathematique(),
+                                    terminale.getSpc(),
+                                    terminale.getSvt(),
+                                    terminale.getSes(),
+                                    terminale.getN_mat(),
+                                    terminale.getTrimestre(),
+                                    terminale.getAnnee_scolaire()
+                                    );
+                            action_pane.setVisible(true);
+                            new FadeInRight(action_pane).play();
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                            popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                         }
-                    }
-                };
-                return tableCell;
+                    });
+                    dltBtn.setOnAction(event -> {
+                        action_pane.setVisible(false);
+                        try {
+                            terminaleDAO.delete(getTableView().getItems().get(getIndex()).getId(), "terminale", "id");
+                            refresh();
+                        } catch (SQLException | ClassNotFoundException exception) {
+                            popUp.error("information", "veuillez selectionner une colonne avant de cliquer sur editer");
+                        }
+                    });
+                    HBox hb = new HBox();
+                    hb.setSpacing(5);
+                    hb.setStyle("-fx-alignment:center");
+                    hb.getChildren().addAll(editBtn, dltBtn);
+                    setGraphic(hb);
+                    setText(null);
+                }
+            }
         };
         action_column.setCellFactory(newColumn);
         btn_action.setOnAction(event -> {
@@ -218,77 +219,41 @@ public class TerminaleController implements Initializable{
         svt_input.setText("");
         ses_input.setText("");
         eps_input.setText("");
+        trimestre_input.setText("");
     }
     private void refresh(){
         listTerminale.clear();
         listTerminale.setAll(terminaleDAO.listAll());
         activerRecherche();
         clearInputs();
-//        check();
     }
 
     public void check(){
-//        if (!(mlg_input.getText()).isEmpty() &&
-//                !(frs_input.getText()).isEmpty() &&
-//                !(ang_input.getText()).isEmpty() &&
-//                !(hg_input.getText()).isEmpty() &&
-//                !(phylo_input.getText()).isEmpty() &&
-//                !(eps_input.getText()).isEmpty() &&
-//                !(math_input.getText()).isEmpty() &&
-//                !(pc_input.getText()).isEmpty() &&
-//                !(svt_input.getText()).isEmpty() &&
-//                !(ses_input.getText()).isEmpty() &&
-//                n_mat_input.getValue()!=null &&
-//                !(trimestre_input.getText()).isEmpty() &&
-//                annee_input.getValue()!=null
-//        ){
-//            btn_action.setVisible(true);
-//        } else if (mlg_input.getText().isEmpty() ||
-//                frs_input.getText().isEmpty() ||
-//                ang_input.getText().isEmpty() ||
-//                hg_input.getText().isEmpty() ||
-//                phylo_input.getText().isEmpty() ||
-//                eps_input.getText().isEmpty() ||
-//                math_input.getText().isEmpty() ||
-//                pc_input.getText().isEmpty() ||
-//                svt_input.getText().isEmpty() ||
-//                ses_input.getText().isEmpty() ||
-//                n_mat_input.getValue() ==null ||
-//                trimestre_input.getText().isEmpty() ||
-//                annee_input.getValue()==null
-//        ){
-//            btn_action.setVisible(false);
-//        }
     }
-    private FilteredList<Terminale> activerRecherche() {
+    private void activerRecherche() {
         FilteredList<Terminale> filteredList = new FilteredList<>(listTerminale, a->true);
-        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(terminale -> {
-            if (newValue.isEmpty()
-                    || terminale.getAnglais().toString().contains(newValue)
-                    || terminale.getPhylosphie().toString().contains(newValue)
-                    || terminale.getMalagasy().toString().contains(newValue)
-                    || terminale.getN_mat().contains(newValue.toUpperCase())
-                    || terminale.getHistoGeo().toString().contains(newValue)
-                    || terminale.getMathematique().toString().contains(newValue)
-                    || terminale.getSpc().toString().contains(newValue)
-                    || terminale.getSvt().toString().contains(newValue)
-                    || terminale.getEps().toString().contains(newValue)
-                    || terminale.getSes().toString().contains(newValue)
-                    || terminale.getAnnee_scolaire().toString().contains(newValue)
-            ){
-                return true;
-            }else return false;
-        }));
+        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(terminale -> newValue.isEmpty()
+                || terminale.getAnglais().toString().contains(newValue)
+                || terminale.getPhylosphie().toString().contains(newValue)
+                || terminale.getMalagasy().toString().contains(newValue)
+                || terminale.getN_mat().contains(newValue.toUpperCase())
+                || terminale.getHistoGeo().toString().contains(newValue)
+                || terminale.getMathematique().toString().contains(newValue)
+                || terminale.getSpc().toString().contains(newValue)
+                || terminale.getSvt().toString().contains(newValue)
+                || terminale.getFrs().toString().contains(newValue)
+                || terminale.getEps().toString().contains(newValue)
+                || terminale.getSes().toString().contains(newValue)
+                || terminale.getAnnee_scolaire().toString().contains(newValue)));
         SortedList<Terminale> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(table_terminale.comparatorProperty());
         table_terminale.setItems(sortedList);
-        return filteredList;
     }
 
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants";
+        String query = "SELECT n_matricule FROM etudiants where classe='terminale' order by n_matricule ASC";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

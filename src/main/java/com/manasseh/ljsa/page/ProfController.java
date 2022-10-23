@@ -55,55 +55,51 @@ public class ProfController implements Initializable{
         actionColumn.setCellValueFactory(new PropertyValueFactory<>(""));
 
         // creation de bouton ajout et suppression
-        Callback<TableColumn<Prof, Prof>, TableCell<Prof, Prof>> cellFactory=  (TableColumn<Prof, Prof> param) ->{
-                TableCell<Prof, Prof> tableCell = new TableCell<Prof,Prof>() {
-                    @Override
-                    public void updateItem(Prof item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            final Button editBtn = new Button("Editer");
-                            final Button dltBtn = new Button("Supprimer");
-                            dltBtn.setStyle("-fx-background-color:#FF6666");
-                            editBtn.setOnAction(event -> {
-                                action_pane.setVisible(true);
-                                try {
-                                    prof = table_prof.getSelectionModel().getSelectedItem();
-                                    professeur.setText("Professeur: edition");
-                                    btn_action.setText("Mettre à jour");
-                                    ProfController.this.setText(
-                                            prof.getId(),
-                                            prof.getN_mat(),
-                                            prof.getNom_prof(),
-                                            prof.getPrenom_prof(),
-                                            prof.getDate_nais());
-                                    new FadeInRight(action_pane).play();
-                                } catch (NullPointerException e) {
-                                    popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
-                                }
-                            });
-                            dltBtn.setOnAction(event -> {
-                               action_pane.setVisible(false);
-                                try {
-                                    dao.delete(getTableView().getItems().get(getIndex()).getId(), "profs", "id");
-                                    refreshTable();
-                                } catch (SQLException | ClassNotFoundException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            });
-                            HBox hb = new HBox();
-                            hb.setSpacing(2);
-                            hb.setStyle("-fx-alignment:center");
-                            hb.getChildren().addAll(editBtn, dltBtn);
-                            setGraphic(hb);
-                            setText(null);
+        Callback<TableColumn<Prof, Prof>, TableCell<Prof, Prof>> cellFactory=  (TableColumn<Prof, Prof> param) -> new TableCell<Prof,Prof>() {
+            @Override
+            public void updateItem(Prof item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    final Button editBtn = new Button("Editer");
+                    final Button dltBtn = new Button("Supprimer");
+                    dltBtn.setStyle("-fx-background-color:#FF6666");
+                    editBtn.setOnAction(event -> {
+                        action_pane.setVisible(true);
+                        try {
+                            prof = getTableView().getItems().get(getIndex());
+                            professeur.setText("Professeur: edition");
+                            btn_action.setText("Mettre à jour");
+                            ProfController.this.setText(
+                                    prof.getId(),
+                                    prof.getN_mat(),
+                                    prof.getNom_prof(),
+                                    prof.getPrenom_prof(),
+                                    prof.getDate_nais());
+                            new FadeInRight(action_pane).play();
+                        } catch (NullPointerException e) {
+                            popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                         }
-                    }
-                };
-                return tableCell;
-
+                    });
+                    dltBtn.setOnAction(event -> {
+                       action_pane.setVisible(false);
+                        try {
+                            dao.delete(getTableView().getItems().get(getIndex()).getId(), "profs", "id");
+                            refreshTable();
+                        } catch (SQLException | ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    HBox hb = new HBox();
+                    hb.setSpacing(2);
+                    hb.setStyle("-fx-alignment:center");
+                    hb.getChildren().addAll(editBtn, dltBtn);
+                    setGraphic(hb);
+                    setText(null);
+                }
+            }
         };
         actionColumn.setCellFactory(cellFactory);
 
@@ -132,7 +128,7 @@ public class ProfController implements Initializable{
             }
         });
     }
-    public FilteredList<Prof> activerRecherche(){
+    public void activerRecherche(){
         FilteredList<Prof> filteredList = new FilteredList<>(profList,prof -> true);
         recherche_input.textProperty().addListener((Observable,oldValue,newValue)-> filteredList.setPredicate(prof ->{
             if (prof.getNom_prof().toUpperCase().contains(newValue.toUpperCase())
@@ -145,7 +141,6 @@ public class ProfController implements Initializable{
         SortedList<Prof> sortedData = new SortedList<>(filteredList);
         sortedData.comparatorProperty().bind(table_prof.comparatorProperty());
         table_prof.setItems(sortedData);
-        return filteredList;
     }
     public void refreshTable() {
         profList.clear();

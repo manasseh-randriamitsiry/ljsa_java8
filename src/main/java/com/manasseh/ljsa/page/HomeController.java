@@ -4,7 +4,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
@@ -29,9 +28,9 @@ public class HomeController implements Initializable {
         try {
             nb_etudiant.setText(String.valueOf(etudiantDAO.nombreEtudiant()));
             nb_profs.setText(String.valueOf(profDAO.nombreProf()));
-            XYChart.Series series = new XYChart.Series();
-            series.getData().add(new XYChart.Data<>("2",34));
-            area_chart.getData().add(series);
+//            XYChart.Series series = new XYChart.Series();
+//            series.getData().add(new XYChart.Data<>("2",34));
+//            area_chart.getData().add(series);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -49,52 +49,49 @@ public class MatiereController implements Initializable {
         abreviation_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getAbreviation()));
         action_column.setCellValueFactory(new PropertyValueFactory<>(""));
         //
-        Callback<TableColumn<Matiere,Matiere>, TableCell<Matiere,Matiere>> newColumn = (TableColumn< Matiere, Matiere> param) -> {
-                TableCell<Matiere, Matiere> tableCell = new TableCell<Matiere,Matiere>() {
-                    @Override
-                    public void updateItem(Matiere item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            final Button editBtn = new Button("Editer");
-                            final Button dltBtn = new Button("Supprimer");
-                            dltBtn.setStyle("-fx-background-color:#FF6666");
-                            editBtn.setOnAction(event -> {
-                                try {
-                                    matiere = table_matiere.getSelectionModel().getSelectedItem();
-                                    matiere_label.setText("Matière: edition");
-                                    btn_action.setText("Mettre à jour");
-                                    setTexts(matiere.getId(),
-                                            matiere.getDesignation(),
-                                            matiere.getAbreviation(),
-                                            matiere.getDescription());
-                                    action_pane.setVisible(true);
-                                    new FadeInRight(action_pane).play();
-                                } catch (NullPointerException e) {
-                                    popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
-                                }
-                            });
-                            dltBtn.setOnAction(event -> {
-                                action_pane.setVisible(false);
-                                try {
-                                    dao.delete(getTableView().getItems().get(getIndex()).getId(), "matiere", "id");
-                                    refreshTable();
-                                } catch (SQLException | ClassNotFoundException exception) {
-                                    popUp.error("information","veuillez selectionner une colonne avant de cliquer sur editer");
-                                }
-                            });
-                            HBox hb = new HBox();
-                            hb.setSpacing(2);
-                            hb.setStyle("-fx-alignment:center");
-                            hb.getChildren().addAll(editBtn, dltBtn);
-                            setGraphic(hb);
-                            setText(null);
+        Callback<TableColumn<Matiere,Matiere>, TableCell<Matiere,Matiere>> newColumn = (TableColumn< Matiere, Matiere> param) -> new TableCell<Matiere,Matiere>() {
+            @Override
+            public void updateItem(Matiere item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    final Button editBtn = new Button("Editer");
+                    final Button dltBtn = new Button("Supprimer");
+                    dltBtn.setStyle("-fx-background-color:#FF6666");
+                    editBtn.setOnAction(event -> {
+                        try {
+                            matiere = getTableView().getItems().get(getIndex());
+                            matiere_label.setText("Matière: edition");
+                            btn_action.setText("Mettre à jour");
+                            setTexts(matiere.getId(),
+                                    matiere.getDesignation(),
+                                    matiere.getAbreviation(),
+                                    matiere.getDescription());
+                            action_pane.setVisible(true);
+                            new FadeInRight(action_pane).play();
+                        } catch (NullPointerException e) {
+                            popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                         }
-                    }
-                };
-                return tableCell;
+                    });
+                    dltBtn.setOnAction(event -> {
+                        action_pane.setVisible(false);
+                        try {
+                            dao.delete(getTableView().getItems().get(getIndex()).getId(), "matiere", "id");
+                            refreshTable();
+                        } catch (SQLException | ClassNotFoundException exception) {
+                            popUp.error("information","veuillez selectionner une colonne avant de cliquer sur editer");
+                        }
+                    });
+                    HBox hb = new HBox();
+                    hb.setSpacing(2);
+                    hb.setStyle("-fx-alignment:center");
+                    hb.getChildren().addAll(editBtn, dltBtn);
+                    setGraphic(hb);
+                    setText(null);
+                }
+            }
         };
         action_column.setCellFactory(newColumn);
         // toggle btn

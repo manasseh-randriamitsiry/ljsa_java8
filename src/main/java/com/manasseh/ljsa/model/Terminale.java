@@ -2,6 +2,8 @@ package com.manasseh.ljsa.model;
 
 import com.manasseh.ljsa.page.TerminaleController;
 
+import java.text.DecimalFormat;
+
 public class Terminale extends TerminaleController {
     private final Integer id;
     private final Float malagasy;
@@ -35,6 +37,32 @@ public class Terminale extends TerminaleController {
         this.annee_scolaire = annee_scolaire;
     }
 
+    public Float getTotal(){
+        return (this.malagasy +
+        this.frs +
+        this.anglais +
+        this.histoGeo +
+        this.phylosphie +
+        this.eps +
+        this.mathematique +
+        this.spc +
+        this.svt +
+        this.ses);
+    }
+    public String getMoyenne(){
+        DecimalFormat df = new DecimalFormat("###.##");
+        Float sum = (this.malagasy +
+                this.frs +
+                this.anglais +
+                this.histoGeo +
+                this.phylosphie +
+                this.eps +
+                this.mathematique +
+                this.spc +
+                this.svt +
+                this.ses)/32;
+        return df.format(sum);
+    }
     public Integer getId() {
         return id;
     }

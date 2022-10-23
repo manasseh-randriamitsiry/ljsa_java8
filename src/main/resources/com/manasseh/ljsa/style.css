@@ -1,12 +1,11 @@
 .root{
     -fx-background-color: #F8F9F9;
-
 }
 .table{
 
 }
 .table-view .column-header{
-    -fx-background-color: #CC9966;
+    -fx-background-color: #F7DC6F;
     -fx-pref-height : 40px;
 }
 #btnOK{
@@ -27,7 +26,32 @@
 .button{
     -fx-text-color: "black";
     -fx-background-color: #99CC66;
-    -fx-border-radius: 10px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+.button_right{
+    -fx-text-color: "black";
+    -fx-background-color: #F7DC6F;
+    -fx-border-radius: 20px 0px 0px 20px;
+    -fx-background-radius: 20px 0px 0px 20px;
+}
+.button_left{
+    -fx-text-color: "black";
+    -fx-background-color: #F7DC6F;
+    -fx-border-radius: 0px 20px 20px 0px;
+    -fx-background-radius: 0px 20px 20px 0px;
+}
+.button_center{
+    -fx-text-color: "black";
+    -fx-background-color: #0099CC;
+    -fx-border-radius: 0px 0px 0px 0px;
+    -fx-background-radius: 0px 0px 0px 0px;
+}
+.button_input{
+    -fx-text-color: "black";
+    -fx-background-color: #99CC66;
+    -fx-border-radius: 20px;
+    -fx-border-color : none;
     -fx-background-radius: 10px;
 }
 
@@ -41,6 +65,12 @@
 .btn-danger{
     -fx-text-color: "black";
     -fx-background-color: #FF6666;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+.btn-success{
+    -fx-text-color: "black";
+    -fx-background-color: #99CC66;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
 }
@@ -65,6 +95,19 @@
 .input1{
     -fx-background-radius: 20px 20px 20px 20px;
     -fx-background-color:  #F8F9F9;
-    -fx-border-color : #0099CC;
+    -fx-border-color : none;
     -fx-border-radius: 20px 20px 20px 20px;
+}
+.input2{
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-background-color:  #ECEDED;
+    -fx-border-color : none;
+    -fx-border-radius: 20px 20px 20px 20px;
+}
+
+.input3{
+    -fx-background-radius: 20px 0px 0px 20px;
+    -fx-background-color:  #F8F9F9;
+    -fx-border-color : none;
+    -fx-border-radius: 20px 0px 0px 20px;
 }

@@ -44,7 +44,7 @@ public class PremiereController implements Initializable{
             eac_input,
             ses_input,
             tice_input;
-    public ComboBox annee_input,
+    public ComboBox<Object> annee_input,
             n_mat_input;
     public TableColumn<Premiere, String> trimestre_column,
             annee_column,
@@ -60,7 +60,9 @@ public class PremiereController implements Initializable{
             phylo_column,
             n_mat_column,
             eac_column,
-            phys_column;
+            phys_column,
+            moyenne_column,
+            total_column;
     public Label  id_label;
     public Pane action_pane;
     public Label premiere_label;
@@ -75,7 +77,7 @@ public class PremiereController implements Initializable{
         refresh();
         clearInputs();
         new FadeOutRight(action_pane).play();
-        String items[] = {"2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033"
+        String[] items = {"2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033"
                 ,"2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047",
                 "2048","2049","2050","2051","2052","2053","2054","2055","2056","2057","2058","2059","2060","2061"};
         listEtudiant();
@@ -95,69 +97,68 @@ public class PremiereController implements Initializable{
           frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
          tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
          phylo_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylo().toString()));
+        total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
+        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoy()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
          annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 
-        Callback<TableColumn<Premiere,Premiere>, TableCell<Premiere,Premiere>> newColumn = (TableColumn<Premiere,Premiere> param) -> {
-                TableCell<Premiere, Premiere> tableCell = new TableCell<Premiere,Premiere>() {
-                    @Override
-                    public void updateItem(Premiere item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            final Button editBtn = new Button("Editer");
-                            final Button dltBtn = new Button("Supprimer");
-                            dltBtn.setStyle("-fx-background-color:#FF6666");
-                            editBtn.setOnAction(event -> {
-                                try {
-                                    premiere = premiere_table.getSelectionModel().getSelectedItem();
-                                    premiere_label.setText("Premiere: edition");
-                                    btn_action.setText("Mettre à jour");
-                                    setInputText(premiere.getId(),
-                                            premiere.getMalagasy(),
-                                            premiere.getFrancais(),
-                                            premiere.getAnglais(),
-                                            premiere.getHistogeo(),
-                                            premiere.getEac(),
-                                            premiere.getSes(),
-                                            premiere.getSpc(),
-                                            premiere.getSvt(),
-                                            premiere.getMats(),
-                                            premiere.getEps(),
-                                            premiere.getTice(),
-                                            premiere.getPhylo(),
-                                            premiere.getN_mat(),
-                                            premiere.getTrimestre(),
-                                            premiere.getAnnee_scolaire()
-                                            );
-                                    action_pane.setVisible(true);
-                                    new FadeInRight(action_pane).play();
-                                } catch (NullPointerException e) {
-                                    System.out.println(e);
-                                    popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
-                                }
-                            });
-                            dltBtn.setOnAction(event -> {
-                                action_pane.setVisible(false);
-                                try {
-                                    premiereDAO.delete(getTableView().getItems().get(getIndex()).getId(), "premiere", "id");
-                                    refresh();
-                                } catch (SQLException | ClassNotFoundException exception) {
-                                    popUp.error("information", "veuillez selectionner une colonne avant de cliquer sur editer");
-                                }
-                            });
-                            HBox hb = new HBox();
-                            hb.setSpacing(5);
-                            hb.setStyle("-fx-alignment:center");
-                            hb.getChildren().addAll(editBtn, dltBtn);
-                            setGraphic(hb);
-                            setText(null);
+        Callback<TableColumn<Premiere,Premiere>, TableCell<Premiere,Premiere>> newColumn = (TableColumn<Premiere,Premiere> param) -> new TableCell<Premiere,Premiere>() {
+            @Override
+            public void updateItem(Premiere item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    final Button editBtn = new Button("Editer");
+                    final Button dltBtn = new Button("Supprimer");
+                    dltBtn.setStyle("-fx-background-color:#FF6666");
+                    editBtn.setOnAction(event -> {
+                        try {
+                            premiere = getTableView().getItems().get(getIndex());
+                            premiere_label.setText("Premiere: edition");
+                            btn_action.setText("Mettre à jour");
+                            setInputText(premiere.getId(),
+                                    premiere.getMalagasy(),
+                                    premiere.getFrancais(),
+                                    premiere.getAnglais(),
+                                    premiere.getHistogeo(),
+                                    premiere.getEac(),
+                                    premiere.getSes(),
+                                    premiere.getSpc(),
+                                    premiere.getSvt(),
+                                    premiere.getMats(),
+                                    premiere.getEps(),
+                                    premiere.getTice(),
+                                    premiere.getPhylo(),
+                                    premiere.getN_mat(),
+                                    premiere.getTrimestre(),
+                                    premiere.getAnnee_scolaire()
+                                    );
+                            action_pane.setVisible(true);
+                            new FadeInRight(action_pane).play();
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                            popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                         }
-                    }
-                };
-                return tableCell;
+                    });
+                    dltBtn.setOnAction(event -> {
+                        action_pane.setVisible(false);
+                        try {
+                            premiereDAO.delete(getTableView().getItems().get(getIndex()).getId(), "premiere", "id");
+                            refresh();
+                        } catch (SQLException | ClassNotFoundException exception) {
+                            popUp.error("information", "veuillez selectionner une colonne avant de cliquer sur editer");
+                        }
+                    });
+                    HBox hb = new HBox();
+                    hb.setSpacing(5);
+                    hb.setStyle("-fx-alignment:center");
+                    hb.getChildren().addAll(editBtn, dltBtn);
+                    setGraphic(hb);
+                    setText(null);
+                }
+            }
         };
         action_column.setCellFactory(newColumn);
         btn_action.setOnAction(event -> {
@@ -243,36 +244,30 @@ public class PremiereController implements Initializable{
     }
     public void check(){
     }
-    private FilteredList<Premiere> activerRecherche() {
+    private void activerRecherche() {
         FilteredList<Premiere> filteredList = new FilteredList<>(listPremiere, a->true);
-        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(premiere -> {
-            if (newValue.isEmpty()
-                    || premiere.getAnglais().toString().contains(newValue)
-                    || premiere.getEac().toString().contains(newValue)
-                    || premiere.getMalagasy().toString().contains(newValue)
-                    || premiere.getN_mat().contains(newValue.toUpperCase())
-                    || premiere.getTice().toString().contains(newValue)
-                    || premiere.getMats().toString().contains(newValue)
-                    || premiere.getSpc().toString().contains(newValue)
-                    || premiere.getSvt().toString().contains(newValue)
-                    || premiere.getEps().toString().contains(newValue)
-                    || premiere.getPhylo().toString().contains(newValue)
-                    || premiere.getSes().toString().contains(newValue)
-                    || premiere.getAnnee_scolaire().toString().contains(newValue)
-            ){
-                return true;
-            }else return false;
-        }));
+        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(premiere -> newValue.isEmpty()
+                || premiere.getAnglais().toString().contains(newValue)
+                || premiere.getEac().toString().contains(newValue)
+                || premiere.getMalagasy().toString().contains(newValue)
+                || premiere.getN_mat().contains(newValue.toUpperCase())
+                || premiere.getTice().toString().contains(newValue)
+                || premiere.getMats().toString().contains(newValue)
+                || premiere.getSpc().toString().contains(newValue)
+                || premiere.getSvt().toString().contains(newValue)
+                || premiere.getEps().toString().contains(newValue)
+                || premiere.getPhylo().toString().contains(newValue)
+                || premiere.getSes().toString().contains(newValue)
+                || premiere.getAnnee_scolaire().toString().contains(newValue)));
         SortedList<Premiere> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(premiere_table.comparatorProperty());
         premiere_table.setItems(sortedList);
-        return filteredList;
     }
 
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants";
+        String query = "SELECT n_matricule FROM etudiants where classe='première' order by n_matricule ASC";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
