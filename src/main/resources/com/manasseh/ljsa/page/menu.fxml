@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane fx:id="border_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseDragged="#activateDrag" onMousePressed="#getCursorPosition" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #E5E8E8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.MenuController">
+<BorderPane fx:id="border_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseDragged="#activateDrag" onMousePressed="#getCursorPosition" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #E5E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.MenuController">
    <left>
       <Pane prefHeight="700.0" prefWidth="192.0" styleClass="sidebar" stylesheets="@../style.css" BorderPane.alignment="CENTER">
          <children>
@@ -56,6 +56,13 @@
                   <Image url="@../img/matiere-icon.png" />
                </image>
             </ImageView>
+<!--            <SplitMenuButton fx:id="notes_btn" layoutX="17.0" layoutY="453.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="33.0" prefWidth="158.0" stylesheets="@../style.css" text="Notes">-->
+<!--               <items>-->
+<!--                  <MenuItem mnemonicParsing="false" onAction="#noteSeconde" text="Seconde" />-->
+<!--                  <MenuItem mnemonicParsing="false" onAction="#notePremiere" text="Premiere" />-->
+<!--                  <MenuItem mnemonicParsing="false" onAction="#noteTerminale" text="Terminale" />-->
+<!--               </items>-->
+<!--            </SplitMenuButton>-->
          </children></Pane>
    </left>
    <center>

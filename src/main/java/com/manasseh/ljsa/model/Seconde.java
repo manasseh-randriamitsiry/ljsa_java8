@@ -1,5 +1,7 @@
 package com.manasseh.ljsa.model;
 
+import java.text.DecimalFormat;
+
 public class Seconde {
     private final Integer id;
     private final Float malagasy;
@@ -29,10 +31,41 @@ public class Seconde {
         this.mats = mats;
         this.eps = eps;
         this.tice = tice;
+        this.ses = ses;
         this.n_mat = n_mat;
         this.trimestre = trimestre;
         this.annee_scolaire = annee_scolaire;
-        this.ses = ses;
+
+    }
+
+    public Float getTotal(){
+        return (this.malagasy +
+        this.francais +
+        this.anglais +
+        this.histogeo +
+        this.eac +
+        this.spc +
+        this.svt +
+        this.mats +
+        this.eps +
+        this.tice +
+        this.ses);
+    }
+
+    public String getMoyenne(){
+        DecimalFormat df = new DecimalFormat("###.##");
+        Float sum = (this.malagasy +
+                this.francais +
+                this.anglais +
+                this.histogeo +
+                this.eac +
+                this.spc +
+                this.svt +
+                this.mats +
+                this.eps +
+                this.tice +
+                this.ses)/25;
+        return df.format(sum);
     }
 
     public Integer getId() {

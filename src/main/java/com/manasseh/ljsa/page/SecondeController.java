@@ -52,6 +52,8 @@ public class SecondeController implements Initializable{
             tice_column,
             eps_column,
             frs_column,
+            moyenne_column,
+            total_column,
             hg_column,
             math_column,
             mlg_column,
@@ -91,6 +93,8 @@ public class SecondeController implements Initializable{
           svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
           frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
          tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
+         total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
+         moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
          annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 
@@ -130,7 +134,7 @@ public class SecondeController implements Initializable{
                                     action_pane.setVisible(true);
                                     new FadeInRight(action_pane).play();
                                 } catch (NullPointerException e) {
-                                    System.out.println(e);
+                                    e.printStackTrace();
                                     popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                                 }
                             });
@@ -237,23 +241,18 @@ public class SecondeController implements Initializable{
     }
     private FilteredList<Seconde> activerRecherche() {
         FilteredList<Seconde> filteredList = new FilteredList<>(listseconde, a->true);
-        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(seconde -> {
-            if (newValue.isEmpty()
-                    || seconde.getAnglais().toString().contains(newValue)
-                    || seconde.getEac().toString().contains(newValue)
-                    || seconde.getMalagasy().toString().contains(newValue)
-                    || seconde.getN_mat().contains(newValue.toUpperCase())
-                    || seconde.getTice().toString().contains(newValue)
-                    || seconde.getMats().toString().contains(newValue)
-                    || seconde.getSpc().toString().contains(newValue)
-                    || seconde.getSvt().toString().contains(newValue)
-                    || seconde.getEps().toString().contains(newValue)
-                    || seconde.getSes().toString().contains(newValue)
-                    || seconde.getAnnee_scolaire().toString().contains(newValue)
-            ){
-                return true;
-            }else return false;
-        }));
+        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(seconde -> newValue.isEmpty()
+                || seconde.getAnglais().toString().contains(newValue)
+                || seconde.getEac().toString().contains(newValue)
+                || seconde.getMalagasy().toString().contains(newValue)
+                || seconde.getN_mat().contains(newValue.toUpperCase())
+                || seconde.getTice().toString().contains(newValue)
+                || seconde.getMats().toString().contains(newValue)
+                || seconde.getSpc().toString().contains(newValue)
+                || seconde.getSvt().toString().contains(newValue)
+                || seconde.getEps().toString().contains(newValue)
+                || seconde.getSes().toString().contains(newValue)
+                || seconde.getAnnee_scolaire().toString().contains(newValue)));
         SortedList<Seconde> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(seconde_table.comparatorProperty());
         seconde_table.setItems(sortedList);
@@ -263,7 +262,7 @@ public class SecondeController implements Initializable{
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants";
+        String query = "SELECT n_matricule FROM etudiants where classe='seconde' order by n_matricule ASC";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

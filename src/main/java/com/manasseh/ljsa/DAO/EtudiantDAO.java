@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import com.manasseh.ljsa.model.Etudiant;
+
 import java.sql.*;
 
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
@@ -92,4 +93,8 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return nombre;
     }
+
+//    public ObservableList<> chart(){
+//
+//    }
 }

@@ -55,6 +55,8 @@ public class TerminaleController implements Initializable{
             mlg_column,
             n_mat_column,
             phylo_column,
+            total_column,
+            moyenne_column,
             phys_column;
     public Label  id_label;
     public Pane action_pane;
@@ -88,6 +90,8 @@ public class TerminaleController implements Initializable{
         svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
         frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrs().toString()));
         ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
+        total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
+        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne().toString()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
         annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 
@@ -218,6 +222,7 @@ public class TerminaleController implements Initializable{
         svt_input.setText("");
         ses_input.setText("");
         eps_input.setText("");
+        trimestre_input.setText("");
     }
     private void refresh(){
         listTerminale.clear();
@@ -262,23 +267,19 @@ public class TerminaleController implements Initializable{
     }
     private FilteredList<Terminale> activerRecherche() {
         FilteredList<Terminale> filteredList = new FilteredList<>(listTerminale, a->true);
-        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(terminale -> {
-            if (newValue.isEmpty()
-                    || terminale.getAnglais().toString().contains(newValue)
-                    || terminale.getPhylosphie().toString().contains(newValue)
-                    || terminale.getMalagasy().toString().contains(newValue)
-                    || terminale.getN_mat().contains(newValue.toUpperCase())
-                    || terminale.getHistoGeo().toString().contains(newValue)
-                    || terminale.getMathematique().toString().contains(newValue)
-                    || terminale.getSpc().toString().contains(newValue)
-                    || terminale.getSvt().toString().contains(newValue)
-                    || terminale.getEps().toString().contains(newValue)
-                    || terminale.getSes().toString().contains(newValue)
-                    || terminale.getAnnee_scolaire().toString().contains(newValue)
-            ){
-                return true;
-            }else return false;
-        }));
+        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(terminale -> newValue.isEmpty()
+                || terminale.getAnglais().toString().contains(newValue)
+                || terminale.getPhylosphie().toString().contains(newValue)
+                || terminale.getMalagasy().toString().contains(newValue)
+                || terminale.getN_mat().contains(newValue.toUpperCase())
+                || terminale.getHistoGeo().toString().contains(newValue)
+                || terminale.getMathematique().toString().contains(newValue)
+                || terminale.getSpc().toString().contains(newValue)
+                || terminale.getSvt().toString().contains(newValue)
+                || terminale.getFrs().toString().contains(newValue)
+                || terminale.getEps().toString().contains(newValue)
+                || terminale.getSes().toString().contains(newValue)
+                || terminale.getAnnee_scolaire().toString().contains(newValue)));
         SortedList<Terminale> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(table_terminale.comparatorProperty());
         table_terminale.setItems(sortedList);
@@ -288,7 +289,7 @@ public class TerminaleController implements Initializable{
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants";
+        String query = "SELECT n_matricule FROM etudiants where classe='terminale' order by n_matricule ASC";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

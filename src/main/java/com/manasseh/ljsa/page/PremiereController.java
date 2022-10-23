@@ -60,7 +60,9 @@ public class PremiereController implements Initializable{
             phylo_column,
             n_mat_column,
             eac_column,
-            phys_column;
+            phys_column,
+            moyenne_column,
+            total_column;
     public Label  id_label;
     public Pane action_pane;
     public Label premiere_label;
@@ -95,6 +97,8 @@ public class PremiereController implements Initializable{
           frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
          tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
          phylo_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylo().toString()));
+        total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
+        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoy()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
          annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 
@@ -245,24 +249,19 @@ public class PremiereController implements Initializable{
     }
     private FilteredList<Premiere> activerRecherche() {
         FilteredList<Premiere> filteredList = new FilteredList<>(listPremiere, a->true);
-        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(premiere -> {
-            if (newValue.isEmpty()
-                    || premiere.getAnglais().toString().contains(newValue)
-                    || premiere.getEac().toString().contains(newValue)
-                    || premiere.getMalagasy().toString().contains(newValue)
-                    || premiere.getN_mat().contains(newValue.toUpperCase())
-                    || premiere.getTice().toString().contains(newValue)
-                    || premiere.getMats().toString().contains(newValue)
-                    || premiere.getSpc().toString().contains(newValue)
-                    || premiere.getSvt().toString().contains(newValue)
-                    || premiere.getEps().toString().contains(newValue)
-                    || premiere.getPhylo().toString().contains(newValue)
-                    || premiere.getSes().toString().contains(newValue)
-                    || premiere.getAnnee_scolaire().toString().contains(newValue)
-            ){
-                return true;
-            }else return false;
-        }));
+        recherche_input.textProperty().addListener((Observable,oldValue,newValue) -> filteredList.setPredicate(premiere -> newValue.isEmpty()
+                || premiere.getAnglais().toString().contains(newValue)
+                || premiere.getEac().toString().contains(newValue)
+                || premiere.getMalagasy().toString().contains(newValue)
+                || premiere.getN_mat().contains(newValue.toUpperCase())
+                || premiere.getTice().toString().contains(newValue)
+                || premiere.getMats().toString().contains(newValue)
+                || premiere.getSpc().toString().contains(newValue)
+                || premiere.getSvt().toString().contains(newValue)
+                || premiere.getEps().toString().contains(newValue)
+                || premiere.getPhylo().toString().contains(newValue)
+                || premiere.getSes().toString().contains(newValue)
+                || premiere.getAnnee_scolaire().toString().contains(newValue)));
         SortedList<Premiere> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(premiere_table.comparatorProperty());
         premiere_table.setItems(sortedList);
@@ -272,7 +271,7 @@ public class PremiereController implements Initializable{
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants";
+        String query = "SELECT n_matricule FROM etudiants where classe='première' order by n_matricule ASC";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
