@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
-import manasseh.utils.AutoCompleteComboBoxListener;
+import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
 
 import java.net.URL;
 import java.sql.Connection;
