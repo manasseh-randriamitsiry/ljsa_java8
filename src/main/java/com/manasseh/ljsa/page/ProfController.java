@@ -84,7 +84,7 @@ public class ProfController implements Initializable{
                         }
                     });
                     dltBtn.setOnAction(event -> {
-                       action_pane.setVisible(false);
+                        action_pane.setVisible(false);
                         try {
                             dao.delete(getTableView().getItems().get(getIndex()).getId(), "profs", "id");
                             refreshTable();
@@ -130,14 +130,10 @@ public class ProfController implements Initializable{
     }
     public void activerRecherche(){
         FilteredList<Prof> filteredList = new FilteredList<>(profList,prof -> true);
-        recherche_input.textProperty().addListener((Observable,oldValue,newValue)-> filteredList.setPredicate(prof ->{
-            if (prof.getNom_prof().toUpperCase().contains(newValue.toUpperCase())
+        recherche_input.textProperty().addListener((Observable,oldValue,newValue)-> filteredList.setPredicate(prof -> prof.getNom_prof().toUpperCase().contains(newValue.toUpperCase())
                     || prof.getPrenom_prof().toLowerCase().contains(newValue.toLowerCase())
-                    || prof.getN_mat().toUpperCase().contains(newValue.toUpperCase()))
-            {
-                return true;
-            }else return prof.getDate_nais().toString().contains(newValue);
-        }));
+                    || prof.getN_mat().toUpperCase().contains(newValue.toUpperCase())
+                    || prof.getDate_nais().toString().contains(newValue)));
         SortedList<Prof> sortedData = new SortedList<>(filteredList);
         sortedData.comparatorProperty().bind(table_prof.comparatorProperty());
         table_prof.setItems(sortedData);

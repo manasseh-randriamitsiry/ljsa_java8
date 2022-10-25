@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
-import manasseh.utils.AutoCompleteComboBoxListener;
+import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,42 +27,12 @@ import java.util.ResourceBundle;
 public class SecondeController implements Initializable{
     public TableView<Seconde> seconde_table;
     public TableColumn<Seconde, Seconde> action_column;
-    public Button afficher_ajout_btn,
-            btn_action;
-    public TextField recherche_input,
-            svt_input,
-            trimestre_input,
-            ang_input,
-            eps_input,
-            hg_input,
-            frs_input,
-            math_input,
-            mlg_input,
-            pc_input,
-            eac_input,
-            ses_input,
-            tice_input;
-    public ComboBox<Object> annee_input,
-            n_mat_input;
-    public TableColumn<Seconde, String> trimestre_column,
-            annee_column,
-            ses_column,
-            ang_column,
-            svt_column,
-            tice_column,
-            eps_column,
-            frs_column,
-            moyenne_column,
-            total_column,
-            hg_column,
-            math_column,
-            mlg_column,
-            n_mat_column,
-            eac_column,
-            phys_column;
-    public Label  id_label;
+    public Button afficher_ajout_btn, btn_action;
+    public TextField recherche_input, svt_input, trimestre_input, ang_input, eps_input, hg_input, frs_input, math_input, mlg_input, pc_input, eac_input, ses_input, tice_input;
+    public ComboBox<Object> annee_input, n_mat_input;
+    public TableColumn<Seconde, String> trimestre_column, annee_column, ses_column, ang_column, svt_column, tice_column, eps_column, frs_column, moyenne_column, total_column, hg_column, math_column, mlg_column, n_mat_column, eac_column, phys_column;
+    public Label  id_label,seconde_label;
     public Pane action_pane;
-    public Label seconde_label;
 
     ObservableList<Seconde> listseconde = FXCollections.observableArrayList();
     SecondeDAO secondeDAO = new SecondeDAO();

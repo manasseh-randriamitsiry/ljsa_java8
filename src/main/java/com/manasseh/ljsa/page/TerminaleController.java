@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import com.manasseh.ljsa.DAO.TerminaleDAO;
 import com.manasseh.ljsa.model.Terminale;
-import manasseh.utils.AutoCompleteComboBoxListener;
+import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import java.net.URL;
@@ -27,41 +27,12 @@ import java.util.ResourceBundle;
 public class TerminaleController implements Initializable{
     public TableView<Terminale> table_terminale;
     public TableColumn<Terminale, Terminale> action_column;
-    public Button afficher_ajout_btn,
-            btn_action;
-    public TextField recherche_input,
-            svt_input,
-            trimestre_input,
-            ang_input,
-            eps_input,
-            hg_input,
-            frs_input,
-            math_input,
-            mlg_input,
-            pc_input,
-            phylo_input,
-            ses_input;
-    public ComboBox<Object> annee_input,
-            n_mat_input;
-    public TableColumn<Terminale, String> trimestre_column,
-            annee_column,
-            ang_column,
-            svt_column,
-            ses_column,
-            eps_column,
-            frs_column,
-            hg_column,
-            math_column,
-            mlg_column,
-            n_mat_column,
-            phylo_column,
-            total_column,
-            moyenne_column,
-            phys_column;
-    public Label  id_label;
+    public Button afficher_ajout_btn, btn_action;
+    public TextField recherche_input, svt_input, trimestre_input, ang_input, eps_input, hg_input, frs_input, math_input, mlg_input, pc_input, phylo_input, ses_input;
+    public ComboBox<Object> annee_input, n_mat_input;
+    public TableColumn<Terminale, String> trimestre_column, annee_column, ang_column, svt_column, ses_column, eps_column, frs_column, hg_column, math_column, mlg_column,n_mat_column, phylo_column, total_column, moyenne_column, phys_column;
+    public Label  id_label, terminale_label;
     public Pane action_pane;
-    public Label terminale_label;
-
     ObservableList<Terminale> listTerminale = FXCollections.observableArrayList();
     TerminaleDAO terminaleDAO = new TerminaleDAO();
     Terminale terminale = null;
