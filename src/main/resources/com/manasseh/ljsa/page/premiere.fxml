@@ -40,7 +40,7 @@
     <Button fx:id="afficher_ajout_btn" layoutX="22.0" layoutY="23.0" minWidth="44.0" mnemonicParsing="false" onAction="#afficherPaneAjout" onMouseClicked="#afficherPaneAjout" prefHeight="30.0" prefWidth="44.0" text="+" />
     <TextField fx:id="recherche_input" layoutX="809.0" layoutY="17.0" prefHeight="42.0" prefWidth="181.0" promptText="Rechercher ..." styleClass="input1" />
     <Label fx:id="id_label" layoutX="249.0" layoutY="30.0" text="Label" visible="false" />
-    <Pane fx:id="action_pane" layoutX="48.0" layoutY="72.0" prefHeight="117.0" prefWidth="914.0" styleClass="input">
+    <Pane fx:id= "action_pane" layoutX="48.0" layoutY="72.0" prefHeight="117.0" prefWidth="914.0" styleClass="input">
         <TextField fx:id="mlg_input" layoutX="34.0" layoutY="48.0" onKeyReleased="#check" prefHeight="26.0"
                    prefWidth="70.0" promptText="Malagasy" styleClass="input1"/>
         <TextField fx:id="frs_input" layoutX="36.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0"
