@@ -32,6 +32,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static com.itextpdf.text.html.HtmlTags.FONT;
+
 public class EtudiantController implements Initializable {
     public Pane action_pane;
     public TextField numero_matricule_input;
@@ -241,28 +243,27 @@ public class EtudiantController implements Initializable {
         FileChooser fil_chooser = new FileChooser();
         File file = fil_chooser.showSaveDialog(stage);
 
-        Document document = new Document();
+        Document document = new Document(PageSize.A4, 0f, 0f, 10f, 0f);
         PdfWriter.getInstance(document, Files.newOutputStream(Paths.get(file + ".pdf")));
         document.open();
 
-        Paragraph header = new Paragraph("test header");
-        document.add(header);
+//        Paragraph header = new Paragraph("test header");
+//        document.add(header);
         PdfPTable table = new PdfPTable(6);
-        PdfPCell nmat = new PdfPCell(new Phrase("NºMatricule\t"));
+        PdfPCell nmat = new PdfPCell(new Phrase("NMat"));
         table.addCell(nmat);
         PdfPCell nom = new PdfPCell(new Phrase("Nom"));
         table.addCell(nom);
-        nom.setColspan(2);
         PdfPCell prenom = new PdfPCell(new Phrase("Prenom"));
         table.addCell(prenom);
         PdfPCell classe = new PdfPCell(new Phrase("Classe"));
         table.addCell(classe);
         PdfPCell serie = new PdfPCell(new Phrase("Serie"));
         table.addCell(serie);
-        serie.setColspan(2);
         PdfPCell date_nais = new PdfPCell(new Phrase("Date Nais"));
         table.addCell(date_nais);
-        table.setHeaderRows(1);
+        float[] columnWidths = new float[]{15f, 30f, 30f, 20f,10f,20f};
+        table.setWidths(columnWidths);
 
         DatabaseConnection con = new DatabaseConnection();
         Connection connection = con.getConnection();
@@ -270,16 +271,32 @@ public class EtudiantController implements Initializable {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
-            table.addCell(resultSet.getString("n_matricule"));
-            table.addCell(resultSet.getString("nom"));
-            table.addCell(resultSet.getString("prenom"));
-            table.addCell(resultSet.getString("classe"));
-            table.addCell(resultSet.getString("serie"));
-            table.addCell(resultSet.getString("date_nais"));
+            table.addCell(getNormalCell(resultSet.getString("n_matricule"),  9));
+            table.addCell(getNormalCell(resultSet.getString("nom"),  9));
+            table.addCell(getNormalCell(resultSet.getString("prenom"),  9));
+            table.addCell(getNormalCell(resultSet.getString("classe"), 9 ));
+            table.addCell(getNormalCell(resultSet.getString("serie"), 9));
+            table.addCell(getNormalCell(resultSet.getString("date_nais"), 9 ));
         }
         document.addTitle("Liste des Etudiants");
         document.add(table);
         popUp.success("Success", "Creation de PDF avec success au :"+file+".pdf");
         document.close();
+    }
+
+    public static PdfPCell getNormalCell(String string, float size)
+            throws DocumentException, IOException {
+        if("".equals(string)){
+            return new PdfPCell();
+        }
+        Font f = new Font();
+        if(size < 0) {
+            f.setColor(BaseColor.RED);
+            size = -size;
+        }
+        f.setSize(size);
+        PdfPCell cell = new PdfPCell(new Phrase(string, f));
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        return cell;
     }
 }
