@@ -32,8 +32,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import static com.itextpdf.text.html.HtmlTags.FONT;
-
 public class EtudiantController implements Initializable {
     public Pane action_pane;
     public TextField numero_matricule_input;
@@ -247,8 +245,6 @@ public class EtudiantController implements Initializable {
         PdfWriter.getInstance(document, Files.newOutputStream(Paths.get(file + ".pdf")));
         document.open();
 
-//        Paragraph header = new Paragraph("test header");
-//        document.add(header);
         PdfPTable table = new PdfPTable(6);
         PdfPCell nmat = new PdfPCell(new Phrase("NMat"));
         table.addCell(nmat);
@@ -284,8 +280,7 @@ public class EtudiantController implements Initializable {
         document.close();
     }
 
-    public static PdfPCell getNormalCell(String string, float size)
-            throws DocumentException, IOException {
+    public static PdfPCell getNormalCell(String string, float size) {
         if("".equals(string)){
             return new PdfPCell();
         }
