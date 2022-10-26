@@ -183,6 +183,7 @@ public class PremiereController implements Initializable{
                     premiereDAO.insert(premiere);
                     refresh();
                     clearInputs();
+                    new FadeOutRight(action_pane).play();
                 } catch (NumberFormatException | SQLException e) {
                     popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
                 }

@@ -52,21 +52,21 @@ public class SecondeController implements Initializable{
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(items);
         n_mat_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getN_mat()));
-          ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
-          mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
-           hg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHistogeo().toString()));
-          eac_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEac().toString()));
-          eps_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEps().toString()));
-          ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
-         math_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMats().toString()));
-         phys_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSpc().toString()));
-          svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
-          frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
-         tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
-         total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
-         moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne()));
+        ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
+        mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
+        hg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHistogeo().toString()));
+        eac_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEac().toString()));
+        eps_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEps().toString()));
+        ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
+        math_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMats().toString()));
+        phys_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSpc().toString()));
+        svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
+        frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
+        tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
+        total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
+        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
-         annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
+        annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 
         Callback<TableColumn<Seconde,Seconde>, TableCell<Seconde,Seconde>> newColumn = (TableColumn<Seconde,Seconde> param) -> new TableCell<Seconde,Seconde>() {
             @Override
@@ -80,7 +80,6 @@ public class SecondeController implements Initializable{
                     final Button dltBtn = new Button("Supprimer");
                     dltBtn.setStyle("-fx-background-color:#FF6666");
                     editBtn.setOnAction(event -> {
-                        try {
                             seconde = getTableView().getItems().get(getIndex());
                             seconde_label.setText("Seconde: edition");
                             btn_action.setText("Mettre à jour");
@@ -102,10 +101,6 @@ public class SecondeController implements Initializable{
                                     );
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                            popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
-                        }
                     });
                     dltBtn.setOnAction(event -> {
                         action_pane.setVisible(false);
@@ -145,6 +140,7 @@ public class SecondeController implements Initializable{
                             Integer.valueOf(trimestre_input.getText()),
                             Integer.valueOf(annee_input.getValue().toString()));
                     secondeDAO.insert(seconde);
+                    new FadeOutRight(action_pane).play();
                     refresh();
                     clearInputs();
                 } catch (NumberFormatException | SQLException e) {
@@ -182,8 +178,8 @@ public class SecondeController implements Initializable{
     public void afficherPaneAjout(){
         btn_action.setText("Ajouter +");
         seconde_label.setText("Seconde: Ajout");
-        action_pane.setVisible(true);
         new FadeInRight(action_pane).play();
+        clearInputs();
     }
     private void clearInputs() {
         mlg_input.setText("");

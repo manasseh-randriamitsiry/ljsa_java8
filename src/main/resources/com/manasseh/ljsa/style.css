@@ -36,7 +36,7 @@
     -fx-background-radius: 20px 0px 0px 20px;
 }
 .button_left{
-    -fx-text-color: "black";
+     -fx-text-fill: black;
     -fx-background-color: #F7DC6F;
     -fx-border-radius: 0px 20px 20px 0px;
     -fx-background-radius: 0px 20px 20px 0px;

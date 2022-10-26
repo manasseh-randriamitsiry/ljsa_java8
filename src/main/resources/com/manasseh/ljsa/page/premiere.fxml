@@ -9,87 +9,108 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css"
-      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.manasseh.ljsa.page.PremiereController">
+<Pane prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.PremiereController">
     <Label fx:id="premiere_label" layoutX="80.0" layoutY="17.0" text="Premiere">
         <font>
-            <Font size="34.0"/>
+            <Font size="34.0" />
         </font>
     </Label>
-    <TableView fx:id="premiere_table" layoutX="22.0" layoutY="225.0" prefHeight="438.0" prefWidth="968.0"
-               tableMenuButtonVisible="true">
+    <TableView fx:id="premiere_table" layoutX="22.0" layoutY="203.0" prefHeight="460.0" prefWidth="968.0" tableMenuButtonVisible="true">
       <columns>
-          <TableColumn fx:id="n_mat_column" maxWidth="500.0" prefWidth="100.0" text="NºMatricule"/>
-          <TableColumn fx:id="mlg_column" maxWidth="500.0" prefWidth="42.0" text="MLG"/>
-          <TableColumn fx:id="frs_column" maxWidth="500.0" prefWidth="42.0" text="FRS"/>
-          <TableColumn fx:id="ang_column" maxWidth="500.0" prefWidth="41.0" text="ANG"/>
-          <TableColumn fx:id="hg_column" maxWidth="500.0" prefWidth="41.0" text="HG"/>
-          <TableColumn fx:id="math_column" maxWidth="500.0" prefWidth="41.0" text="MAT"/>
-          <TableColumn fx:id="phys_column" maxWidth="500.0" prefWidth="41.0" text="PC"/>
-          <TableColumn fx:id="svt_column" maxWidth="500.0" prefWidth="41.0" text="SVT"/>
-          <TableColumn fx:id="eac_column" maxWidth="500.0" prefWidth="40.0" text="EAC"/>
-          <TableColumn fx:id="tice_column" maxWidth="500.0" prefWidth="45.0" text="TICE"/>
-          <TableColumn fx:id="eps_column" maxWidth="500.0" prefWidth="45.0" text="EPS"/>
-          <TableColumn fx:id="ses_column" maxWidth="500.0" prefWidth="45.0" text="SES"/>
-          <TableColumn fx:id="phylo_column" maxWidth="500.0" prefWidth="45.0" text="PHYL"/>
-          <TableColumn fx:id="trimestre_column" maxWidth="500.0" prefWidth="45.0" text="TRI"/>
-          <TableColumn fx:id="annee_column" maxWidth="500.0" prefWidth="50.0" text="ANNEE"/>
-          <TableColumn fx:id="total_column" maxWidth="500.0" prefWidth="50.0" text="TOT"/>
-          <TableColumn fx:id="moyenne_column" maxWidth="500.0" prefWidth="50.0" text="MOY"/>
-          <TableColumn fx:id="action_column" maxWidth="500.0" prefWidth="150.0" text="Action"/>
+          <TableColumn fx:id="n_mat_column" maxWidth="500.0" prefWidth="100.0" text="NºMatricule" />
+          <TableColumn fx:id="mlg_column" maxWidth="500.0" prefWidth="42.0" text="MLG" />
+          <TableColumn fx:id="frs_column" maxWidth="500.0" prefWidth="42.0" text="FRS" />
+          <TableColumn fx:id="ang_column" maxWidth="500.0" prefWidth="41.0" text="ANG" />
+          <TableColumn fx:id="hg_column" maxWidth="500.0" prefWidth="41.0" text="HG" />
+          <TableColumn fx:id="math_column" maxWidth="500.0" prefWidth="41.0" text="MAT" />
+          <TableColumn fx:id="phys_column" maxWidth="500.0" prefWidth="41.0" text="PC" />
+          <TableColumn fx:id="svt_column" maxWidth="500.0" prefWidth="41.0" text="SVT" />
+          <TableColumn fx:id="eac_column" maxWidth="500.0" prefWidth="36.0" text="EAC" />
+          <TableColumn fx:id="tice_column" maxWidth="500.0" prefWidth="49.0" text="TICE" />
+          <TableColumn fx:id="eps_column" maxWidth="500.0" prefWidth="45.0" text="EPS" />
+          <TableColumn fx:id="ses_column" maxWidth="500.0" prefWidth="45.0" text="SES" />
+          <TableColumn fx:id="phylo_column" maxWidth="500.0" prefWidth="45.0" text="PHYL" />
+          <TableColumn fx:id="trimestre_column" maxWidth="500.0" prefWidth="45.0" text="TRI" />
+          <TableColumn fx:id="annee_column" maxWidth="500.0" prefWidth="50.0" text="ANNEE" />
+          <TableColumn fx:id="total_column" maxWidth="500.0" prefWidth="50.0" text="TOT" />
+          <TableColumn fx:id="moyenne_column" maxWidth="500.0" prefWidth="50.0" text="MOY" />
+          <TableColumn fx:id="action_column" maxWidth="500.0" prefWidth="150.0" text="Action" />
       </columns>
     </TableView>
-    <Pane fx:id="action_pane" layoutX="24.0" layoutY="68.0" prefHeight="152.0" prefWidth="968.0" styleClass="input">
-        <TextField fx:id="mlg_input" layoutX="274.0" layoutY="14.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" styleClass="input1" text="1"/>
-        <ComboBox fx:id="n_mat_input" editable="true" layoutX="32.0" layoutY="56.0" prefHeight="28.0"
-                  prefWidth="143.0" promptText="Numero matricule" styleClass="input1"/>
-        <Label layoutX="204.0" layoutY="19.0" text="Malagasy :"/>
-        <TextField fx:id="frs_input" layoutX="274.0" layoutY="45.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" styleClass="input1" text="2"/>
-        <Label layoutX="204.0" layoutY="50.0" text="Français :"/>
-        <TextField fx:id="ang_input" layoutX="274.0" layoutY="78.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" styleClass="input1" text="3"/>
-        <Label layoutX="204.0" layoutY="83.0" text="Anglais :"/>
-        <TextField fx:id="hg_input" layoutX="503.0" layoutY="15.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="57.0" styleClass="input1" text="4"/>
-        <Label layoutX="372.0" layoutY="21.0" text="Histoire-Geographie :"/>
-        <Label layoutX="372.0" layoutY="52.0" text="Mathematique :"/>
-        <TextField fx:id="pc_input" layoutX="490.0" layoutY="77.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" styleClass="input1" text="7"/>
-        <Label layoutX="372.0" layoutY="85.0" text="Physique-Chimie :"/>
-        <TextField fx:id="svt_input" layoutX="440.0" layoutY="111.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="125.0" styleClass="input1" text="8"/>
-        <Label layoutX="372.0" layoutY="116.0" text="Science :"/>
-        <TextField fx:id="eps_input" layoutX="652.0" layoutY="47.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="143.0" styleClass="input1" text="10"/>
-        <Label layoutX="584.0" layoutY="52.0" text="EPS :"/>
-        <TextField fx:id="trimestre_input" layoutX="652.0" layoutY="113.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="143.0" styleClass="input1"/>
-        <Label layoutX="582.0" layoutY="117.0" text="Trimestre"/>
-        <TextField fx:id="math_input" layoutX="476.0" layoutY="46.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="84.0" styleClass="input1" text="6"/>
-        <ComboBox fx:id="annee_input" editable="true" layoutX="814.0" layoutY="14.0" onHiding="#check"
-                  onShowing="#check" prefHeight="27.0" prefWidth="125.0" promptText="Anee" styleClass="input1"/>
-        <Button fx:id="btn_action" layoutX="854.0" layoutY="100.0" mnemonicParsing="false" text="Ajouter +"/>
-        <TextField fx:id="tice_input" layoutX="274.0" layoutY="111.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" styleClass="input1" text="9"/>
-        <Label layoutX="220.0" layoutY="116.0" text="TICE :"/>
-        <TextField fx:id="eac_input" layoutX="79.0" layoutY="18.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="93.0" styleClass="input1" text="5"/>
-        <Label layoutX="32.0" layoutY="23.0" text="EAC :"/>
-        <TextField fx:id="ses_input" layoutX="652.0" layoutY="81.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="143.0" styleClass="input1" text="5"/>
-        <Label layoutX="582.0" layoutY="86.0" text="SES :"/>
-        <TextField fx:id="phylo_input" layoutX="652.0" layoutY="15.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="143.0" styleClass="input1" text="10"/>
-        <Label layoutX="584.0" layoutY="20.0" text="PHYLO :"/>
+    <Button fx:id="afficher_ajout_btn" layoutX="22.0" layoutY="23.0" minWidth="44.0" mnemonicParsing="false" onAction="#afficherPaneAjout" onMouseClicked="#afficherPaneAjout" prefHeight="30.0" prefWidth="44.0" text="+" />
+    <TextField fx:id="recherche_input" layoutX="809.0" layoutY="17.0" prefHeight="42.0" prefWidth="181.0" promptText="Rechercher ..." styleClass="input1" />
+    <Label fx:id="id_label" layoutX="249.0" layoutY="30.0" text="Label" visible="false" />
+    <Pane fx:id="action_pane" layoutX="48.0" layoutY="72.0" prefHeight="117.0" prefWidth="914.0" styleClass="input">
+        <TextField fx:id="mlg_input" layoutX="34.0" layoutY="48.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Malagasy" styleClass="input1"/>
+        <TextField fx:id="frs_input" layoutX="36.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Français" styleClass="input1"/>
+        <TextField fx:id="hg_input" layoutX="189.0" layoutY="8.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Histo-geo" styleClass="input1"/>
+        <TextField fx:id="pc_input" layoutX="190.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Physique" styleClass="input1"/>
+        <TextField fx:id="svt_input" layoutX="334.0" layoutY="6.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="SVT" styleClass="input1"/>
+        <TextField fx:id="eps_input" layoutX="334.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="EPS" styleClass="input1"/>
+        <TextField fx:id="trimestre_input" layoutX="486.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Trimestre" styleClass="input1"/>
+        <TextField fx:id="math_input" layoutX="190.0" layoutY="47.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Math" styleClass="input1"/>
+        <ComboBox fx:id="annee_input" editable="true" layoutX="626.0" layoutY="83.0" onHiding="#check"
+                  onShowing="#check" prefHeight="27.0" prefWidth="106.0" promptText="Anee" styleClass="input1"/>
+        <Button fx:id="btn_action" layoutX="823.0" layoutY="68.0" mnemonicParsing="false" styleClass="btn-success"
+                text="Ajouter +"/>
+        <TextField fx:id="ses_input" layoutX="34.0" layoutY="10.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="SES" styleClass="input1"/>
+        <Button layoutX="93.0" layoutY="10.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SES"/>
+        <Button layoutX="92.0" layoutY="47.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="MLG"/>
+        <Button layoutX="91.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="FRS"/>
+        <Button layoutX="249.0" layoutY="8.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="HG"/>
+        <Button layoutX="249.0" layoutY="46.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="MATH"/>
+        <Button layoutX="247.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="SPC"/>
+        <Button layoutX="394.0" layoutY="5.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SVT"/>
+        <Button layoutX="396.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="EPS"/>
+        <Button layoutX="539.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="TRIM"/>
+        <TextField fx:id="ang_input" layoutX="486.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="Anglais" styleClass="input1"/>
+        <Button layoutX="539.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="ANG"/>
+        <ComboBox fx:id="n_mat_input" editable="true" layoutX="626.0" layoutY="44.0" prefHeight="26.0" prefWidth="106.0"
+                  promptText="Numero matricule" styleClass="input1"/>
+        <Button layoutX="730.0" layoutY="44.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0"
+                prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="NMAT"/>
+        <Button layoutX="730.0" layoutY="83.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0"
+                prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="ANNEE"/>
+        <TextField fx:id="tice_input" layoutX="486.0" layoutY="5.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="TICE" styleClass="input1"/>
+        <Button layoutX="539.0" layoutY="4.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TICE"/>
+        <TextField fx:id="eac_input" layoutX="333.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="70.0" promptText="EAC" styleClass="input1"/>
+        <Button layoutX="395.0" layoutY="82.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
+                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
+                text="EAC"/>
+        <TextField fx:id="phylo_input" layoutX="627.0" layoutY="7.0" onKeyReleased="#check" prefHeight="26.0"
+                   prefWidth="120.0" promptText="Phylo" styleClass="input1"/>
+        <Button layoutX="730.0" layoutY="6.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
+                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="PHYLO"/>
     </Pane>
-    <Button fx:id="afficher_ajout_btn" layoutX="22.0" layoutY="23.0" minWidth="44.0" mnemonicParsing="false"
-            onAction="#afficherPaneAjout" onMouseClicked="#afficherPaneAjout" prefHeight="30.0" prefWidth="44.0"
-            text="+"/>
-    <TextField fx:id="recherche_input" layoutX="809.0" layoutY="17.0" prefHeight="42.0" prefWidth="181.0"
-               promptText="Rechercher ..." styleClass="input1"/>
-    <Label fx:id="id_label" layoutX="249.0" layoutY="30.0" text="Label" visible="false"/>
+   <Button layoutX="933.0" layoutY="17.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
 </Pane>

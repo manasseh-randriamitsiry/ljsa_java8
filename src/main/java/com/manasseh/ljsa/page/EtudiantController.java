@@ -3,6 +3,10 @@ package com.manasseh.ljsa.page;
 import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeInRightBig;
 import animatefx.animation.FadeOutRight;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,16 +16,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.model.*;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -227,5 +234,52 @@ public class EtudiantController implements Initializable {
                 || classe_input.getValue() == null){
             btn_action.setVisible(false);
         }
+    }
+
+    public void generatePdf() throws IOException, DocumentException, SQLException {
+        Stage stage = new Stage();
+        FileChooser fil_chooser = new FileChooser();
+        File file = fil_chooser.showSaveDialog(stage);
+
+        Document document = new Document();
+        PdfWriter.getInstance(document, Files.newOutputStream(Paths.get(file + ".pdf")));
+        document.open();
+
+        Paragraph header = new Paragraph("test header");
+        document.add(header);
+        PdfPTable table = new PdfPTable(6);
+        PdfPCell nmat = new PdfPCell(new Phrase("NºMatricule\t"));
+        table.addCell(nmat);
+        PdfPCell nom = new PdfPCell(new Phrase("Nom"));
+        table.addCell(nom);
+        nom.setColspan(2);
+        PdfPCell prenom = new PdfPCell(new Phrase("Prenom"));
+        table.addCell(prenom);
+        PdfPCell classe = new PdfPCell(new Phrase("Classe"));
+        table.addCell(classe);
+        PdfPCell serie = new PdfPCell(new Phrase("Serie"));
+        table.addCell(serie);
+        serie.setColspan(2);
+        PdfPCell date_nais = new PdfPCell(new Phrase("Date Nais"));
+        table.addCell(date_nais);
+        table.setHeaderRows(1);
+
+        DatabaseConnection con = new DatabaseConnection();
+        Connection connection = con.getConnection();
+        String query = "select n_matricule, nom,prenom,classe,serie,date_nais from etudiants;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            table.addCell(resultSet.getString("n_matricule"));
+            table.addCell(resultSet.getString("nom"));
+            table.addCell(resultSet.getString("prenom"));
+            table.addCell(resultSet.getString("classe"));
+            table.addCell(resultSet.getString("serie"));
+            table.addCell(resultSet.getString("date_nais"));
+        }
+        document.addTitle("Liste des Etudiants");
+        document.add(table);
+        popUp.success("Success", "Creation de PDF avec success au :"+file+".pdf");
+        document.close();
     }
 }
