@@ -64,7 +64,7 @@ public class Seconde {
                 this.mats +
                 this.eps +
                 this.tice +
-                this.ses)/25;
+                this.ses)/20;
         return df.format(sum);
     }
 

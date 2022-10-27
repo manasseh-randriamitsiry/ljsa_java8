@@ -10,6 +10,7 @@ import java.sql.*;
 
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     PopUp popUp = new PopUp();
+
     @Override
     public void insert(Etudiant etudiant) throws SQLException {
         String sql = "insert into etudiants() values(NULL,?,?,?,?,?,?)";
@@ -94,7 +95,16 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         return nombre;
     }
 
-//    public ObservableList<> chart(){
-//
-//    }
+    public String getSerie(String n_matricule) throws SQLException {
+        String serie = null;
+        String sql = "select serie from etudiants where n_matricule = '"+n_matricule+"'";
+        DatabaseConnection connection = new DatabaseConnection();
+        Statement statement = connection.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()){
+            serie = resultSet.getString("serie");
+        }
+        return serie;
+    }
+
 }

@@ -19,6 +19,7 @@ public class Etudiant {
         this.date_nais_etudiant = date_nais_etudiant;
     }
 
+
     public Integer getId() {
         return id;
     }

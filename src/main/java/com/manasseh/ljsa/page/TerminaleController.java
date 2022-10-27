@@ -62,7 +62,13 @@ public class TerminaleController implements Initializable{
         frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrs().toString()));
         ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
         total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
-        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne()));
+        moyenne_column.setCellValueFactory(param -> {
+            try {
+                return new SimpleStringProperty(param.getValue().getMoyenne());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
         annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
 

@@ -17,7 +17,6 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         Connection connection = databaseConnection.getConnection();
         String query = "select * from terminale";
         listTerminales.clear();
-
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

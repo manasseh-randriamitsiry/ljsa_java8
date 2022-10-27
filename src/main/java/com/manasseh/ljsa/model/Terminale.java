@@ -1,7 +1,9 @@
 package com.manasseh.ljsa.model;
 
+import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.page.TerminaleController;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 public class Terminale extends TerminaleController {
@@ -19,6 +21,7 @@ public class Terminale extends TerminaleController {
     private final String n_mat;
     private final Integer trimestre;
     private final Integer annee_scolaire;
+    EtudiantDAO etudiantDAO = new EtudiantDAO();
 
     public Terminale(Integer id, Float malagasy, Float frs, Float anglais, Float histoGeo, Float phylosphie, Float eps, Float mathematique, Float spc, Float svt, Float ses, String n_mat, Integer trimestre, Integer annee_scolaire) {
         this.id = id;
@@ -36,7 +39,6 @@ public class Terminale extends TerminaleController {
         this.trimestre = trimestre;
         this.annee_scolaire = annee_scolaire;
     }
-
     public Float getTotal(){
         return (this.malagasy +
         this.frs +
@@ -49,8 +51,12 @@ public class Terminale extends TerminaleController {
         this.svt +
         this.ses);
     }
-    public String getMoyenne(){
+    public String getMoyenne() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
+        int coeff = 32;
+        if (etudiantDAO.getSerie(n_mat).equals("D")){
+            coeff = 25;
+        }
         Float sum = (this.malagasy +
                 this.frs +
                 this.anglais +
@@ -60,7 +66,7 @@ public class Terminale extends TerminaleController {
                 this.mathematique +
                 this.spc +
                 this.svt +
-                this.ses)/32;
+                this.ses)/coeff;
         return df.format(sum);
     }
     public Integer getId() {

@@ -5,7 +5,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import manasseh.utils.ActivateDrag;
-import com.manasseh.ljsa.utils.PopUp;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -93,16 +92,14 @@ public class MenuController extends ActivateDrag implements Initializable {
         try{
             loadContent("home");
         } catch (Exception e){
-            PopUp popUp = new PopUp();
-            popUp.error("erreur",":"+e);
+            e.printStackTrace();
         }
     }
     public void loadContent(String page) {
         try {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         } catch (IOException e){
-            PopUp alert = new PopUp();
-            alert.error("Erreur",e.getMessage());
+            e.printStackTrace();
         }
         new ZoomIn(root).play();
         body.getChildren().removeAll(root);

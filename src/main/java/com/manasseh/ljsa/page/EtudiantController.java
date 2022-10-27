@@ -65,9 +65,9 @@ public class EtudiantController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listSerie();
+        refresh();
         String[] items = {"Seconde","Première","Terminale"};
         classe_input.getItems().addAll(items);
-        refresh();
         numero_matricule_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getN_mat_etudiant()));
         nom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNom_etudiant()));
         prenom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getPrenom_etudiant()));
@@ -280,6 +280,7 @@ public class EtudiantController implements Initializable {
         document.close();
     }
 
+    // pour regler les fonts. Pas important
     public static PdfPCell getNormalCell(String string, float size) {
         if("".equals(string)){
             return new PdfPCell();
