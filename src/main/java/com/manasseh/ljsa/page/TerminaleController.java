@@ -2,6 +2,7 @@ package com.manasseh.ljsa.page;
 
 import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeOutRight;
+import com.manasseh.ljsa.DAO.EtudiantDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,13 +16,11 @@ import javafx.util.Callback;
 import com.manasseh.ljsa.DAO.TerminaleDAO;
 import com.manasseh.ljsa.model.Terminale;
 import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
-import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class TerminaleController implements Initializable{
@@ -38,18 +37,16 @@ public class TerminaleController implements Initializable{
     TerminaleDAO terminaleDAO = new TerminaleDAO();
     Terminale terminale = null;
     PopUp popUp = new PopUp();
+    EtudiantDAO etudiantDAO = new EtudiantDAO();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
         clearInputs();
         new FadeOutRight(action_pane).play();
-        String[] items = {"2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033"
-                ,"2034","2035","2036","2037","2038","2039","2040","2041","2042","2043","2044","2045","2046","2047",
-                "2048","2049","2050","2051","2052","2053","2054","2055","2056","2057","2058","2059","2060","2061"};
-        listEtudiant();
+        n_mat_input.setItems(etudiantDAO.listEtudiant("terminale"));
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
-        annee_input.getItems().addAll( items);
+        annee_input.getItems().addAll(getYearList(100));
         n_mat_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getN_mat()));
         ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
         mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
@@ -227,21 +224,14 @@ public class TerminaleController implements Initializable{
         sortedList.comparatorProperty().bind(table_terminale.comparatorProperty());
         table_terminale.setItems(sortedList);
     }
-    public void listEtudiant(){
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants where classe='terminale' order by n_matricule ASC";
-        try {
-            Statement statement = connectDb.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            ObservableList<Object> data = FXCollections.observableArrayList();
-            while (resultSet.next()){
-                data.add(resultSet.getString(1));
-            }
-            n_mat_input.setItems(data);
-        } catch (SQLException ignored) {
-            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+    public static ArrayList<String> getYearList(int years) {
+        ArrayList<String> yearList = new ArrayList<>(years);
+        int startYear = Calendar.getInstance().get(Calendar.YEAR) - 30;
+        if (startYear<1970){
+            startYear = 1970;
         }
+        for (int i = 0; i < years; i++)
+            yearList.add(Integer.toString(startYear + i));
+        return yearList;
     }
-
 }

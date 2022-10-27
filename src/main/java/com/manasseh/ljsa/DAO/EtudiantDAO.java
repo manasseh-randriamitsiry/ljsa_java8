@@ -107,4 +107,21 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         return serie;
     }
 
+    public ObservableList<Object> listEtudiant(String classe){
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDb = connectNow.getConnection();
+        String query = "SELECT n_matricule FROM etudiants where classe='"+classe+"' order by n_matricule ASC";
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                data.add(resultSet.getString(1));
+            }
+        } catch (SQLException ignored) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+        }
+        return data;
+    }
+
 }
