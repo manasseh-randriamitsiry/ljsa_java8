@@ -17,7 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,49 +27,17 @@ import java.util.ResourceBundle;
 public class PremiereController implements Initializable{
     public TableView<Premiere> premiere_table;
     public TableColumn<Premiere, Premiere> action_column;
-    public Button afficher_ajout_btn,
-            btn_action;
-    public TextField recherche_input,
-            svt_input,
-            phylo_input,
-            trimestre_input,
-            ang_input,
-            eps_input,
-            hg_input,
-            frs_input,
-            math_input,
-            mlg_input,
-            pc_input,
-            eac_input,
-            ses_input,
-            tice_input;
+    public Button afficher_ajout_btn, btn_action;
+    public TextField recherche_input, svt_input, phylo_input, trimestre_input, ang_input, eps_input, hg_input, frs_input, math_input, mlg_input, pc_input, eac_input, ses_input, tice_input;
     public ComboBox<String> annee_input;
     public ComboBox<Object> n_mat_input;
-    public TableColumn<Premiere, String> trimestre_column,
-            annee_column,
-            ses_column,
-            ang_column,
-            svt_column,
-            tice_column,
-            eps_column,
-            frs_column,
-            hg_column,
-            math_column,
-            mlg_column,
-            phylo_column,
-            n_mat_column,
-            eac_column,
-            phys_column,
-            moyenne_column,
-            total_column;
+    public TableColumn<Premiere,String> trimestre_column, annee_column, ses_column, ang_column, svt_column, tice_column, eps_column, frs_column, hg_column, math_column, mlg_column, phylo_column, n_mat_column, eac_column, phys_column, moyenne_column, total_column;
     public Label  id_label;
     public Pane action_pane;
     public Label premiere_label;
-
     ObservableList<Premiere> listPremiere = FXCollections.observableArrayList();
     PremiereDAO premiereDAO = new PremiereDAO();
     Premiere premiere = null;
-
     PopUp popUp = new PopUp();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,23 +85,24 @@ public class PremiereController implements Initializable{
                             premiere = getTableView().getItems().get(getIndex());
                             premiere_label.setText("Premiere: edition");
                             btn_action.setText("Mettre à jour");
-                            setInputText(premiere.getId(),
-                                    premiere.getMalagasy(),
-                                    premiere.getFrancais(),
-                                    premiere.getAnglais(),
-                                    premiere.getHistogeo(),
-                                    premiere.getEac(),
-                                    premiere.getSes(),
-                                    premiere.getSpc(),
-                                    premiere.getSvt(),
-                                    premiere.getMats(),
-                                    premiere.getEps(),
-                                    premiere.getTice(),
-                                    premiere.getPhylo(),
-                                    premiere.getN_mat(),
-                                    premiere.getTrimestre(),
-                                    premiere.getAnnee_scolaire()
-                                    );
+
+                            id_label.setText(premiere.getId().toString());
+                            mlg_input.setText(premiere.getMalagasy().toString());
+                            frs_input.setText(premiere.getFrancais().toString());
+                            ang_input.setText(premiere.getAnglais().toString());
+                            hg_input.setText(premiere.getHistogeo().toString());
+                            eac_input.setText(premiere.getEac().toString());
+                            math_input.setText(premiere.getMats().toString());
+                            ses_input.setText(premiere.getSes().toString());
+                            pc_input.setText(premiere.getSpc().toString());
+                            svt_input.setText(premiere.getSvt().toString());
+                            tice_input.setText(premiere.getTice().toString());
+                            eps_input.setText(premiere.getEps().toString());
+                            phylo_input.setText(premiere.getPhylo().toString());
+                            n_mat_input.getSelectionModel().select(premiere.getN_mat());
+                            trimestre_input.setText(premiere.getTrimestre().toString());
+                            annee_input.getSelectionModel().select(premiere.getAnnee_scolaire());
+
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
                         } catch (NullPointerException e) {
@@ -164,7 +132,7 @@ public class PremiereController implements Initializable{
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
                 try {
-                    premiere = new Premiere(10,
+                    premiere = new Premiere(0,
                             Float.valueOf(mlg_input.getText()),
                             Float.valueOf(frs_input.getText()),
                             Float.valueOf(ang_input.getText()),
@@ -280,27 +248,5 @@ public class PremiereController implements Initializable{
         } catch (SQLException ignored) {
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
         }
-    }
-
-    private void setInputText(Integer id, Float malagasy, Float frs, Float anglais, Float histoGeo,
-                              Float eac, Float ses, Float spc, Float svt,Float mathematique,
-                              Float eps,Float tice,Float phylo, String n_mat,Integer trimestre,Integer annee_scolaire){
-        mlg_input.setText(malagasy.toString());
-        frs_input.setText(frs.toString());
-        ang_input.setText(anglais.toString());
-        hg_input.setText(histoGeo.toString());
-        eac_input.setText(eac.toString());
-        math_input.setText(mathematique.toString());
-        ses_input.setText(ses.toString());
-        pc_input.setText(spc.toString());
-        svt_input.setText(svt.toString());
-        tice_input.setText(tice.toString());
-        eps_input.setText(eps.toString());
-        phylo_input.setText(phylo.toString());
-        n_mat_input.getSelectionModel().select(n_mat);
-        trimestre_input.setText(trimestre.toString());
-        annee_input.getSelectionModel().select(annee_scolaire);
-        btn_action.setText("Mettre à jour");
-        id_label.setText(id.toString());
     }
 }

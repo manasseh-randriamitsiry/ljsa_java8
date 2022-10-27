@@ -37,7 +37,6 @@ public class TerminaleController implements Initializable{
     ObservableList<Terminale> listTerminale = FXCollections.observableArrayList();
     TerminaleDAO terminaleDAO = new TerminaleDAO();
     Terminale terminale = null;
-
     PopUp popUp = new PopUp();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,21 +88,23 @@ public class TerminaleController implements Initializable{
                             terminale = getTableView().getItems().get(getIndex());
                             terminale_label.setText("Terminale: edition");
                             btn_action.setText("Mettre à jour");
-                            setInputText(terminale.getId(),
-                                    terminale.getMalagasy(),
-                                    terminale.getFrs(),
-                                    terminale.getAnglais(),
-                                    terminale.getHistoGeo(),
-                                    terminale.getPhylosphie(),
-                                    terminale.getEps(),
-                                    terminale.getMathematique(),
-                                    terminale.getSpc(),
-                                    terminale.getSvt(),
-                                    terminale.getSes(),
-                                    terminale.getN_mat(),
-                                    terminale.getTrimestre(),
-                                    terminale.getAnnee_scolaire()
-                                    );
+
+                            id_label.setText(terminale.getId().toString());
+                            mlg_input.setText(terminale.getMalagasy().toString());
+                            frs_input.setText(terminale.getFrs().toString());
+                            ang_input.setText(terminale.getAnglais().toString());
+                            hg_input.setText(terminale.getHistoGeo().toString());
+                            phylo_input.setText(terminale.getPhylosphie().toString());
+                            math_input.setText( terminale.getMathematique().toString());
+                            pc_input.setText(terminale.getSpc().toString());
+                            svt_input.setText(terminale.getSvt().toString());
+                            ses_input.setText(terminale.getSes().toString());
+                            eps_input.setText(terminale.getEps().toString());
+                            n_mat_input.getSelectionModel().select(terminale.getN_mat());
+                            trimestre_input.setText(terminale.getTrimestre().toString());
+                            annee_input.getSelectionModel().select(terminale.getAnnee_scolaire());
+                            btn_action.setText("Mettre à jour");
+
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
                         } catch (NullPointerException e) {
@@ -205,7 +206,6 @@ public class TerminaleController implements Initializable{
         activerRecherche();
         clearInputs();
     }
-
     public void check(){
     }
     private void activerRecherche() {
@@ -227,7 +227,6 @@ public class TerminaleController implements Initializable{
         sortedList.comparatorProperty().bind(table_terminale.comparatorProperty());
         table_terminale.setItems(sortedList);
     }
-
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
@@ -245,23 +244,4 @@ public class TerminaleController implements Initializable{
         }
     }
 
-    private void setInputText(Integer id, Float malagasy, Float frs, Float anglais, Float histoGeo,
-                              Float phylosphie, Float eps, Float mathematique, Float spc, Float svt,
-                              Float ses, String n_mat,Integer trimestre,Integer annee_scolaire){
-        mlg_input.setText(malagasy.toString());
-        frs_input.setText(frs.toString());
-        ang_input.setText(anglais.toString());
-        hg_input.setText(histoGeo.toString());
-        phylo_input.setText(phylosphie.toString());
-        math_input.setText(mathematique.toString());
-        pc_input.setText(spc.toString());
-        svt_input.setText(svt.toString());
-        ses_input.setText(ses.toString());
-        eps_input.setText(eps.toString());
-        n_mat_input.getSelectionModel().select(n_mat);
-        trimestre_input.setText(trimestre.toString());
-        annee_input.getSelectionModel().select(annee_scolaire);
-        btn_action.setText("Mettre à jour");
-        id_label.setText(id.toString());
-    }
 }

@@ -34,11 +34,9 @@ public class SecondeController implements Initializable{
     public TableColumn<Seconde, String> trimestre_column, annee_column, ses_column, ang_column, svt_column, tice_column, eps_column, frs_column, moyenne_column, total_column, hg_column, math_column, mlg_column, n_mat_column, eac_column, phys_column;
     public Label  id_label,seconde_label;
     public Pane action_pane;
-
     ObservableList<Seconde> listseconde = FXCollections.observableArrayList();
     SecondeDAO secondeDAO = new SecondeDAO();
     Seconde seconde = null;
-
     PopUp popUp = new PopUp();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,22 +82,23 @@ public class SecondeController implements Initializable{
                             seconde = getTableView().getItems().get(getIndex());
                             seconde_label.setText("Seconde: edition");
                             btn_action.setText("Mettre à jour");
-                            setInputText(seconde.getId(),
-                                    seconde.getMalagasy(),
-                                    seconde.getFrancais(),
-                                    seconde.getAnglais(),
-                                    seconde.getHistogeo(),
-                                    seconde.getEac(),
-                                    seconde.getSes(),
-                                    seconde.getSpc(),
-                                    seconde.getSvt(),
-                                    seconde.getMats(),
-                                    seconde.getEps(),
-                                    seconde.getTice(),
-                                    seconde.getN_mat(),
-                                    seconde.getTrimestre(),
-                                    seconde.getAnnee_scolaire()
-                                    );
+
+                            id_label.setText(seconde.getId().toString());
+                            mlg_input.setText(seconde.getMalagasy().toString());
+                            frs_input.setText(seconde.getFrancais().toString());
+                            ang_input.setText(seconde.getAnglais().toString());
+                            hg_input.setText(seconde.getHistogeo().toString());
+                            eac_input.setText(seconde.getEac().toString());
+                            math_input.setText(seconde.getMats().toString());
+                            ses_input.setText(seconde.getSes().toString());
+                            pc_input.setText(seconde.getSpc().toString());
+                            svt_input.setText(seconde.getSvt().toString());
+                            tice_input.setText(seconde.getTice().toString());
+                            eps_input.setText(seconde.getEps().toString());
+                            n_mat_input.getSelectionModel().select(seconde.getN_mat());
+                            trimestre_input.setText(seconde.getTrimestre().toString());
+                            annee_input.getSelectionModel().select(seconde.getAnnee_scolaire());
+
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
                     });
@@ -221,7 +220,6 @@ public class SecondeController implements Initializable{
         sortedList.comparatorProperty().bind(seconde_table.comparatorProperty());
         seconde_table.setItems(sortedList);
     }
-
     public void listEtudiant(){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
@@ -237,26 +235,5 @@ public class SecondeController implements Initializable{
         } catch (SQLException ignored) {
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
         }
-    }
-
-    private void setInputText(Integer id, Float malagasy, Float frs, Float anglais, Float histoGeo,
-                              Float eac, Float ses, Float spc, Float svt,Float mathematique,
-                              Float eps,Float tice, String n_mat,Integer trimestre,Integer annee_scolaire){
-        mlg_input.setText(malagasy.toString());
-        frs_input.setText(frs.toString());
-        ang_input.setText(anglais.toString());
-        hg_input.setText(histoGeo.toString());
-        eac_input.setText(eac.toString());
-        math_input.setText(mathematique.toString());
-        ses_input.setText(ses.toString());
-        pc_input.setText(spc.toString());
-        svt_input.setText(svt.toString());
-        tice_input.setText(tice.toString());
-        eps_input.setText(eps.toString());
-        n_mat_input.getSelectionModel().select(n_mat);
-        trimestre_input.setText(trimestre.toString());
-        annee_input.getSelectionModel().select(annee_scolaire);
-        btn_action.setText("Mettre à jour");
-        id_label.setText(id.toString());
     }
 }

@@ -9,13 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfbb41a6-bed2-4ec0-a2c1-e99654c755b9" name="Changes" comment="alert fixed">
+    <list default="true" id="cfbb41a6-bed2-4ec0-a2c1-e99654c755b9" name="Changes" comment="warnings fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/EtudiantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/EtudiantController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/SecondeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/SecondeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666888365441</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="warnings fixed">
+      <created>1666890071359</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1666890071359</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,6 +239,7 @@
     <MESSAGE value="total and average added" />
     <MESSAGE value="generate pdf added to Etudiants" />
     <MESSAGE value="alert fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="alert fixed" />
+    <MESSAGE value="warnings fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="warnings fixed" />
   </component>
 </project>
