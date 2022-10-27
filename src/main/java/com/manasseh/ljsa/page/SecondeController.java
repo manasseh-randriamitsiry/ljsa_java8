@@ -220,8 +220,8 @@ public class SecondeController implements Initializable{
     public static ArrayList<String> getYearList(int years) {
         ArrayList<String> yearList = new ArrayList<>(years);
         int startYear = Calendar.getInstance().get(Calendar.YEAR) - 30;
-        if (startYear<1970){
-            startYear = 1970;
+        if (startYear<1990){
+            startYear = 1990;
         }
         for (int i = 0; i < years; i++)
             yearList.add(Integer.toString(startYear + i));
