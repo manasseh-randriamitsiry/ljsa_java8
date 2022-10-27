@@ -66,8 +66,8 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         statement.setString(1,etudiant.getN_mat_etudiant().toUpperCase());
         statement.setString(2,etudiant.getNom_etudiant().toUpperCase());
         statement.setString(3,etudiant.getPrenom_etudiant().toLowerCase());
-        statement.setString(4,etudiant.getClasse_etudiant());
-        statement.setString(5,etudiant.getSerie_etudiant());
+        statement.setString(4,etudiant.getClasse_etudiant().toLowerCase());
+        statement.setString(5,etudiant.getSerie_etudiant().toUpperCase());
         statement.setString(6,String.valueOf(etudiant.getDate_nais_etudiant()));
         statement.setInt(7,etudiant.getId());
         try{

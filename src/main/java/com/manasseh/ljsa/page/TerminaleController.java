@@ -29,7 +29,8 @@ public class TerminaleController implements Initializable{
     public TableColumn<Terminale, Terminale> action_column;
     public Button afficher_ajout_btn, btn_action;
     public TextField recherche_input, svt_input, trimestre_input, ang_input, eps_input, hg_input, frs_input, math_input, mlg_input, pc_input, phylo_input, ses_input;
-    public ComboBox<Object> annee_input, n_mat_input;
+    public ComboBox<String> annee_input;
+    public ComboBox<Object> n_mat_input;
     public TableColumn<Terminale, String> trimestre_column, annee_column, ang_column, svt_column, ses_column, eps_column, frs_column, hg_column, math_column, mlg_column,n_mat_column, phylo_column, total_column, moyenne_column, phys_column;
     public Label  id_label, terminale_label;
     public Pane action_pane;
@@ -49,7 +50,7 @@ public class TerminaleController implements Initializable{
         listEtudiant();
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
-        annee_input.getItems().addAll(items);
+        annee_input.getItems().addAll( items);
         n_mat_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getN_mat()));
         ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
         mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
@@ -145,7 +146,7 @@ public class TerminaleController implements Initializable{
                             Float.valueOf(ses_input.getText()),
                             n_mat_input.getValue().toString(),
                             Integer.valueOf(trimestre_input.getText()),
-                            Integer.valueOf(annee_input.getValue().toString()));
+                            Integer.valueOf(annee_input.getValue()));
                     terminaleDAO.insert(terminale);
                     refresh();
                     clearInputs();
@@ -167,7 +168,7 @@ public class TerminaleController implements Initializable{
                         Float.valueOf(ses_input.getText()),
                         n_mat_input.getValue().toString(),
                         Integer.valueOf(trimestre_input.getText()),
-                        Integer.valueOf(annee_input.getValue().toString()));
+                        Integer.valueOf(annee_input.getValue()));
                 try {
                     terminaleDAO.update(terminale);
                     refresh();

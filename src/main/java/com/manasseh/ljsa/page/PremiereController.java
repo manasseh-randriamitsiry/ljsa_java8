@@ -44,8 +44,8 @@ public class PremiereController implements Initializable{
             eac_input,
             ses_input,
             tice_input;
-    public ComboBox<Object> annee_input,
-            n_mat_input;
+    public ComboBox<String> annee_input;
+    public ComboBox<Object> n_mat_input;
     public TableColumn<Premiere, String> trimestre_column,
             annee_column,
             ses_column,
@@ -179,7 +179,7 @@ public class PremiereController implements Initializable{
                             Float.valueOf(phylo_input.getText()),
                             n_mat_input.getValue().toString(),
                             Integer.valueOf(trimestre_input.getText()),
-                            Integer.valueOf(annee_input.getValue().toString()));
+                            Integer.valueOf(annee_input.getValue()));
                     premiereDAO.insert(premiere);
                     refresh();
                     clearInputs();
@@ -204,7 +204,7 @@ public class PremiereController implements Initializable{
                         Float.valueOf(phylo_input.getText()),
                         n_mat_input.getValue().toString(),
                         Integer.valueOf(trimestre_input.getText()),
-                        Integer.valueOf(annee_input.getValue().toString()));
+                        Integer.valueOf(annee_input.getValue()));
                 try {
                     premiereDAO.update(premiere);
                     refresh();

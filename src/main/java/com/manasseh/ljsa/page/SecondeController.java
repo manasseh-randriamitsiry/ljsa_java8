@@ -29,7 +29,8 @@ public class SecondeController implements Initializable{
     public TableColumn<Seconde, Seconde> action_column;
     public Button afficher_ajout_btn, btn_action;
     public TextField recherche_input, svt_input, trimestre_input, ang_input, eps_input, hg_input, frs_input, math_input, mlg_input, pc_input, eac_input, ses_input, tice_input;
-    public ComboBox<Object> annee_input, n_mat_input;
+    public ComboBox<String> annee_input;
+    public ComboBox<Object> n_mat_input;
     public TableColumn<Seconde, String> trimestre_column, annee_column, ses_column, ang_column, svt_column, tice_column, eps_column, frs_column, moyenne_column, total_column, hg_column, math_column, mlg_column, n_mat_column, eac_column, phys_column;
     public Label  id_label,seconde_label;
     public Pane action_pane;
@@ -138,7 +139,7 @@ public class SecondeController implements Initializable{
                             Float.valueOf(tice_input.getText()),
                             n_mat_input.getValue().toString(),
                             Integer.valueOf(trimestre_input.getText()),
-                            Integer.valueOf(annee_input.getValue().toString()));
+                            Integer.valueOf(annee_input.getValue()));
                     secondeDAO.insert(seconde);
                     new FadeOutRight(action_pane).play();
                     refresh();
@@ -162,7 +163,7 @@ public class SecondeController implements Initializable{
                         Float.valueOf(tice_input.getText()),
                         n_mat_input.getValue().toString(),
                         Integer.valueOf(trimestre_input.getText()),
-                        Integer.valueOf(annee_input.getValue().toString()));
+                        Integer.valueOf(annee_input.getValue()));
                 try {
                     secondeDAO.update(seconde);
                     refresh();

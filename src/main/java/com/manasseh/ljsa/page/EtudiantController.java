@@ -50,7 +50,7 @@ public class EtudiantController implements Initializable {
     public TextField recherche_input;
     public Label etudiant_label;
     public ComboBox<Object>  serie_input;
-    public ComboBox<Object> classe_input;
+    public ComboBox<String> classe_input;
     public Label id_label;
     public Pane pane_etudiant;
     EtudiantDAO dao = new EtudiantDAO();
@@ -66,6 +66,7 @@ public class EtudiantController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         listSerie();
         refresh();
+        new FadeOutRight(action_pane).play();
         String[] items = {"Seconde","Première","Terminale"};
         classe_input.getItems().addAll(items);
         numero_matricule_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getN_mat_etudiant()));
@@ -134,7 +135,7 @@ public class EtudiantController implements Initializable {
                             numero_matricule_input.getText(),
                             nom_input.getText(),
                             prenom_input.getText(),
-                            classe_input.getValue().toString(),
+                            classe_input.getValue(),
                             serie_input.getValue().toString(),
                             date_nais_picker.getValue().toString());
                     dao.insert(etudiant);
@@ -149,7 +150,7 @@ public class EtudiantController implements Initializable {
                         numero_matricule_input.getText(),
                         nom_input.getText(),
                         prenom_input.getText(),
-                        classe_input.getValue().toString(),
+                        classe_input.getValue(),
                         serie_input.getValue().toString(),
                         date_nais_picker.getValue().toString());
                 try {
