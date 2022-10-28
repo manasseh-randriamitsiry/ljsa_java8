@@ -12,81 +12,65 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="profsPane" onZoom="#zoomText" prefHeight="680.0" prefWidth="1010.0" styleClass="body"
-      stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.manasseh.ljsa.page.ProfController">
+<Pane fx:id="profsPane" onZoom="#zoomText" prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.ProfController">
    <Label fx:id="professeur" layoutX="90.0" layoutY="30.0" text="Professeurs">
       <font>
-         <Font size="34.0"/>
+         <Font size="34.0" />
       </font>
    </Label>
-   <Button fx:id="btn_ajout_prof" layoutX="26.0" layoutY="35.0" minWidth="35.0" mnemonicParsing="false"
-           onAction="#ajoutProfesseur" onMouseClicked="#check" prefHeight="32.0" prefWidth="35.0"
-           stylesheets="@../style.css" text="+">
+   <Button fx:id="btn_ajout_prof" layoutX="26.0" layoutY="35.0" minWidth="35.0" mnemonicParsing="false" onAction="#ajoutProfesseur" onMouseClicked="#check" prefHeight="32.0" prefWidth="35.0" stylesheets="@../style.css" text="+">
       <font>
-         <Font size="14.0"/>
+         <Font size="14.0" />
       </font>
    </Button>
-   <TableView fx:id="table_prof" editable="true" layoutX="26.0" layoutY="182.0" prefHeight="449.0" prefWidth="959.0"
-              styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
+   <TableView fx:id="table_prof" editable="true" layoutX="26.0" layoutY="182.0" prefHeight="449.0" prefWidth="959.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
       <columns>
-         <TableColumn fx:id="n_mat_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="100.0"
-                      text="NªMatricule"/>
-         <TableColumn fx:id="nom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="258.0"
-                      text="Nom"/>
-         <TableColumn fx:id="prenom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="300.0"
-                      text="Prenom"/>
-         <TableColumn fx:id="date_nais_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="150.0"
-                      text="Date de naissance"/>
-         <TableColumn fx:id="actionColumn" editable="false" minWidth="100.0" prefWidth="150.0" text="Action"/>
+         <TableColumn fx:id="n_mat_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="100.0" text="NªMatricule" />
+         <TableColumn fx:id="nom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="258.0" text="Nom" />
+         <TableColumn fx:id="prenom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="300.0" text="Prenom" />
+         <TableColumn fx:id="date_nais_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="150.0" text="Date de naissance" />
+         <TableColumn fx:id="actionColumn" editable="false" minWidth="100.0" prefWidth="150.0" text="Action" />
       </columns>
    </TableView>
-   <TextField fx:id="recherche_input" layoutX="808.0" layoutY="30.0" prefHeight="42.0" prefWidth="183.0"
-              promptText="Rechercher ..." styleClass="input" stylesheets="@../style.css">
+   <TextField fx:id="recherche_input" layoutX="808.0" layoutY="30.0" prefHeight="42.0" prefWidth="183.0" promptText="Rechercher ..." styleClass="input" stylesheets="@../style.css">
       <contextMenu>
          <ContextMenu>
             <items>
-               <MenuItem mnemonicParsing="false" text="Unspecified Action"/>
+               <MenuItem mnemonicParsing="false" text="Unspecified Action" />
             </items>
          </ContextMenu>
       </contextMenu>
    </TextField>
-   <Pane fx:id="action_pane" layoutX="23.0" layoutY="83.0" prefHeight="90.0" prefWidth="966.0" styleClass="input"
-         stylesheets="@../style.css">
-      <Label layoutX="21.0" layoutY="18.0" text="NºMatricule :"/>
-      <TextField fx:id="numero_matricule_input" layoutX="104.0" layoutY="14.0" onKeyReleased="#check"
-                 prefHeight="18.0" prefWidth="152.0" promptText="Numero matricule" stylesheets="@../style.css">
+   <Pane fx:id="action_pane" layoutX="23.0" layoutY="83.0" prefHeight="90.0" prefWidth="966.0" styleClass="input" stylesheets="@../style.css">
+      <Label layoutX="21.0" layoutY="18.0" text="NºMatricule :" />
+      <TextField fx:id="numero_matricule_input" layoutX="104.0" layoutY="14.0" onKeyReleased="#check" prefHeight="18.0" prefWidth="152.0" promptText="Numero matricule" stylesheets="@../style.css">
          <styleClass>
-            <String fx:value="body"/>
-            <String fx:value="input1"/>
+            <String fx:value="body" />
+            <String fx:value="input1" />
          </styleClass>
       </TextField>
-      <Label layoutX="21.0" layoutY="53.0" text="Nom :"/>
-      <TextField fx:id="nom_prof_input" layoutX="104.0" layoutY="49.0" onKeyReleased="#check" prefHeight="18.0"
-                 prefWidth="152.0" promptText="Nom" stylesheets="@../style.css">
+      <Label layoutX="21.0" layoutY="53.0" text="Nom :" />
+      <TextField fx:id="nom_prof_input" layoutX="104.0" layoutY="49.0" onKeyReleased="#check" prefHeight="18.0" prefWidth="152.0" promptText="Nom" stylesheets="@../style.css">
          <styleClass>
-            <String fx:value="body"/>
-            <String fx:value="input1"/>
+            <String fx:value="body" />
+            <String fx:value="input1" />
          </styleClass>
       </TextField>
-      <Label layoutX="277.0" layoutY="12.0" text="Prenom :"/>
-      <TextField fx:id="prenom_prof_input" layoutX="360.0" layoutY="12.0" onKeyReleased="#check" prefHeight="18.0"
-                 prefWidth="152.0" promptText="prenom" stylesheets="@../style.css">
+      <Label layoutX="277.0" layoutY="12.0" text="Prenom :" />
+      <TextField fx:id="prenom_prof_input" layoutX="360.0" layoutY="12.0" onKeyReleased="#check" prefHeight="18.0" prefWidth="152.0" promptText="prenom" stylesheets="@../style.css">
          <styleClass>
-            <String fx:value="body"/>
-            <String fx:value="input1"/>
+            <String fx:value="body" />
+            <String fx:value="input1" />
          </styleClass>
       </TextField>
-      <Label layoutX="277.0" layoutY="47.0" text="Date Nais :"/>
-      <Button fx:id="btn_action" layoutX="819.0" layoutY="29.0" mnemonicParsing="false" prefHeight="32.0"
-              prefWidth="125.0" text="OK">
+      <Label layoutX="277.0" layoutY="47.0" text="Date Nais :" />
+      <Button fx:id="btn_action" layoutX="819.0" layoutY="29.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="125.0" text="OK">
          <font>
-            <Font size="12.0"/>
+            <Font size="12.0" />
          </font>
       </Button>
-      <DatePicker fx:id="date_nais_picker" editable="false" layoutX="360.0" layoutY="43.0" onAction="#check"
-                  prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true"
-                  style="-fx-background-radius: 10px;"/>
+      <DatePicker fx:id="date_nais_picker" editable="false" layoutX="360.0" layoutY="43.0" onAction="#check" prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true" style="-fx-background-radius: 10px;" />
    </Pane>
-   <Label fx:id="id" layoutX="26.0" layoutY="6.0" text="Label" visible="false"/>
+   <Label fx:id="id" layoutX="26.0" layoutY="6.0" text="Label" visible="false" />
+   <Button layoutX="934.0" layoutY="30.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
 </Pane>

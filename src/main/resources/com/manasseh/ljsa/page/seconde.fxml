@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.SecondeController">
@@ -40,71 +41,36 @@
     <TextField fx:id="recherche_input" layoutX="809.0" layoutY="17.0" prefHeight="42.0" prefWidth="181.0" promptText="Rechercher ..." styleClass="input1" />
     <Label fx:id="id_label" layoutX="249.0" layoutY="30.0" text="Label" visible="false" />
     <Pane fx:id="action_pane" layoutX="97.0" layoutY="65.0" prefHeight="117.0" prefWidth="816.0" styleClass="input">
-        <TextField fx:id="mlg_input" layoutX="34.0" layoutY="48.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Malagasy" styleClass="input1"/>
-        <TextField fx:id="frs_input" layoutX="36.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Français" styleClass="input1"/>
-        <TextField fx:id="hg_input" layoutX="189.0" layoutY="8.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Histo-geo" styleClass="input1"/>
-        <TextField fx:id="pc_input" layoutX="190.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Physique" styleClass="input1"/>
-        <TextField fx:id="svt_input" layoutX="334.0" layoutY="6.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="SVT" styleClass="input1"/>
-        <TextField fx:id="eps_input" layoutX="334.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="EPS" styleClass="input1"/>
-        <TextField fx:id="trimestre_input" layoutX="486.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Trimestre" styleClass="input1"/>
-        <TextField fx:id="math_input" layoutX="190.0" layoutY="47.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Math" styleClass="input1"/>
-        <ComboBox fx:id="annee_input" editable="true" layoutX="630.0" layoutY="43.0" onHiding="#check"
-                  onShowing="#check" prefHeight="27.0" prefWidth="106.0" promptText="Anee" styleClass="input1"/>
-        <Button fx:id="btn_action" layoutX="666.0" layoutY="80.0" mnemonicParsing="false" styleClass="btn-success"
-                text="Ajouter +"/>
-        <TextField fx:id="ses_input" layoutX="34.0" layoutY="10.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="SES" styleClass="input1"/>
-        <Button layoutX="93.0" layoutY="10.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SES"/>
-        <Button layoutX="92.0" layoutY="47.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="MLG"/>
-        <Button layoutX="91.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="FRS"/>
-        <Button layoutX="249.0" layoutY="8.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="HG"/>
-        <Button layoutX="249.0" layoutY="46.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
-                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="MATH"/>
-        <Button layoutX="247.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
-                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="SPC"/>
-        <Button layoutX="394.0" layoutY="5.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SVT"/>
-        <Button layoutX="396.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
-                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="EPS"/>
-        <Button layoutX="539.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
-                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="TRIM"/>
-        <TextField fx:id="ang_input" layoutX="486.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="Anglais" styleClass="input1"/>
-        <Button layoutX="539.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
-                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="ANG"/>
-        <ComboBox fx:id="n_mat_input" editable="true" layoutX="630.0" layoutY="4.0" prefHeight="26.0" prefWidth="106.0"
-                  promptText="Numero matricule" styleClass="input1"/>
-        <Button layoutX="734.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT"/>
-        <Button layoutX="734.0" layoutY="43.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0"
-                prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="ANNEE"/>
-        <TextField fx:id="tice_input" layoutX="486.0" layoutY="5.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="TICE" styleClass="input1"/>
-        <Button layoutX="539.0" layoutY="4.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0"
-                style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TICE"/>
-        <TextField fx:id="eac_input" layoutX="333.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0"
-                   prefWidth="70.0" promptText="EAC" styleClass="input1"/>
-        <Button layoutX="395.0" layoutY="82.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0"
-                prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css"
-                text="EAC"/>
+        <TextField fx:id="mlg_input" layoutX="34.0" layoutY="48.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Malagasy" styleClass="input1" />
+        <TextField fx:id="frs_input" layoutX="36.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Français" styleClass="input1" />
+        <TextField fx:id="hg_input" layoutX="189.0" layoutY="8.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Histo-geo" styleClass="input1" />
+        <TextField fx:id="pc_input" layoutX="190.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Physique" styleClass="input1" />
+        <TextField fx:id="svt_input" layoutX="334.0" layoutY="6.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="SVT" styleClass="input1" />
+        <TextField fx:id="eps_input" layoutX="334.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="EPS" styleClass="input1" />
+        <TextField fx:id="trimestre_input" layoutX="486.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Trimestre" styleClass="input1" />
+        <TextField fx:id="math_input" layoutX="190.0" layoutY="47.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Math" styleClass="input1" />
+        <ComboBox fx:id="annee_input" editable="true" layoutX="630.0" layoutY="43.0" onHiding="#check" onShowing="#check" prefHeight="27.0" prefWidth="106.0" promptText="Anee" styleClass="input1" />
+        <Button fx:id="btn_action" layoutX="666.0" layoutY="80.0" mnemonicParsing="false" styleClass="btn-success" text="Ajouter +" />
+        <TextField fx:id="ses_input" layoutX="34.0" layoutY="10.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="SES" styleClass="input1" />
+        <Button layoutX="93.0" layoutY="10.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SES" />
+        <Button layoutX="92.0" layoutY="47.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="MLG" />
+        <Button layoutX="91.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="FRS" />
+        <Button layoutX="249.0" layoutY="8.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="HG" />
+        <Button layoutX="249.0" layoutY="46.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="MATH" />
+        <Button layoutX="247.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SPC" />
+        <Button layoutX="394.0" layoutY="5.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SVT" />
+        <Button layoutX="396.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="EPS" />
+        <Button layoutX="539.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TRIM" />
+        <TextField fx:id="ang_input" layoutX="486.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Anglais" styleClass="input1" />
+        <Button layoutX="539.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANG" />
+        <ComboBox fx:id="n_mat_input" editable="true" layoutX="630.0" layoutY="4.0" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
+        <Button layoutX="734.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT" />
+        <Button layoutX="734.0" layoutY="43.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANNEE" />
+        <TextField fx:id="tice_input" layoutX="486.0" layoutY="5.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="TICE" styleClass="input1" />
+        <Button layoutX="539.0" layoutY="4.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TICE" />
+        <TextField fx:id="eac_input" layoutX="333.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="EAC" styleClass="input1" />
+        <Button layoutX="395.0" layoutY="82.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="EAC" />
+      <Circle fill="DODGERBLUE" layoutX="802.0" layoutY="18.0" fx:id="detail_btn" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" />
     </Pane>
    <Button layoutX="932.0" layoutY="16.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
 </Pane>

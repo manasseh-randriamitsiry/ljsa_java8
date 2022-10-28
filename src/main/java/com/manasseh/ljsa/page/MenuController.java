@@ -89,11 +89,7 @@ public class MenuController extends ActivateDrag implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try{
-            loadContent("home");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        home();
     }
     public void loadContent(String page) {
         try {
@@ -105,20 +101,16 @@ public class MenuController extends ActivateDrag implements Initializable {
         body.getChildren().removeAll(root);
         body.getChildren().setAll(root);
     }
-
     public void iconified() {
         Stage stage = (Stage) home_btn.getScene().getWindow();
         stage.setIconified(true);
     }
-
     public void close() {
         System.exit(0);
     }
-
     public void activateDrag(MouseEvent event) {
         activate(event, border_pane);
     }
-
     public void getCursorPosition(MouseEvent event) {
         pressed(event);
     }

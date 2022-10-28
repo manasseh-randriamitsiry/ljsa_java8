@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.TerminaleController">
@@ -63,6 +64,7 @@
         <ComboBox fx:id="n_mat_input" editable="true" layoutX="630.0" layoutY="4.0" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
         <Button layoutX="734.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT" />
         <Button layoutX="734.0" layoutY="43.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANNEE" />
+      <Circle fx:id="detail_btn" fill="DODGERBLUE" layoutX="803.0" layoutY="18.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" />
     </Pane>
     <Button fx:id="afficher_ajout_btn" layoutX="22.0" layoutY="23.0" minWidth="44.0" mnemonicParsing="false" onAction="#afficherPaneAjout" onMouseClicked="#afficherPaneAjout" prefHeight="30.0" prefWidth="44.0" text="+" />
     <TextField fx:id="recherche_input" layoutX="809.0" layoutY="17.0" prefHeight="42.0" prefWidth="181.0" promptText="Rechercher ..." styleClass="input1" />

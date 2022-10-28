@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import com.manasseh.ljsa.model.Etudiant;
-
 import java.sql.*;
 
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
@@ -82,7 +81,6 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         statement.close();
     }
-
     public int nombreEtudiant() throws SQLException {
         int nombre = 0;
         String sql = "select count(*) from etudiants";
@@ -94,7 +92,6 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return nombre;
     }
-
     public String getSerie(String n_matricule) throws SQLException {
         String serie = null;
         String sql = "select serie from etudiants where n_matricule = '"+n_matricule+"'";
@@ -106,7 +103,30 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return serie;
     }
-
+    public Etudiant getByNmat(String n_matricule){
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDb = connectNow.getConnection();
+        Etudiant etudiant = null;
+        String query = "SELECT * FROM etudiants where n_matricule='"+n_matricule+"'";
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                etudiant = new Etudiant(
+                        resultSet.getInt("id"),
+                        resultSet.getString("n_matricule"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getString("classe"),
+                        resultSet.getString("serie"),
+                        resultSet.getString("date_nais")
+                );
+            }
+        } catch (SQLException ignored) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+        }
+        return etudiant;
+    }
     public ObservableList<Object> listEtudiant(String classe){
         ObservableList<Object> data = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();

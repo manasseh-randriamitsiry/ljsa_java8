@@ -4,6 +4,7 @@ import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeOutRight;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.DAO.PremiereDAO;
+import com.manasseh.ljsa.model.Etudiant;
 import com.manasseh.ljsa.model.Premiere;
 import com.manasseh.ljsa.utils.PopUp;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,12 +12,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,12 +44,14 @@ public class PremiereController implements Initializable{
     public TableColumn<Premiere,String> trimestre_column, annee_column, ses_column, ang_column, svt_column, tice_column, eps_column, frs_column, hg_column, math_column, mlg_column, phylo_column, n_mat_column, eac_column, phys_column, moyenne_column, total_column;
     public Label  id_label;
     public Pane action_pane;
+    public Circle detail_btn;
     public Label premiere_label;
     ObservableList<Premiere> listPremiere = FXCollections.observableArrayList();
     PremiereDAO premiereDAO = new PremiereDAO();
     Premiere premiere = null;
     PopUp popUp = new PopUp();
     EtudiantDAO etudiantDAO = new EtudiantDAO();
+    Etudiant etudiant;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
@@ -126,6 +139,33 @@ public class PremiereController implements Initializable{
             }
         };
         action_column.setCellFactory(newColumn);
+
+        // detail pop up
+        detail_btn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader ();
+                loader.setLocation(getClass().getResource("detailEtudiant.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException |NullPointerException ex ) {
+                    popUp.error("Information", "Selectionner un numero matricule avant de cliquer. Merci");
+                }
+                DetailController detail = loader.getController();
+                etudiant = etudiantDAO.getByNmat((String) n_mat_input.getValue());
+                detail.setInputText(etudiant);
+                Parent parent = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(parent));
+                stage.initStyle(StageStyle.UTILITY);
+                stage.initOwner(((Node)event.getSource()).getScene().getWindow());
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+                refresh();
+            } catch (NullPointerException e) {
+                popUp.error("Information", "Selectionner un numero matricule avant de cliquer. Merci");
+            }
+        });
+
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
                 try {
