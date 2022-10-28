@@ -40,7 +40,6 @@ public class LoginController extends ActivateDrag {
         } else if (username.getText().isEmpty() && password.getText().isEmpty()) {
             popUp.error("erreur","les champ champs sont vides !");
         }
-
     }
     public void login(ActionEvent event,String username, String password) {
         info.setVisible(false);
