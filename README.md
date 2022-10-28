@@ -3,7 +3,7 @@
 - FX_VERSION = 8;
 - By ManassehRandriamitsiry
 
-how to setup :
+how to set up :
 - default Main : Main
 - default sql user : root
 -         sql password: 123456789
