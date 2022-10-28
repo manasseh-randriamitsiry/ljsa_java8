@@ -10,20 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfbb41a6-bed2-4ec0-a2c1-e99654c755b9" name="Changes" comment="voirDetail added">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/DetailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/detailEtudiant.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Etudiant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/DetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/DetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/SecondeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/SecondeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/etudiant.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/etudiant.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/premiere.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/premiere.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/profs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/profs.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/seconde.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/seconde.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/utils/ActivateDrag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/utils/ActivateDrag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/utils/LoadPage.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666893579531</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="voirDetail added">
+      <created>1666987420435</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1666987420435</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -1,4 +1,4 @@
-package manasseh.utils;
+package com.manasseh.ljsa.utils;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;

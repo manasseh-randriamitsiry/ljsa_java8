@@ -8,7 +8,7 @@ public class Etudiant {
     private final String classe_etudiant;
     private final String serie_etudiant;
     private final String date_nais_etudiant;
-    
+
     public Etudiant(Integer id, String n_mat_etudiant, String nom_etudiant, String prenom_etudiant, String classe_etudiant, String serie_etudiant, String date_nais_etudiant) {
         this.id = id;
         this.n_mat_etudiant = n_mat_etudiant;

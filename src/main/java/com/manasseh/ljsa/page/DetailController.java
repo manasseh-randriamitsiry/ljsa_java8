@@ -1,12 +1,13 @@
 package com.manasseh.ljsa.page;
 
 import com.manasseh.ljsa.model.Etudiant;
+import com.manasseh.ljsa.utils.ActivateDrag;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-public class DetailController extends manasseh.utils.ActivateDrag {
+public class DetailController extends ActivateDrag {
     public Pane detailPane;
     public TextField nom;
     public TextField prenom;

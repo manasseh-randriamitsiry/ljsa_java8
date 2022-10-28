@@ -4,7 +4,7 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import manasseh.utils.ActivateDrag;
+import com.manasseh.ljsa.utils.ActivateDrag;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;

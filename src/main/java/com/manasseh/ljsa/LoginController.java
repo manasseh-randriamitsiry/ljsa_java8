@@ -10,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import manasseh.utils.ActivateDrag;
+import com.manasseh.ljsa.utils.ActivateDrag;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import javafx.event.ActionEvent;
@@ -29,7 +29,7 @@ public class LoginController extends ActivateDrag {
     public Label info;
     public Pane loginPane;
     PopUp popUp = new PopUp();
-    public void auth(ActionEvent actionEvent) throws IOException {
+    public void auth(ActionEvent actionEvent) {
         info.setVisible(false);
         if (!username.getText().isEmpty() && !password.getText().isEmpty()){
             login(actionEvent,username.getText(),password.getText());
@@ -42,8 +42,7 @@ public class LoginController extends ActivateDrag {
         }
 
     }
-    public void login(ActionEvent event,String username, String password) throws IOException {
-
+    public void login(ActionEvent event,String username, String password) {
         info.setVisible(false);
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
@@ -70,7 +69,7 @@ public class LoginController extends ActivateDrag {
         }
     }
 
-    public void noAccount(ActionEvent event) {
+    public void noAccount() {
         info.setText("Contacter votre admin ou \n veuillez envoyer un email au : \nmanassehrandriamitsiry@gmail.com");
         info.setVisible(true);
         new Swing(info).play();
