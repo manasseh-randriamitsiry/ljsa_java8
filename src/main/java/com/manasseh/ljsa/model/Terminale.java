@@ -1,5 +1,6 @@
 package com.manasseh.ljsa.model;
 
+import com.manasseh.ljsa.DAO.ClasseDAO;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.page.TerminaleController;
 
@@ -22,6 +23,7 @@ public class Terminale extends TerminaleController {
     private final Integer trimestre;
     private final Integer annee_scolaire;
     EtudiantDAO etudiantDAO = new EtudiantDAO();
+    ClasseDAO classeDAO = new ClasseDAO();
 
     public Terminale(Integer id, Float malagasy, Float frs, Float anglais, Float histoGeo, Float phylosphie, Float eps, Float mathematique, Float spc, Float svt, Float ses, String n_mat, Integer trimestre, Integer annee_scolaire) {
         this.id = id;
@@ -53,10 +55,7 @@ public class Terminale extends TerminaleController {
     }
     public String getMoyenne() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
-        int coeff = 32;
-        if (etudiantDAO.getSerie(n_mat).equals("D")){
-            coeff = 25;
-        }
+        int coeff = classeDAO.getClasse(etudiantDAO.getClasse(n_mat));
         Float sum = (this.malagasy +
                 this.frs +
                 this.anglais +

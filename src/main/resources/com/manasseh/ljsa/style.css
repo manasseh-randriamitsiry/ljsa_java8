@@ -58,8 +58,6 @@
 .button:focused{
     -fx-text-color: "black";
     -fx-background-color: #996699;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
 }
 
 .btn-danger{

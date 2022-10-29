@@ -57,7 +57,7 @@ public class PremiereController implements Initializable{
         refresh();
         clearInputs();
         new FadeOutRight(action_pane).play();
-        n_mat_input.setItems(etudiantDAO.listEtudiant("première"));
+        n_mat_input.setItems(etudiantDAO.listEtudiant());
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(getYearList(100));
@@ -75,10 +75,15 @@ public class PremiereController implements Initializable{
          tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
          phylo_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylo().toString()));
         total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
-        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoy()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
          annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
-
+        moyenne_column.setCellValueFactory(param -> {
+            try {
+                return new SimpleStringProperty(param.getValue().getMoy());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         Callback<TableColumn<Premiere,Premiere>, TableCell<Premiere,Premiere>> newColumn = (TableColumn<Premiere,Premiere> param) -> new TableCell<Premiere,Premiere>() {
             @Override
             public void updateItem(Premiere item, boolean empty) {

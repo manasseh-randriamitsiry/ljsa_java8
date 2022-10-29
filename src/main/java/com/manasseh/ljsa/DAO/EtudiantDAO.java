@@ -12,21 +12,21 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
 
     @Override
     public void insert(Etudiant etudiant) throws SQLException {
-        String sql = "insert into etudiants() values(NULL,?,?,?,?,?,?)";
+        String sql = "insert into etudiants() values(NULL,?,?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,etudiant.getN_mat_etudiant().toUpperCase());
         statement.setString(2,etudiant.getNom_etudiant().toUpperCase());
         statement.setString(3,etudiant.getPrenom_etudiant().toLowerCase());
-        statement.setString(4,etudiant.getClasse_etudiant().toLowerCase());
-        statement.setString(5,etudiant.getSerie_etudiant().toUpperCase());
-        statement.setString(6,String.valueOf(etudiant.getDate_nais_etudiant()));
+        statement.setString(4,etudiant.getClasse_etudiant().toUpperCase());
+        statement.setString(5,String.valueOf(etudiant.getDate_nais_etudiant()));
         try {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 popUp.success("Success","insertion avec success");
             }
         } catch (SQLIntegrityConstraintViolationException e){
+//            e.printStackTrace();
             popUp.error("erreur ","Le numero matricule est dejà utilisé");
         }
         statement.close();
@@ -48,7 +48,6 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
                         resultSet.getString("nom"),
                         resultSet.getString("prenom"),
                         resultSet.getString("classe"),
-                        resultSet.getString("serie"),
                         resultSet.getString("date_nais")
                 ));
             }
@@ -59,16 +58,15 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     }
     @Override
     public void update(Etudiant etudiant) throws SQLException{
-        String sql = "update etudiants set n_matricule = ?, nom=?, prenom=?, classe = ?, serie = ?,date_nais=? where id = ?";
+        String sql = "update etudiants set n_matricule = ?, nom=?, prenom=?, classe = ?,date_nais=? where id = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,etudiant.getN_mat_etudiant().toUpperCase());
         statement.setString(2,etudiant.getNom_etudiant().toUpperCase());
         statement.setString(3,etudiant.getPrenom_etudiant().toLowerCase());
-        statement.setString(4,etudiant.getClasse_etudiant().toLowerCase());
-        statement.setString(5,etudiant.getSerie_etudiant().toUpperCase());
-        statement.setString(6,String.valueOf(etudiant.getDate_nais_etudiant()));
-        statement.setInt(7,etudiant.getId());
+        statement.setString(4,etudiant.getClasse_etudiant().toUpperCase());
+        statement.setString(5,String.valueOf(etudiant.getDate_nais_etudiant()));
+        statement.setInt(6,etudiant.getId());
         try{
             int res = statement.executeUpdate();
             if (res>0) {
@@ -92,14 +90,14 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return nombre;
     }
-    public String getSerie(String n_matricule) throws SQLException {
+    public String getClasse(String n_matricule) throws SQLException {
         String serie = null;
-        String sql = "select serie from etudiants where n_matricule = '"+n_matricule+"'";
+        String sql = "select classe from etudiants where n_matricule = '"+n_matricule+"'";
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()){
-            serie = resultSet.getString("serie");
+            serie = resultSet.getString("classe");
         }
         return serie;
     }
@@ -118,7 +116,6 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
                         resultSet.getString("nom"),
                         resultSet.getString("prenom"),
                         resultSet.getString("classe"),
-                        resultSet.getString("serie"),
                         resultSet.getString("date_nais")
                 );
             }
@@ -127,11 +124,11 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return etudiant;
     }
-    public ObservableList<Object> listEtudiant(String classe){
+    public ObservableList<Object> listEtudiant(){
         ObservableList<Object> data = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants where classe='"+classe+"' order by n_matricule ASC";
+        String query = "SELECT n_matricule FROM etudiants order by n_matricule ASC";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

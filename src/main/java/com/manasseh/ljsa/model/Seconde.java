@@ -1,5 +1,9 @@
 package com.manasseh.ljsa.model;
 
+import com.manasseh.ljsa.DAO.ClasseDAO;
+import com.manasseh.ljsa.DAO.EtudiantDAO;
+
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 public class Seconde {
@@ -18,6 +22,8 @@ public class Seconde {
     private final String n_mat;
     private final Integer trimestre;
     private final Integer annee_scolaire;
+    EtudiantDAO etudiantDAO = new EtudiantDAO();
+    ClasseDAO classeDAO = new ClasseDAO();
 
     public Seconde(Integer id, Float malagasy, Float francais, Float anglais, Float histogeo, Float eac,Float ses, Float spc, Float svt, Float mats, Float eps, Float tice, String n_mat, Integer trimestre, Integer annee_scolaire) {
         this.id = id;
@@ -52,8 +58,9 @@ public class Seconde {
         this.ses);
     }
 
-    public String getMoyenne(){
+    public String getMoyenne() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
+        int coeff = classeDAO.getClasse(etudiantDAO.getClasse(n_mat));
         Float sum = (this.malagasy +
                 this.francais +
                 this.anglais +
@@ -64,7 +71,7 @@ public class Seconde {
                 this.mats +
                 this.eps +
                 this.tice +
-                this.ses)/20;
+                this.ses)/coeff;
         return df.format(sum);
     }
 

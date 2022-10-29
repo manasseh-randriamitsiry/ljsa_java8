@@ -21,71 +21,82 @@ public class MenuController extends ActivateDrag implements Initializable {
     public Button profs_btn;
     public StackPane body;
     public Button matiere_btn;
-    public SplitMenuButton classe_btn;
+    public SplitMenuButton classes_btn;
     public BorderPane border_pane;
+    public Button classe_btn;
     Parent root = null;
     public void home() {
         loadContent("home");
-        home_btn.setStyle("-fx-background-color: #996699");
-        profs_btn.setStyle("-fx-background-color: #99CC66");
-        etudiant_btn.setStyle("-fx-background-color: #99CC66");
-        matiere_btn.setStyle("-fx-background-color: #99CC66");
-        classe_btn.setText("classe");
+        home_btn.setStyle("-fx-background-color: #EBD26A");
+        profs_btn.setStyle("-fx-background-color:none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
+        classes_btn.setText("classe");
     }
     public void etudiant() {
         loadContent("etudiant");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        profs_btn.setStyle("-fx-background-color: #99CC66");
-        etudiant_btn.setStyle("-fx-background-color: #996699");
-        matiere_btn.setStyle("-fx-background-color: #99CC66");
-        classe_btn.setText("classe");
+        home_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: #EBD26A");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
+        classes_btn.setText("classe");
     }
     public void terminale() {
         loadContent("terminale");
-        classe_btn.setText("Classe >Terminale");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        profs_btn.setStyle("-fx-background-color: #99CC66");
-        etudiant_btn.setStyle("-fx-background-color: #99CC66");
-        matiere_btn.setStyle("-fx-background-color: #99CC66");
+        classes_btn.setText("Classe >Terminale");
+        home_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
     }
     public void premiere() {
         loadContent("premiere");
-        classe_btn.setText("Classe >Premiere");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        profs_btn.setStyle("-fx-background-color: #99CC66");
-        etudiant_btn.setStyle("-fx-background-color: #99CC66");
-        matiere_btn.setStyle("-fx-background-color: #99CC66");
+        classes_btn.setText("Classe >Premiere");
+        home_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
     }
 
     public void seconde() {
         loadContent("seconde");
-        classe_btn.setText("Classe >Seconde");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        profs_btn.setStyle("-fx-background-color: #99CC66");
-        etudiant_btn.setStyle("-fx-background-color: #99CC66");
-        matiere_btn.setStyle("-fx-background-color: #99CC66");
+        classes_btn.setText("Classe >Seconde");
+        home_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
     }
     public void matiere(){
         loadContent("matiere");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        profs_btn.setStyle("-fx-background-color: #99CC66");
-        etudiant_btn.setStyle("-fx-background-color: #99CC66");
-        matiere_btn.setStyle("-fx-background-color: #996699");
-        classe_btn.setText("classe");
+        home_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: #EBD26A");
+        classe_btn.setStyle("-fx-background-color: none");
+        classes_btn.setText("classe");
     }
     public void profs() {
         loadContent("profs");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        home_btn.setStyle("-fx-background-color: #99CC66");
-        profs_btn.setStyle("-fx-background-color: #996699");
-        etudiant_btn.setStyle("-fx-background-color: #99CC66");
-        matiere_btn.setStyle("-fx-background-color: #99CC66");
-        classe_btn.setText("classe");
+        home_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: #EBD26A");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
+        classes_btn.setText("classe");
+    }
+    public void classe() {
+        loadContent("classe");
+        home_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: #EBD26A");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        classes_btn.setText("classe");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

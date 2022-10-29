@@ -7,6 +7,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.manasseh.ljsa.DAO.ClasseDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,16 +45,15 @@ public class EtudiantController implements Initializable {
     public TableColumn<Etudiant,String> nom_column;
     public TableColumn<Etudiant,String> prenom_column;
     public TableColumn<Etudiant,String> classe_column;
-    public TableColumn<Etudiant,String> serie_column;
     public TableColumn<Etudiant, String> date_nais_column;
     public TableColumn<Etudiant,Etudiant> action_column;
     public TextField recherche_input;
     public Label etudiant_label;
-    public ComboBox<Object>  serie_input;
-    public ComboBox<String> classe_input;
+    public ComboBox<Object> classe_input;
     public Label id_label;
     public Pane pane_etudiant;
     EtudiantDAO dao = new EtudiantDAO();
+    ClasseDAO classeDAO = new ClasseDAO();
     Etudiant etudiant;
     PopUp popUp = new PopUp();
     ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
@@ -64,16 +64,13 @@ public class EtudiantController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        listSerie();
         refresh();
         new FadeOutRight(action_pane).play();
-        String[] items = {"Seconde","Première","Terminale"};
-        classe_input.getItems().addAll(items);
+        classe_input.setItems(classeDAO.listClasse());
         numero_matricule_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getN_mat_etudiant()));
         nom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNom_etudiant()));
         prenom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getPrenom_etudiant()));
         classe_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getClasse_etudiant()));
-        serie_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getSerie_etudiant()));
         date_nais_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDate_nais_etudiant()));
 
         Callback<TableColumn<Etudiant,Etudiant>, TableCell<Etudiant,Etudiant>> newColumn = (TableColumn<Etudiant, Etudiant> param) -> new TableCell<Etudiant,Etudiant>() {
@@ -97,7 +94,6 @@ public class EtudiantController implements Initializable {
                                     etudiant.getNom_etudiant(),
                                     etudiant.getPrenom_etudiant(),
                                     etudiant.getClasse_etudiant(),
-                                    etudiant.getSerie_etudiant(),
                                     etudiant.getDate_nais_etudiant());
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
@@ -135,9 +131,9 @@ public class EtudiantController implements Initializable {
                             numero_matricule_input.getText(),
                             nom_input.getText(),
                             prenom_input.getText(),
-                            classe_input.getValue(),
-                            serie_input.getValue().toString(),
+                            classe_input.getValue().toString(),
                             date_nais_picker.getValue().toString());
+                    System.out.println(classe_input.getValue().toString());
                     dao.insert(etudiant);
                     new FadeOutRight(action_pane).play();
                     refresh();
@@ -150,8 +146,7 @@ public class EtudiantController implements Initializable {
                         numero_matricule_input.getText(),
                         nom_input.getText(),
                         prenom_input.getText(),
-                        classe_input.getValue(),
-                        serie_input.getValue().toString(),
+                        classe_input.getValue().toString(),
                         date_nais_picker.getValue().toString());
                 try {
                     dao.update(etudiant);
@@ -165,13 +160,12 @@ public class EtudiantController implements Initializable {
         });
 
     }
-    public void setTexts(Integer id, String n_mat_etudiant, String nom_etudiant, String prenom_etudiant, String classe_etudiant, String serie_etudiant, String date_nais_etudiant){
+    public void setTexts(Integer id, String n_mat_etudiant, String nom_etudiant, String prenom_etudiant, String classe_etudiant, String date_nais_etudiant){
         id_label.setText(id.toString());
         numero_matricule_input.setText(n_mat_etudiant);
         nom_input.setText(nom_etudiant);
         prenom_input.setText(prenom_etudiant);
         classe_input.getSelectionModel().select(classe_etudiant);
-        serie_input.getSelectionModel().select(serie_etudiant);
         date_nais_picker.setValue(LocalDate.parse(date_nais_etudiant));
     }
     private void clearInputs() {
@@ -187,7 +181,6 @@ public class EtudiantController implements Initializable {
                     || etudiant.getPrenom_etudiant().toLowerCase().contains(newValue.toLowerCase())
                     || etudiant.getN_mat_etudiant().toUpperCase().contains(newValue.toUpperCase())
                     || etudiant.getClasse_etudiant().toUpperCase().contains(newValue.toUpperCase())
-                    || etudiant.getSerie_etudiant().toUpperCase().contains(newValue.toUpperCase())
             ){
                 return true;
             }else return etudiant.getDate_nais_etudiant().contains(newValue);
@@ -203,35 +196,18 @@ public class EtudiantController implements Initializable {
         clearInputs();
         new FadeInRightBig(action_pane).play();
     }
-    public void listSerie(){
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDb = connectNow.getConnection();
-        String query = "SELECT abreviation FROM serie";
-        try {
-            Statement statement = connectDb.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            ObservableList<Object> data = FXCollections.observableArrayList();
-            while (resultSet.next()){
-                data.add(resultSet.getString(1));
-            }
-            serie_input.setItems(data);
-        } catch (SQLException ignored) {
-            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
-        }
-    }
+
     public void check(){
         if (!numero_matricule_input.getText().isEmpty()
                 && !nom_input.getText().isEmpty()
                 && !prenom_input.getText().isEmpty()
                 && date_nais_picker.getValue() !=null
-                && serie_input.getValue() != null
                 && classe_input.getValue() != null){
             btn_action.setVisible(true);
         } else if (numero_matricule_input.getText().isEmpty()
                 || nom_input.getText().isEmpty()
                 || prenom_input.getText().isEmpty()
                 || date_nais_picker.getValue() ==null
-                || serie_input.getValue() == null
                 || classe_input.getValue() == null){
             btn_action.setVisible(false);
         }
@@ -246,7 +222,7 @@ public class EtudiantController implements Initializable {
         PdfWriter.getInstance(document, Files.newOutputStream(Paths.get(file + ".pdf")));
         document.open();
 
-        PdfPTable table = new PdfPTable(6);
+        PdfPTable table = new PdfPTable(5);
         PdfPCell nmat = new PdfPCell(new Phrase("NMat"));
         table.addCell(nmat);
         PdfPCell nom = new PdfPCell(new Phrase("Nom"));
@@ -255,16 +231,14 @@ public class EtudiantController implements Initializable {
         table.addCell(prenom);
         PdfPCell classe = new PdfPCell(new Phrase("Classe"));
         table.addCell(classe);
-        PdfPCell serie = new PdfPCell(new Phrase("Serie"));
-        table.addCell(serie);
         PdfPCell date_nais = new PdfPCell(new Phrase("Date Nais"));
         table.addCell(date_nais);
-        float[] columnWidths = new float[]{15f, 30f, 30f, 20f,10f,20f};
+        float[] columnWidths = new float[]{15f, 30f, 30f, 20f,20f};
         table.setWidths(columnWidths);
 
         DatabaseConnection con = new DatabaseConnection();
         Connection connection = con.getConnection();
-        String query = "select n_matricule, nom,prenom,classe,serie,date_nais from etudiants;";
+        String query = "select n_matricule, nom,prenom,classe,date_nais from etudiants;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
@@ -272,7 +246,6 @@ public class EtudiantController implements Initializable {
             table.addCell(getNormalCell(resultSet.getString("nom"),  9));
             table.addCell(getNormalCell(resultSet.getString("prenom"),  9));
             table.addCell(getNormalCell(resultSet.getString("classe"), 9 ));
-            table.addCell(getNormalCell(resultSet.getString("serie"), 9));
             table.addCell(getNormalCell(resultSet.getString("date_nais"), 9 ));
         }
         document.addTitle("Liste des Etudiants");

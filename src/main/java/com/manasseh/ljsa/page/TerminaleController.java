@@ -56,7 +56,7 @@ public class TerminaleController implements Initializable{
         refresh();
         clearInputs();
         new FadeOutRight(action_pane).play();
-        n_mat_input.setItems(etudiantDAO.listEtudiant("terminale"));
+        n_mat_input.setItems(etudiantDAO.listEtudiant());
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(getYearList(100));

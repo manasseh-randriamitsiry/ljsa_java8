@@ -54,7 +54,7 @@ public class SecondeController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
         clearInputs();
-        n_mat_input.setItems(etudiantDAO.listEtudiant("seconde"));
+        n_mat_input.setItems(etudiantDAO.listEtudiant());
         new FadeOutRight(action_pane).play();
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
@@ -72,10 +72,15 @@ public class SecondeController implements Initializable{
         frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
         tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
         total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
-        moyenne_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMoyenne()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
         annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
-
+        moyenne_column.setCellValueFactory(param -> {
+            try {
+                return new SimpleStringProperty(param.getValue().getMoyenne());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         Callback<TableColumn<Seconde,Seconde>, TableCell<Seconde,Seconde>> newColumn = (TableColumn<Seconde,Seconde> param) -> new TableCell<Seconde,Seconde>() {
             @Override
             public void updateItem(Seconde item, boolean empty) {

@@ -13,7 +13,6 @@ public class DetailController extends ActivateDrag {
     public TextField prenom;
     public TextField date_nais;
     public TextField classe;
-    public TextField serie;
     public Label n_matricule;
 
     public void getCursorPosition(MouseEvent event) {
@@ -27,7 +26,6 @@ public class DetailController extends ActivateDrag {
         this.nom.setText(etudiant.getNom_etudiant());
         this.prenom.setText(etudiant.getPrenom_etudiant());
         this.classe.setText(etudiant.getClasse_etudiant());
-        this.serie.setText(etudiant.getSerie_etudiant());
         this.date_nais.setText(etudiant.getDate_nais_etudiant());
     }
 }

@@ -14,34 +14,39 @@
 <BorderPane fx:id="border_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseDragged="#activateDrag" onMousePressed="#getCursorPosition" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #E5E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.MenuController">
    <left>
       <Pane prefHeight="700.0" prefWidth="192.0" styleClass="sidebar" stylesheets="@../style.css" BorderPane.alignment="CENTER">
-         <Button fx:id="home_btn" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="16.0" layoutY="226.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#home" prefHeight="34.0" prefWidth="160.0" styleClass="btn-success" stylesheets="@../style.css" text="Menu" />
-         <Button fx:id="etudiant_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="273.0" mnemonicParsing="false" onAction="#etudiant" prefHeight="34.0" prefWidth="160.0" styleClass="btn-success" stylesheets="@../style.css" text="Etudiant" />
-         <SplitMenuButton fx:id="classe_btn" layoutX="17.0" layoutY="413.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="33.0" prefWidth="158.0" style="-fx-border-color: green;" stylesheets="@../style.css" text="Classe">
+         <Button fx:id="home_btn" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="-2.0" layoutY="232.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#home" prefHeight="29.0" prefWidth="194.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Menu" />
+         <Button fx:id="etudiant_btn" alignment="CENTER" contentDisplay="CENTER" layoutY="266.0" mnemonicParsing="false" onAction="#etudiant" prefHeight="30.0" prefWidth="193.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Etudiant" />
+         <SplitMenuButton fx:id="classes_btn" layoutX="45.0" layoutY="417.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="87.0" style="-fx-border-color: green;" stylesheets="@../style.css" text="Classe">
             <items>
                <MenuItem mnemonicParsing="false" onAction="#seconde" text="Seconde" />
                <MenuItem mnemonicParsing="false" onAction="#premiere" text="Premiere" />
                <MenuItem mnemonicParsing="false" onAction="#terminale" text="Terminale" />
             </items>
          </SplitMenuButton>
-         <Button fx:id="profs_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="319.0" mnemonicParsing="false" onAction="#profs" prefHeight="34.0" prefWidth="160.0" styleClass="btn-success" stylesheets="@../style.css" text="Profs" />
+         <Button fx:id="profs_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="301.0" mnemonicParsing="false" onAction="#profs" prefHeight="29.0" prefWidth="193.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Profs" />
          <Pane layoutX="7.0" layoutY="8.0" prefHeight="184.0" prefWidth="178.0" styleClass="body" stylesheets="@../style.css">
             <ImageView fitHeight="71.0" fitWidth="83.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../img/img.jpeg" />
             </ImageView>
             <Label layoutX="51.0" layoutY="97.0" prefHeight="43.0" prefWidth="77.0" style="-fx-font-size: 32px; -fx-font-weight: bold;" text="LJSA" />
          </Pane>
-         <Button fx:id="matiere_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="364.0" mnemonicParsing="false" onAction="#matiere" prefHeight="34.0" prefWidth="160.0" styleClass="btn-success" stylesheets="@../style.css" text="Matiere" />
-         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="41.0" layoutY="232.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <Button fx:id="matiere_btn" alignment="CENTER" contentDisplay="CENTER" layoutY="333.0" mnemonicParsing="false" onAction="#matiere" prefHeight="29.0" prefWidth="192.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Matiere" />
+         <ImageView fitHeight="14.0" fitWidth="18.0" layoutX="45.0" layoutY="240.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
             <Image url="@../img/menu-icon.png" />
          </ImageView>
-         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="41.0" layoutY="279.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="18.0" fitWidth="20.0" layoutX="43.0" layoutY="274.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
             <Image url="@../img/profile_picture_user_icon_153847.png" />
          </ImageView>
-         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="41.0" layoutY="325.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="15.0" fitWidth="17.0" layoutX="45.0" layoutY="309.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
             <Image url="@../img/teacher-icon.png" />
          </ImageView>
-         <ImageView fitHeight="22.0" fitWidth="24.0" layoutX="41.0" layoutY="370.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="14.0" fitWidth="19.0" layoutX="44.0" layoutY="342.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
             <Image url="@../img/matiere-icon.png" />
+         </ImageView>
+         <Button fx:id="classe_btn" alignment="CENTER" contentDisplay="CENTER" layoutY="363.0" mnemonicParsing="false" onAction="#classe" prefHeight="29.0" prefWidth="192.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Classe" />
+         <ImageView fitHeight="14.0" fitWidth="19.0" layoutX="43.0" layoutY="371.0" opacity="0.4" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../img/matiere-icon.png"/>
          </ImageView>
       </Pane>
    </left>

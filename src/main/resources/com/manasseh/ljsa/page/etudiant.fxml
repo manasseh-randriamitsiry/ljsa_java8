@@ -23,7 +23,6 @@
          <TableColumn fx:id="nom_column" editable="false" maxWidth="500.0" minWidth="50.0" prefWidth="200.0" text="Nom" />
          <TableColumn fx:id="prenom_column" editable="false" maxWidth="500.0" minWidth="50.0" prefWidth="200.0" text="prenom" />
          <TableColumn fx:id="classe_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="110.0" text="classe" />
-         <TableColumn fx:id="serie_column" editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="50.0" text="serie" />
          <TableColumn fx:id="date_nais_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="150.0" text="dateNais" />
          <TableColumn fx:id="action_column" editable="false" maxWidth="200.0" prefWidth="150.0" text="Action" />
       </columns>
@@ -58,10 +57,8 @@
          </font>
       </Button>
       <DatePicker fx:id="date_nais_picker" editable="false" layoutX="360.0" layoutY="49.0" onMousePressed="#check" prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true" style="-fx-background-radius: 10px;" />
-      <Label layoutX="546.0" layoutY="18.0" text="Serie :" />
-      <Label layoutX="541.0" layoutY="47.0" text="Classe :" />
-      <ComboBox fx:id="serie_input" layoutX="605.0" layoutY="15.0" onAction="#check" prefWidth="150.0" styleClass="input1" stylesheets="@../style.css" />
-      <ComboBox fx:id="classe_input" layoutX="605.0" layoutY="48.0" onAction="#check" prefWidth="150.0" styleClass="input1" stylesheets="@../style.css" />
+      <Label layoutX="539.0" layoutY="15.0" text="Classe :" />
+      <ComboBox fx:id="classe_input" layoutX="603.0" layoutY="16.0" onAction="#check" prefWidth="150.0" styleClass="input1" stylesheets="@../style.css" />
    </Pane>
    <Button layoutX="35.0" layoutY="24.0" minWidth="36.0" mnemonicParsing="false" onAction="#ajoutEtudiant" prefHeight="32.0" prefWidth="36.0" text="+" />
    <Label fx:id="id_label" layoutX="35.0" layoutY="6.0" text="id_label" visible="false" />
