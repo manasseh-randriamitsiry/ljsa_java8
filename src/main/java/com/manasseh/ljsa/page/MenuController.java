@@ -21,9 +21,12 @@ public class MenuController extends ActivateDrag implements Initializable {
     public Button profs_btn;
     public StackPane body;
     public Button matiere_btn;
+
+
     public SplitMenuButton classes_btn;
     public BorderPane border_pane;
     public Button classe_btn;
+    public Button categorie_btn;
     Parent root = null;
     public void home() {
         loadContent("home");
@@ -41,11 +44,11 @@ public class MenuController extends ActivateDrag implements Initializable {
         etudiant_btn.setStyle("-fx-background-color: #EBD26A");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
-        classes_btn.setText("classe");
+        categorie_btn.setStyle("-fx-background-color: none");
     }
     public void terminale() {
         loadContent("terminale");
-        classes_btn.setText("Classe >Terminale");
+        categorie_btn.setStyle("-fx-background-color: #EBD26A");
         home_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
@@ -54,22 +57,23 @@ public class MenuController extends ActivateDrag implements Initializable {
     }
     public void premiere() {
         loadContent("premiere");
-        classes_btn.setText("Classe >Premiere");
+        categorie_btn.setStyle("-fx-background-color: #EBD26A");
         home_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
+        home_btn.setStyle("-fx-background-color: none");
     }
 
     public void seconde() {
         loadContent("seconde");
-        classes_btn.setText("Classe >Seconde");
-        home_btn.setStyle("-fx-background-color: none");
+        categorie_btn.setStyle("-fx-background-color: #EBD26A");
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
+        home_btn.setStyle("-fx-background-color: none");
     }
     public void matiere(){
         loadContent("matiere");
@@ -78,7 +82,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: #EBD26A");
         classe_btn.setStyle("-fx-background-color: none");
-        classes_btn.setText("classe");
+        categorie_btn.setStyle("-fx-background-color: none");
     }
     public void profs() {
         loadContent("profs");
@@ -87,7 +91,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
-        classes_btn.setText("classe");
+        categorie_btn.setStyle("-fx-background-color: none");
     }
     public void classe() {
         loadContent("classe");
@@ -96,7 +100,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         etudiant_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
-        classes_btn.setText("classe");
+        categorie_btn.setStyle("-fx-background-color: none");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

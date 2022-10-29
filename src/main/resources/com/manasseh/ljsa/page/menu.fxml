@@ -16,13 +16,6 @@
       <Pane prefHeight="700.0" prefWidth="192.0" styleClass="sidebar" stylesheets="@../style.css" BorderPane.alignment="CENTER">
          <Button fx:id="home_btn" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="-2.0" layoutY="232.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#home" prefHeight="29.0" prefWidth="194.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Menu" />
          <Button fx:id="etudiant_btn" alignment="CENTER" contentDisplay="CENTER" layoutY="266.0" mnemonicParsing="false" onAction="#etudiant" prefHeight="30.0" prefWidth="193.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Etudiant" />
-         <SplitMenuButton fx:id="classes_btn" layoutX="45.0" layoutY="417.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="87.0" style="-fx-border-color: green;" stylesheets="@../style.css" text="Classe">
-            <items>
-               <MenuItem mnemonicParsing="false" onAction="#seconde" text="Seconde" />
-               <MenuItem mnemonicParsing="false" onAction="#premiere" text="Premiere" />
-               <MenuItem mnemonicParsing="false" onAction="#terminale" text="Terminale" />
-            </items>
-         </SplitMenuButton>
          <Button fx:id="profs_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="301.0" mnemonicParsing="false" onAction="#profs" prefHeight="29.0" prefWidth="193.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Profs" />
          <Pane layoutX="7.0" layoutY="8.0" prefHeight="184.0" prefWidth="178.0" styleClass="body" stylesheets="@../style.css">
             <ImageView fitHeight="71.0" fitWidth="83.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -44,10 +37,21 @@
             <Image url="@../img/matiere-icon.png" />
          </ImageView>
          <Button fx:id="classe_btn" alignment="CENTER" contentDisplay="CENTER" layoutY="363.0" mnemonicParsing="false" onAction="#classe" prefHeight="29.0" prefWidth="192.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Classe" />
-         <ImageView fitHeight="14.0" fitWidth="19.0" layoutX="43.0" layoutY="371.0" opacity="0.4" pickOnBounds="true"
+         <ImageView fitHeight="14.0" fitWidth="19.0" layoutX="43.0" layoutY="371.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../img/matiere-icon.png" />
+         </ImageView>
+         <Button fx:id="categorie_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="394.0" mnemonicParsing="false" onAction="#classe" prefHeight="29.0" prefWidth="192.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Categorie" />
+         <ImageView fitHeight="14.0" fitWidth="19.0" layoutX="43.0" layoutY="401.0" opacity="0.4" pickOnBounds="true"
                     preserveRatio="true">
             <Image url="@../img/matiere-icon.png"/>
          </ImageView>
+         <SplitMenuButton fx:id="classes_btn" layoutX="166.0" layoutY="393.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="24.0" style="-fx-border-color: green;" stylesheets="@../style.css">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#seconde" text="Seconde" />
+               <MenuItem mnemonicParsing="false" onAction="#premiere" text="Premiere" />
+               <MenuItem mnemonicParsing="false" onAction="#terminale" text="Terminale" />
+            </items>
+         </SplitMenuButton>
       </Pane>
    </left>
    <center>
