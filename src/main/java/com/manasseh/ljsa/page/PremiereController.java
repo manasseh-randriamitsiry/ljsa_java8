@@ -6,6 +6,7 @@ import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.DAO.PremiereDAO;
 import com.manasseh.ljsa.model.Etudiant;
 import com.manasseh.ljsa.model.Premiere;
+import com.manasseh.ljsa.utils.AnneeLists;
 import com.manasseh.ljsa.utils.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -30,8 +31,6 @@ import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class PremiereController implements Initializable{
@@ -60,7 +59,7 @@ public class PremiereController implements Initializable{
         n_mat_input.setItems(etudiantDAO.listEtudiant());
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
-        annee_input.getItems().addAll(getYearList(100));
+        annee_input.getItems().addAll(AnneeLists.getYearList(100));
         n_mat_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getN_mat()));
           ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
           mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
@@ -273,15 +272,5 @@ public class PremiereController implements Initializable{
         SortedList<Premiere> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(premiere_table.comparatorProperty());
         premiere_table.setItems(sortedList);
-    }
-    public static ArrayList<String> getYearList(int years) {
-        ArrayList<String> yearList = new ArrayList<>(years);
-        int startYear = Calendar.getInstance().get(Calendar.YEAR) - 30;
-        if (startYear<1990){
-            startYear = 1990;
-        }
-        for (int i = 0; i < years; i++)
-            yearList.add(Integer.toString(startYear + i));
-        return yearList;
     }
 }

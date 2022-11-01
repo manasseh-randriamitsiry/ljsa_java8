@@ -8,6 +8,12 @@
     -fx-background-color: #F7DC6F;
     -fx-pref-height : 40px;
 }
+.table-row-cell:success{
+    -fx-background-color: green;
+}
+.table-row-cell:fail{
+    -fx-background-color:red;
+}
 #btnOK{
     -fx-background-color: "red";
     -fx-color: "black";

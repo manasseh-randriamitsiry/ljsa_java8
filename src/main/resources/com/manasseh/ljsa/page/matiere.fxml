@@ -10,41 +10,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="matiere_pane" onZoom="#zoomText" prefHeight="680.0" prefWidth="1010.0" styleClass="body"
-      stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.manasseh.ljsa.page.MatiereController">
+<Pane fx:id="matiere_pane" onZoom="#zoomText" prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.MatiereController">
     <Label fx:id="matiere_label" layoutX="98.0" layoutY="25.0" text="Matiere">
         <font>
-          <Font size="34.0"/>
+          <Font size="34.0" />
         </font>
     </Label>
-    <Pane fx:id="action_pane" layoutX="40.0" layoutY="78.0" prefHeight="123.0" prefWidth="930.0" styleClass="body"
-          stylesheets="@../style.css">
-        <TextField fx:id="designation_input" layoutX="107.0" layoutY="14.0" prefHeight="42.0" prefWidth="216.0"
-                   promptText="Designation" styleClass="input" stylesheets="@../style.css"/>
-        <Text layoutX="17.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation :"/>
-        <TextField fx:id="abreviation_input" layoutX="421.0" layoutY="14.0" prefHeight="42.0" prefWidth="108.0"
-                   promptText="Abvreviation" styleClass="input" stylesheets="@../style.css"/>
-        <Text layoutX="334.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreviation :"/>
-        <TextArea fx:id="description_input" layoutX="638.0" layoutY="12.0" prefHeight="42.0" prefWidth="278.0"
-                  promptText="Description" styleClass="body" stylesheets="@../style.css"/>
-        <Text layoutX="540.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :"/>
-        <Button fx:id="btn_action" layoutX="820.0" layoutY="66.0" mnemonicParsing="false" prefHeight="42.0"
-                prefWidth="89.0" text="Ajouter +"/>
-        <Label fx:id="id" layoutX="26.0" layoutY="126.0" text="Label" visible="false"/>
+    <Pane fx:id="action_pane" layoutX="40.0" layoutY="78.0" prefHeight="123.0" prefWidth="930.0" styleClass="body" stylesheets="@../style.css">
+        <TextField fx:id="designation_input" layoutX="96.0" layoutY="8.0" prefHeight="31.0" prefWidth="171.0" promptText="Designation" styleClass="input" stylesheets="@../style.css" />
+        <Text layoutX="6.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation :" />
+        <TextField fx:id="abreviation_input" layoutX="362.0" layoutY="7.0" prefHeight="31.0" prefWidth="171.0" promptText="Abvreviation" styleClass="input" stylesheets="@../style.css" />
+        <Text layoutX="276.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreviation :" />
+        <TextArea fx:id="description_input" layoutX="636.0" layoutY="1.0" prefHeight="42.0" prefWidth="278.0" promptText="Description" styleClass="body" stylesheets="@../style.css" />
+        <Text layoutX="543.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
+        <Button fx:id="btn_action" layoutX="818.0" layoutY="58.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Ajouter +" />
+        <Label fx:id="id" layoutX="26.0" layoutY="126.0" text="Label" visible="false" />
+      <Button layoutX="213.0" layoutY="7.0" minWidth="53.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="53.0" style="-fx-font-size: 12;" styleClass="button_left" stylesheets="@../style.css" />
+      <Button layoutX="482.0" layoutY="6.0" minWidth="53.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="53.0" style="-fx-font-size: 12;" styleClass="button_left" stylesheets="@../style.css" />
     </Pane>
-    <TableView fx:id="table_matiere" editable="true" layoutX="40.0" layoutY="201.0" prefHeight="446.0" prefWidth="930.0"
-               styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
+    <TableView fx:id="table_matiere" editable="true" layoutX="40.0" layoutY="201.0" prefHeight="446.0" prefWidth="930.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
       <columns>
-          <TableColumn fx:id="abreviation_column" maxWidth="200.0" minWidth="50.0" prefWidth="100.0"
-                       text="Abreviation"/>
-          <TableColumn fx:id="designation_column" maxWidth="500.0" minWidth="100.0" prefWidth="250.0"
-                       text="Designation"/>
-          <TableColumn fx:id="description_column" maxWidth="1000.0" minWidth="200.0" prefWidth="390.0"
-                       text="Description"/>
-          <TableColumn fx:id="action_column" maxWidth="500.0" minWidth="174.0" prefWidth="189.0" text="Action"/>
+          <TableColumn fx:id="abreviation_column" maxWidth="200.0" minWidth="50.0" prefWidth="100.0" text="Abreviation" />
+          <TableColumn fx:id="designation_column" maxWidth="500.0" minWidth="100.0" prefWidth="250.0" text="Designation" />
+          <TableColumn fx:id="description_column" maxWidth="1000.0" minWidth="200.0" prefWidth="390.0" text="Description" />
+          <TableColumn fx:id="action_column" maxWidth="500.0" minWidth="174.0" prefWidth="189.0" text="Action" />
       </columns>
     </TableView>
-    <Button layoutX="38.0" layoutY="31.0" minWidth="36.0" mnemonicParsing="false" onAction="#afficher_pane_ajout"
-            prefHeight="30.0" prefWidth="36.0" text="+"/>
+    <Button layoutX="38.0" layoutY="31.0" minWidth="36.0" mnemonicParsing="false" onAction="#afficher_pane_ajout" prefHeight="30.0" prefWidth="36.0" text="+" />
 </Pane>

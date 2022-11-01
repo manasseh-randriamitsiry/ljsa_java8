@@ -21,12 +21,11 @@ public class MenuController extends ActivateDrag implements Initializable {
     public Button profs_btn;
     public StackPane body;
     public Button matiere_btn;
-
-
     public SplitMenuButton classes_btn;
     public BorderPane border_pane;
     public Button classe_btn;
     public Button categorie_btn;
+    public Button releve_btn;
     Parent root = null;
     public void home() {
         loadContent("home");
@@ -35,6 +34,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
         classes_btn.setText("classe");
     }
     public void etudiant() {
@@ -45,6 +45,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
     }
     public void terminale() {
         loadContent("terminale");
@@ -54,6 +55,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
     }
     public void premiere() {
         loadContent("premiere");
@@ -64,6 +66,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
         home_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
     }
 
     public void seconde() {
@@ -74,6 +77,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
         home_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
     }
     public void matiere(){
         loadContent("matiere");
@@ -83,6 +87,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: #EBD26A");
         classe_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
     }
     public void profs() {
         loadContent("profs");
@@ -92,6 +97,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
     }
     public void classe() {
         loadContent("classe");
@@ -101,6 +107,37 @@ public class MenuController extends ActivateDrag implements Initializable {
         profs_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: none");
+    }
+    public void releveSeconde() {
+        loadContent("releveSeconde");
+        home_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: #EBD26A");
+    }
+    public void relevePremiere() {
+        loadContent("relevePremiere");
+        home_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: #EBD26A");
+    }
+    public void releveTerminale() {
+        loadContent("releveTerminale");
+        home_btn.setStyle("-fx-background-color: none");
+        classe_btn.setStyle("-fx-background-color: none");
+        etudiant_btn.setStyle("-fx-background-color: none");
+        profs_btn.setStyle("-fx-background-color: none");
+        matiere_btn.setStyle("-fx-background-color: none");
+        categorie_btn.setStyle("-fx-background-color: none");
+        releve_btn.setStyle("-fx-background-color: #EBD26A");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

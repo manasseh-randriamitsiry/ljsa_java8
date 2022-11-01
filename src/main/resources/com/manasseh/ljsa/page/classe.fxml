@@ -15,19 +15,19 @@
           <Font size="34.0" />
         </font>
     </Label>
-    <Pane fx:id="action_pane" layoutX="577.0" layoutY="160.0" prefHeight="406.0" prefWidth="317.0" styleClass="input" stylesheets="@../style.css">
-        <TextField fx:id="classe_input" layoutX="153.0" layoutY="84.0" prefHeight="42.0" prefWidth="121.0" promptText="Classe" styleClass="input1" stylesheets="@../style.css" />
-        <Text layoutX="48.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classe :" />
-        <Text layoutX="42.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Coefficient :" />
-        <Button fx:id="btn_action" layoutX="123.0" layoutY="332.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" text="Ajouter +" />
+    <Pane fx:id="action_pane" layoutX="660.0" layoutY="155.0" prefHeight="406.0" prefWidth="296.0" styleClass="input" stylesheets="@../style.css">
+        <TextField fx:id="classe_input" layoutX="143.0" layoutY="83.0" prefHeight="42.0" prefWidth="121.0" promptText="Classe" styleClass="input1" stylesheets="@../style.css" />
+        <Text layoutX="38.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classe :" />
+        <Text layoutX="32.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Coefficient :" />
+        <Button fx:id="btn_action" layoutX="113.0" layoutY="331.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" text="Ajouter +" />
         <Label fx:id="id" layoutX="26.0" layoutY="126.0" text="Label" visible="false" />
-      <TextField fx:id="coefficient_input" layoutX="154.0" layoutY="158.0" prefHeight="42.0" prefWidth="120.0" promptText="Coefficient" styleClass="input1" stylesheets="@../style.css" />
+      <TextField fx:id="coefficient_input" layoutX="144.0" layoutY="157.0" prefHeight="42.0" prefWidth="120.0" promptText="Coefficient" styleClass="input1" stylesheets="@../style.css" />
     </Pane>
-    <TableView fx:id="table_coefficient" editable="true" layoutX="122.0" layoutY="155.0" prefHeight="412.0" prefWidth="404.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
+    <TableView fx:id="table_coefficient" editable="true" layoutX="80.0" layoutY="152.0" prefHeight="412.0" prefWidth="526.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
       <columns>
-          <TableColumn fx:id="classe_column" maxWidth="200.0" minWidth="50.0" prefWidth="100.0" text="Classe" />
+          <TableColumn fx:id="classe_column" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Classe" />
           <TableColumn fx:id="coefficient_column" maxWidth="1000.0" minWidth="50.0" prefWidth="100.0" text="Total Coefficient" />
-          <TableColumn fx:id="action_column" maxWidth="500.0" minWidth="174.0" prefWidth="189.0" text="Action" />
+          <TableColumn fx:id="action_column" maxWidth="500.0" minWidth="174.0" prefWidth="220.0" text="Action" />
       </columns>
     </TableView>
     <Button layoutX="38.0" layoutY="31.0" minWidth="36.0" mnemonicParsing="false" onAction="#afficherPaneAjout" prefHeight="30.0" prefWidth="36.0" text="+" />

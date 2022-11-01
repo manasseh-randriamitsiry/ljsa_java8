@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.RelevePremiereController">
+    <Label fx:id="releve_label" layoutX="22.0" layoutY="23.0" text="Relevé Première">
+        <font>
+            <Font size="34.0" />
+        </font>
+    </Label>
+    <TableView fx:id="premiere_table" layoutX="22.0" layoutY="175.0" prefHeight="488.0" prefWidth="968.0" tableMenuButtonVisible="true">
+        <columns>
+            <TableColumn fx:id="n_mat_column" maxWidth="500.0" prefWidth="120.0" text="NºMatricule" />
+            <TableColumn fx:id="mlg_column" maxWidth="500.0" prefWidth="50.0" text="MLG" />
+            <TableColumn fx:id="frs_column" maxWidth="500.0" prefWidth="50.0" text="FRS" />
+            <TableColumn fx:id="ang_column" maxWidth="500.0" prefWidth="50.0" text="ANG" />
+            <TableColumn fx:id="hg_column" maxWidth="500.0" prefWidth="50.0" text="HG" />
+            <TableColumn fx:id="math_column" maxWidth="500.0" prefWidth="50.0" text="MAT" />
+            <TableColumn fx:id="phys_column" maxWidth="500.0" prefWidth="50.0" text="PC" />
+            <TableColumn fx:id="svt_column" maxWidth="500.0" prefWidth="50.0" text="SVT" />
+            <TableColumn fx:id="eac_column" maxWidth="500.0" prefWidth="50.0" text="EAC" />
+            <TableColumn fx:id="tice_column" maxWidth="500.0" prefWidth="50.0" text="TICE" />
+            <TableColumn fx:id="eps_column" maxWidth="500.0" prefWidth="50.0" text="EPS" />
+            <TableColumn fx:id="ses_column" maxWidth="500.0" prefWidth="50.0" text="SES" />
+            <TableColumn fx:id="phylo_column" maxWidth="500.0" prefWidth="50.0" text="PHYL" />
+            <TableColumn fx:id="trimestre_column" maxWidth="500.0" prefWidth="50.0" text="TRI" />
+            <TableColumn fx:id="annee_column" maxWidth="500.0" prefWidth="70.0" text="ANNEE" />
+            <TableColumn fx:id="total_column" maxWidth="500.0" prefWidth="60.0" text="TOT" />
+            <TableColumn fx:id="moyenne_column" maxWidth="500.0" prefWidth="70.0" text="MOY" />
+        </columns>
+    </TableView>
+    <Button layoutX="844.0" layoutY="32.0" minWidth="44.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Generer Pdf" />
+   <ComboBox layoutX="118.0" fx:id="nmat_input" layoutY="74.0" prefWidth="150.0" promptText="NMatricule" />
+   <ComboBox layoutX="118.0" fx:id="annee_debut" layoutY="122.0" prefWidth="150.0" promptText="Annee-debut" />
+   <ComboBox layoutX="339.0" fx:id="annee_fin" layoutY="122.0" prefWidth="150.0" promptText="Annee-fin" />
+   <Label layoutX="294.0" layoutY="128.0" text="au :" />
+   <Label layoutX="30.0" layoutY="80.0" text="NºMatricule :" />
+   <Label layoutX="30.0" layoutY="128.0" text="Année :" />
+</Pane>

@@ -6,7 +6,9 @@ import animatefx.animation.FadeOutRight;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.manasseh.ljsa.DAO.ClasseDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -24,6 +26,7 @@ import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.model.*;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -269,4 +272,35 @@ public class EtudiantController implements Initializable {
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         return cell;
     }
+
+    public void importPdf(){
+        Stage stage = new Stage();
+        FileChooser fil_chooser = new FileChooser();
+        File file = fil_chooser.showOpenDialog(stage);
+        try {
+            //Create PdfReader instance.
+            PdfReader pdfReader = new PdfReader(file.toURL());
+            //Get the number of pages in pdf.
+            int pages = pdfReader.getNumberOfPages();
+            //Iterate the pdf through pages.
+            for(int i=1; i<=pages; i++) {
+//                Extract the page content using PdfTextExtractor.
+                String pageContent =
+                        PdfTextExtractor.getTextFromPage(pdfReader, i);
+//                Print the page content on console.
+                System.out.println("Content on Page "
+                        + i + ": " + pageContent);
+//                System.out.println(pageContent.);
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+
+                etudiant = new Etudiant(0,String.valueOf(pageContent.indexOf(6)),String.valueOf(pageContent.indexOf(7)),String.valueOf(pageContent.indexOf(8)),String.valueOf(pageContent.indexOf(9)),String.valueOf(pageContent.indexOf(10)));
+                dao.insert(etudiant);
+            }
+//            Close the PdfReader.
+            pdfReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

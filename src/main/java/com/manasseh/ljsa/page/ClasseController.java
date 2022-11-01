@@ -1,7 +1,6 @@
 package com.manasseh.ljsa.page;
 
-import animatefx.animation.FadeInRight;
-import animatefx.animation.FadeOutRight;
+import animatefx.animation.*;
 import com.manasseh.ljsa.DAO.ClasseDAO;
 import com.manasseh.ljsa.model.Classe;
 import com.manasseh.ljsa.utils.PopUp;
@@ -38,7 +37,7 @@ public class ClasseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        new FadeOutRight(action_pane).play();
+        new FadeOutUp(action_pane).play();
         refreshTable();
 
         classe_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getClasse()));
@@ -67,7 +66,7 @@ public class ClasseController implements Initializable {
                                     classe.getId(),
                                     classe.getClasse(),
                                     classe.getTotalCoeff());
-                            new FadeInRight(action_pane).play();
+                            new FadeInDown(action_pane).play();
                         } catch (NullPointerException e) {
                             popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
                         }
@@ -98,7 +97,7 @@ public class ClasseController implements Initializable {
                 try {
                     classe = new Classe(0,classe_input.getText(),Integer.valueOf(coefficient_input.getText()));
                     classeDAO.insert(classe);
-                    new FadeOutRight(action_pane).play();
+                    new FadeOutUp(action_pane).play();
                     refreshTable();
                     clearInputs();
                 } catch (Exception e) {
@@ -112,7 +111,7 @@ public class ClasseController implements Initializable {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                new FadeOutRight(action_pane).play();
+                new FadeOutUp(action_pane).play();
                 refreshTable();
                 clearInputs();
             }
@@ -138,7 +137,8 @@ public class ClasseController implements Initializable {
 
     public void afficherPaneAjout() {
         btn_action.setText("Ajouter +");
-        new FadeInRight(action_pane).play();
+        new FadeInUp(action_pane).play();
+        clearInputs();
     }
 
 }
