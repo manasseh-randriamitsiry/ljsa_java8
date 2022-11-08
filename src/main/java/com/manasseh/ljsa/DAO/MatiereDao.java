@@ -5,17 +5,17 @@ import javafx.collections.ObservableList;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.model.Matiere;
 import com.manasseh.ljsa.utils.PopUp;
-
 import java.sql.*;
 
 public class MatiereDao extends DeleteDAO implements DAOInterface<Matiere>{
     PopUp popUp = new PopUp();
+    String tableName = "matiere";
     @Override
     public ObservableList<Matiere> listAll() {
         ObservableList<Matiere> list = FXCollections.observableArrayList();
         DatabaseConnection startConnection = new DatabaseConnection();
         Connection connection = startConnection.getConnection();
-        String query = "select * from matiere";
+        String query = "select * from "+tableName;
         list.clear();
         try{
             Statement statement = connection.createStatement();
@@ -35,7 +35,7 @@ public class MatiereDao extends DeleteDAO implements DAOInterface<Matiere>{
     }
     @Override
     public void update(Matiere matiere) throws SQLException {
-        String sql = "update matiere set designation = ?, abreviation=?, description=? where id = ?";
+        String sql = "update "+tableName+" set designation = ?, abreviation=?, description=? where id = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,matiere.getDesignation());
@@ -56,7 +56,7 @@ public class MatiereDao extends DeleteDAO implements DAOInterface<Matiere>{
     }
     @Override
     public void insert(Matiere matiere) throws SQLException {
-        String sql = "insert into matiere() values(NULL,?,?,?)";
+        String sql = "insert into "+tableName+" values(NULL,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,matiere.getDescription());

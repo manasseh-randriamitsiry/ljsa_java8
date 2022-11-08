@@ -62,6 +62,6 @@
    </Pane>
    <Button layoutX="35.0" layoutY="24.0" minWidth="36.0" mnemonicParsing="false" onAction="#ajoutEtudiant" prefHeight="32.0" prefWidth="36.0" text="+" />
    <Label fx:id="id_label" layoutX="35.0" layoutY="6.0" text="id_label" visible="false" />
-   <Button layoutX="700.0" layoutY="27.0" mnemonicParsing="false" onAction="#generatePdf" text="Generer PDF" />
+   <Button layoutX="700.0" layoutY="27.0" mnemonicParsing="false" onAction="#confirmerPdf" text="Generer PDF" />
    <Button layoutX="931.0" layoutY="19.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
 </Pane>

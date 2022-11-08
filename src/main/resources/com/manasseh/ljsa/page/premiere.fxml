@@ -64,7 +64,7 @@
         <Button layoutX="539.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TRIM" />
         <TextField fx:id="ang_input" layoutX="486.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Anglais" styleClass="input1" />
         <Button layoutX="539.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANG" />
-        <ComboBox fx:id="n_mat_input" editable="true" layoutX="626.0" layoutY="44.0" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
+        <ComboBox fx:id="n_mat_input" editable="true" layoutX="626.0" layoutY="44.0" onAction="#check" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
         <Button layoutX="730.0" layoutY="44.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT" />
         <Button layoutX="730.0" layoutY="83.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANNEE" />
         <TextField fx:id="tice_input" layoutX="486.0" layoutY="5.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="TICE" styleClass="input1" />

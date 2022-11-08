@@ -5,17 +5,17 @@ import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.*;
 
 public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
     PopUp popUp = new PopUp();
+    String tableName = "premiere";
     @Override
     public ObservableList<Premiere> listAll() {
         ObservableList<Premiere> list = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT * FROM premiere";
+        String query = "SELECT * FROM "+tableName;
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -47,7 +47,7 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
 
     @Override
     public void update(Premiere data) throws SQLException {
-        String sql = "UPDATE `premiere` SET `malagasy` = ?, `francais` = ?, `anglais` = ?, `histogeo` = ?, `eac` = ?, `ses` = ?, `spc` = ?, `svt` = ?, `mats` = ?, `eps` = ?, `tice` = ?,`phylo` = ?, `n_mat` = ?, `trimestre` = ?, `annee_scolaire` = ? WHERE `premiere`.`id` = ?";
+        String sql = "UPDATE "+tableName+" SET `malagasy` = ?, `francais` = ?, `anglais` = ?, `histogeo` = ?, `eac` = ?, `ses` = ?, `spc` = ?, `svt` = ?, `mats` = ?, `eps` = ?, `tice` = ?,`phylo` = ?, `n_mat` = ?, `trimestre` = ?, `annee_scolaire` = ? WHERE `id` = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1, data.getMalagasy());
@@ -81,7 +81,7 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
 
     @Override
     public void insert(Premiere data) throws SQLException {
-        String sql = "INSERT INTO premiere() VALUES ( NULL,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+        String sql = "INSERT INTO "+tableName+" VALUES ( NULL,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1, data.getMalagasy());

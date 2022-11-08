@@ -92,18 +92,7 @@ public class Premiere {
     public String getMoy() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
         int coeff = classeDAO.getClasse(etudiantDAO.getClasse(n_mat));
-        float sum = (this.malagasy +
-                this.francais+
-                this.anglais +
-                this.histogeo +
-                this.eac +
-                this.spc +
-                this.svt +
-                this.mats +
-                this.eps +
-                this.tice +
-                this.phylo +
-                this.ses )/coeff;
+        float sum = getTotal()/coeff;
         return df.format(sum);
     }
 

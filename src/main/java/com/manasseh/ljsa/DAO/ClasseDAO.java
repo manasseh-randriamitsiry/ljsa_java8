@@ -10,13 +10,14 @@ import java.sql.*;
 
 public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
     PopUp popUp = new PopUp();
+    String tableName = "coefficient";
 
     @Override
     public ObservableList<Classe> listAll() {
         ObservableList<Classe> profList = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT * FROM coefficient";
+        String query = "SELECT * FROM "+tableName;
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -34,7 +35,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
     }
     public Integer getClasse(String classe) throws SQLException {
         int coeff = 0;
-        String sql = "select coefficient_total from coefficient where classe = '"+classe+"'";
+        String sql = "select coefficient_total from "+tableName+" where classe = '"+classe+"'";
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -48,7 +49,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         ObservableList<Object> listClasse = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT classe FROM coefficient";
+        String query = "SELECT classe FROM "+tableName;
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -64,7 +65,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
 
     @Override
     public void update(Classe data) throws SQLException {
-        String sql = "UPDATE `coefficient` SET `classe` = ?, `coefficient_total` = ? WHERE `coefficient`.`id` = ?;";
+        String sql = "UPDATE "+tableName+" SET `classe` = ?, `coefficient_total` = ? WHERE `id` = ?;";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
@@ -85,7 +86,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
 
     @Override
     public void insert(Classe data) throws SQLException {
-        String sql = "insert into coefficient() values(NULL,?,?)";
+        String sql = "insert into "+tableName+" values(NULL,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());

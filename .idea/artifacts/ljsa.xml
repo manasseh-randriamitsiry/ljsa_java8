@@ -41,7 +41,6 @@
         <element id="library" level="project" name="Maven: org.opentest4j:opentest4j:1.2.0" />
         <element id="library" level="application" name="de.jensd.fontawesomefx" />
         <element id="library" level="application" name="swinglabs.swingx.all" />
-        <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.13.3" />
       </element>
     </root>
   </artifact>

@@ -79,4 +79,11 @@ public class ReleveSecondeController implements Initializable {
             }
         });
     }
+
+    public void genererReleve(){
+        if (!nmat_input.getValue().equals("")){
+            list = secondeDAO.listNotes(nmat_input.getValue().toString());
+            seconde_table.setItems(list);
+        }
+    }
 }

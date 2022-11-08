@@ -61,17 +61,7 @@ public class Seconde {
     public String getMoyenne() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
         int coeff = classeDAO.getClasse(etudiantDAO.getClasse(n_mat));
-        Float sum = (this.malagasy +
-                this.francais +
-                this.anglais +
-                this.histogeo +
-                this.eac +
-                this.spc +
-                this.svt +
-                this.mats +
-                this.eps +
-                this.tice +
-                this.ses)/coeff;
+        Float sum = getTotal()/coeff;
         return df.format(sum);
     }
 

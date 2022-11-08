@@ -56,16 +56,7 @@ public class Terminale extends TerminaleController {
     public String getMoyenne() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
         int coeff = classeDAO.getClasse(etudiantDAO.getClasse(n_mat));
-        Float sum = (this.malagasy +
-                this.frs +
-                this.anglais +
-                this.histoGeo +
-                this.phylosphie +
-                this.eps +
-                this.mathematique +
-                this.spc +
-                this.svt +
-                this.ses)/coeff;
+        Float sum = getTotal()/coeff;
         return df.format(sum);
     }
     public Integer getId() {

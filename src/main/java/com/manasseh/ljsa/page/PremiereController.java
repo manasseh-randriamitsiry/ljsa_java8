@@ -55,6 +55,7 @@ public class PremiereController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
         clearInputs();
+        check();
         new FadeOutRight(action_pane).play();
         n_mat_input.setItems(etudiantDAO.listEtudiant());
         new AutoCompleteComboBoxListener<>(n_mat_input);
@@ -95,6 +96,7 @@ public class PremiereController implements Initializable{
                     final Button dltBtn = new Button("Supprimer");
                     dltBtn.setStyle("-fx-background-color:#FF6666");
                     editBtn.setOnAction(event -> {
+                        check();
                         try {
                             premiere = getTableView().getItems().get(getIndex());
                             premiere_label.setText("Premiere: edition");
@@ -172,6 +174,7 @@ public class PremiereController implements Initializable{
 
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
+                check();
                 try {
                     premiere = new Premiere(0,
                             Float.valueOf(mlg_input.getText()),
@@ -253,6 +256,11 @@ public class PremiereController implements Initializable{
         clearInputs();
     }
     public void check(){
+        if (n_mat_input.getValue() == null){
+            detail_btn.setVisible(false);
+        } else if (n_mat_input.getValue() !=null){
+            detail_btn.setVisible(true);
+        }
     }
     private void activerRecherche() {
         FilteredList<Premiere> filteredList = new FilteredList<>(listPremiere, a->true);

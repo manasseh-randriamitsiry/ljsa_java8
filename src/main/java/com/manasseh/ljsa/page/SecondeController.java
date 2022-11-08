@@ -53,6 +53,7 @@ public class SecondeController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
         clearInputs();
+        check();
         n_mat_input.setItems(etudiantDAO.listEtudiant());
         new FadeOutRight(action_pane).play();
         new AutoCompleteComboBoxListener<>(n_mat_input);
@@ -94,28 +95,29 @@ public class SecondeController implements Initializable{
                     final Button dltBtn = new Button("Supprimer");
                     dltBtn.setStyle("-fx-background-color:#FF6666");
                     editBtn.setOnAction(event -> {
-                            seconde = getTableView().getItems().get(getIndex());
-                            seconde_label.setText("Seconde: edition");
-                            btn_action.setText("Mettre à jour");
+                        check();
+                        seconde = getTableView().getItems().get(getIndex());
+                        seconde_label.setText("Seconde: edition");
+                        btn_action.setText("Mettre à jour");
 
-                            id_label.setText(seconde.getId().toString());
-                            mlg_input.setText(seconde.getMalagasy().toString());
-                            frs_input.setText(seconde.getFrancais().toString());
-                            ang_input.setText(seconde.getAnglais().toString());
-                            hg_input.setText(seconde.getHistogeo().toString());
-                            eac_input.setText(seconde.getEac().toString());
-                            math_input.setText(seconde.getMats().toString());
-                            ses_input.setText(seconde.getSes().toString());
-                            pc_input.setText(seconde.getSpc().toString());
-                            svt_input.setText(seconde.getSvt().toString());
-                            tice_input.setText(seconde.getTice().toString());
-                            eps_input.setText(seconde.getEps().toString());
-                            n_mat_input.getSelectionModel().select(seconde.getN_mat());
-                            trimestre_input.setText(seconde.getTrimestre().toString());
-                            annee_input.getSelectionModel().select(seconde.getAnnee_scolaire());
+                        id_label.setText(seconde.getId().toString());
+                        mlg_input.setText(seconde.getMalagasy().toString());
+                        frs_input.setText(seconde.getFrancais().toString());
+                        ang_input.setText(seconde.getAnglais().toString());
+                        hg_input.setText(seconde.getHistogeo().toString());
+                        eac_input.setText(seconde.getEac().toString());
+                        math_input.setText(seconde.getMats().toString());
+                        ses_input.setText(seconde.getSes().toString());
+                        pc_input.setText(seconde.getSpc().toString());
+                        svt_input.setText(seconde.getSvt().toString());
+                        tice_input.setText(seconde.getTice().toString());
+                        eps_input.setText(seconde.getEps().toString());
+                        n_mat_input.getSelectionModel().select(seconde.getN_mat());
+                        trimestre_input.setText(seconde.getTrimestre().toString());
+                        annee_input.getSelectionModel().select(seconde.getAnnee_scolaire());
 
-                            action_pane.setVisible(true);
-                            new FadeInRight(action_pane).play();
+                        action_pane.setVisible(true);
+                        new FadeInRight(action_pane).play();
                     });
                     dltBtn.setOnAction(event -> {
                         action_pane.setVisible(false);
@@ -217,6 +219,7 @@ public class SecondeController implements Initializable{
             }
         });
     }
+
     public void afficherPaneAjout(){
         btn_action.setText("Ajouter +");
         seconde_label.setText("Seconde: Ajout");
@@ -243,6 +246,11 @@ public class SecondeController implements Initializable{
         clearInputs();
     }
     public void check(){
+        if (n_mat_input.getValue() == null){
+            detail_btn.setVisible(false);
+        } else if (n_mat_input.getValue() !=null){
+            detail_btn.setVisible(true);
+        }
     }
     private void activerRecherche() {
         FilteredList<Seconde> filteredList = new FilteredList<>(listseconde, a->true);

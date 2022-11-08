@@ -9,10 +9,11 @@ import java.sql.*;
 
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     PopUp popUp = new PopUp();
+    String tableName = "etudiants";
 
     @Override
     public void insert(Etudiant etudiant) throws SQLException {
-        String sql = "insert into etudiants() values(NULL,?,?,?,?,?)";
+        String sql = "insert into "+tableName+" values(NULL,?,?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,etudiant.getN_mat_etudiant().toUpperCase());
@@ -36,7 +37,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
         DatabaseConnection startConnection = new DatabaseConnection();
         Connection connection = startConnection.getConnection();
-        String query = "select * from etudiants";
+        String query = "select * from "+ tableName;
         listEtudiant.clear();
         try{
             Statement statement = connection.createStatement();
@@ -58,7 +59,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     }
     @Override
     public void update(Etudiant etudiant) throws SQLException{
-        String sql = "update etudiants set n_matricule = ?, nom=?, prenom=?, classe = ?,date_nais=? where id = ?";
+        String sql = "update "+tableName+" set n_matricule = ?, nom=?, prenom=?, classe = ?,date_nais=? where id = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,etudiant.getN_mat_etudiant().toUpperCase());
@@ -81,7 +82,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     }
     public int nombreEtudiant() throws SQLException {
         int nombre = 0;
-        String sql = "select count(*) from etudiants";
+        String sql = "select count(*) from "+tableName;
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet result = statement.executeQuery(sql);
@@ -92,7 +93,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     }
     public String getClasse(String n_matricule) throws SQLException {
         String serie = null;
-        String sql = "select classe from etudiants where n_matricule = '"+n_matricule+"'";
+        String sql = "select classe from "+tableName+" where n_matricule = '"+n_matricule+"'";
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -102,12 +103,11 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         return serie;
     }
     public Etudiant getByNmat(String n_matricule){
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDb = connectNow.getConnection();
+        DatabaseConnection connection = new DatabaseConnection();
         Etudiant etudiant = null;
-        String query = "SELECT * FROM etudiants where n_matricule='"+n_matricule+"'";
+        String query = "SELECT * FROM "+tableName+" where n_matricule = '"+n_matricule+"'";
         try {
-            Statement statement = connectDb.createStatement();
+            Statement statement = connection.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 etudiant = new Etudiant(
@@ -126,11 +126,10 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     }
     public ObservableList<Object> listEtudiant(){
         ObservableList<Object> data = FXCollections.observableArrayList();
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDb = connectNow.getConnection();
-        String query = "SELECT n_matricule FROM etudiants order by n_matricule ASC";
+        DatabaseConnection connection = new DatabaseConnection();
+        String query = "SELECT n_matricule FROM "+tableName+" order by n_matricule ASC";
         try {
-            Statement statement = connectDb.createStatement();
+            Statement statement = connection.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 data.add(resultSet.getString(1));

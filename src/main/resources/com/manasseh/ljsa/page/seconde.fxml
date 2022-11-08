@@ -49,7 +49,7 @@
         <TextField fx:id="eps_input" layoutX="334.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="EPS" styleClass="input1" />
         <TextField fx:id="trimestre_input" layoutX="486.0" layoutY="84.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Trimestre" styleClass="input1" />
         <TextField fx:id="math_input" layoutX="190.0" layoutY="47.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Math" styleClass="input1" />
-        <ComboBox fx:id="annee_input" editable="true" layoutX="630.0" layoutY="43.0" onHiding="#check" onShowing="#check" prefHeight="27.0" prefWidth="106.0" promptText="Anee" styleClass="input1" />
+        <ComboBox fx:id="annee_input" editable="true" layoutX="630.0" layoutY="43.0" prefHeight="27.0" prefWidth="106.0" promptText="Anee" styleClass="input1" />
         <Button fx:id="btn_action" layoutX="666.0" layoutY="80.0" mnemonicParsing="false" styleClass="btn-success" text="Ajouter +" />
         <TextField fx:id="ses_input" layoutX="34.0" layoutY="10.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="SES" styleClass="input1" />
         <Button layoutX="93.0" layoutY="10.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SES" />
@@ -63,14 +63,14 @@
         <Button layoutX="539.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TRIM" />
         <TextField fx:id="ang_input" layoutX="486.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Anglais" styleClass="input1" />
         <Button layoutX="539.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANG" />
-        <ComboBox fx:id="n_mat_input" editable="true" layoutX="630.0" layoutY="4.0" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
+        <ComboBox fx:id="n_mat_input" editable="true" layoutX="630.0" layoutY="4.0" onAction="#check" onMouseEntered="#check" onMouseExited="#check" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
         <Button layoutX="734.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT" />
         <Button layoutX="734.0" layoutY="43.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANNEE" />
         <TextField fx:id="tice_input" layoutX="486.0" layoutY="5.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="TICE" styleClass="input1" />
         <Button layoutX="539.0" layoutY="4.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TICE" />
         <TextField fx:id="eac_input" layoutX="333.0" layoutY="83.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="EAC" styleClass="input1" />
         <Button layoutX="395.0" layoutY="82.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="EAC" />
-      <Circle fill="DODGERBLUE" layoutX="802.0" layoutY="18.0" fx:id="detail_btn" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Circle fx:id="detail_btn" fill="DODGERBLUE" layoutX="802.0" layoutY="18.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" />
     </Pane>
    <Button layoutX="932.0" layoutY="16.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
 </Pane>

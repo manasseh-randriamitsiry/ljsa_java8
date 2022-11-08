@@ -5,17 +5,17 @@ import javafx.collections.ObservableList;
 import com.manasseh.ljsa.model.Terminale;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
-
 import java.sql.*;
 
 public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
     PopUp popUp = new PopUp();
+    String tableName = "terminale";
     @Override
     public ObservableList<Terminale> listAll() {
         ObservableList<Terminale> listTerminales = FXCollections.observableArrayList();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
-        String query = "select * from terminale";
+        String query = "select * from "+tableName;
         listTerminales.clear();
         try {
             Statement statement = connection.createStatement();
@@ -41,15 +41,14 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         } catch (SQLException error){
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
         }
-
         return listTerminales;
     }
 
     @Override
     public void update(Terminale update) throws SQLException {
         System.out.println("here");
-        String sql = "UPDATE `terminale` SET `mlg` = ?, `frs` = ?, `anglais` = ?, `histogeo` = ?, `phylo` = ?, " +
-                "`math` = ?, `spc` = ?, `svt` = ?, `ses` = ?, `eps` = ?, `nmat` = ?, `trimestre` = ?, `annee_scolaire` = ? WHERE `terminale`.`id` = ?";
+        String sql = "UPDATE "+tableName+" SET `mlg` = ?, `frs` = ?, `anglais` = ?, `histogeo` = ?, `phylo` = ?, " +
+                "`math` = ?, `spc` = ?, `svt` = ?, `ses` = ?, `eps` = ?, `nmat` = ?, `trimestre` = ?, `annee_scolaire` = ? WHERE `id` = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1,update.getMalagasy());
@@ -81,7 +80,7 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
 
     @Override
     public void insert(Terminale newTerminale) throws SQLException {
-        String sql = "INSERT INTO terminale() VALUES ( NULL,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO "+tableName+" VALUES ( NULL,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1, newTerminale.getMalagasy());

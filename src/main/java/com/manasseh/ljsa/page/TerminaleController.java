@@ -54,6 +54,7 @@ public class TerminaleController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
         clearInputs();
+        check();
         new FadeOutRight(action_pane).play();
         n_mat_input.setItems(etudiantDAO.listEtudiant());
         new AutoCompleteComboBoxListener<>(n_mat_input);
@@ -94,6 +95,7 @@ public class TerminaleController implements Initializable{
                     dltBtn.setStyle("-fx-background-color:#FF6666");
                     editBtn.setOnAction(event -> {
                         try {
+                            check();
                             terminale = getTableView().getItems().get(getIndex());
                             terminale_label.setText("Terminale: edition");
                             btn_action.setText("Mettre à jour");
@@ -169,6 +171,7 @@ public class TerminaleController implements Initializable{
 
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
+                check();
                 try {
                     terminale = new Terminale(10,
                             Float.valueOf(mlg_input.getText()),
@@ -243,6 +246,11 @@ public class TerminaleController implements Initializable{
         clearInputs();
     }
     public void check(){
+        if (n_mat_input.getValue() == null){
+            detail_btn.setVisible(false);
+        } else if (n_mat_input.getValue() !=null){
+            detail_btn.setVisible(true);
+        }
     }
     private void activerRecherche() {
         FilteredList<Terminale> filteredList = new FilteredList<>(listTerminale, a->true);
