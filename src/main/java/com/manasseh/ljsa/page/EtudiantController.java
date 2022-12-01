@@ -29,7 +29,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -253,11 +252,15 @@ public class EtudiantController implements Initializable {
         PdfFont font = PdfFontFactory.createFont(TIMES_ROMAN);
         PdfFont bold = PdfFontFactory.createFont(TIMES_BOLD);
 
-        Text title = new Text("The Strange Case of Dr. Jekyll and Mr. Hyde").setFont(font);
-        Text author = new Text("Robert Louis Stevenson").setFont(font);
-        Paragraph p = new Paragraph().add(title).add(" by ").add(author);
+        Text title = new Text("Listes des etudiants du ").setFont(font);
+        Text ecole = new Text("Lycée Joël Sylvain").setFont(font);
+//        Paragraph p = new Paragraph().add(title).add(" by ").add(author);
+        Paragraph p = new Paragraph().add(title);
+        Paragraph e  = new Paragraph().add(ecole);
+        e.setTextAlignment(TextAlignment.RIGHT);
         p.setTextAlignment(TextAlignment.RIGHT);
         document.add(p);
+        document.add(e);
 
         // Adding cells to the table
         table.addCell(new Cell().add(new Paragraph("NºMAT").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
@@ -285,36 +288,4 @@ public class EtudiantController implements Initializable {
         popUp.success("Sauvegardé", file +"pdf");
 
     }
-
-
-//    public void importPdf(){
-//        Stage stage = new Stage();
-//        FileChooser fil_chooser = new FileChooser();
-//        File file = fil_chooser.showOpenDialog(stage);
-//        try {
-//            //Create PdfReader instance.
-//            PdfReader pdfReader = new PdfReader(file.toURL());
-//            //Get the number of pages in pdf.
-//            int pages = pdfReader.getNumberOfPages();
-//            //Iterate the pdf through pages.
-//            for(int i=1; i<=pages; i++) {
-////                Extract the page content using PdfTextExtractor.
-//                String pageContent =
-//                        PdfTextExtractor.getTextFromPage(pdfReader, i);
-////                Print the page content on console.
-//                System.out.println("Content on Page "
-//                        + i + ": " + pageContent);
-////                System.out.println(pageContent.);
-//                ByteArrayOutputStream bao = new ByteArrayOutputStream();
-//
-//                etudiant = new Etudiant(0,String.valueOf(pageContent.indexOf(6)),String.valueOf(pageContent.indexOf(7)),String.valueOf(pageContent.indexOf(8)),String.valueOf(pageContent.indexOf(9)),String.valueOf(pageContent.indexOf(10)));
-//                dao.insert(etudiant);
-//            }
-////            Close the PdfReader.
-//            pdfReader.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 }

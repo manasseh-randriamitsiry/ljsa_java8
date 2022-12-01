@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -29,6 +28,7 @@ public class ClasseController implements Initializable {
     public Label id;
     public TextField coefficient_input;
     public Pane coefficient_pane;
+    public Label mode_label;
     public Label coefficient_label;
     ObservableList<Classe> classeList = FXCollections.observableArrayList();
     Classe classe = null;
@@ -60,6 +60,7 @@ public class ClasseController implements Initializable {
                         action_pane.setVisible(true);
                         try {
                             classe = getTableView().getItems().get(getIndex());
+                            mode_label.setText("Classe: edition");
                             coefficient_label.setText("Classe: edition");
                             btn_action.setText("Mettre à jour");
                             ClasseController.this.setText(
@@ -95,6 +96,8 @@ public class ClasseController implements Initializable {
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
                 try {
+                    mode_label.setText("Classe: Ajout");
+                    coefficient_label.setText("Classe: edition");
                     classe = new Classe(0,classe_input.getText(),Integer.valueOf(coefficient_input.getText()));
                     classeDAO.insert(classe);
                     new FadeOutUp(action_pane).play();

@@ -192,6 +192,7 @@ public class TerminaleController implements Initializable{
                     clearInputs();
                 } catch (NumberFormatException | SQLException e) {
                     popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
+                    e.printStackTrace();
                 }
             }
             else if (btn_action.getText().equals("Mettre à jour")){

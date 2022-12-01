@@ -46,9 +46,9 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
 
     @Override
     public void update(Terminale update) throws SQLException {
-        System.out.println("here");
         String sql = "UPDATE "+tableName+" SET `mlg` = ?, `frs` = ?, `anglais` = ?, `histogeo` = ?, `phylo` = ?, " +
                 "`math` = ?, `spc` = ?, `svt` = ?, `ses` = ?, `eps` = ?, `nmat` = ?, `trimestre` = ?, `annee_scolaire` = ? WHERE `id` = ?";
+
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1,update.getMalagasy());
@@ -106,4 +106,6 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         }
         statement.close();
     }
+
+
 }
