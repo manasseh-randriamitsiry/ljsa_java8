@@ -63,6 +63,14 @@ public class EtudiantController implements Initializable {
     Etudiant etudiant;
     PopUp popUp = new PopUp();
     ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
+
+    /// define our constants
+    final int NUMERO_MATRICULE_MAX = 10;
+    final int NUMERO_MATRICULE_MIN = 4;
+    final int NAME_MAX = 50;
+    final int NAME_MIN = 4;
+    final int SURNAME_MAX = 50;
+    final int SURNAME_MIN = 3;
     private void refresh(){
         listEtudiant.clear();
         listEtudiant.setAll(dao.listAll());
@@ -95,12 +103,7 @@ public class EtudiantController implements Initializable {
                             etudiant = getTableView().getItems().get(getIndex());
                             etudiant_label.setText("Etudiant: edition");
                             btn_action.setText("Mettre à jour");
-                            setTexts(etudiant.getId(),
-                                    etudiant.getN_mat_etudiant(),
-                                    etudiant.getNom_etudiant(),
-                                    etudiant.getPrenom_etudiant(),
-                                    etudiant.getClasse_etudiant(),
-                                    etudiant.getDate_nais_etudiant());
+                            setTexts(etudiant.getId(), etudiant.getN_mat_etudiant(), etudiant.getNom_etudiant(), etudiant.getPrenom_etudiant(), etudiant.getClasse_etudiant(),etudiant.getDate_nais_etudiant());
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
                         } catch (NullPointerException e) {
@@ -132,39 +135,49 @@ public class EtudiantController implements Initializable {
 
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter")){
-                try {
-                    etudiant = new Etudiant(0,
-                            numero_matricule_input.getText(),
-                            nom_input.getText(),
-                            prenom_input.getText(),
-                            classe_input.getValue().toString(),
-                            date_nais_picker.getValue().toString());
-                    System.out.println(classe_input.getValue().toString());
-                    dao.insert(etudiant);
+                if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
+                    try {
+                        etudiant = new Etudiant(0, numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
+                        System.out.println(classe_input.getValue().toString());
+                        dao.insert(etudiant);
+                        new FadeOutRight(action_pane).play();
+                        refresh();
+                        clearInputs();
+                    } catch (Exception e) {
+                        popUp.error("erreur","Erreur, essaye encore une fois");
+                    }
+                }
+
+            } else if (btn_action.getText().equals("Mettre à jour")){
+                if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
+                    try {
+                        etudiant = new Etudiant(Integer.valueOf(id_label.getText()), numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
+                        dao.update(etudiant);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                     new FadeOutRight(action_pane).play();
                     refresh();
                     clearInputs();
-                } catch (Exception e) {
-                    popUp.error("erreur","Erreur, essaye encore une fois");
                 }
-            } else if (btn_action.getText().equals("Mettre à jour")){
-                etudiant = new Etudiant(Integer.valueOf(id_label.getText()),
-                        numero_matricule_input.getText(),
-                        nom_input.getText(),
-                        prenom_input.getText(),
-                        classe_input.getValue().toString(),
-                        date_nais_picker.getValue().toString());
-                try {
-                    dao.update(etudiant);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                new FadeOutRight(action_pane).play();
-                    refresh();
-                clearInputs();
             }
         });
-
+    }
+    public boolean verify(String nom, String prenom, String nmat){
+        if (nmat.length()>NUMERO_MATRICULE_MAX){
+            popUp.error("erreur","Numero matricule trop long, essaye encore une fois");
+        } else if (nmat.length()<NUMERO_MATRICULE_MIN) {
+            popUp.error("erreur","Numero matricule trop courts, essaye encore une fois");
+        }else if (nom.length()>NAME_MAX) {
+            popUp.error("erreur","Nom trop long, essaye encore une fois");
+        } else if (nom.length()<NAME_MIN)  {
+            popUp.error("erreur","Nom trop courts, essaye encore une fois");
+        }else if (prenom.length()>SURNAME_MAX) {
+            popUp.error("erreur","Prenom trop long, essaye encore une fois");
+        } else if (prenom.length()<SURNAME_MIN)  {
+            popUp.error("erreur","Prenom trop courts, essaye encore une fois");
+        } else return true;
+        return false;
     }
     public void setTexts(Integer id, String n_mat_etudiant, String nom_etudiant, String prenom_etudiant, String classe_etudiant, String date_nais_etudiant){
         id_label.setText(id.toString());
@@ -234,58 +247,63 @@ public class EtudiantController implements Initializable {
         }
     }
 
-    public void generatePdf() throws IOException {
-        Stage stage = new Stage();
-        FileChooser fil_chooser = new FileChooser();
-        File file = fil_chooser.showSaveDialog(stage);
+    public void generatePdf() throws IOException{
+        try {
+            Stage stage = new Stage();
+            FileChooser fil_chooser = new FileChooser();
+            File file = fil_chooser.showSaveDialog(stage);
 
-        // creating the document
-        PdfWriter writer = new PdfWriter(file+".pdf");
-        PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
+            // creating the document
+            PdfWriter writer = new PdfWriter(file+".pdf");
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
 
-        // Creating a table
-        float [] pointColumnWidths = {60F, 175F, 175F,50F,70F};
-        Table table = new Table(pointColumnWidths);
+            // Creating a table
+            float [] pointColumnWidths = {60F, 175F, 175F,50F,70F};
+            Table table = new Table(pointColumnWidths);
 
-        // font setting
-        PdfFont font = PdfFontFactory.createFont(TIMES_ROMAN);
-        PdfFont bold = PdfFontFactory.createFont(TIMES_BOLD);
+            // font setting
+            PdfFont font = PdfFontFactory.createFont(TIMES_ROMAN);
+            PdfFont bold = PdfFontFactory.createFont(TIMES_BOLD);
 
-        Text title = new Text("Listes des etudiants du ").setFont(font);
-        Text ecole = new Text("Lycée Joël Sylvain").setFont(font);
-//        Paragraph p = new Paragraph().add(title).add(" by ").add(author);
-        Paragraph p = new Paragraph().add(title);
-        Paragraph e  = new Paragraph().add(ecole);
-        e.setTextAlignment(TextAlignment.RIGHT);
-        p.setTextAlignment(TextAlignment.RIGHT);
-        document.add(p);
-        document.add(e);
+            Text title = new Text("Listes des etudiants ").setFont(font);
+            Text ecole = new Text("du Lycée Joël Sylvain").setFont(font);
+//          Paragraph p = new Paragraph().add(title).add(" by ").add(author);
+            Paragraph p = new Paragraph().add(title);
+            Paragraph e  = new Paragraph().add(ecole);
+            e.setTextAlignment(TextAlignment.RIGHT);
+            p.setTextAlignment(TextAlignment.RIGHT);
+            document.add(p);
+            document.add(e);
 
-        // Adding cells to the table
-        table.addCell(new Cell().add(new Paragraph("NºMAT").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
-        table.addCell(new Cell().add(new Paragraph("NOM").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
-        table.addCell(new Cell().add(new Paragraph("PRENOM").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
-        table.addCell(new Cell().add(new Paragraph("CLASSE").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
-        table.addCell(new Cell().add(new Paragraph("D_NAIS").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
+            // Adding cells to the table
+            table.addCell(new Cell().add(new Paragraph("NºMAT").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
+            table.addCell(new Cell().add(new Paragraph("NOM").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
+            table.addCell(new Cell().add(new Paragraph("PRENOM").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
+            table.addCell(new Cell().add(new Paragraph("CLASSE").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
+            table.addCell(new Cell().add(new Paragraph("D_NAIS").setFont(bold).setTextAlignment(TextAlignment.CENTER).setFontSize(14)));
 
-        // set content of tablePdf from our tableView
-        for (int i = 0; i<table_etudiant.getItems().size();i++){
-            etudiant = table_etudiant.getItems().get(i);
-            table.addCell(etudiant.getN_mat_etudiant()).setFont(font);
-            table.addCell(etudiant.getNom_etudiant()).setFont(font);
-            table.addCell(etudiant.getPrenom_etudiant()).setFont(font);
-            table.addCell(etudiant.getClasse_etudiant()).setFont(font);
-            table.addCell(etudiant.getDate_nais_etudiant()).setFont(font);
+            // set content of tablePdf from our tableView
+            for (int i = 0; i<table_etudiant.getItems().size();i++){
+                etudiant = table_etudiant.getItems().get(i);
+                table.addCell(etudiant.getN_mat_etudiant().toUpperCase()).setFont(font);
+                table.addCell(etudiant.getNom_etudiant().toUpperCase()).setFont(font);
+                table.addCell(etudiant.getPrenom_etudiant()).setFont(font);
+                table.addCell(etudiant.getClasse_etudiant()).setFont(font);
+                table.addCell(etudiant.getDate_nais_etudiant()).setFont(font);
+            }
+            table.setPaddingTop(200F);
+            Paragraph tot = new Paragraph("Total:"+ (long) table_etudiant.getItems().size());
+            document.add(tot);
+            document.add(table);
+
+            // Closing the document
+            document.close();
+            if (file.getAbsolutePath().equals("null")){
+                System.out.println("the path is null");
+            } else popUp.success("Sauvegardé dans :", file +".pdf");
+        } catch (java.lang.RuntimeException e){
+            System.out.println("Runtime E: path null");
         }
-        table.setPaddingTop(200F);
-        Paragraph tot = new Paragraph("Total:"+ (long) table_etudiant.getItems().size());
-        document.add(tot);
-        document.add(table);
-
-        // Closing the document
-        document.close();
-        popUp.success("Sauvegardé", file +"pdf");
-
     }
 }

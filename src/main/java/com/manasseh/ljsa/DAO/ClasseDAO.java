@@ -33,17 +33,6 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         }
         return profList;
     }
-    public Integer getClasse(String classe) throws SQLException {
-        int coeff = 0;
-        String sql = "select coefficient_total from "+tableName+" where classe = '"+classe+"'";
-        DatabaseConnection connection = new DatabaseConnection();
-        Statement statement = connection.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        while (resultSet.next()){
-            coeff = resultSet.getInt("coefficient_total");
-        }
-        return coeff;
-    }
 
     public ObservableList<Object> listClasse(){
         ObservableList<Object> listClasse = FXCollections.observableArrayList();
