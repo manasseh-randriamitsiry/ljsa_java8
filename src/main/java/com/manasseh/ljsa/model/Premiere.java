@@ -1,5 +1,7 @@
 package com.manasseh.ljsa.model;
 
+import com.manasseh.ljsa.DAO.PremiereDAO;
+
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
@@ -20,6 +22,7 @@ public class Premiere {
     private final String n_mat;
     private final Integer trimestre;
     private final Integer annee_scolaire;
+    PremiereDAO premiereDAO = new PremiereDAO();
 
     public Premiere(Integer id, Float malagasy, Float francais, Float anglais, Float histogeo, Float eac, Float ses, Float spc, Float svt, Float mats, Float eps, Float tice,Float phylo, String n_mat, Integer trimestre, Integer annee_scolaire) {
         this.id = id;
@@ -87,7 +90,7 @@ public class Premiere {
     }
     public String getMoy() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
-        int coeff = 25;
+        int coeff = premiereDAO.getCoeffTotal();
         float sum = getTotal()/coeff;
         return df.format(sum);
     }

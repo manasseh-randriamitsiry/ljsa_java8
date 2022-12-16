@@ -90,4 +90,8 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         }
         statement.close();
     }
+
+    public Integer getCoeffTotal() throws SQLException {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package com.manasseh.ljsa.DAO;
 
+import com.manasseh.ljsa.model.Coefficient_terminale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import com.manasseh.ljsa.model.Terminale;
@@ -10,12 +11,13 @@ import java.sql.*;
 public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
     PopUp popUp = new PopUp();
     String tableName = "terminale";
+    String tableCoeffName = "terminale_note_coeff";
     @Override
     public ObservableList<Terminale> listAll() {
         ObservableList<Terminale> listTerminales = FXCollections.observableArrayList();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
-        String query = "select * from "+tableName;
+        String query = "SELECT id,nmat,trimestre,annee_scolaire,terminale.mlg*terminale_note_coeff.mlg as mlg,terminale.frs*terminale_note_coeff.frs as frs,terminale.anglais*terminale_note_coeff.anglais as anglais,terminale.histogeo*terminale_note_coeff.histogeo as histogeo,terminale.phylo*terminale_note_coeff.phylo as phylo,terminale.math*terminale_note_coeff.math as math,terminale.spc*terminale_note_coeff.spc as spc,terminale.svt*terminale_note_coeff.svt as svt,terminale.ses*terminale_note_coeff.ses as ses,terminale.eps from terminale,terminale_note_coeff";
         listTerminales.clear();
         try {
             Statement statement = connection.createStatement();
@@ -80,20 +82,20 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
 
     @Override
     public void insert(Terminale newTerminale) throws SQLException {
-        String sql = "INSERT INTO "+tableName+" VALUES ( NULL,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO `terminale`(`id`, `nmat`, `mlg`, `frs`, `anglais`, `histogeo`, `phylo`, `math`, `spc`, `svt`, `ses`, `eps`, `trimestre`, `annee_scolaire`) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
-        statement.setFloat(1, newTerminale.getMalagasy());
-        statement.setFloat(2, newTerminale.getFrs());
-        statement.setFloat(3,newTerminale.getAnglais());
-        statement.setFloat(4,newTerminale.getHistoGeo());
-        statement.setFloat(5,newTerminale.getPhylosphie());
-        statement.setFloat(6,newTerminale.getMathematique());
-        statement.setFloat(7,newTerminale.getSpc());
-        statement.setFloat(8,newTerminale.getSvt());
-        statement.setFloat(9,newTerminale.getSes());
-        statement.setFloat(10,newTerminale.getEps());
-        statement.setString(11,newTerminale.getN_mat());
+        statement.setString(1, newTerminale.getN_mat());
+        statement.setFloat(2,newTerminale.getMalagasy());
+        statement.setFloat(3,newTerminale.getFrs());
+        statement.setFloat(4,newTerminale.getAnglais());
+        statement.setFloat(5,newTerminale.getHistoGeo());
+        statement.setFloat(6,newTerminale.getPhylosphie());
+        statement.setFloat(7,newTerminale.getMathematique());
+        statement.setFloat(8,newTerminale.getSpc());
+        statement.setFloat(9,newTerminale.getSvt());
+        statement.setFloat(10,newTerminale.getSes());
+        statement.setFloat(11,newTerminale.getEps());
         statement.setInt(12,newTerminale.getTrimestre());
         statement.setInt(13,newTerminale.getAnnee_scolaire());
         try {
@@ -105,6 +107,74 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
             popUp.error("erreur ","Le numero matricule est dejà utilisé");
         }
         statement.close();
+    }
+
+    public Integer getCoeffTotal() throws SQLException {
+        int coeff = 1;
+        String sql = "SELECT SUM(mlg+frs+anglais+histogeo+phylo+math+spc+svt+ses+eps) as total FROM "+tableCoeffName;
+        DatabaseConnection connection = new DatabaseConnection();
+        Statement statement = connection.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()){
+            coeff = resultSet.getInt("total");
+        }
+        return coeff;
+    }
+
+    public void updateCoeff(Coefficient_terminale data) throws SQLException {
+        String sql = "UPDATE `seconde_note_coeff` SET `malagasy`=?,`francais`=?,`anglais`=?,`histogeo`=?,`eac`=?,`ses`=?,`spc`=?,`svt`=?,`mats`=?,`eps`=?,`tice`=? WHERE 1";
+        DatabaseConnection connection = new DatabaseConnection();
+        PreparedStatement statement = connection.getConnection().prepareStatement(sql);
+        statement.setFloat(1, data.getMalagasy());
+        statement.setFloat(2, data.getFrs());
+        statement.setFloat(3,data.getAnglais());
+        statement.setFloat(4,data.getHistoGeo());
+        statement.setFloat(5,data.getPhylosphie());
+        statement.setFloat(6,data.getEps());
+        statement.setFloat(7,data.getMathematique());
+        statement.setFloat(8,data.getSpc());
+        statement.setFloat(9,data.getSvt());
+        statement.setFloat(10,data.getSes());
+
+        try{
+            int res = statement.executeUpdate();
+            if (res>0) {
+                popUp.success("Success","Mise à jour avec success");
+            } else {
+                popUp.error("Erreur ","Mise à jour avec erreur");
+            }
+        } catch (SQLIntegrityConstraintViolationException e){
+            popUp.error("Erreur","Reesayer");
+        }
+        statement.close();
+    }
+
+    public ObservableList<Coefficient_terminale> listCoeff(){
+        ObservableList<Coefficient_terminale> listCoeff = FXCollections.observableArrayList();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDb = connectNow.getConnection();
+        String query = "SELECT * FROM "+tableCoeffName;
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                listCoeff.add(new Coefficient_terminale(
+                        resultSet.getInt("mlg"),
+                        resultSet.getInt("frs"),
+                        resultSet.getInt("anglais"),
+                        resultSet.getInt("histogeo"),
+                        resultSet.getInt("phylo"),
+                        resultSet.getInt("math"),
+                        resultSet.getInt("spc"),
+                        resultSet.getInt("svt"),
+                        resultSet.getInt("ses"),
+                        resultSet.getInt("eps")
+                ));
+            }
+        } catch (SQLException ignored) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+        }
+        return listCoeff;
     }
 
 

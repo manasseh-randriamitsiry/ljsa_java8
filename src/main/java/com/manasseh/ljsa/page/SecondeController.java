@@ -137,7 +137,6 @@ public class SecondeController implements Initializable{
                         n_mat_input.getSelectionModel().select(seconde.getN_mat());
                         trimestre_input.setText(seconde.getTrimestre().toString());
                         annee_input.getSelectionModel().select(seconde.getAnnee_scolaire());
-
                         action_pane.setVisible(true);
 
                         new FadeInRight(action_pane).play();

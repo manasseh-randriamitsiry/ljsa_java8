@@ -1,5 +1,6 @@
 package com.manasseh.ljsa.model;
 
+import com.manasseh.ljsa.DAO.TerminaleDAO;
 import com.manasseh.ljsa.page.TerminaleController;
 
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ public class Terminale extends TerminaleController {
     private final String n_mat;
     private final Integer trimestre;
     private final Integer annee_scolaire;
+    TerminaleDAO terminaleDAO = new TerminaleDAO();
 
     public Terminale(Integer id, Float malagasy, Float frs, Float anglais, Float histoGeo, Float phylosphie, Float eps, Float mathematique, Float spc, Float svt, Float ses, String n_mat, Integer trimestre, Integer annee_scolaire) {
         this.id = id;
@@ -51,7 +53,7 @@ public class Terminale extends TerminaleController {
     }
     public String getMoyenne() throws SQLException {
         DecimalFormat df = new DecimalFormat("###.##");
-        int coeff = 21;
+        int coeff = terminaleDAO.getCoeffTotal();
         Float sum = getTotal()/coeff;
         return df.format(sum);
     }

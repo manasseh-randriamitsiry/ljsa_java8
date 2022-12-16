@@ -141,7 +141,7 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
     }
     public Integer getCoeffTotal() throws SQLException {
         int coeff = 1;
-        String sql = "SELECT SUM(anglais+eac+eps+francais+histogeo+malagasy+mats+ses+spc+svt+tice) as total FROM `seconde_note_coeff`;";
+        String sql = "SELECT SUM(anglais+eac+eps+francais+histogeo+malagasy+mats+ses+spc+svt+tice) as total FROM "+tableCoeffName;
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);

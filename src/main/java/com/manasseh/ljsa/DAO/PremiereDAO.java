@@ -1,5 +1,6 @@
 package com.manasseh.ljsa.DAO;
 
+import com.manasseh.ljsa.model.Coefficient_premiere;
 import com.manasseh.ljsa.model.Premiere;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
@@ -10,12 +11,13 @@ import java.sql.*;
 public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
     PopUp popUp = new PopUp();
     String tableName = "premiere";
+    String tableCoeffName = "premiere_note_coeff";
     @Override
     public ObservableList<Premiere> listAll() {
         ObservableList<Premiere> list = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "SELECT * FROM "+tableName;
+        String query = "SELECT id,n_mat,trimestre,annee_scolaire,premiere.malagasy*premiere_note_coeff.malagasy as malagasy,premiere.francais*premiere_note_coeff.francais as francais,premiere.anglais*premiere_note_coeff.anglais as anglais,premiere.histogeo*premiere_note_coeff.histogeo as histogeo,premiere.eac*premiere_note_coeff.eac as eac,premiere.ses*premiere_note_coeff.ses as ses,premiere.spc*premiere_note_coeff.spc as spc,premiere.svt*premiere_note_coeff.svt as svt,premiere.mats*premiere_note_coeff.mats as mats,premiere.eps*premiere_note_coeff.eps as eps,premiere.tice*premiere_note_coeff.tice as tice,premiere.phylo*premiere_note_coeff.phylo as phylo from premiere,premiere_note_coeff;";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -39,8 +41,9 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
                         resultSet.getInt("annee_scolaire")
                 ));
             }
-        } catch (SQLException ignored) {
+        } catch (SQLException e) {
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            e.printStackTrace();
         }
         return list;
     }
@@ -108,5 +111,75 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
             popUp.error("erreur ","Le numero matricule est dejà utilisé");
         }
         statement.close();
+    }
+
+    public Integer getCoeffTotal() throws SQLException {
+        int coeff = 1;
+        String sql = "SELECT SUM(malagasy+francais+anglais+histogeo+eac+ses+spc+svt+mats+eps+tice+phylo) as total FROM "+tableCoeffName;
+        DatabaseConnection connection = new DatabaseConnection();
+        Statement statement = connection.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()){
+            coeff = resultSet.getInt("total");
+        }
+        return coeff;
+    }
+
+    public void updateCoeff(Coefficient_premiere data) throws SQLException {
+        String sql = "UPDATE `seconde_note_coeff` SET `malagasy`=?,`francais`=?,`anglais`=?,`histogeo`=?,`eac`=?,`ses`=?,`spc`=?,`svt`=?,`mats`=?,`eps`=?,`tice`=? WHERE 1";
+        DatabaseConnection connection = new DatabaseConnection();
+        PreparedStatement statement = connection.getConnection().prepareStatement(sql);
+        statement.setFloat(1, data.getMalagasy());
+        statement.setFloat(2, data.getFrancais());
+        statement.setFloat(3,data.getAnglais());
+        statement.setFloat(4,data.getHistogeo());
+        statement.setFloat(5,data.getEac());
+        statement.setFloat(6,data.getSes());
+        statement.setFloat(7,data.getSpc());
+        statement.setFloat(8,data.getSvt());
+        statement.setFloat(9,data.getMats());
+        statement.setFloat(10,data.getEps());
+        statement.setFloat(11,data.getTice());
+        try{
+            int res = statement.executeUpdate();
+            if (res>0) {
+                popUp.success("Success","Mise à jour avec success");
+            } else {
+                popUp.error("Erreur ","Mise à jour avec erreur");
+            }
+        } catch (SQLIntegrityConstraintViolationException e){
+            popUp.error("Erreur","Reesayer");
+        }
+        statement.close();
+    }
+
+    public ObservableList<Coefficient_premiere> listCoeff(){
+        ObservableList<Coefficient_premiere> listCoeff = FXCollections.observableArrayList();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDb = connectNow.getConnection();
+        String query = "SELECT * FROM "+tableCoeffName;
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                listCoeff.add(new Coefficient_premiere(
+                        resultSet.getInt("malagasy"),
+                        resultSet.getInt("francais"),
+                        resultSet.getInt("anglais"),
+                        resultSet.getInt("histogeo"),
+                        resultSet.getInt("eac"),
+                        resultSet.getInt("ses"),
+                        resultSet.getInt("spc"),
+                        resultSet.getInt("svt"),
+                        resultSet.getInt("mats"),
+                        resultSet.getInt("eps"),
+                        resultSet.getInt("tice"),
+                        resultSet.getInt("phylo")
+                ));
+            }
+        } catch (SQLException ignored) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+        }
+        return listCoeff;
     }
 }
