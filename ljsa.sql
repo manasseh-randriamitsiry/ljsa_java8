@@ -2,7 +2,7 @@
 -- Database: `ljsa`
 --
 
-CREATE DATABASE IF NOT EXISTS `ljsa` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE DATABASE IF NOT EXISTS `ljsa`;
 USE `ljsa`;
 
 -- --------------------------------------------------------
@@ -13,7 +13,7 @@ USE `ljsa`;
 
 CREATE TABLE `etudiants` (
   `id` int(11) NOT NULL,
-  `n_matricule` varchar(10) COLLATE utf8_bin NOT NULL,
+  `n_matricule` varchar(10),
   `nom` varchar(150) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(150) COLLATE utf8_bin NOT NULL,
   `classe` varchar(20) COLLATE utf8_bin NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `matiere` (
   `id` int(11) NOT NULL,
   `designation` varchar(50) NOT NULL,
   `abreviation` varchar(50) NOT NULL,
-  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+  `description` varchar(200) DEFAULT NULL
 );
 
 --
@@ -93,8 +93,8 @@ CREATE TABLE `premiere` (
   `eps` float NOT NULL,
   `tice` float NOT NULL,
   `phylo` float NOT NULL,
-  `n_mat` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `trimestre` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `n_mat` varchar(10) NOT NULL,
+  `trimestre` varchar(10) NOT NULL,
   `annee_scolaire` int(4) NOT NULL
 );
 
@@ -114,9 +114,9 @@ INSERT INTO `premiere` (`id`, `malagasy`, `francais`, `anglais`, `histogeo`, `ea
 
 CREATE TABLE `profs` (
   `id` int(11) NOT NULL,
-  `n_matricule` varchar(45) COLLATE utf8_bin NOT NULL,
-  `nom_prof` varchar(100) COLLATE utf8_bin NOT NULL,
-  `prenom_prof` varchar(100) COLLATE utf8_bin NOT NULL,
+  `n_matricule` varchar(45) NOT NULL,
+  `nom_prof` varchar(100) NOT NULL,
+  `prenom_prof` varchar(100) NOT NULL,
   `date_nais` date NOT NULL
 );
 
@@ -147,8 +147,8 @@ CREATE TABLE `seconde` (
   `mats` float NOT NULL,
   `eps` float NOT NULL,
   `tice` float NOT NULL,
-  `n_mat` varchar(10) COLLATE utf8_bin NOT NULL,
-  `trimestre` varchar(10) COLLATE utf8_bin NOT NULL,
+  `n_mat` varchar(10) NOT NULL,
+  `trimestre` varchar(10) NOT NULL,
   `annee_scolaire` int(4) NOT NULL
 );
 
@@ -203,9 +203,9 @@ CREATE TABLE `terminale` (
   `svt` float DEFAULT NULL,
   `ses` float DEFAULT NULL,
   `eps` float DEFAULT NULL,
-  `nmat` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `nmat` varchar(10) DEFAULT NULL,
   `trimestre` int(1) DEFAULT NULL,
-  `annee_scolaire` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+  `annee_scolaire` varchar(10) DEFAULT NULL
 );
 
 --

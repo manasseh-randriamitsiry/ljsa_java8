@@ -1,7 +1,6 @@
 package com.manasseh.ljsa.model;
 
 import com.manasseh.ljsa.DAO.PremiereDAO;
-
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
@@ -94,8 +93,6 @@ public class Premiere {
         float sum = getTotal()/coeff;
         return df.format(sum);
     }
-
-
 
     public Float getSvt() {
         return svt;

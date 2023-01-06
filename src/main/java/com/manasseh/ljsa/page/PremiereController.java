@@ -4,6 +4,7 @@ import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeOutRight;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
 import com.manasseh.ljsa.DAO.PremiereDAO;
+import com.manasseh.ljsa.model.Coefficient_premiere;
 import com.manasseh.ljsa.model.Etudiant;
 import com.manasseh.ljsa.model.Premiere;
 import com.manasseh.ljsa.utils.AnneeLists;
@@ -45,12 +46,20 @@ public class PremiereController implements Initializable{
     public Pane action_pane;
     public Circle detail_btn;
     public Label premiere_label;
+    public TableView<Coefficient_premiere> premiere_table_coeff;
+    public TableColumn<Coefficient_premiere, String> mlg_column_coeff,frs_column_coeff,ang_column_coeff,hg_column_coeff,math_column_coeff,phys_column_coeff,svt_column_coeff,eac_column_coeff,tice_column_coeff,eps_column_coeff,ses_column_coeff,phylo_column_coeff;
+    public Button trim_btn;
+    public Button nmat_btn;
+    public Button annee_btn;
+    public Button define_coeff;
     ObservableList<Premiere> listPremiere = FXCollections.observableArrayList();
+    ObservableList<Coefficient_premiere> listCoefficient = FXCollections.observableArrayList();
     PremiereDAO premiereDAO = new PremiereDAO();
     Premiere premiere = null;
     PopUp popUp = new PopUp();
     EtudiantDAO etudiantDAO = new EtudiantDAO();
     Etudiant etudiant;
+    Coefficient_premiere coefficientPremiere = null;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
@@ -61,22 +70,38 @@ public class PremiereController implements Initializable{
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(AnneeLists.getYearList(100));
+
+        // coefficient
+        ang_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
+        mlg_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
+        frs_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
+        hg_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHistogeo().toString()));
+        math_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMats().toString()));
+        phys_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSpc().toString()));
+        svt_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
+        eac_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEac().toString()));
+        tice_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
+        eps_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEps().toString()));
+        ses_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
+        phylo_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylo().toString()));
+
+        // notes
         n_mat_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getN_mat()));
-          ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
-          mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
-           hg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHistogeo().toString()));
-          eac_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEac().toString()));
-          eps_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEps().toString()));
-          ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
-         math_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMats().toString()));
-         phys_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSpc().toString()));
-          svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
-          frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
-         tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
-         phylo_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylo().toString()));
+        ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
+        mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
+        hg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHistogeo().toString()));
+        eac_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEac().toString()));
+        eps_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEps().toString()));
+        ses_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
+        math_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMats().toString()));
+        phys_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSpc().toString()));
+        svt_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
+        frs_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrancais().toString()));
+        tice_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTice().toString()));
+        phylo_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylo().toString()));
         total_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotal().toString()));
         trimestre_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTrimestre().toString()));
-         annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
+        annee_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnnee_scolaire().toString()));
         moyenne_column.setCellValueFactory(param -> {
             try {
                 return new SimpleStringProperty(param.getValue().getMoy());
@@ -229,6 +254,25 @@ public class PremiereController implements Initializable{
             }
         });
     }
+    public void switchShow(){
+        n_mat_input.setVisible(true);
+        annee_input.setVisible(true);
+        trimestre_input.setVisible(true);
+        trim_btn.setVisible(true);
+        nmat_btn.setVisible(true);
+        annee_btn.setVisible(true);
+        detail_btn.setVisible(true);
+    }
+    public boolean verifyNote(float note){
+        if (Math.round(note)<0){
+            popUp.error("Note negatif", "Les notes doit etre superieur a 0");
+            return false;
+        } else if (note>20){
+            popUp.error("Note trop grand", "Les notes doit etre entre 0 et 20");
+            return false;
+        }
+        return true;
+    }
     public void afficherPaneAjout(){
         btn_action.setText("Ajouter +");
         premiere_label.setText("Premiere: Ajout");
@@ -252,6 +296,9 @@ public class PremiereController implements Initializable{
     private void refresh(){
         listPremiere.clear();
         listPremiere.setAll(premiereDAO.listAll());
+        listCoefficient.clear();
+        listCoefficient.setAll(premiereDAO.listCoeff());
+        premiere_table_coeff.setItems(listCoefficient);
         activerRecherche();
         clearInputs();
     }
@@ -280,5 +327,35 @@ public class PremiereController implements Initializable{
         SortedList<Premiere> sortedList = new SortedList<>(filteredList);
         sortedList.comparatorProperty().bind(premiere_table.comparatorProperty());
         premiere_table.setItems(sortedList);
+    }
+
+    public void defineCoeff() {
+        n_mat_input.setVisible(false);
+        annee_input.setVisible(false);
+        trimestre_input.setVisible(false);
+        trim_btn.setVisible(false);
+        nmat_btn.setVisible(false);
+        annee_btn.setVisible(false);
+        detail_btn.setVisible(false);
+
+        coefficientPremiere = premiere_table_coeff.getItems().get(0);
+        mlg_input.setText(coefficientPremiere.getMalagasy().toString());
+        frs_input.setText(coefficientPremiere.getFrancais().toString());
+        ang_input.setText(coefficientPremiere.getAnglais().toString());
+        hg_input.setText(coefficientPremiere.getHistogeo().toString());
+        eac_input.setText(coefficientPremiere.getEac().toString());
+        math_input.setText(coefficientPremiere.getMats().toString());
+        ses_input.setText(coefficientPremiere.getSes().toString());
+        pc_input.setText(coefficientPremiere.getSpc().toString());
+        svt_input.setText(coefficientPremiere.getSvt().toString());
+        tice_input.setText(coefficientPremiere.getTice().toString());
+        eps_input.setText(coefficientPremiere.getEps().toString());
+        phylo_input.setText(coefficientPremiere.getPhylo().toString());
+//
+        btn_action.setText("Coef: edit");
+        premiere_label.setText("Modification des coefficients");
+//
+        action_pane.setVisible(true);
+        new FadeInRight(action_pane).play();
     }
 }

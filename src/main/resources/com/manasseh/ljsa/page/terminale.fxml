@@ -16,7 +16,7 @@
             <Font size="34.0" />
         </font>
     </Label>
-    <TableView fx:id="table_terminale" layoutX="22.0" layoutY="190.0" prefHeight="473.0" prefWidth="968.0" tableMenuButtonVisible="true">
+    <TableView fx:id="table_terminale" layoutX="22.0" layoutY="190.0" prefHeight="388.0" prefWidth="968.0" tableMenuButtonVisible="true">
       <columns>
           <TableColumn fx:id="n_mat_column" maxWidth="500.0" prefWidth="100.0" text="NºMatricule" />
           <TableColumn fx:id="mlg_column" maxWidth="500.0" prefWidth="45.0" text="MLG" />
@@ -57,17 +57,32 @@
         <Button layoutX="247.0" layoutY="83.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="PC" />
         <Button layoutX="394.0" layoutY="5.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SVT" />
         <Button layoutX="396.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="EPS" />
-        <Button layoutX="396.0" layoutY="81.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TRIM" />
+        <Button fx:id="trim_btn" layoutX="396.0" layoutY="81.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="TRIM" />
         <Button layoutX="540.0" layoutY="4.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="SES" />
         <TextField fx:id="ang_input" layoutX="486.0" layoutY="44.0" onKeyReleased="#check" prefHeight="26.0" prefWidth="70.0" promptText="Anglais" styleClass="input1" />
         <Button layoutX="539.0" layoutY="43.0" minWidth="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANG" />
         <ComboBox fx:id="n_mat_input" editable="true" layoutX="630.0" layoutY="4.0" onAction="#check" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
-        <Button layoutX="734.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT" />
-        <Button layoutX="734.0" layoutY="43.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANNEE" />
+        <Button fx:id="nmat_btn" layoutX="734.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="NMAT" />
+        <Button fx:id="annee_btn" layoutX="734.0" layoutY="43.0" minWidth="53.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" style="-fx-font-size: 10;" styleClass="button_left" stylesheets="@../style.css" text="ANNEE" />
       <Circle fx:id="detail_btn" fill="DODGERBLUE" layoutX="803.0" layoutY="18.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" />
     </Pane>
     <Button fx:id="afficher_ajout_btn" layoutX="22.0" layoutY="23.0" minWidth="44.0" mnemonicParsing="false" onAction="#afficherPaneAjout" onMouseClicked="#afficherPaneAjout" prefHeight="30.0" prefWidth="44.0" text="+" />
     <TextField fx:id="recherche_input" layoutX="809.0" layoutY="17.0" prefHeight="42.0" prefWidth="181.0" promptText="Rechercher ..." styleClass="input1" />
     <Label fx:id="id_label" layoutX="249.0" layoutY="30.0" text="Label" visible="false" />
     <Button layoutX="933.0" layoutY="16.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
+   <TableView fx:id="table_terminale_coeff" layoutX="21.0" layoutY="591.0" prefHeight="81.0" prefWidth="464.0" tableMenuButtonVisible="true">
+      <columns>
+         <TableColumn fx:id="mlg_column_coeff" maxWidth="500.0" prefWidth="45.0" text="MLG" />
+         <TableColumn fx:id="frs_column_coeff" maxWidth="500.0" prefWidth="45.0" text="FRS" />
+         <TableColumn fx:id="ang_column_coeff" maxWidth="500.0" prefWidth="45.0" text="ANG" />
+         <TableColumn fx:id="hg_column_coeff" maxWidth="500.0" prefWidth="45.0" text="HG" />
+         <TableColumn fx:id="math_column_coeff" maxWidth="500.0" prefWidth="45.0" text="MAT" />
+         <TableColumn fx:id="phys_column_coeff" maxWidth="500.0" prefWidth="45.0" text="PC" />
+         <TableColumn fx:id="svt_column_coeff" maxWidth="500.0" prefWidth="45.0" text="SVT" />
+         <TableColumn fx:id="phylo_column_coeff" maxWidth="500.0" prefWidth="45.0" text="PHY" />
+         <TableColumn fx:id="ses_column_coeff" maxWidth="500.0" prefWidth="45.0" text="SES" />
+         <TableColumn fx:id="eps_column_coeff" maxWidth="500.0" prefWidth="45.0" text="EPS" />
+      </columns>
+   </TableView>
+   <Button fx:id="define_coeff" layoutX="694.0" layoutY="24.0" minWidth="44.0" mnemonicParsing="false" onAction="#defineCoeff" onMouseClicked="#defineCoeff" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: gray;" text="Definir coeff" />
 </Pane>

@@ -3,6 +3,7 @@ package com.manasseh.ljsa.page;
 import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeOutRight;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
+import com.manasseh.ljsa.model.Coefficient_terminale;
 import com.manasseh.ljsa.model.Etudiant;
 import com.manasseh.ljsa.utils.AnneeLists;
 import javafx.beans.property.SimpleStringProperty;
@@ -44,12 +45,20 @@ public class TerminaleController implements Initializable{
     public Label  id_label, terminale_label;
     public Pane action_pane;
     public Circle detail_btn;
+    public Button define_coeff;
+    public TableColumn<Coefficient_terminale,String> eps_column_coeff, ses_column_coeff, phylo_column_coeff,svt_column_coeff,phys_column_coeff,math_column_coeff,hg_column_coeff,ang_column_coeff,frs_column_coeff,mlg_column_coeff;
+    public TableView<Coefficient_terminale> table_terminale_coeff;
+    public Button nmat_btn;
+    public Button annee_btn;
+    public Button trim_btn;
     ObservableList<Terminale> listTerminale = FXCollections.observableArrayList();
+    ObservableList<Coefficient_terminale> list_coefficient = FXCollections.observableArrayList();
     TerminaleDAO terminaleDAO = new TerminaleDAO();
     Terminale terminale = null;
     PopUp popUp = new PopUp();
     EtudiantDAO etudiantDAO = new EtudiantDAO();
     Etudiant etudiant;
+    Coefficient_terminale  coefficientTerminale = null;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
@@ -60,6 +69,20 @@ public class TerminaleController implements Initializable{
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(AnneeLists.getYearList(100));
+
+        // coefficient
+        mlg_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
+        frs_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getFrs().toString()));
+        ang_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
+        hg_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHistoGeo().toString()));
+        math_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMathematique().toString()));
+        phys_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSpc().toString()));
+        svt_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSvt().toString()));
+        phylo_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPhylosphie().toString()));
+        ses_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSes().toString()));
+        eps_column_coeff.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEps().toString()));
+
+        // notes
         n_mat_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getN_mat()));
         ang_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAnglais().toString()));
         mlg_column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMalagasy().toString()));
@@ -243,6 +266,9 @@ public class TerminaleController implements Initializable{
     private void refresh(){
         listTerminale.clear();
         listTerminale.setAll(terminaleDAO.listAll());
+        list_coefficient.clear();
+        list_coefficient.setAll(terminaleDAO.listCoeff());
+        table_terminale_coeff.setItems(list_coefficient);
         activerRecherche();
         clearInputs();
     }
@@ -273,4 +299,51 @@ public class TerminaleController implements Initializable{
         table_terminale.setItems(sortedList);
     }
 
+    public void switchShow(){
+        n_mat_input.setVisible(true);
+        annee_input.setVisible(true);
+        trimestre_input.setVisible(true);
+        trim_btn.setVisible(true);
+        nmat_btn.setVisible(true);
+        annee_btn.setVisible(true);
+        detail_btn.setVisible(true);
+    }
+    public boolean verifyNote(float note){
+        if (Math.round(note)<0){
+            popUp.error("Note negatif", "Les notes doit etre superieur a 0");
+            return false;
+        } else if (note>20){
+            popUp.error("Note trop grand", "Les notes doit etre entre 0 et 20");
+            return false;
+        }
+        return true;
+    }
+    public void defineCoeff() {
+        n_mat_input.setVisible(false);
+        annee_input.setVisible(false);
+        trimestre_input.setVisible(false);
+        trim_btn.setVisible(false);
+        nmat_btn.setVisible(false);
+        annee_btn.setVisible(false);
+        detail_btn.setVisible(false);
+
+        coefficientTerminale = table_terminale_coeff.getItems().get(0);
+        mlg_input.setText(coefficientTerminale.getMalagasy().toString());
+        frs_input.setText(coefficientTerminale.getFrs().toString());
+        ang_input.setText(coefficientTerminale.getAnglais().toString());
+        hg_input.setText(coefficientTerminale.getHistoGeo().toString());
+//        eac_input.setText(coefficientTerminale.getEac().toString());
+        math_input.setText(coefficientTerminale.getMathematique().toString());
+        ses_input.setText(coefficientTerminale.getSes().toString());
+        pc_input.setText(coefficientTerminale.getSpc().toString());
+        svt_input.setText(coefficientTerminale.getSvt().toString());
+        phylo_input.setText(coefficientTerminale.getPhylosphie().toString());
+        eps_input.setText(coefficientTerminale.getEps().toString());
+//
+        btn_action.setText("Coef: edit");
+        terminale_label.setText("Modification des coefficients");
+//
+        action_pane.setVisible(true);
+        new FadeInRight(action_pane).play();
+    }
 }
