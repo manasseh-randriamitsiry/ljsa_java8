@@ -126,7 +126,7 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
     }
 
     public void updateCoeff(Coefficient_premiere data) throws SQLException {
-        String sql = "UPDATE `seconde_note_coeff` SET `malagasy`=?,`francais`=?,`anglais`=?,`histogeo`=?,`eac`=?,`ses`=?,`spc`=?,`svt`=?,`mats`=?,`eps`=?,`tice`=? WHERE 1";
+        String sql = "UPDATE premiere_note_coeff SET malagasy = ?,francais = ?,anglais = ?,histogeo = ?,eac = ?,ses = ?,spc = ?,svt = ?,mats = ?,eps = ?,tice = ?,phylo = ? WHERE 1";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1, data.getMalagasy());
@@ -140,6 +140,7 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
         statement.setFloat(9,data.getMats());
         statement.setFloat(10,data.getEps());
         statement.setFloat(11,data.getTice());
+        statement.setFloat(12,data.getPhylo());
         try{
             int res = statement.executeUpdate();
             if (res>0) {

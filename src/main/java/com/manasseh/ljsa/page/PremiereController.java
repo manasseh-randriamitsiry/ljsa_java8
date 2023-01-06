@@ -199,51 +199,104 @@ public class PremiereController implements Initializable{
 
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
-                check();
-                try {
-                    premiere = new Premiere(0,
-                            Float.valueOf(mlg_input.getText()),
-                            Float.valueOf(frs_input.getText()),
-                            Float.valueOf(ang_input.getText()),
-                            Float.valueOf(hg_input.getText()),
-                            Float.valueOf(eac_input.getText()),
-                            Float.valueOf(ses_input.getText()),
-                            Float.valueOf(pc_input.getText()),
-                            Float.valueOf(svt_input.getText()),
-                            Float.valueOf(math_input.getText()),
-                            Float.valueOf(eps_input.getText()),
-                            Float.valueOf(tice_input.getText()),
-                            Float.valueOf(phylo_input.getText()),
-                            n_mat_input.getValue().toString(),
-                            Integer.valueOf(trimestre_input.getText()),
-                            Integer.valueOf(annee_input.getValue()));
-                    premiereDAO.insert(premiere);
-                    refresh();
-                    clearInputs();
-                    new FadeOutRight(action_pane).play();
-                } catch (NumberFormatException | SQLException e) {
-                    popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
+                if (verifyNote(Float.parseFloat(mlg_input.getText()))
+                        && verifyNote(Float.parseFloat(frs_input.getText()))
+                        && verifyNote(Float.parseFloat(ang_input.getText()))
+                        && verifyNote(Float.parseFloat(hg_input.getText()))
+                        && verifyNote(Float.parseFloat(eac_input.getText()))
+                        && verifyNote(Float.parseFloat(ses_input.getText()))
+                        && verifyNote(Float.parseFloat(pc_input.getText()))
+                        && verifyNote(Float.parseFloat(svt_input.getText()))
+                        && verifyNote(Float.parseFloat(math_input.getText()))
+                        && verifyNote(Float.parseFloat(eps_input.getText()))
+                        && verifyNote(Float.parseFloat(tice_input.getText()))
+                        && verifyNote(Float.parseFloat(phylo_input.getText()))
+                ){
+                    check();
+                    try {
+                        premiere = new Premiere(0,
+                                Float.valueOf(mlg_input.getText()),
+                                Float.valueOf(frs_input.getText()),
+                                Float.valueOf(ang_input.getText()),
+                                Float.valueOf(hg_input.getText()),
+                                Float.valueOf(eac_input.getText()),
+                                Float.valueOf(ses_input.getText()),
+                                Float.valueOf(pc_input.getText()),
+                                Float.valueOf(svt_input.getText()),
+                                Float.valueOf(math_input.getText()),
+                                Float.valueOf(eps_input.getText()),
+                                Float.valueOf(tice_input.getText()),
+                                Float.valueOf(phylo_input.getText()),
+                                n_mat_input.getValue().toString(),
+                                Integer.valueOf(trimestre_input.getText()),
+                                Integer.valueOf(annee_input.getValue()));
+                        premiereDAO.insert(premiere);
+                        refresh();
+                        clearInputs();
+                        new FadeOutRight(action_pane).play();
+                    } catch (NumberFormatException | SQLException e) {
+                        popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
+                    }
                 }
             }
             else if (btn_action.getText().equals("Mettre à jour")){
-                premiere = new Premiere(Integer.valueOf(id_label.getText()),
-                        Float.valueOf(mlg_input.getText()),
-                        Float.valueOf(frs_input.getText()),
-                        Float.valueOf(ang_input.getText()),
-                        Float.valueOf(hg_input.getText()),
-                        Float.valueOf(eac_input.getText()),
-                        Float.valueOf(ses_input.getText()),
-                        Float.valueOf(pc_input.getText()),
-                        Float.valueOf(svt_input.getText()),
-                        Float.valueOf(math_input.getText()),
-                        Float.valueOf(eps_input.getText()),
-                        Float.valueOf(tice_input.getText()),
-                        Float.valueOf(phylo_input.getText()),
-                        n_mat_input.getValue().toString(),
-                        Integer.valueOf(trimestre_input.getText()),
-                        Integer.valueOf(annee_input.getValue()));
+                if (verifyNote(Float.parseFloat(mlg_input.getText()))
+                        && verifyNote(Float.parseFloat(frs_input.getText()))
+                        && verifyNote(Float.parseFloat(ang_input.getText()))
+                        && verifyNote(Float.parseFloat(hg_input.getText()))
+                        && verifyNote(Float.parseFloat(eac_input.getText()))
+                        && verifyNote(Float.parseFloat(ses_input.getText()))
+                        && verifyNote(Float.parseFloat(pc_input.getText()))
+                        && verifyNote(Float.parseFloat(svt_input.getText()))
+                        && verifyNote(Float.parseFloat(math_input.getText()))
+                        && verifyNote(Float.parseFloat(eps_input.getText()))
+                        && verifyNote(Float.parseFloat(tice_input.getText()))
+                        && verifyNote(Float.parseFloat(phylo_input.getText()))
+                ){
+                    try {
+                        premiere = new Premiere(Integer.valueOf(id_label.getText()),
+                                Float.valueOf(mlg_input.getText()),
+                                Float.valueOf(frs_input.getText()),
+                                Float.valueOf(ang_input.getText()),
+                                Float.valueOf(hg_input.getText()),
+                                Float.valueOf(eac_input.getText()),
+                                Float.valueOf(ses_input.getText()),
+                                Float.valueOf(pc_input.getText()),
+                                Float.valueOf(svt_input.getText()),
+                                Float.valueOf(math_input.getText()),
+                                Float.valueOf(eps_input.getText()),
+                                Float.valueOf(tice_input.getText()),
+                                Float.valueOf(phylo_input.getText()),
+                                n_mat_input.getValue().toString(),
+                                Integer.valueOf(trimestre_input.getText()),
+                                Integer.valueOf(annee_input.getValue()));
+                        premiereDAO.update(premiere);
+                        refresh();
+                        clearInputs();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    new FadeOutRight(action_pane).play();
+                    action_pane.setVisible(true);
+                }
+            }
+            else if (btn_action.getText().equals("Coef: edit")) {
+                coefficientPremiere = new Coefficient_premiere(
+                        Integer.valueOf(mlg_input.getText()),
+                        Integer.valueOf(frs_input.getText()),
+                        Integer.valueOf(ang_input.getText()),
+                        Integer.valueOf(hg_input.getText()),
+                        Integer.valueOf(eac_input.getText()),
+                        Integer.valueOf(ses_input.getText()),
+                        Integer.valueOf(pc_input.getText()),
+                        Integer.valueOf(svt_input.getText()),
+                        Integer.valueOf(math_input.getText()),
+                        Integer.valueOf(eps_input.getText()),
+                        Integer.valueOf(tice_input.getText()),
+                        Integer.valueOf(phylo_input.getText())
+                );
                 try {
-                    premiereDAO.update(premiere);
+                    premiereDAO.updateCoeff(coefficientPremiere);
                     refresh();
                     clearInputs();
                 } catch (SQLException e) {
@@ -251,6 +304,7 @@ public class PremiereController implements Initializable{
                 }
                 new FadeOutRight(action_pane).play();
                 action_pane.setVisible(true);
+                switchShow();
             }
         });
     }

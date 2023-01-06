@@ -3,8 +3,7 @@ package com.manasseh.ljsa.page;
 import animatefx.animation.FadeInRight;
 import animatefx.animation.FadeOutRight;
 import com.manasseh.ljsa.DAO.EtudiantDAO;
-import com.manasseh.ljsa.model.Coefficient_terminale;
-import com.manasseh.ljsa.model.Etudiant;
+import com.manasseh.ljsa.model.*;
 import com.manasseh.ljsa.utils.AnneeLists;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -26,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import com.manasseh.ljsa.DAO.TerminaleDAO;
-import com.manasseh.ljsa.model.Terminale;
 import com.manasseh.ljsa.utils.AutoCompleteComboBoxListener;
 import com.manasseh.ljsa.utils.PopUp;
 import java.io.IOException;
@@ -194,9 +192,55 @@ public class TerminaleController implements Initializable{
 
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
-                check();
-                try {
-                    terminale = new Terminale(10,
+                if (verifyNote(Float.parseFloat(mlg_input.getText()))
+                        && verifyNote(Float.parseFloat(frs_input.getText()))
+                        && verifyNote(Float.parseFloat(ang_input.getText()))
+                        && verifyNote(Float.parseFloat(hg_input.getText()))
+                        && verifyNote(Float.parseFloat(ses_input.getText()))
+                        && verifyNote(Float.parseFloat(pc_input.getText()))
+                        && verifyNote(Float.parseFloat(svt_input.getText()))
+                        && verifyNote(Float.parseFloat(math_input.getText()))
+                        && verifyNote(Float.parseFloat(eps_input.getText()))
+                        && verifyNote(Float.parseFloat(phylo_input.getText()))
+                ){
+                    check();
+                    try {
+                        terminale = new Terminale(10,
+                                Float.valueOf(mlg_input.getText()),
+                                Float.valueOf(frs_input.getText()),
+                                Float.valueOf(ang_input.getText()),
+                                Float.valueOf(hg_input.getText()),
+                                Float.valueOf(phylo_input.getText()),
+                                Float.valueOf(eps_input.getText()),
+                                Float.valueOf(math_input.getText()),
+                                Float.valueOf(pc_input.getText()),
+                                Float.valueOf(svt_input.getText()),
+                                Float.valueOf(ses_input.getText()),
+                                n_mat_input.getValue().toString(),
+                                Integer.valueOf(trimestre_input.getText()),
+                                Integer.valueOf(annee_input.getValue()));
+                        terminaleDAO.insert(terminale);
+                        refresh();
+                        clearInputs();
+                    } catch (NumberFormatException | SQLException e) {
+                        popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (btn_action.getText().equals("Mettre à jour")){
+                if (verifyNote(Float.parseFloat(mlg_input.getText()))
+                        && verifyNote(Float.parseFloat(frs_input.getText()))
+                        && verifyNote(Float.parseFloat(ang_input.getText()))
+                        && verifyNote(Float.parseFloat(hg_input.getText()))
+                        && verifyNote(Float.parseFloat(ses_input.getText()))
+                        && verifyNote(Float.parseFloat(pc_input.getText()))
+                        && verifyNote(Float.parseFloat(svt_input.getText()))
+                        && verifyNote(Float.parseFloat(math_input.getText()))
+                        && verifyNote(Float.parseFloat(eps_input.getText()))
+                        && verifyNote(Float.parseFloat(phylo_input.getText()))
+                ){
+                    terminale = new Terminale(Integer.valueOf(id_label.getText()),
                             Float.valueOf(mlg_input.getText()),
                             Float.valueOf(frs_input.getText()),
                             Float.valueOf(ang_input.getText()),
@@ -210,31 +254,33 @@ public class TerminaleController implements Initializable{
                             n_mat_input.getValue().toString(),
                             Integer.valueOf(trimestre_input.getText()),
                             Integer.valueOf(annee_input.getValue()));
-                    terminaleDAO.insert(terminale);
-                    refresh();
-                    clearInputs();
-                } catch (NumberFormatException | SQLException e) {
-                    popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
-                    e.printStackTrace();
+                    try {
+                        terminaleDAO.update(terminale);
+                        refresh();
+                        clearInputs();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    new FadeOutRight(action_pane).play();
+                    action_pane.setVisible(true);
                 }
             }
-            else if (btn_action.getText().equals("Mettre à jour")){
-                terminale = new Terminale(Integer.valueOf(id_label.getText()),
-                        Float.valueOf(mlg_input.getText()),
-                        Float.valueOf(frs_input.getText()),
-                        Float.valueOf(ang_input.getText()),
-                        Float.valueOf(hg_input.getText()),
-                        Float.valueOf(phylo_input.getText()),
-                        Float.valueOf(eps_input.getText()),
-                        Float.valueOf(math_input.getText()),
-                        Float.valueOf(pc_input.getText()),
-                        Float.valueOf(svt_input.getText()),
-                        Float.valueOf(ses_input.getText()),
-                        n_mat_input.getValue().toString(),
-                        Integer.valueOf(trimestre_input.getText()),
-                        Integer.valueOf(annee_input.getValue()));
+            else if (btn_action.getText().equals("Coef: edit")) {
+                coefficientTerminale = new Coefficient_terminale(
+                        Integer.valueOf(mlg_input.getText()),
+                        Integer.valueOf(frs_input.getText()),
+                        Integer.valueOf(ang_input.getText()),
+                        Integer.valueOf(hg_input.getText()),
+                        Integer.valueOf(phylo_input.getText()),
+                        Integer.valueOf(eps_input.getText()),
+                        Integer.valueOf(math_input.getText()),
+                        Integer.valueOf(pc_input.getText()),
+                        Integer.valueOf(svt_input.getText()),
+                        Integer.valueOf(ses_input.getText())
+                );
+
                 try {
-                    terminaleDAO.update(terminale);
+                    terminaleDAO.updateCoeff(coefficientTerminale);
                     refresh();
                     clearInputs();
                 } catch (SQLException e) {
@@ -242,6 +288,7 @@ public class TerminaleController implements Initializable{
                 }
                 new FadeOutRight(action_pane).play();
                 action_pane.setVisible(true);
+                switchShow();
             }
         });
     }
