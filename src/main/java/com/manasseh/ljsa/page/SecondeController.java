@@ -258,7 +258,8 @@ public class SecondeController implements Initializable{
                         secondeDAO.update(seconde);
                         refresh();
                         clearInputs();
-                    } catch (SQLException e) {
+                    } catch (SQLException | NumberFormatException e) {
+                        popUp.error("erreur","Erreur, verifier que les notes sont des nombres puis essaye encore une fois");
                         throw new RuntimeException(e);
                     }
                     new FadeOutRight(action_pane).play();
@@ -266,29 +267,43 @@ public class SecondeController implements Initializable{
                 }
             }
             else if (btn_action.getText().equals("Coef: edit")) {
-                coefficient_seconde = new Coefficient_seconde(
-                        Integer.valueOf(mlg_input.getText()),
-                        Integer.valueOf(frs_input.getText()),
-                        Integer.valueOf(ang_input.getText()),
-                        Integer.valueOf(hg_input.getText()),
-                        Integer.valueOf(eac_input.getText()),
-                        Integer.valueOf(ses_input.getText()),
-                        Integer.valueOf(pc_input.getText()),
-                        Integer.valueOf(svt_input.getText()),
-                        Integer.valueOf(math_input.getText()),
-                        Integer.valueOf(eps_input.getText()),
-                        Integer.valueOf(tice_input.getText())
-                        );
-                try {
-                    secondeDAO.updateCoeff(coefficient_seconde);
-                    refresh();
-                    clearInputs();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (verifyCoeff(Integer.valueOf(mlg_input.getText()))
+                        && verifyCoeff(Integer.valueOf(frs_input.getText()))
+                        && verifyCoeff(Integer.valueOf(ang_input.getText()))
+                        && verifyCoeff(Integer.valueOf(hg_input.getText()))
+                        && verifyCoeff(Integer.valueOf(eac_input.getText()))
+                        && verifyCoeff(Integer.valueOf(ses_input.getText()))
+                        && verifyCoeff(Integer.valueOf(pc_input.getText()))
+                        && verifyCoeff(Integer.valueOf(svt_input.getText()))
+                        && verifyCoeff(Integer.valueOf(math_input.getText()))
+                        && verifyCoeff(Integer.valueOf(eps_input.getText()))
+                        && verifyCoeff(Integer.valueOf(tice_input.getText()))
+                ){
+                    coefficient_seconde = new Coefficient_seconde(
+                            Integer.valueOf(mlg_input.getText()),
+                            Integer.valueOf(frs_input.getText()),
+                            Integer.valueOf(ang_input.getText()),
+                            Integer.valueOf(hg_input.getText()),
+                            Integer.valueOf(eac_input.getText()),
+                            Integer.valueOf(ses_input.getText()),
+                            Integer.valueOf(pc_input.getText()),
+                            Integer.valueOf(svt_input.getText()),
+                            Integer.valueOf(math_input.getText()),
+                            Integer.valueOf(eps_input.getText()),
+                            Integer.valueOf(tice_input.getText())
+                    );
+                    try {
+                        secondeDAO.updateCoeff(coefficient_seconde);
+                        refresh();
+                        clearInputs();
+                    } catch (SQLException | NumberFormatException e) {
+                        popUp.error("Erreur", "verifier les valeurs");
+                        throw new RuntimeException(e);
+                    }
+                    new FadeOutRight(action_pane).play();
+                    action_pane.setVisible(true);
+                    switchShow();
                 }
-                new FadeOutRight(action_pane).play();
-                action_pane.setVisible(true);
-                switchShow();
             }
         });
     }
@@ -307,6 +322,16 @@ public class SecondeController implements Initializable{
             return false;
         } else if (note>20){
             popUp.error("Note trop grand", "Les notes doit etre entre 0 et 20");
+            return false;
+        }
+        return true;
+    }
+    public boolean verifyCoeff(int coeff){
+        if (coeff<0){
+            popUp.error("Coefficient negatif", "Les Coefficient doit etre superieur a 0");
+            return false;
+        } else if (coeff>20){
+            popUp.error("Coefficient trop grand", "Les Coefficient doit etre entre 0 et 20");
             return false;
         }
         return true;

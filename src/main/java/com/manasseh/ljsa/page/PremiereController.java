@@ -281,30 +281,44 @@ public class PremiereController implements Initializable{
                 }
             }
             else if (btn_action.getText().equals("Coef: edit")) {
-                coefficientPremiere = new Coefficient_premiere(
-                        Integer.valueOf(mlg_input.getText()),
-                        Integer.valueOf(frs_input.getText()),
-                        Integer.valueOf(ang_input.getText()),
-                        Integer.valueOf(hg_input.getText()),
-                        Integer.valueOf(eac_input.getText()),
-                        Integer.valueOf(ses_input.getText()),
-                        Integer.valueOf(pc_input.getText()),
-                        Integer.valueOf(svt_input.getText()),
-                        Integer.valueOf(math_input.getText()),
-                        Integer.valueOf(eps_input.getText()),
-                        Integer.valueOf(tice_input.getText()),
-                        Integer.valueOf(phylo_input.getText())
-                );
-                try {
-                    premiereDAO.updateCoeff(coefficientPremiere);
-                    refresh();
-                    clearInputs();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (verifyCoeff(Integer.valueOf(mlg_input.getText()))
+                    && verifyCoeff(Integer.valueOf(frs_input.getText()))
+                    && verifyCoeff(Integer.valueOf(ang_input.getText()))
+                    && verifyCoeff(Integer.valueOf(hg_input.getText()))
+                    && verifyCoeff(Integer.valueOf(eac_input.getText()))
+                    && verifyCoeff(Integer.valueOf(ses_input.getText()))
+                    && verifyCoeff(Integer.valueOf(pc_input.getText()))
+                    && verifyCoeff(Integer.valueOf(svt_input.getText()))
+                    && verifyCoeff(Integer.valueOf(math_input.getText()))
+                    && verifyCoeff(Integer.valueOf(eps_input.getText()))
+                    && verifyCoeff(Integer.valueOf(tice_input.getText()))
+                    && verifyCoeff(Integer.valueOf(phylo_input.getText()))
+                ){
+                    coefficientPremiere = new Coefficient_premiere(
+                            Integer.valueOf(mlg_input.getText()),
+                            Integer.valueOf(frs_input.getText()),
+                            Integer.valueOf(ang_input.getText()),
+                            Integer.valueOf(hg_input.getText()),
+                            Integer.valueOf(eac_input.getText()),
+                            Integer.valueOf(ses_input.getText()),
+                            Integer.valueOf(pc_input.getText()),
+                            Integer.valueOf(svt_input.getText()),
+                            Integer.valueOf(math_input.getText()),
+                            Integer.valueOf(eps_input.getText()),
+                            Integer.valueOf(tice_input.getText()),
+                            Integer.valueOf(phylo_input.getText())
+                    );
+                    try {
+                        premiereDAO.updateCoeff(coefficientPremiere);
+                        refresh();
+                        clearInputs();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    new FadeOutRight(action_pane).play();
+                    action_pane.setVisible(true);
+                    switchShow();
                 }
-                new FadeOutRight(action_pane).play();
-                action_pane.setVisible(true);
-                switchShow();
             }
         });
     }
@@ -327,6 +341,17 @@ public class PremiereController implements Initializable{
         }
         return true;
     }
+    public boolean verifyCoeff(int coeff){
+        if (coeff<0){
+            popUp.error("Coefficient negatif", "Les Coefficient doit etre superieur a 0");
+            return false;
+        } else if (coeff>20){
+            popUp.error("Coefficient trop grand", "Les Coefficient doit etre entre 0 et 20");
+            return false;
+        }
+        return true;
+    }
+
     public void afficherPaneAjout(){
         btn_action.setText("Ajouter +");
         premiere_label.setText("Premiere: Ajout");
