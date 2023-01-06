@@ -121,17 +121,18 @@ public class TerminaleController implements Initializable{
                             terminale_label.setText("Terminale: edition");
                             btn_action.setText("Mettre à jour");
 
+                            coefficientTerminale = table_terminale_coeff.getItems().get(0);
                             id_label.setText(terminale.getId().toString());
-                            mlg_input.setText(terminale.getMalagasy().toString());
-                            frs_input.setText(terminale.getFrs().toString());
-                            ang_input.setText(terminale.getAnglais().toString());
-                            hg_input.setText(terminale.getHistoGeo().toString());
-                            phylo_input.setText(terminale.getPhylosphie().toString());
-                            math_input.setText( terminale.getMathematique().toString());
-                            pc_input.setText(terminale.getSpc().toString());
-                            svt_input.setText(terminale.getSvt().toString());
-                            ses_input.setText(terminale.getSes().toString());
-                            eps_input.setText(terminale.getEps().toString());
+                            mlg_input.setText(String.valueOf(terminale.getMalagasy()/coefficientTerminale.getMalagasy()));
+                            frs_input.setText(String.valueOf(terminale.getFrs()/coefficientTerminale.getFrs()));
+                            ang_input.setText(String.valueOf(terminale.getAnglais()/coefficientTerminale.getAnglais()));
+                            hg_input.setText(String.valueOf(terminale.getHistoGeo()/coefficientTerminale.getHistoGeo()));
+                            phylo_input.setText(String.valueOf(terminale.getPhylosphie()/coefficientTerminale.getPhylosphie()));
+                            math_input.setText(String.valueOf(terminale.getMathematique()/coefficientTerminale.getMathematique()));
+                            pc_input.setText(String.valueOf(terminale.getSpc()/coefficientTerminale.getSpc()));
+                            svt_input.setText(String.valueOf(terminale.getSvt()/coefficientTerminale.getSvt()));
+                            ses_input.setText(String.valueOf(terminale.getSes()/coefficientTerminale.getSes()));
+                            eps_input.setText(String.valueOf(terminale.getEps()/coefficientTerminale.getEps()));
                             n_mat_input.getSelectionModel().select(terminale.getN_mat());
                             trimestre_input.setText(terminale.getTrimestre().toString());
                             annee_input.getSelectionModel().select(terminale.getAnnee_scolaire());
@@ -267,16 +268,16 @@ public class TerminaleController implements Initializable{
                 }
             }
             else if (btn_action.getText().equals("Coef: edit")) {
-                if (verifyCoeff(Integer.valueOf(mlg_input.getText()))
-                        && verifyCoeff(Integer.valueOf(frs_input.getText()))
-                        && verifyCoeff(Integer.valueOf(ang_input.getText()))
-                        && verifyCoeff(Integer.valueOf(hg_input.getText()))
-                        && verifyCoeff(Integer.valueOf(ses_input.getText()))
-                        && verifyCoeff(Integer.valueOf(pc_input.getText()))
-                        && verifyCoeff(Integer.valueOf(svt_input.getText()))
-                        && verifyCoeff(Integer.valueOf(math_input.getText()))
-                        && verifyCoeff(Integer.valueOf(eps_input.getText()))
-                        && verifyCoeff(Integer.valueOf(phylo_input.getText()))
+                if (verifyCoeff(Integer.parseInt(mlg_input.getText()))
+                        && verifyCoeff(Integer.parseInt(frs_input.getText()))
+                        && verifyCoeff(Integer.parseInt(ang_input.getText()))
+                        && verifyCoeff(Integer.parseInt(hg_input.getText()))
+                        && verifyCoeff(Integer.parseInt(ses_input.getText()))
+                        && verifyCoeff(Integer.parseInt(pc_input.getText()))
+                        && verifyCoeff(Integer.parseInt(svt_input.getText()))
+                        && verifyCoeff(Integer.parseInt(math_input.getText()))
+                        && verifyCoeff(Integer.parseInt(eps_input.getText()))
+                        && verifyCoeff(Integer.parseInt(phylo_input.getText()))
                 ){
                     coefficientTerminale = new Coefficient_terminale(
                             Integer.valueOf(mlg_input.getText()),

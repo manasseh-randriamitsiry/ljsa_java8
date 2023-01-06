@@ -127,19 +127,20 @@ public class PremiereController implements Initializable{
                             premiere_label.setText("Premiere: edition");
                             btn_action.setText("Mettre à jour");
 
+                            coefficientPremiere = premiere_table_coeff.getItems().get(0);
                             id_label.setText(premiere.getId().toString());
-                            mlg_input.setText(premiere.getMalagasy().toString());
-                            frs_input.setText(premiere.getFrancais().toString());
-                            ang_input.setText(premiere.getAnglais().toString());
-                            hg_input.setText(premiere.getHistogeo().toString());
-                            eac_input.setText(premiere.getEac().toString());
-                            math_input.setText(premiere.getMats().toString());
-                            ses_input.setText(premiere.getSes().toString());
-                            pc_input.setText(premiere.getSpc().toString());
-                            svt_input.setText(premiere.getSvt().toString());
-                            tice_input.setText(premiere.getTice().toString());
-                            eps_input.setText(premiere.getEps().toString());
-                            phylo_input.setText(premiere.getPhylo().toString());
+                            mlg_input.setText(String.valueOf(premiere.getMalagasy()/coefficientPremiere.getMalagasy()));
+                            frs_input.setText(String.valueOf(premiere.getFrancais()/coefficientPremiere.getFrancais()));
+                            ang_input.setText(String.valueOf(premiere.getAnglais()/coefficientPremiere.getAnglais()));
+                            hg_input.setText(String.valueOf(premiere.getHistogeo()/coefficientPremiere.getHistogeo()));
+                            eac_input.setText(String.valueOf(premiere.getEac()/coefficientPremiere.getEac()));
+                            math_input.setText(String.valueOf(premiere.getMats()/coefficientPremiere.getMats()));
+                            ses_input.setText(String.valueOf(premiere.getSes()/coefficientPremiere.getSes()));
+                            pc_input.setText(String.valueOf(premiere.getSpc()/coefficientPremiere.getSpc()));
+                            svt_input.setText(String.valueOf(premiere.getSvt()/coefficientPremiere.getSvt()));
+                            tice_input.setText(String.valueOf(premiere.getTice()/coefficientPremiere.getTice()));
+                            eps_input.setText(String.valueOf(premiere.getEps()/coefficientPremiere.getEps()));
+                            phylo_input.setText(String.valueOf(premiere.getPhylo()/coefficientPremiere.getPhylo()));
                             n_mat_input.getSelectionModel().select(premiere.getN_mat());
                             trimestre_input.setText(premiere.getTrimestre().toString());
                             annee_input.getSelectionModel().select(premiere.getAnnee_scolaire());
@@ -281,18 +282,18 @@ public class PremiereController implements Initializable{
                 }
             }
             else if (btn_action.getText().equals("Coef: edit")) {
-                if (verifyCoeff(Integer.valueOf(mlg_input.getText()))
-                    && verifyCoeff(Integer.valueOf(frs_input.getText()))
-                    && verifyCoeff(Integer.valueOf(ang_input.getText()))
-                    && verifyCoeff(Integer.valueOf(hg_input.getText()))
-                    && verifyCoeff(Integer.valueOf(eac_input.getText()))
-                    && verifyCoeff(Integer.valueOf(ses_input.getText()))
-                    && verifyCoeff(Integer.valueOf(pc_input.getText()))
-                    && verifyCoeff(Integer.valueOf(svt_input.getText()))
-                    && verifyCoeff(Integer.valueOf(math_input.getText()))
-                    && verifyCoeff(Integer.valueOf(eps_input.getText()))
-                    && verifyCoeff(Integer.valueOf(tice_input.getText()))
-                    && verifyCoeff(Integer.valueOf(phylo_input.getText()))
+                if (verifyCoeff(Integer.parseInt(mlg_input.getText()))
+                    && verifyCoeff(Integer.parseInt(frs_input.getText()))
+                    && verifyCoeff(Integer.parseInt(ang_input.getText()))
+                    && verifyCoeff(Integer.parseInt(hg_input.getText()))
+                    && verifyCoeff(Integer.parseInt(eac_input.getText()))
+                    && verifyCoeff(Integer.parseInt(ses_input.getText()))
+                    && verifyCoeff(Integer.parseInt(pc_input.getText()))
+                    && verifyCoeff(Integer.parseInt(svt_input.getText()))
+                    && verifyCoeff(Integer.parseInt(math_input.getText()))
+                    && verifyCoeff(Integer.parseInt(eps_input.getText()))
+                    && verifyCoeff(Integer.parseInt(tice_input.getText()))
+                    && verifyCoeff(Integer.parseInt(phylo_input.getText()))
                 ){
                     coefficientPremiere = new Coefficient_premiere(
                             Integer.valueOf(mlg_input.getText()),

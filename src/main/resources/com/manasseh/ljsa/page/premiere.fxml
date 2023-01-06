@@ -16,7 +16,7 @@
             <Font size="34.0" />
         </font>
     </Label>
-    <TableView fx:id="premiere_table" layoutX="39.0" layoutY="203.0" prefHeight="377.0" prefWidth="951.0" tableMenuButtonVisible="true">
+    <TableView fx:id="premiere_table" layoutX="39.0" layoutY="203.0" prefHeight="465.0" prefWidth="951.0" tableMenuButtonVisible="true">
       <columns>
           <TableColumn fx:id="n_mat_column" maxWidth="500.0" prefWidth="100.0" text="NºMatricule" />
           <TableColumn fx:id="mlg_column" maxWidth="500.0" prefWidth="42.0" text="MLG" />
@@ -76,7 +76,7 @@
       <Circle fx:id="detail_btn" fill="DODGERBLUE" layoutX="799.0" layoutY="59.0" radius="9.0" stroke="TRANSPARENT" strokeType="INSIDE" />
     </Pane>
    <Button layoutX="933.0" layoutY="17.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />
-   <TableView fx:id="premiere_table_coeff" layoutX="39.0" layoutY="592.0" prefHeight="74.0" prefWidth="524.0" tableMenuButtonVisible="true">
+   <TableView fx:id="premiere_table_coeff" layoutX="39.0" layoutY="592.0" opacity="0.0" prefHeight="74.0" prefWidth="524.0" tableMenuButtonVisible="true">
       <columns>
          <TableColumn fx:id="mlg_column_coeff" maxWidth="500.0" prefWidth="42.0" text="MLG" />
          <TableColumn fx:id="frs_column_coeff" maxWidth="500.0" prefWidth="42.0" text="FRS" />
