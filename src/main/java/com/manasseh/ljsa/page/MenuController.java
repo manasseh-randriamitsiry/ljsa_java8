@@ -1,5 +1,6 @@
 package com.manasseh.ljsa.page;
 import animatefx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -166,5 +167,4 @@ public class MenuController extends ActivateDrag implements Initializable {
     public void getCursorPosition(MouseEvent event) {
         pressed(event);
     }
-
 }

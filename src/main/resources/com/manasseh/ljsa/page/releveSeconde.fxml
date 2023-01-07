@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.ReleveSecondeController">
-    <Label fx:id="releve_label" layoutX="31.0" layoutY="17.0" text="Relevé Seconde">
+    <Label fx:id="releve_label" layoutX="144.0" layoutY="22.0" text="&gt;Relevé ">
         <font>
             <Font size="34.0" />
         </font>
@@ -34,11 +34,12 @@
             <TableColumn fx:id="annee_column" maxWidth="500.0" prefWidth="90.0" text="ANNEE" />
         </columns>
     </TableView>
-    <Button layoutX="859.0" layoutY="17.0" minWidth="44.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" text="Generer Pdf" />
-    <ComboBox layoutX="118.0" fx:id="nmat_input" layoutY="74.0" prefWidth="150.0" promptText="NMatricule" />
-    <ComboBox layoutX="118.0" fx:id="annee_debut" layoutY="122.0" prefWidth="150.0" promptText="Annee-debut" />
-    <ComboBox layoutX="339.0" fx:id="annee_fin" layoutY="122.0" prefWidth="150.0" promptText="Annee-fin" />
+    <ComboBox fx:id="nmat_input" layoutX="118.0" layoutY="74.0" prefWidth="150.0" promptText="NMatricule" />
+    <ComboBox fx:id="annee_debut" layoutX="118.0" layoutY="122.0" prefWidth="150.0" promptText="Annee-debut" />
+    <ComboBox fx:id="annee_fin" layoutX="339.0" layoutY="122.0" prefWidth="150.0" promptText="Annee-fin" />
    <Label layoutX="295.0" layoutY="128.0" text="au :" />
    <Label layoutX="31.0" layoutY="81.0" text="NºMatricule :" />
    <Label layoutX="31.0" layoutY="128.0" text="Année :" />
+   <Button layoutX="889.0" layoutY="27.0" mnemonicParsing="false" onAction="#confirmerPdf" text="Generer PDF" />
+   <Button layoutX="24.0" layoutY="27.0" mnemonicParsing="false" onAction="#filtrer" styleClass="button_left" text="Appliquer Filtre" />
 </Pane>

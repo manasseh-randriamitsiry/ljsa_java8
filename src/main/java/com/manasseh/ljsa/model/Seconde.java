@@ -39,7 +39,6 @@ public class Seconde {
         this.n_mat = n_mat;
         this.trimestre = trimestre;
         this.annee_scolaire = annee_scolaire;
-
     }
 
     public Float getTotal(){

@@ -46,6 +46,39 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         }
         return list;
     }
+    public ObservableList<Seconde> listAllFIlter(int startYear,int endYear, String nMat) {
+        ObservableList<Seconde> list = FXCollections.observableArrayList();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDb = connectNow.getConnection();
+        String query = "select seconde.malagasy*seconde_note_coeff.malagasy as malagasy,seconde.francais*seconde_note_coeff.francais as francais,seconde.anglais*seconde_note_coeff.anglais as anglais,seconde.histogeo*seconde_note_coeff.histogeo as histogeo,seconde.eac*seconde_note_coeff.eac as eac,seconde.ses*seconde_note_coeff.ses as ses,seconde.spc*seconde_note_coeff.spc as spc,seconde.svt*seconde_note_coeff.svt as svt,seconde.mats*seconde_note_coeff.mats as mats,seconde.eps*seconde_note_coeff.eps as eps,seconde.tice*seconde_note_coeff.tice as tice, n_mat, trimestre, annee_scolaire,id FROM seconde,seconde_note_coeff where annee_scolaire between '"+startYear+"' and '"+endYear+"' and n_mat = '"+nMat+"' ;";
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                list.add(new Seconde(
+                        resultSet.getInt("id"),
+                        resultSet.getFloat("malagasy"),
+                        resultSet.getFloat("francais"),
+                        resultSet.getFloat("anglais"),
+                        resultSet.getFloat("histogeo"),
+                        resultSet.getFloat("eac"),
+                        resultSet.getFloat("ses"),
+                        resultSet.getFloat("spc"),
+                        resultSet.getFloat("svt"),
+                        resultSet.getFloat("mats"),
+                        resultSet.getFloat("eps"),
+                        resultSet.getFloat("tice"),
+                        resultSet.getString("n_mat"),
+                        resultSet.getInt("trimestre"),
+                        resultSet.getInt("annee_scolaire")
+                ));
+            }
+        } catch (SQLException e) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            e.printStackTrace();
+        }
+        return list;
+    }
     public ObservableList<Seconde> listNotes(String nmat) {
         ObservableList<Seconde> list = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
