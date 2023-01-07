@@ -18,16 +18,16 @@
     <Pane fx:id="action_pane" layoutX="660.0" layoutY="155.0" prefHeight="406.0" prefWidth="296.0" styleClass="input" stylesheets="@../style.css">
         <TextField fx:id="classe_input" layoutX="143.0" layoutY="119.0" prefHeight="42.0" prefWidth="121.0" promptText="Classe" styleClass="input1" stylesheets="@../style.css" />
         <Text layoutX="38.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classe :" />
-        <Text layoutX="32.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Coefficient :" />
+        <Text layoutX="32.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Effectifs :" />
         <Button fx:id="btn_action" layoutX="113.0" layoutY="331.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" text="Ajouter +" />
         <Label fx:id="id" layoutX="26.0" layoutY="126.0" text="Label" visible="false" />
-      <TextField fx:id="coefficient_input" layoutX="144.0" layoutY="193.0" prefHeight="42.0" prefWidth="120.0" promptText="Coefficient" styleClass="input1" stylesheets="@../style.css" />
+      <TextField fx:id="effectifs_input" layoutX="144.0" layoutY="193.0" prefHeight="42.0" prefWidth="120.0" promptText="Effectifs" styleClass="input1" stylesheets="@../style.css" />
       <Label fx:id="mode_label" layoutX="57.0" layoutY="36.0" style="-fx-font-size: 30;" text="Classe: Ajout" />
     </Pane>
     <TableView fx:id="table_coefficient" editable="true" layoutX="80.0" layoutY="152.0" prefHeight="412.0" prefWidth="526.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
       <columns>
           <TableColumn fx:id="classe_column" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Classe" />
-          <TableColumn fx:id="coefficient_column" maxWidth="1000.0" minWidth="50.0" prefWidth="100.0" text="Total Coefficient" />
+          <TableColumn fx:id="effectif_column" maxWidth="1000.0" minWidth="50.0" prefWidth="100.0" text="Effectifs" />
           <TableColumn fx:id="action_column" maxWidth="500.0" minWidth="174.0" prefWidth="220.0" text="Action" />
       </columns>
     </TableView>

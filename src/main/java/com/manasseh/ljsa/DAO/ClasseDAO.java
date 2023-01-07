@@ -10,7 +10,7 @@ import java.sql.*;
 
 public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
     PopUp popUp = new PopUp();
-    String tableName = "coefficient";
+    String tableName = "classe";
 
     @Override
     public ObservableList<Classe> listAll() {
@@ -25,7 +25,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
                 profList.add(new Classe(
                         resultSet.getInt("id"),
                         resultSet.getString("classe"),
-                        resultSet.getInt("coefficient_total")
+                        resultSet.getInt("effectif")
                 ));
             }
         } catch (SQLException ignored) {
@@ -54,11 +54,11 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
 
     @Override
     public void update(Classe data) throws SQLException {
-        String sql = "UPDATE "+tableName+" SET `classe` = ?, `coefficient_total` = ? WHERE `id` = ?;";
+        String sql = "UPDATE "+tableName+" SET `classe` = ?, `effectif` = ? WHERE `id` = ?;";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
-        statement.setInt(2,data.getTotalCoeff());
+        statement.setInt(2,data.getEffectif());
         statement.setInt(3, data.getId());
         try{
             int res = statement.executeUpdate();
@@ -69,6 +69,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
             }
         } catch (SQLIntegrityConstraintViolationException e){
             popUp.error("Erreur","Le classe "+ data.getClasse() +" est dejà definis");
+            e.printStackTrace();
         }
         statement.close();
     }
@@ -79,7 +80,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
-        statement.setInt(2,data.getTotalCoeff());
+        statement.setInt(2,data.getEffectif());
         try {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
@@ -87,11 +88,9 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
             }
         } catch (SQLIntegrityConstraintViolationException e){
             popUp.error("erreur ","Classe dejà enregistré");
+            e.printStackTrace();
         }
         statement.close();
     }
 
-    public Integer getCoeffTotal() throws SQLException {
-        return null;
-    }
 }

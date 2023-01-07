@@ -11,10 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="cfbb41a6-bed2-4ec0-a2c1-e99654c755b9" name="Changes" comment="&quot;note ponderé terminale et premiere&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/PremiereController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/TerminaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/premiere.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/premiere.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/terminale.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/ClasseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/ClasseDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Classe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/model/Classe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/ClasseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/manasseh/ljsa/page/ClasseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/classe.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/page/classe.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +361,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673005647060</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="&quot;note ponderé terminale et premiere&quot;">
+      <created>1673008721642</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1673008721642</updated>
+    </task>
+    <task id="LOCAL-00039" summary="&quot;note ponderé terminale et premiere&quot;">
+      <created>1673008737277</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1673008737277</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -19,17 +19,17 @@ import java.util.ResourceBundle;
 
 public class ClasseController implements Initializable {
     public TableColumn<Classe,String> classe_column;
-    public TableColumn<Classe, String> coefficient_column;
+    public TableColumn<Classe, String> effectif_column;
     public TableColumn<Classe, Classe> action_column;
     public TableView<Classe> table_coefficient;
     public Pane action_pane;
     public TextField classe_input;
     public Button btn_action;
     public Label id;
-    public TextField coefficient_input;
     public Pane coefficient_pane;
     public Label mode_label;
     public Label coefficient_label;
+    public TextField effectifs_input;
     ObservableList<Classe> classeList = FXCollections.observableArrayList();
     Classe classe = null;
     ClasseDAO classeDAO = new ClasseDAO();
@@ -41,7 +41,7 @@ public class ClasseController implements Initializable {
         refreshTable();
 
         classe_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getClasse()));
-        coefficient_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getTotalCoeff().toString()));
+        effectif_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getEffectif().toString()));
         action_column.setCellValueFactory(new PropertyValueFactory<>(""));
 
         // creation de bouton ajout et suppression
@@ -66,7 +66,7 @@ public class ClasseController implements Initializable {
                             ClasseController.this.setText(
                                     classe.getId(),
                                     classe.getClasse(),
-                                    classe.getTotalCoeff());
+                                    classe.getEffectif());
                             new FadeInDown(action_pane).play();
                         } catch (NullPointerException e) {
                             popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
@@ -98,7 +98,7 @@ public class ClasseController implements Initializable {
                 try {
                     mode_label.setText("Classe: Ajout");
                     coefficient_label.setText("Classe: edition");
-                    classe = new Classe(0,classe_input.getText(),Integer.valueOf(coefficient_input.getText()));
+                    classe = new Classe(0,classe_input.getText(),Integer.valueOf(effectifs_input.getText()));
                     classeDAO.insert(classe);
                     new FadeOutUp(action_pane).play();
                     refreshTable();
@@ -108,7 +108,7 @@ public class ClasseController implements Initializable {
                     popUp.error("erreur","Erreur, essaye encore une fois");
                 }
             } else if (btn_action.getText().equals("Mettre à jour")){
-                classe = new Classe(Integer.valueOf(id.getText()),classe_input.getText(),Integer.valueOf(coefficient_input.getText()));
+                classe = new Classe(Integer.valueOf(id.getText()),classe_input.getText(),Integer.valueOf(effectifs_input.getText()));
                 try {
                     classeDAO.update(classe);
                 } catch (SQLException e) {
@@ -124,12 +124,12 @@ public class ClasseController implements Initializable {
     private void setText(Integer id, String classe, Integer totalCoeff) {
         this.id.setText(id.toString());
         this.classe_input.setText(classe);
-        this.coefficient_input.setText(totalCoeff.toString());
+        this.effectifs_input.setText(totalCoeff.toString());
     }
 
     private void clearInputs() {
         classe_input.setText("");
-        coefficient_input.setText("");
+        effectifs_input.setText("");
     }
 
     private void refreshTable() {
@@ -140,6 +140,8 @@ public class ClasseController implements Initializable {
 
     public void afficherPaneAjout() {
         btn_action.setText("Ajouter +");
+        mode_label.setText("Classe: Ajout");
+        coefficient_label.setText("Classe: Ajout");
         new FadeInUp(action_pane).play();
         clearInputs();
     }

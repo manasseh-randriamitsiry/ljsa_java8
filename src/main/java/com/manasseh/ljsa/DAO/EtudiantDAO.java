@@ -53,7 +53,8 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
                 ));
             }
         } catch (SQLException error){
-            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            popUp.error("erreu","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
         }
         return listEtudiant;
     }
@@ -119,8 +120,9 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
                         resultSet.getString("date_nais")
                 );
             }
-        } catch (SQLException ignored) {
+        } catch (SQLException error) {
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
         }
         return etudiant;
     }
@@ -134,8 +136,9 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
             while (resultSet.next()){
                 data.add(resultSet.getString(1));
             }
-        } catch (SQLException ignored) {
+        } catch (SQLException error) {
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
         }
         return data;
     }
