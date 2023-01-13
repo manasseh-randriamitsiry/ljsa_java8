@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import com.manasseh.ljsa.model.Etudiant;
+import javafx.scene.chart.PieChart;
+
 import java.sql.*;
 
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
@@ -92,17 +94,17 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return nombre;
     }
-    public String getClasse(String n_matricule) throws SQLException {
-        String serie = null;
-        String sql = "select classe from "+tableName+" where n_matricule = '"+n_matricule+"'";
-        DatabaseConnection connection = new DatabaseConnection();
-        Statement statement = connection.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        while (resultSet.next()){
-            serie = resultSet.getString("classe");
-        }
-        return serie;
-    }
+//    public String getClasse(String n_matricule) throws SQLException {
+//        String serie = null;
+//        String sql = "select classe from "+tableName+" where n_matricule = '"+n_matricule+"'";
+//        DatabaseConnection connection = new DatabaseConnection();
+//        Statement statement = connection.getConnection().createStatement();
+//        ResultSet resultSet = statement.executeQuery(sql);
+//        while (resultSet.next()){
+//            serie = resultSet.getString("classe");
+//        }
+//        return serie;
+//    }
     public Etudiant getByNmat(String n_matricule){
         DatabaseConnection connection = new DatabaseConnection();
         Etudiant etudiant = null;
@@ -141,6 +143,22 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
             error.printStackTrace();
         }
         return data;
+    }
+    public ObservableList<PieChart.Data> chartEtudiant(){
+        DatabaseConnection connection = new DatabaseConnection();
+        ObservableList<PieChart.Data> pieChartdata= FXCollections.observableArrayList();
+        String query = "select classe,count(n_matricule) as nombre from etudiants group by classe;";
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                pieChartdata.add(new PieChart.Data(resultSet.getString(1),Integer.parseInt(resultSet.getString(2))));
+            }
+        } catch (SQLException error) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
+        }
+        return pieChartdata;
     }
 
 }
