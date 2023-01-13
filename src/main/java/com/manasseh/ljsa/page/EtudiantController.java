@@ -137,18 +137,13 @@ public class EtudiantController implements Initializable {
             if (btn_action.getText().equals("Ajouter")){
                 if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
                     try {
-                        etudiant = new Etudiant(0,
-                                numero_matricule_input.getText(),
-                                nom_input.getText(),
-                                prenom_input.getText(),
-                                classe_input.getValue().toString(),
-                                date_nais_picker.getValue().toString());
+                        etudiant = new Etudiant(0, numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
+                        System.out.println(classe_input.getValue().toString());
                         dao.insert(etudiant);
                         new FadeOutRight(action_pane).play();
                         refresh();
                         clearInputs();
                     } catch (Exception e) {
-                        e.printStackTrace();
                         popUp.error("erreur","Erreur, essaye encore une fois");
                     }
                 }
