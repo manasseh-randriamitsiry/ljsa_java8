@@ -38,6 +38,10 @@ public class ProfController implements Initializable{
     public DatePicker date_nais_picker;
     public Label id;
     public TextField recherche_input;
+    public DatePicker date_prise_service;
+    public DatePicker date_cessation_service;
+    public TableColumn<Prof, String> date_prise_service_column;
+    public TableColumn<Prof, String> date_cessation_service_column;
     ObservableList<Prof> profList = FXCollections.observableArrayList();
     ProfDAO dao = new ProfDAO();
     Prof prof = null;
@@ -52,6 +56,8 @@ public class ProfController implements Initializable{
         nom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNom_prof()));
         prenom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getPrenom_prof()));
         date_nais_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDate_nais().toString()));
+        date_prise_service_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDate_prise_service().toString()));
+        date_cessation_service_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getDate_cessation_service().toString()));
         actionColumn.setCellValueFactory(new PropertyValueFactory<>(""));
 
         // creation de bouton ajout et suppression
@@ -107,7 +113,7 @@ public class ProfController implements Initializable{
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter")){
                 try {
-                    prof = new Prof(0,numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue());
+                    prof = new Prof(0,numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue(), date_prise_service.getValue(), date_cessation_service.getValue());
                     dao.insert(prof);
                     new FadeOutRight(action_pane).play();
                     refreshTable();
@@ -117,7 +123,7 @@ public class ProfController implements Initializable{
                 }
             } else if (btn_action.getText().equals("Mettre à jour")){
                 try {
-                    prof = new Prof(Integer.valueOf(id.getText()),numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue());
+                    prof = new Prof(Integer.valueOf(id.getText()),numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue(), date_prise_service.getValue(), date_cessation_service.getValue());
                     dao.update(prof);
                     new FadeOutRight(action_pane).play();
                     refreshTable();

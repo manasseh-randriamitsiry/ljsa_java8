@@ -11,13 +11,15 @@ public class ProfDAO extends DeleteDAO implements DAOInterface<Prof> {
     PopUp popUp = new PopUp();
     @Override
     public void insert(Prof prof) throws SQLException {
-        String sql = "insert into profs() values(NULL,?,?,?,?)";
+        String sql = "insert into profs() values(NULL,?,?,?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,prof.getN_mat().toUpperCase());
         statement.setString(2,prof.getNom_prof().toUpperCase());
         statement.setString(3,prof.getPrenom_prof().toLowerCase());
         statement.setString(4,String.valueOf(prof.getDate_nais()));
+        statement.setString(5,String.valueOf(prof.getDate_prise_service()));
+        statement.setString(6,String.valueOf(prof.getDate_cessation_service()));
         try {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
@@ -44,7 +46,9 @@ public class ProfDAO extends DeleteDAO implements DAOInterface<Prof> {
                         resultSet.getString("n_matricule"),
                         resultSet.getString("nom_prof"),
                         resultSet.getString("prenom_prof"),
-                        resultSet.getDate("date_nais").toLocalDate()
+                        resultSet.getDate("date_nais").toLocalDate(),
+                        resultSet.getDate("date_prise_service").toLocalDate(),
+                        resultSet.getDate("date_cessation_service").toLocalDate()
                 ));
             }
         } catch (SQLException ignored) {
@@ -55,14 +59,16 @@ public class ProfDAO extends DeleteDAO implements DAOInterface<Prof> {
 
     @Override
     public void update(Prof prof) throws SQLException{
-        String sql = "update profs set n_matricule = ?, nom_prof=?, prenom_prof=?,date_nais=? where id = ?";
+        String sql = "update profs set n_matricule = ?, nom_prof=?, prenom_prof=?,date_nais=?,date_prise_service=?,date_cessation_service=? where id = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,prof.getN_mat().toUpperCase());
         statement.setString(2,prof.getNom_prof().toUpperCase());
         statement.setString(3,prof.getPrenom_prof().toLowerCase());
         statement.setString(4,String.valueOf(prof.getDate_nais()));
-        statement.setInt(5,prof.getId());
+        statement.setString(5,String.valueOf(prof.getDate_prise_service()));
+        statement.setString(6,String.valueOf(prof.getDate_cessation_service()));
+        statement.setInt(7,prof.getId());
         try{
             int res = statement.executeUpdate();
             if (res>0) {

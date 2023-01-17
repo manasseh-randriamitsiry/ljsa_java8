@@ -26,10 +26,12 @@
    <TableView fx:id="table_prof" editable="true" layoutX="26.0" layoutY="182.0" prefHeight="449.0" prefWidth="959.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">
       <columns>
          <TableColumn fx:id="n_mat_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="100.0" text="NªMatricule" />
-         <TableColumn fx:id="nom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="258.0" text="Nom" />
-         <TableColumn fx:id="prenom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="300.0" text="Prenom" />
-         <TableColumn fx:id="date_nais_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="150.0" text="Date de naissance" />
-         <TableColumn fx:id="actionColumn" editable="false" minWidth="100.0" prefWidth="150.0" text="Action" />
+         <TableColumn fx:id="nom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="200.0" text="Nom" />
+         <TableColumn fx:id="prenom_column" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="143.0" text="Prenom" />
+         <TableColumn fx:id="date_nais_column" editable="false" maxWidth="307.0" minWidth="50.0" prefWidth="120.0" text="Date de naissance" />
+         <TableColumn fx:id="date_prise_service_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="120.0" text="Date Prise de Service" />
+         <TableColumn fx:id="date_cessation_service_column" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="120.0" text="Date Cessation de Service" />
+         <TableColumn fx:id="actionColumn" editable="false" maxWidth="500.0" minWidth="100.0" prefWidth="150.0" text="Action" />
       </columns>
    </TableView>
    <TextField fx:id="recherche_input" layoutX="808.0" layoutY="30.0" prefHeight="42.0" prefWidth="183.0" promptText="Rechercher ..." styleClass="input" stylesheets="@../style.css">
@@ -56,20 +58,24 @@
             <String fx:value="input1" />
          </styleClass>
       </TextField>
-      <Label layoutX="277.0" layoutY="12.0" text="Prenom :" />
+      <Label layoutX="277.0" layoutY="18.0" text="Prenom :" />
       <TextField fx:id="prenom_prof_input" layoutX="360.0" layoutY="12.0" onKeyReleased="#check" prefHeight="18.0" prefWidth="152.0" promptText="prenom" stylesheets="@../style.css">
          <styleClass>
             <String fx:value="body" />
             <String fx:value="input1" />
          </styleClass>
       </TextField>
-      <Label layoutX="277.0" layoutY="47.0" text="Date Nais :" />
+      <Label layoutX="277.0" layoutY="53.0" text="Date Nais :" />
       <Button fx:id="btn_action" layoutX="819.0" layoutY="29.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="125.0" text="OK">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <DatePicker fx:id="date_nais_picker" editable="false" layoutX="360.0" layoutY="43.0" onAction="#check" prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true" style="-fx-background-radius: 10px;" />
+      <DatePicker fx:id="date_nais_picker" editable="false" layoutX="360.0" layoutY="49.0" onAction="#check" prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true" style="-fx-background-radius: 10px;" />
+      <Label layoutX="531.0" layoutY="20.0" text="Date P Service : " />
+      <DatePicker fx:id="date_prise_service" editable="false" layoutX="634.0" layoutY="14.0" onAction="#check" prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true" style="-fx-background-radius: 10px;" />
+      <Label layoutX="533.0" layoutY="53.0" text="Cessation de S:" />
+      <DatePicker fx:id="date_cessation_service" editable="false" layoutX="634.0" layoutY="49.0" onAction="#check" prefHeight="26.0" prefWidth="152.0" promptText="Date de naissance" showWeekNumbers="true" style="-fx-background-radius: 10px;" />
    </Pane>
    <Label fx:id="id" layoutX="26.0" layoutY="6.0" text="Label" visible="false" />
    <Button layoutX="934.0" layoutY="30.0" minWidth="50.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="58.0" style="-fx-font-size: 20;" styleClass="button_left" stylesheets="@../style.css" text="Q" />

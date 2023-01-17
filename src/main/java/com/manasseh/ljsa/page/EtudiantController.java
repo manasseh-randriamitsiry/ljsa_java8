@@ -76,6 +76,7 @@ public class EtudiantController implements Initializable {
         listEtudiant.setAll(dao.listAll());
         activerRecherche();
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refresh();
@@ -112,14 +113,7 @@ public class EtudiantController implements Initializable {
                     });
                     dltBtn.setOnAction(event -> {
                         action_pane.setVisible(false);
-                        try {
-                            dao.delete(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
-                            refresh();
-                            } catch (java.sql.SQLIntegrityConstraintViolationException exception ) {
-                            popUp.error("information", "Erreur durant le suppression, etudiant en cours d'utilisation");
-                        } catch (SQLException | ClassNotFoundException e) {
-                            throw new RuntimeException(e);
-                        }
+                        deleteEtudiant(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
                     });
                     HBox hb = new HBox();
                     hb.setSpacing(2);
@@ -135,31 +129,9 @@ public class EtudiantController implements Initializable {
 
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter")){
-                if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
-                    try {
-                        etudiant = new Etudiant(0, numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
-                        System.out.println(classe_input.getValue().toString());
-                        dao.insert(etudiant);
-                        new FadeOutRight(action_pane).play();
-                        refresh();
-                        clearInputs();
-                    } catch (Exception e) {
-                        popUp.error("erreur","Erreur, essaye encore une fois");
-                    }
-                }
-
+                addEtudiant();
             } else if (btn_action.getText().equals("Mettre à jour")){
-                if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
-                    try {
-                        etudiant = new Etudiant(Integer.valueOf(id_label.getText()), numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
-                        dao.update(etudiant);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    new FadeOutRight(action_pane).play();
-                    refresh();
-                    clearInputs();
-                }
+                editEtudiant();
             }
         });
     }
@@ -215,7 +187,43 @@ public class EtudiantController implements Initializable {
         clearInputs();
         new FadeInRightBig(action_pane).play();
     }
-
+    public void addEtudiant(){
+        if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
+            try {
+                etudiant = new Etudiant(0, numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
+                System.out.println(classe_input.getValue().toString());
+                dao.insert(etudiant);
+                new FadeOutRight(action_pane).play();
+                refresh();
+                clearInputs();
+            } catch (Exception e) {
+                popUp.error("erreur","Erreur, essaye encore une fois");
+            }
+        }
+    }
+    public void editEtudiant(){
+        if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
+            try {
+                etudiant = new Etudiant(Integer.valueOf(id_label.getText()), numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
+                dao.update(etudiant);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            new FadeOutRight(action_pane).play();
+            refresh();
+            clearInputs();
+        }
+    }
+    public void deleteEtudiant(int id, String tableName, String idName){
+        try {
+            dao.delete(id, tableName, idName);
+            refresh();
+        } catch (java.sql.SQLIntegrityConstraintViolationException exception ) {
+            popUp.error("information", "Erreur durant le suppression, etudiant en cours d'utilisation");
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void check(){
         if (!numero_matricule_input.getText().isEmpty()
                 && !nom_input.getText().isEmpty()
