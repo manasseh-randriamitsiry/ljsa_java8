@@ -35,11 +35,13 @@ public class MenuController extends ActivateDrag implements Initializable {
     public void home() {
         loadContent("home");
         home_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(home_btn).play();
         profs_btn.setStyle("-fx-background-color:none");
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
         releve_btn.setStyle("-fx-background-color: none");
+        categorie_btn.setStyle("-fx-background-color: none");
         classes_btn.setText("classe");
     }
     public void etudiant() {
@@ -47,6 +49,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         home_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(etudiant_btn).play();
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
@@ -55,6 +58,7 @@ public class MenuController extends ActivateDrag implements Initializable {
     public void terminale() {
         loadContent("terminale");
         categorie_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(categorie_btn).play();
         home_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
@@ -65,6 +69,7 @@ public class MenuController extends ActivateDrag implements Initializable {
     public void premiere() {
         loadContent("premiere");
         categorie_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(categorie_btn).play();
         home_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
@@ -77,6 +82,7 @@ public class MenuController extends ActivateDrag implements Initializable {
     public void seconde() {
         loadContent("seconde");
         categorie_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(categorie_btn).play();
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
@@ -90,6 +96,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         profs_btn.setStyle("-fx-background-color: none");
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(matiere_btn).play();
         classe_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
         releve_btn.setStyle("-fx-background-color: none");
@@ -98,6 +105,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         loadContent("profs");
         home_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(profs_btn).play();
         etudiant_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: none");
@@ -108,6 +116,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         loadContent("classe");
         home_btn.setStyle("-fx-background-color: none");
         classe_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(classe_btn).play();
         etudiant_btn.setStyle("-fx-background-color: none");
         profs_btn.setStyle("-fx-background-color: none");
         matiere_btn.setStyle("-fx-background-color: none");
@@ -123,6 +132,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
         releve_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(releve_btn).play();
     }
     public void relevePremiere() {
         loadContent("relevePremiere");
@@ -133,6 +143,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
         releve_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(releve_btn).play();
     }
     public void releveTerminale() {
         loadContent("releveTerminale");
@@ -143,6 +154,7 @@ public class MenuController extends ActivateDrag implements Initializable {
         matiere_btn.setStyle("-fx-background-color: none");
         categorie_btn.setStyle("-fx-background-color: none");
         releve_btn.setStyle("-fx-background-color: #EBD26A");
+        new ZoomIn(releve_btn).play();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

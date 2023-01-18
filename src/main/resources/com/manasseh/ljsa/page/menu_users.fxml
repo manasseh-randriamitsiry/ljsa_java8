@@ -14,7 +14,7 @@
 
 <BorderPane fx:id="border_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseDragged="#activateDrag" onMousePressed="#getCursorPosition" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #E5E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.MenuUserController">
    <left>
-      <Pane prefHeight="700.0" prefWidth="192.0" styleClass="sidebar" stylesheets="@../style.css" BorderPane.alignment="CENTER">
+      <Pane prefHeight="700.0" prefWidth="192.0" styleClass="sidebar2" stylesheets="@../style.css" BorderPane.alignment="CENTER">
          <Button fx:id="home_btn" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="-2.0" layoutY="237.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#home" prefHeight="29.0" prefWidth="194.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Menu" />
          <Button fx:id="etudiant_btn" alignment="CENTER" contentDisplay="CENTER" layoutY="266.0" mnemonicParsing="false" onAction="#etudiant" prefHeight="30.0" prefWidth="193.0" style="-fx-background-color: none;" stylesheets="@../style.css" text="Etudiant" />
          <Pane layoutX="7.0" layoutY="8.0" prefHeight="184.0" prefWidth="178.0" styleClass="body" stylesheets="@../style.css">
@@ -60,7 +60,7 @@
             </items>
          </SplitMenuButton>
          <ButtonBar layoutX="-5.0" layoutY="595.0" prefHeight="40.0" prefWidth="200.0" />
-         <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="633.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#logout" prefHeight="35.0" prefWidth="194.0" styleClass="btn-logout" stylesheets="@../style.css" text="Deconnection" />
+         <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="635.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#logout" prefHeight="33.0" prefWidth="191.0" styleClass="btn-logout" stylesheets="@../style.css" text="Deconnection" />
       </Pane>
    </left>
    <center>

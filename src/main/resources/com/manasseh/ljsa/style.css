@@ -28,7 +28,10 @@
     -fx-background-color: #F7DC6F;
     -fx-background-radius: 0px 20px 20px 0px;
 }
-
+.sidebar2{
+    -fx-background-color: #99CC50;
+    -fx-background-radius: 0px 20px 20px 0px;
+}
 .button{
     -fx-text-color: "black";
     -fx-background-color: #99CC66;
