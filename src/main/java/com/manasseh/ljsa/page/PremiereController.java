@@ -343,8 +343,8 @@ public class PremiereController implements Initializable{
         return true;
     }
     public boolean verifyCoeff(int coeff){
-        if (coeff<0){
-            popUp.error("Coefficient negatif", "Les Coefficient doit etre superieur a 0");
+        if (coeff<=0){
+            popUp.error("Coefficient non valide", "Les Coefficient doit etre superieur a 0");
             return false;
         } else if (coeff>20){
             popUp.error("Coefficient trop grand", "Les Coefficient doit etre entre 0 et 20");

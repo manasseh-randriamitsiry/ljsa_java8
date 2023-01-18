@@ -267,17 +267,17 @@ public class SecondeController implements Initializable{
                 }
             }
             else if (btn_action.getText().equals("Coef: edit")) {
-                if (verifyCoeff(Integer.valueOf(mlg_input.getText()))
-                        && verifyCoeff(Integer.valueOf(frs_input.getText()))
-                        && verifyCoeff(Integer.valueOf(ang_input.getText()))
-                        && verifyCoeff(Integer.valueOf(hg_input.getText()))
-                        && verifyCoeff(Integer.valueOf(eac_input.getText()))
-                        && verifyCoeff(Integer.valueOf(ses_input.getText()))
-                        && verifyCoeff(Integer.valueOf(pc_input.getText()))
-                        && verifyCoeff(Integer.valueOf(svt_input.getText()))
-                        && verifyCoeff(Integer.valueOf(math_input.getText()))
-                        && verifyCoeff(Integer.valueOf(eps_input.getText()))
-                        && verifyCoeff(Integer.valueOf(tice_input.getText()))
+                if (verifyCoeff(Integer.parseInt(mlg_input.getText()))
+                        && verifyCoeff(Integer.parseInt(frs_input.getText()))
+                        && verifyCoeff(Integer.parseInt(ang_input.getText()))
+                        && verifyCoeff(Integer.parseInt(hg_input.getText()))
+                        && verifyCoeff(Integer.parseInt(eac_input.getText()))
+                        && verifyCoeff(Integer.parseInt(ses_input.getText()))
+                        && verifyCoeff(Integer.parseInt(pc_input.getText()))
+                        && verifyCoeff(Integer.parseInt(svt_input.getText()))
+                        && verifyCoeff(Integer.parseInt(math_input.getText()))
+                        && verifyCoeff(Integer.parseInt(eps_input.getText()))
+                        && verifyCoeff(Integer.parseInt(tice_input.getText()))
                 ){
                     coefficient_seconde = new Coefficient_seconde(
                             Integer.valueOf(mlg_input.getText()),
@@ -327,8 +327,8 @@ public class SecondeController implements Initializable{
         return true;
     }
     public boolean verifyCoeff(int coeff){
-        if (coeff<0){
-            popUp.error("Coefficient negatif", "Les Coefficient doit etre superieur a 0");
+        if (coeff<=0){
+            popUp.error("Coefficient non valide", "Les Coefficient doit etre superieur a 0");
             return false;
         } else if (coeff>20){
             popUp.error("Coefficient trop grand", "Les Coefficient doit etre entre 0 et 20");
