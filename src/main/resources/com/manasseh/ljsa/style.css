@@ -72,6 +72,12 @@
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
 }
+.btn-logout{
+    -fx-text-color: "black";
+    -fx-background-color: #FF6666;
+    -fx-border-radius: 0px 0px 0px 20px;
+    -fx-background-radius: 0px 0px 0px 20px;
+}
 .btn-success{
     -fx-text-color: "black";
     -fx-background-color: #99CC66;

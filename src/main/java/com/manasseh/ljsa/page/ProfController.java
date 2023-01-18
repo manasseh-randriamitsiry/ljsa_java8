@@ -83,7 +83,9 @@ public class ProfController implements Initializable{
                                     prof.getN_mat(),
                                     prof.getNom_prof(),
                                     prof.getPrenom_prof(),
-                                    prof.getDate_nais());
+                                    prof.getDate_nais(),
+                                    prof.getDate_prise_service(),
+                                    prof.getDate_cessation_service());
                             new FadeInRight(action_pane).play();
                         } catch (NullPointerException e) {
                             popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
@@ -174,11 +176,13 @@ public class ProfController implements Initializable{
             btn_action.setVisible(false);
         }
     }
-    public void setText(Integer id,String n_mat,String nom,String prenom, LocalDate date_nais){
+    public void setText(Integer id,String n_mat,String nom,String prenom, LocalDate date_nais ,LocalDate date_prise_s, LocalDate date_cessation_s){
         numero_matricule_input.setText(n_mat);
         nom_prof_input.setText(nom);
         prenom_prof_input.setText(prenom);
         date_nais_picker.setValue(date_nais);
+        date_prise_service.setValue(date_prise_s);
+        date_cessation_service.setValue(date_cessation_s);
         this.id.setText(String.valueOf(id));
     }
     public void close() {

@@ -45,17 +45,17 @@ public class LoginController extends ActivateDrag {
         info.setVisible(false);
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "select count(1) from login where username = '"+username+"' and password = '"+password+"'";
+        String query = "select count(1) from profs where nom_prof = '"+username.toUpperCase()+"' and n_matricule = '"+password.toUpperCase()+"'";
         try {
             if (username.equals("admin") && password.equals("manasseh_randriamitsiry")){
-                loadPage(event,"page/menu");
+                loadPage(event,"page/menu_admin");
                 popUp.success("Bienvenue",username+"!, je vous souhaite la bienvenue");
             } else {
                 Statement statement = connectDb.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
                     if (resultSet.getInt(1)==1){
-                        loadPage(event,"page/menu");
+                        loadPage(event,"page/menu_users");
                         popUp.success("Bienvenue",username+"!, je vous souhaite la bienvenue");
                     } else if (resultSet.getInt(1)==0){
                         PopUp error = new PopUp();
@@ -64,7 +64,7 @@ public class LoginController extends ActivateDrag {
                 }
             }
         } catch (Exception e){
-            popUp.error("Erreur login", "erreur inconnue "+e);
+            e.printStackTrace();
         }
     }
 
