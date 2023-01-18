@@ -42,6 +42,43 @@
         <element id="library" level="application" name="de.jensd.fontawesomefx" />
         <element id="library" level="application" name="swinglabs.swingx.all" />
       </element>
+      <element id="library" level="project" name="itextpdf.kernel" />
+      <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.19.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:barcodes:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:commons:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:font-asian:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:forms:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:hyph:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:io:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:kernel:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:layout:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:pdfa:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:sign:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:styled-xml-parser:7.2.4" />
+      <element id="library" level="project" name="Maven: com.itextpdf:svg:7.2.4" />
+      <element id="library" level="project" name="Maven: com.jfoenix:jfoenix:9.0.10" />
+      <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.0.31" />
+      <element id="library" level="project" name="Maven: io.github.typhon0:AnimateFX:1.2.0" />
+      <element id="library" level="project" name="Maven: org.apiguardian:apiguardian-api:1.1.2" />
+      <element id="library" level="project" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.70" />
+      <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.70" />
+      <element id="library" level="project" name="Maven: org.bouncycastle:bcutil-jdk15on:1.70" />
+      <element id="library" level="project" name="Maven: org.controlsfx:controlsfx:8.40.14" />
+      <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-api:5.9.0" />
+      <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.9.0" />
+      <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.9.0" />
+      <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-engine:1.9.0" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:mac:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:mac:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:mac:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:mac:19-ea+7" />
+      <element id="library" level="project" name="Maven: org.opentest4j:opentest4j:1.2.0" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.30" />
     </root>
   </artifact>
 </component>
