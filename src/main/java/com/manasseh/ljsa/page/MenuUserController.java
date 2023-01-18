@@ -1,6 +1,5 @@
 package com.manasseh.ljsa.page;
 
-import animatefx.animation.FadeInRight;
 import animatefx.animation.ZoomIn;
 import com.manasseh.ljsa.utils.ActivateDrag;
 import javafx.event.ActionEvent;
