@@ -3,6 +3,7 @@ package com.manasseh.ljsa.page;
 import animatefx.animation.*;
 import com.manasseh.ljsa.DAO.ClasseDAO;
 import com.manasseh.ljsa.model.Classe;
+import com.manasseh.ljsa.utils.AnneeLists;
 import com.manasseh.ljsa.utils.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -30,6 +31,8 @@ public class ClasseController implements Initializable {
     public Label mode_label;
     public Label coefficient_label;
     public TextField effectifs_input;
+    public ComboBox<Object> level_input;
+    public TableColumn<Classe,String> level_column;
     ObservableList<Classe> classeList = FXCollections.observableArrayList();
     Classe classe = null;
     ClasseDAO classeDAO = new ClasseDAO();
@@ -39,9 +42,10 @@ public class ClasseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         new FadeOutUp(action_pane).play();
         refreshTable();
-
+        level_input.getItems().addAll(1,2,3);
         classe_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getClasse()));
         effectif_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getEffectif().toString()));
+        level_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getLevel().toString()));
         action_column.setCellValueFactory(new PropertyValueFactory<>(""));
 
         // creation de bouton ajout et suppression
@@ -66,7 +70,8 @@ public class ClasseController implements Initializable {
                             ClasseController.this.setText(
                                     classe.getId(),
                                     classe.getClasse(),
-                                    classe.getEffectif());
+                                    classe.getEffectif(),
+                                    classe.getLevel());
                             new FadeInDown(action_pane).play();
                         } catch (NullPointerException e) {
                             popUp.error("Information", "Selectionner un champ avant de cliquer sur editer. Merci");
@@ -98,7 +103,7 @@ public class ClasseController implements Initializable {
                 try {
                     mode_label.setText("Classe: Ajout");
                     coefficient_label.setText("Classe: edition");
-                    classe = new Classe(0,classe_input.getText(),Integer.valueOf(effectifs_input.getText()));
+                    classe = new Classe(0,classe_input.getText(),Integer.valueOf(effectifs_input.getText()),Integer.valueOf(level_input.getValue().toString()));
                     classeDAO.insert(classe);
                     new FadeOutUp(action_pane).play();
                     refreshTable();
@@ -108,7 +113,11 @@ public class ClasseController implements Initializable {
                     popUp.error("erreur","Erreur, essaye encore une fois");
                 }
             } else if (btn_action.getText().equals("Mettre à jour")){
-                classe = new Classe(Integer.valueOf(id.getText()),classe_input.getText(),Integer.valueOf(effectifs_input.getText()));
+                classe = new Classe(Integer.valueOf(id.getText()),
+                        classe_input.getText(),
+                        Integer.valueOf(effectifs_input.getText()),
+                        Integer.valueOf(level_input.getValue().toString())
+                );
                 try {
                     classeDAO.update(classe);
                 } catch (SQLException e) {
@@ -121,10 +130,11 @@ public class ClasseController implements Initializable {
         });
     }
 
-    private void setText(Integer id, String classe, Integer totalCoeff) {
+    private void setText(Integer id, String classe, Integer totalCoeff,Integer level) {
         this.id.setText(id.toString());
         this.classe_input.setText(classe);
         this.effectifs_input.setText(totalCoeff.toString());
+        this.level_input.getSelectionModel().select(level);
     }
 
     private void clearInputs() {

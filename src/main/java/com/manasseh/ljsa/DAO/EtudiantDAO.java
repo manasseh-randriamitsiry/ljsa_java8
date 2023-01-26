@@ -12,7 +12,6 @@ import java.sql.*;
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     PopUp popUp = new PopUp();
     String tableName = "etudiants";
-
     @Override
     public void insert(Etudiant etudiant) throws SQLException {
         String sql = "insert into "+tableName+" values(NULL,?,?,?,?,?)";
@@ -94,17 +93,6 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return nombre;
     }
-//    public String getClasse(String n_matricule) throws SQLException {
-//        String serie = null;
-//        String sql = "select classe from "+tableName+" where n_matricule = '"+n_matricule+"'";
-//        DatabaseConnection connection = new DatabaseConnection();
-//        Statement statement = connection.getConnection().createStatement();
-//        ResultSet resultSet = statement.executeQuery(sql);
-//        while (resultSet.next()){
-//            serie = resultSet.getString("classe");
-//        }
-//        return serie;
-//    }
     public Etudiant getByNmat(String n_matricule){
         DatabaseConnection connection = new DatabaseConnection();
         Etudiant etudiant = null;
@@ -128,10 +116,10 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return etudiant;
     }
-    public ObservableList<Object> listEtudiant(){
+    public ObservableList<Object> listSeconde(){
         ObservableList<Object> data = FXCollections.observableArrayList();
         DatabaseConnection connection = new DatabaseConnection();
-        String query = "SELECT n_matricule FROM "+tableName+" order by n_matricule ASC";
+        String query = "SELECT etudiants.n_matricule FROM etudiants,classe WHERE classe.classe=etudiants.classe and classe.level='1' order by n_matricule ASC";
         try {
             Statement statement = connection.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -144,6 +132,39 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return data;
     }
+    public ObservableList<Object> listPremiere(){
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        DatabaseConnection connection = new DatabaseConnection();
+        String query = "SELECT etudiants.n_matricule FROM etudiants,classe WHERE classe.classe=etudiants.classe and classe.level='2' order by n_matricule ASC";
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                data.add(resultSet.getString(1));
+            }
+        } catch (SQLException error) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
+        }
+        return data;
+    }
+    public ObservableList<Object> listTerminal(){
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        DatabaseConnection connection = new DatabaseConnection();
+        String query = "SELECT etudiants.n_matricule FROM etudiants,classe WHERE classe.classe=etudiants.classe and classe.level='3' order by n_matricule ASC";
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                data.add(resultSet.getString(1));
+            }
+        } catch (SQLException error) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
+        }
+        return data;
+    }
+
     public ObservableList<PieChart.Data> chartEtudiant(){
         DatabaseConnection connection = new DatabaseConnection();
         ObservableList<PieChart.Data> pieChartdata= FXCollections.observableArrayList();

@@ -11,7 +11,6 @@ import java.sql.*;
 public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
     PopUp popUp = new PopUp();
     String tableName = "classe";
-
     @Override
     public ObservableList<Classe> listAll() {
         ObservableList<Classe> profList = FXCollections.observableArrayList();
@@ -25,7 +24,8 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
                 profList.add(new Classe(
                         resultSet.getInt("id"),
                         resultSet.getString("classe"),
-                        resultSet.getInt("effectif")
+                        resultSet.getInt("effectif"),
+                        resultSet.getInt("level")
                 ));
             }
         } catch (SQLException ignored) {
@@ -33,7 +33,6 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         }
         return profList;
     }
-
     public ObservableList<Object> listClasse(){
         ObservableList<Object> listClasse = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
@@ -51,15 +50,15 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         }
         return listClasse;
     }
-
     @Override
     public void update(Classe data) throws SQLException {
-        String sql = "UPDATE "+tableName+" SET `classe` = ?, `effectif` = ? WHERE `id` = ?;";
+        String sql = "UPDATE "+tableName+" SET `classe` = ?, `effectif` = ?,`level` = ?  WHERE `id` = ?;";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
         statement.setInt(2,data.getEffectif());
-        statement.setInt(3, data.getId());
+        statement.setInt(3,data.getLevel());
+        statement.setInt(4,data.getId());
         try{
             int res = statement.executeUpdate();
             if (res>0) {
@@ -73,14 +72,14 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         }
         statement.close();
     }
-
     @Override
     public void insert(Classe data) throws SQLException {
-        String sql = "insert into "+tableName+" values(NULL,?,?)";
+        String sql = "insert into "+tableName+" values(NULL,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
         statement.setInt(2,data.getEffectif());
+        statement.setInt(3,data.getLevel());
         try {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {

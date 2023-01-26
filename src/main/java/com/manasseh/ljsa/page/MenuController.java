@@ -14,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -183,7 +182,6 @@ public class MenuController extends ActivateDrag implements Initializable {
     public void getCursorPosition(MouseEvent event) {
         pressed(event);
     }
-
     public void logout(ActionEvent actionEvent) {
         try{
             loadPage(actionEvent,"../login");

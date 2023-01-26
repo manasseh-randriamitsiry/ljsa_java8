@@ -63,7 +63,7 @@ public class TerminaleController implements Initializable{
         clearInputs();
         check();
         new FadeOutRight(action_pane).play();
-        n_mat_input.setItems(etudiantDAO.listEtudiant());
+        n_mat_input.setItems(etudiantDAO.listTerminal());
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(AnneeLists.getYearList(100));
@@ -309,6 +309,8 @@ public class TerminaleController implements Initializable{
     public void afficherPaneAjout(){
         btn_action.setText("Ajouter +");
         action_pane.setVisible(true);
+        switchShow();
+        clearInputs();
         new FadeInRight(action_pane).play();
     }
     private void clearInputs() {

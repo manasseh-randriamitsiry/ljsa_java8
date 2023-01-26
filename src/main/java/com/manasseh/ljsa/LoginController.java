@@ -47,15 +47,16 @@ public class LoginController extends ActivateDrag {
         Connection connectDb = connectNow.getConnection();
         String query = "select count(1) from profs where nom_prof = '"+username.toUpperCase()+"' and n_matricule = '"+password.toUpperCase()+"'";
         try {
+
             if (username.equals("admin") && password.equals("manasseh_randriamitsiry")){
-                loadPage(event,"page/menu_admin");
+                loadAdminPage(event,"page/menu_admin");
                 popUp.success("Bienvenue",username+"!, je vous souhaite la bienvenue");
             } else {
                 Statement statement = connectDb.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
                     if (resultSet.getInt(1)==1){
-                        loadPage(event,"page/menu_users");
+                        loadMainPage(event,"page/menu_users");
                         popUp.success("Bienvenue",username+"!, je vous souhaite la bienvenue");
                     } else if (resultSet.getInt(1)==0){
                         PopUp error = new PopUp();
@@ -74,7 +75,16 @@ public class LoginController extends ActivateDrag {
         new Swing(info).play();
     }
 
-    public void loadPage(ActionEvent event, String nextPage) throws IOException {
+    public void loadMainPage(ActionEvent event, String nextPage) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nextPage+".fxml")));
+        Stage stage = new Stage();
+        stage.getScene();
+        stage.setScene(new Scene(root));
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+        ((Node)event.getSource()).getScene().getWindow().hide();
+    }
+    public void loadAdminPage(ActionEvent event, String nextPage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nextPage+".fxml")));
         Stage stage = new Stage();
         stage.getScene();

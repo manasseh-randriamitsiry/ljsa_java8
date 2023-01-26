@@ -44,7 +44,7 @@ public class ReleveTerminaleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nmat_input.setItems(etudiantDAO.listEtudiant());
+        nmat_input.setItems(etudiantDAO.listTerminal());
         new AutoCompleteComboBoxListener<>(nmat_input);
         new AutoCompleteComboBoxListener<>(annee_debut);
         annee_debut.getItems().addAll(AnneeLists.getYearList(100));

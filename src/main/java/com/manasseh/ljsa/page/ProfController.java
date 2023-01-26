@@ -46,12 +46,12 @@ public class ProfController implements Initializable{
     ProfDAO dao = new ProfDAO();
     Prof prof = null;
     PopUp popUp = new PopUp();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         check();
         new FadeOutRight(action_pane).play();
         refreshTable();
-
         n_mat_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getN_mat()));
         nom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getNom_prof()));
         prenom_column.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getPrenom_prof()));

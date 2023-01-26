@@ -36,28 +36,59 @@
       </Label>
    </Pane>
    <Pane layoutX="37.0" layoutY="282.0" prefHeight="166.0" prefWidth="166.0" styleClass="input1" stylesheets="@../style.css">
-      <Label layoutX="32.0" layoutY="21.0" text="REUSSITE">
+      <Label layoutX="40.0" layoutY="14.0" text="Seconde">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label fx:id="taux_reuissite" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="90.0" prefHeight="52.0" prefWidth="156.0" text="70">
+      <Label fx:id="taux_reuissite_seconde" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="83.0" prefHeight="52.0" prefWidth="156.0" text="70%">
          <font>
-            <Font size="42.0" />
+            <Font size="33.0" />
          </font>
       </Label>
-   </Pane>
-   <Pane layoutX="238.0" layoutY="282.0" prefHeight="166.0" prefWidth="166.0" styleClass="input1" stylesheets="@../style.css">
-      <Label layoutX="49.0" layoutY="14.0" text="AUTRE">
+      <Label fx:id="annee_seconde" layoutX="66.0" layoutY="53.0" text="2023">
          <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="90.0" prefHeight="52.0" prefWidth="156.0" text="44.2">
-         <font>
-            <Font size="42.0" />
+            <Font size="14.0" />
          </font>
       </Label>
    </Pane>
    <PieChart fx:id="pie_chart" layoutX="469.0" layoutY="68.0" />
+   <Pane layoutX="238.0" layoutY="282.0" prefHeight="166.0" prefWidth="166.0" styleClass="input1" stylesheets="@../style.css">
+      <children>
+         <Label layoutX="40.0" layoutY="14.0" text="Premiere">
+            <font>
+               <Font size="23.0" />
+            </font>
+         </Label>
+         <Label fx:id="taux_reuissite_premiere" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="83.0" prefHeight="52.0" prefWidth="156.0" text="70%">
+            <font>
+               <Font size="33.0" />
+            </font>
+         </Label>
+         <Label fx:id="annee_premiere" layoutX="66.0" layoutY="53.0" text="2023">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
+   <Pane layoutX="37.0" layoutY="481.0" prefHeight="166.0" prefWidth="166.0" styleClass="input1" stylesheets="@../style.css">
+      <children>
+         <Label layoutX="40.0" layoutY="14.0" text="Terminale">
+            <font>
+               <Font size="23.0" />
+            </font>
+         </Label>
+         <Label fx:id="taux_reuissite_terminale" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="83.0" prefHeight="52.0" prefWidth="156.0" text="70%">
+            <font>
+               <Font size="33.0" />
+            </font>
+         </Label>
+         <Label fx:id="annee_terminale" layoutX="66.0" layoutY="53.0" text="2023">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
 </Pane>

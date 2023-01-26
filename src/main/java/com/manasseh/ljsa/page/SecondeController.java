@@ -60,7 +60,7 @@ public class SecondeController implements Initializable{
         refresh();
         clearInputs();
         check();
-        n_mat_input.setItems(etudiantDAO.listEtudiant());
+        n_mat_input.setItems(etudiantDAO.listSeconde());
         new FadeOutRight(action_pane).play();
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);

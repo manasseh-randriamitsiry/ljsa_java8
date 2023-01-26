@@ -11,7 +11,7 @@
             <option name="macIcon" value="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/img/7ec265467ae56fe682433d0ab0eef64a_Noon.icns" />
           </JavaFxApplicationIcons>
         </option>
-        <option name="nativeBundle" value="dmg" />
+        <option name="nativeBundle" value="exe" />
         <option name="title" value="LJSA" />
         <option name="vendor" value="" />
         <option name="version" value="" />

@@ -66,7 +66,7 @@ public class PremiereController implements Initializable{
         clearInputs();
         check();
         new FadeOutRight(action_pane).play();
-        n_mat_input.setItems(etudiantDAO.listEtudiant());
+        n_mat_input.setItems(etudiantDAO.listPremiere());
         new AutoCompleteComboBoxListener<>(n_mat_input);
         new AutoCompleteComboBoxListener<>(annee_input);
         annee_input.getItems().addAll(AnneeLists.getYearList(100));
@@ -357,6 +357,8 @@ public class PremiereController implements Initializable{
         btn_action.setText("Ajouter +");
         premiere_label.setText("Premiere: Ajout");
         action_pane.setVisible(true);
+        switchShow();
+        clearInputs();
         new FadeInRight(action_pane).play();
     }
     private void clearInputs() {

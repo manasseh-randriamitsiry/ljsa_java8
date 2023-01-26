@@ -7,6 +7,8 @@ import com.manasseh.ljsa.utils.PopUp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
+import java.text.DecimalFormat;
+import java.time.Year;
 
 public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
     PopUp popUp = new PopUp();
@@ -212,7 +214,6 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         }
         statement.close();
     }
-
     public ObservableList<Coefficient_seconde> listCoeff(){
         ObservableList<Coefficient_seconde> listCoeff = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
@@ -240,5 +241,18 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
         }
         return listCoeff;
+    }
+    public String getPourcentage() throws SQLException {
+        float result = 0;
+        int current_year = Integer.valueOf(String.valueOf(Year.now()));
+        String sql = "select SUM(seconde.malagasy*seconde_note_coeff.malagasy+seconde.francais*seconde_note_coeff.francais+seconde.anglais*seconde_note_coeff.anglais+seconde.histogeo*seconde_note_coeff.histogeo+seconde.eac*seconde_note_coeff.eac+seconde.ses*seconde_note_coeff.ses+seconde.spc*seconde_note_coeff.spc+seconde.svt*seconde_note_coeff.svt+seconde.mats*seconde_note_coeff.mats+seconde.eps*seconde_note_coeff.eps+seconde.tice*seconde_note_coeff.tice)*5/(count(seconde.n_mat)*SUM(seconde_note_coeff.anglais+seconde_note_coeff.malagasy+seconde_note_coeff.francais+seconde_note_coeff.histogeo+seconde_note_coeff.eac+seconde_note_coeff.ses+seconde_note_coeff.spc+seconde_note_coeff.svt+seconde_note_coeff.mats+seconde_note_coeff.eps+seconde_note_coeff.tice)) as moyenne FROM seconde,seconde_note_coeff where seconde.annee_scolaire='"+current_year+"'";
+        DatabaseConnection connection = new DatabaseConnection();
+        Statement statement = connection.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()){
+            result = resultSet.getFloat("moyenne");
+        }
+        DecimalFormat df = new DecimalFormat("###.##");
+        return df.format(result);
     }
 }

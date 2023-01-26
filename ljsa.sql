@@ -1,108 +1,105 @@
--- Database export via SQLPro (https://www.sqlprostudio.com/allapps.html)
--- Exported by manasseh at 17-01-2023 14:00.
--- WARNING: This file may contain descructive statements such as DROPs.
--- Please ensure that you are running the script at the proper location.
+-- phpMyAdmin SQL Dump
+-- version 5.1.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Jan 26, 2023 at 06:50 AM
+-- Server version: 5.7.34
+-- PHP Version: 8.0.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- BEGIN TABLE classe
-DROP TABLE IF EXISTS classe;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `ljsa`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classe`
+--
+
 CREATE TABLE `classe` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `classe` varchar(20) COLLATE utf8mb3_bin NOT NULL,
-  `effectif` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `username_UNIQUE` (`classe`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `id` int(11) NOT NULL,
+  `classe` varchar(20) COLLATE utf8_bin NOT NULL,
+  `effectif` int(11) NOT NULL,
+  `level` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 2 rows into classe
--- Insert batch #1
-INSERT INTO classe (id, classe, effectif) VALUES
-(2, 'PREMIEREL', 40),
-(3, 'DASDASD', 23);
+-- --------------------------------------------------------
 
--- END TABLE classe
+--
+-- Table structure for table `coefficient`
+--
 
--- BEGIN TABLE coefficient
-DROP TABLE IF EXISTS coefficient;
 CREATE TABLE `coefficient` (
-  `id` int NOT NULL,
-  `classe` varchar(20) COLLATE utf8mb3_bin NOT NULL,
-  `coefficient_total` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `id` int(11) NOT NULL,
+  `classe` varchar(20) COLLATE utf8_bin NOT NULL,
+  `coefficient_total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Table coefficient contains no data. No inserts have been genrated.
--- Inserting 0 rows into coefficient
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `etudiants`
+--
 
--- END TABLE coefficient
-
--- BEGIN TABLE etudiants
-DROP TABLE IF EXISTS etudiants;
 CREATE TABLE `etudiants` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `n_matricule` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `nom` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `prenom` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `classe` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `date_nais` date NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`n_matricule`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `id` int(11) NOT NULL,
+  `n_matricule` varchar(10) COLLATE utf8_bin NOT NULL,
+  `nom` varchar(150) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(150) COLLATE utf8_bin NOT NULL,
+  `classe` varchar(20) COLLATE utf8_bin NOT NULL,
+  `date_nais` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 6 rows into etudiants
--- Insert batch #1
-INSERT INTO etudiants (id, n_matricule, nom, prenom, classe, date_nais) VALUES
-(33, '001AEE', 'RANDRIAMITSIRY', 'valimbavaka manasse', 'DSD', '1999-07-01'),
-(35, '001C', 'RANDRIAMITSIRY', 'lovasoa gabriel', 'terminale', '2002-07-18'),
-(44, '12345AA', 'RAKOTOARISO', 'tahin', 'DASDASD', '2022-09-28'),
-(49, 'SDASD', 'ASDASD', 'asdasd', 'DSD', '2023-01-11'),
-(50, 'SADFSDF', 'DSFSDF', 'gsfgs', 'DSD', '2023-01-10'),
-(51, 'SFSAFASF', 'ASFFD', 'safas', 'DSD', '2023-01-10');
+-- --------------------------------------------------------
 
--- END TABLE etudiants
+--
+-- Dumping data for table `login`
+--
 
--- BEGIN TABLE login
-DROP TABLE IF EXISTS login;
-CREATE TABLE `login` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `password` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
--- Inserting 1 row into login
--- Insert batch #1
-INSERT INTO login (id, username, password) VALUES
+INSERT INTO `login` (`id`, `username`, `password`) VALUES
 (1, 'manasseh', 'kadd');
 
--- END TABLE login
+-- --------------------------------------------------------
 
--- BEGIN TABLE matiere
-DROP TABLE IF EXISTS matiere;
+--
+-- Table structure for table `matiere`
+--
+
 CREATE TABLE `matiere` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `designation` varchar(50) COLLATE utf8mb3_bin NOT NULL,
-  `abreviation` varchar(50) COLLATE utf8mb3_bin NOT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `id` int(11) NOT NULL,
+  `designation` varchar(50) COLLATE utf8_bin NOT NULL,
+  `abreviation` varchar(50) COLLATE utf8_bin NOT NULL,
+  `description` varchar(200) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 3 rows into matiere
--- Insert batch #1
-INSERT INTO matiere (id, designation, abreviation, description) VALUES
+--
+-- Dumping data for table `matiere`
+--
+
+INSERT INTO `matiere` (`id`, `designation`, `abreviation`, `description`) VALUES
 (10, 'Malagasy', 'MLG', 'natao hianarana ny teny malagasy '),
-(11, 'Français', 'FRS', 'matiera  ho an''ny teny frantsay'),
-(12, 'HistoireGeographie', 'HG', 'mianatra ny tantaran''i madagasikara sy izao tontolo izao');
+(11, 'Français', 'FRS', 'matiera  ho an\'ny teny frantsay'),
+(12, 'HistoireGeographie', 'HG', 'mianatra ny tantaran\'i madagasikara sy izao tontolo izao');
 
--- END TABLE matiere
+-- --------------------------------------------------------
 
--- BEGIN TABLE premiere
-DROP TABLE IF EXISTS premiere;
+--
+-- Table structure for table `premiere`
+--
+
 CREATE TABLE `premiere` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `malagasy` float NOT NULL,
   `francais` float NOT NULL,
   `anglais` float NOT NULL,
@@ -115,70 +112,71 @@ CREATE TABLE `premiere` (
   `eps` float NOT NULL,
   `tice` float NOT NULL,
   `phylo` float NOT NULL,
-  `n_mat` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `trimestre` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `annee_scolaire` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `n_mat` varchar(10) COLLATE utf8_bin NOT NULL,
+  `trimestre` varchar(10) COLLATE utf8_bin NOT NULL,
+  `annee_scolaire` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 1 row into premiere
--- Insert batch #1
-INSERT INTO premiere (id, malagasy, francais, anglais, histogeo, eac, ses, spc, svt, mats, eps, tice, phylo, n_mat, trimestre, annee_scolaire) VALUES
-(5, 12, 13, 3, 8, 7, 11, 10, 10, 9, 6, 2, 1, 'EWREWR', '4', 1997);
+-- --------------------------------------------------------
 
--- END TABLE premiere
+--
+-- Table structure for table `premiere_note_coeff`
+--
 
--- BEGIN TABLE premiere_note_coeff
-DROP TABLE IF EXISTS premiere_note_coeff;
 CREATE TABLE `premiere_note_coeff` (
-  `malagasy` int NOT NULL,
-  `francais` int NOT NULL,
-  `anglais` int NOT NULL,
-  `histogeo` int NOT NULL,
-  `eac` int NOT NULL,
-  `ses` int NOT NULL,
-  `spc` int NOT NULL,
-  `svt` int NOT NULL,
-  `mats` int NOT NULL,
-  `eps` int NOT NULL,
-  `tice` int NOT NULL,
-  `phylo` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `malagasy` int(11) NOT NULL,
+  `francais` int(11) NOT NULL,
+  `anglais` int(11) NOT NULL,
+  `histogeo` int(11) NOT NULL,
+  `eac` int(11) NOT NULL,
+  `ses` int(11) NOT NULL,
+  `spc` int(11) NOT NULL,
+  `svt` int(11) NOT NULL,
+  `mats` int(11) NOT NULL,
+  `eps` int(11) NOT NULL,
+  `tice` int(11) NOT NULL,
+  `phylo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 1 row into premiere_note_coeff
--- Insert batch #1
-INSERT INTO premiere_note_coeff (malagasy, francais, anglais, histogeo, eac, ses, spc, svt, mats, eps, tice, phylo) VALUES
+--
+-- Dumping data for table `premiere_note_coeff`
+--
+
+INSERT INTO `premiere_note_coeff` (`malagasy`, `francais`, `anglais`, `histogeo`, `eac`, `ses`, `spc`, `svt`, `mats`, `eps`, `tice`, `phylo`) VALUES
 (2, 3, 11, 4, 9, 8, 6, 7, 5, 8, 10, 12);
 
--- END TABLE premiere_note_coeff
+-- --------------------------------------------------------
 
--- BEGIN TABLE profs
-DROP TABLE IF EXISTS profs;
+--
+-- Table structure for table `profs`
+--
+
 CREATE TABLE `profs` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `n_matricule` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `nom_prof` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `prenom_prof` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `id` int(11) NOT NULL,
+  `n_matricule` varchar(45) COLLATE utf8_bin NOT NULL,
+  `nom_prof` varchar(100) COLLATE utf8_bin NOT NULL,
+  `prenom_prof` varchar(100) COLLATE utf8_bin NOT NULL,
   `date_nais` date NOT NULL,
-  `date_prise_service` date DEFAULT NULL,
-  `date_cessation_service` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `n_matricule_UNIQUE` (`n_matricule`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `date_prise_service` date NOT NULL,
+  `date_cessation_service` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 3 rows into profs
--- Insert batch #1
-INSERT INTO profs (id, n_matricule, nom_prof, prenom_prof, date_nais, date_prise_service, date_cessation_service) VALUES
-(17, '00001AB', 'RANDRIAMITSIRY', 'valimbavaka manasse', '1999-03-10', '2023-01-08', '2023-01-26'),
-(23, '00002AB', 'RANDRIAMITSIRY', 'lovasoa gabriel', '1994-10-14', '1999-03-10', '1999-03-10'),
-(64, '00231AF', 'ANDRY', 'rajoelina', '1999-01-19', '2022-01-05', '2022-01-05');
+--
+-- Dumping data for table `profs`
+--
 
--- END TABLE profs
+INSERT INTO `profs` (`id`, `n_matricule`, `nom_prof`, `prenom_prof`, `date_nais`) VALUES
+(17, '00001AB', 'RANDRIAMITSIRY', 'valimbavaka manasse', '1999-03-10'),
+(23, '00002AB', 'RANDRIAMITSIRY', 'lovasoa gabriel', '1994-10-14');
 
--- BEGIN TABLE seconde
-DROP TABLE IF EXISTS seconde;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seconde`
+--
+
 CREATE TABLE `seconde` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `malagasy` float NOT NULL,
   `francais` float NOT NULL,
   `anglais` float NOT NULL,
@@ -190,65 +188,68 @@ CREATE TABLE `seconde` (
   `mats` float NOT NULL,
   `eps` float NOT NULL,
   `tice` float NOT NULL,
-  `n_mat` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `trimestre` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `annee_scolaire` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `n_mat` varchar(10) COLLATE utf8_bin NOT NULL,
+  `trimestre` varchar(10) COLLATE utf8_bin NOT NULL,
+  `annee_scolaire` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 1 row into seconde
--- Insert batch #1
-INSERT INTO seconde (id, malagasy, francais, anglais, histogeo, eac, ses, spc, svt, mats, eps, tice, n_mat, trimestre, annee_scolaire) VALUES
-(8, 20, 21, 20, 20, 20, 24, 20, 20, 20, 10, 10, '001A', '1', 2021);
+-- --------------------------------------------------------
 
--- END TABLE seconde
+--
+-- Table structure for table `seconde_note_coeff`
+--
 
--- BEGIN TABLE seconde_note_coeff
-DROP TABLE IF EXISTS seconde_note_coeff;
 CREATE TABLE `seconde_note_coeff` (
-  `malagasy` int NOT NULL,
-  `francais` int NOT NULL,
-  `anglais` int NOT NULL,
-  `histogeo` int NOT NULL,
-  `eac` int NOT NULL,
-  `ses` int NOT NULL,
-  `spc` int NOT NULL,
-  `svt` int NOT NULL,
-  `mats` int NOT NULL,
-  `eps` int NOT NULL,
-  `tice` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `malagasy` int(11) NOT NULL,
+  `francais` int(11) NOT NULL,
+  `anglais` int(11) NOT NULL,
+  `histogeo` int(11) NOT NULL,
+  `eac` int(11) NOT NULL,
+  `ses` int(11) NOT NULL,
+  `spc` int(11) NOT NULL,
+  `svt` int(11) NOT NULL,
+  `mats` int(11) NOT NULL,
+  `eps` int(11) NOT NULL,
+  `tice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 1 row into seconde_note_coeff
--- Insert batch #1
-INSERT INTO seconde_note_coeff (malagasy, francais, anglais, histogeo, eac, ses, spc, svt, mats, eps, tice) VALUES
-(1, 1, 1, 3, 1, 2, 3, 3, 3, 1, 1);
+--
+-- Dumping data for table `seconde_note_coeff`
+--
 
--- END TABLE seconde_note_coeff
+INSERT INTO `seconde_note_coeff` (`malagasy`, `francais`, `anglais`, `histogeo`, `eac`, `ses`, `spc`, `svt`, `mats`, `eps`, `tice`) VALUES
+(1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1);
 
--- BEGIN TABLE serie
-DROP TABLE IF EXISTS serie;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `serie`
+--
+
 CREATE TABLE `serie` (
-  `designation` varchar(50) COLLATE utf8mb3_bin NOT NULL,
-  `abreviation` varchar(10) COLLATE utf8mb3_bin NOT NULL,
-  PRIMARY KEY (`designation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `designation` varchar(50) COLLATE utf8_bin NOT NULL,
+  `abreviation` varchar(10) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 5 rows into serie
--- Insert batch #1
-INSERT INTO serie (designation, abreviation) VALUES
+--
+-- Dumping data for table `serie`
+--
+
+INSERT INTO `serie` (`designation`, `abreviation`) VALUES
 ('Serie A1', 'A1'),
 ('Serie A2', 'A2'),
 ('Serie D', 'D'),
 ('Serie OSE', 'OSE'),
 ('Serie S', 'S');
 
--- END TABLE serie
+-- --------------------------------------------------------
 
--- BEGIN TABLE terminale
-DROP TABLE IF EXISTS terminale;
+--
+-- Table structure for table `terminale`
+--
+
 CREATE TABLE `terminale` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `mlg` float DEFAULT NULL,
   `frs` float DEFAULT NULL,
   `anglais` float DEFAULT NULL,
@@ -259,41 +260,172 @@ CREATE TABLE `terminale` (
   `svt` float DEFAULT NULL,
   `ses` float DEFAULT NULL,
   `eps` float DEFAULT NULL,
-  `nmat` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
-  `trimestre` int DEFAULT NULL,
-  `annee_scolaire` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `nmat` (`nmat`),
-  CONSTRAINT `terminale_ibfk_1` FOREIGN KEY (`nmat`) REFERENCES `etudiants` (`n_matricule`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `nmat` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `trimestre` int(11) DEFAULT NULL,
+  `annee_scolaire` varchar(10) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 2 rows into terminale
--- Insert batch #1
-INSERT INTO terminale (id, mlg, frs, anglais, histogeo, phylo, math, spc, svt, ses, eps, nmat, trimestre, annee_scolaire) VALUES
-(53, 3, 2, 9, 10, 2, 4, 8, 9, 19, 4, '001C', 1, '1998'),
-(54, 9, 10, 6, 2, 1, 8, 11, 3, 4, 7, '001C', 12, '5');
+-- --------------------------------------------------------
 
--- END TABLE terminale
+--
+-- Table structure for table `terminale_note_coeff`
+--
 
--- BEGIN TABLE terminale_note_coeff
-DROP TABLE IF EXISTS terminale_note_coeff;
 CREATE TABLE `terminale_note_coeff` (
-  `mlg` int DEFAULT NULL,
-  `frs` int DEFAULT NULL,
-  `anglais` int DEFAULT NULL,
-  `histogeo` int DEFAULT NULL,
-  `phylo` int DEFAULT NULL,
-  `math` int DEFAULT NULL,
-  `spc` int DEFAULT NULL,
-  `svt` int DEFAULT NULL,
-  `ses` int DEFAULT NULL,
-  `eps` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+  `mlg` int(11) DEFAULT NULL,
+  `frs` int(11) DEFAULT NULL,
+  `anglais` int(11) DEFAULT NULL,
+  `histogeo` int(11) DEFAULT NULL,
+  `phylo` int(11) DEFAULT NULL,
+  `math` int(11) DEFAULT NULL,
+  `spc` int(11) DEFAULT NULL,
+  `svt` int(11) DEFAULT NULL,
+  `ses` int(11) DEFAULT NULL,
+  `eps` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Inserting 1 row into terminale_note_coeff
--- Insert batch #1
-INSERT INTO terminale_note_coeff (mlg, frs, anglais, histogeo, phylo, math, spc, svt, ses, eps) VALUES
+--
+-- Dumping data for table `terminale_note_coeff`
+--
+
+INSERT INTO `terminale_note_coeff` (`mlg`, `frs`, `anglais`, `histogeo`, `phylo`, `math`, `spc`, `svt`, `ses`, `eps`) VALUES
 (2, 3, 10, 4, 0, 5, 6, 7, 9, 8);
 
--- END TABLE terminale_note_coeff
+--
+-- Indexes for dumped tables
+--
 
+--
+-- Indexes for table `classe`
+--
+ALTER TABLE `classe`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `username_UNIQUE` (`classe`);
+
+--
+-- Indexes for table `etudiants`
+--
+ALTER TABLE `etudiants`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`n_matricule`),
+  ADD KEY `classe` (`classe`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `username_UNIQUE` (`username`);
+
+--
+-- Indexes for table `matiere`
+--
+ALTER TABLE `matiere`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `premiere`
+--
+ALTER TABLE `premiere`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `profs`
+--
+ALTER TABLE `profs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `n_matricule_UNIQUE` (`n_matricule`);
+
+--
+-- Indexes for table `seconde`
+--
+ALTER TABLE `seconde`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `serie`
+--
+ALTER TABLE `serie`
+  ADD PRIMARY KEY (`designation`);
+
+--
+-- Indexes for table `terminale`
+--
+ALTER TABLE `terminale`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nmat` (`nmat`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `classe`
+--
+ALTER TABLE `classe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `etudiants`
+--
+ALTER TABLE `etudiants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `login`
+--
+ALTER TABLE `login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `matiere`
+--
+ALTER TABLE `matiere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `premiere`
+--
+ALTER TABLE `premiere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `profs`
+--
+ALTER TABLE `profs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `seconde`
+--
+ALTER TABLE `seconde`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `terminale`
+--
+ALTER TABLE `terminale`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `etudiants`
+--
+ALTER TABLE `etudiants`
+  ADD CONSTRAINT `etudiants_ibfk_1` FOREIGN KEY (`classe`) REFERENCES `classe` (`classe`);
+
+--
+-- Constraints for table `terminale`
+--
+ALTER TABLE `terminale`
+  ADD CONSTRAINT `terminale_ibfk_1` FOREIGN KEY (`nmat`) REFERENCES `etudiants` (`n_matricule`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
