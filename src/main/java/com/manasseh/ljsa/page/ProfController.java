@@ -114,25 +114,29 @@ public class ProfController implements Initializable{
         // bouton action toggle
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter")){
-                try {
-                    prof = new Prof(0,numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue(), date_prise_service.getValue(), date_cessation_service.getValue());
-                    dao.insert(prof);
-                    new FadeOutRight(action_pane).play();
-                    refreshTable();
-                    clearInputs();
-                } catch (Exception e) {
-                    popUp.error("erreur","Erreur, essaye encore une fois");
-                }
+                if (date_prise_service.getValue().compareTo(date_cessation_service.getValue())<=0){
+                    try {
+                        prof = new Prof(0,numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue(), date_prise_service.getValue(), date_cessation_service.getValue());
+                        dao.insert(prof);
+                        new FadeOutRight(action_pane).play();
+                        refreshTable();
+                        clearInputs();
+                    } catch (Exception e) {
+                        popUp.error("erreur","Erreur, essaye encore une fois");
+                    }
+                } else popUp.error("Date erreur", "Date cessation erreur!");
             } else if (btn_action.getText().equals("Mettre à jour")){
-                try {
-                    prof = new Prof(Integer.valueOf(id.getText()),numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue(), date_prise_service.getValue(), date_cessation_service.getValue());
-                    dao.update(prof);
-                    new FadeOutRight(action_pane).play();
-                    refreshTable();
-                    clearInputs();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                if (date_prise_service.getValue().compareTo(date_cessation_service.getValue())<=0) {
+                    try {
+                        prof = new Prof(Integer.valueOf(id.getText()),numero_matricule_input.getText(),nom_prof_input.getText(),prenom_prof_input.getText(),date_nais_picker.getValue(), date_prise_service.getValue(), date_cessation_service.getValue());
+                        dao.update(prof);
+                        new FadeOutRight(action_pane).play();
+                        refreshTable();
+                        clearInputs();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else popUp.error("Date erreur", "Date cessation erreur!");
             }
         });
     }

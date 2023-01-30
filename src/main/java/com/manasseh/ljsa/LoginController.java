@@ -48,7 +48,7 @@ public class LoginController extends ActivateDrag {
         String query = "select count(1) from profs where nom_prof = '"+username.toUpperCase()+"' and n_matricule = '"+password.toUpperCase()+"'";
         try {
 
-            if (username.equals("admin") && password.equals("manasseh_randriamitsiry")){
+            if (username.equals("admin") && password.equals("randriamitsiry")){
                 loadAdminPage(event,"page/menu_admin");
                 popUp.success("Bienvenue",username+"!, je vous souhaite la bienvenue");
             } else {

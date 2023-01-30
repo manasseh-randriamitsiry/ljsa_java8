@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="coefficient_pane" prefHeight="680.0" prefWidth="1010.0" styleClass="body" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manasseh.ljsa.page.ClasseController">
-    <Label fx:id="coefficient_label" layoutX="98.0" layoutY="25.0" text="Coefficient">
+    <Label fx:id="coefficient_label" layoutX="98.0" layoutY="25.0" text="Classes">
         <font>
           <Font size="34.0" />
         </font>
@@ -24,7 +24,7 @@
         <Label fx:id="id" layoutX="26.0" layoutY="126.0" text="Label" visible="false" />
       <TextField fx:id="effectifs_input" layoutX="144.0" layoutY="193.0" prefHeight="42.0" prefWidth="120.0" promptText="Effectifs" styleClass="input1" stylesheets="@../style.css" />
       <Label fx:id="mode_label" layoutX="57.0" layoutY="36.0" style="-fx-font-size: 30;" text="Classe: Ajout" />
-      <ComboBox fx:id="level_input" editable="true" layoutX="149.0" layoutY="262.0" prefHeight="26.0" prefWidth="106.0" promptText="Numero matricule" styleClass="input1" />
+      <ComboBox fx:id="level_input" editable="true" layoutX="149.0" layoutY="262.0" prefHeight="26.0" prefWidth="106.0" promptText="level" styleClass="input1" />
       <Text layoutX="67.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level :" />
     </Pane>
     <TableView fx:id="table_coefficient" editable="true" layoutX="34.0" layoutY="155.0" prefHeight="409.0" prefWidth="572.0" styleClass="table" stylesheets="@../style.css" tableMenuButtonVisible="true">

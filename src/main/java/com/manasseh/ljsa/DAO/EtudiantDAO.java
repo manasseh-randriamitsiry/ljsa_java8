@@ -164,7 +164,6 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return data;
     }
-
     public ObservableList<PieChart.Data> chartEtudiant(){
         DatabaseConnection connection = new DatabaseConnection();
         ObservableList<PieChart.Data> pieChartdata= FXCollections.observableArrayList();

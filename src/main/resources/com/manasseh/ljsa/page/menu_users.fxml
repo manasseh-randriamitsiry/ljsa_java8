@@ -60,7 +60,6 @@
             </items>
          </SplitMenuButton>
          <ButtonBar layoutX="-5.0" layoutY="595.0" prefHeight="40.0" prefWidth="200.0" />
-         <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="635.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#logout" prefHeight="33.0" prefWidth="191.0" styleClass="btn-logout" stylesheets="@../style.css" text="Deconnection" />
       </Pane>
    </left>
    <center>

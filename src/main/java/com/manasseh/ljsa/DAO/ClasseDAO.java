@@ -72,6 +72,17 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
         }
         statement.close();
     }
+    public int effectif() throws SQLException {
+        String sql_count = "select effectif from classe";
+        int effectif=0;
+        DatabaseConnection connection_sql_count = new DatabaseConnection();
+        Statement statement_sql_count = connection_sql_count.getConnection().createStatement();
+        ResultSet resultSet = statement_sql_count.executeQuery(sql_count);
+        while (resultSet.next()){
+            effectif = resultSet.getInt("effectif");
+        }
+        return effectif;
+    }
     @Override
     public void insert(Classe data) throws SQLException {
         String sql = "insert into "+tableName+" values(NULL,?,?,?)";

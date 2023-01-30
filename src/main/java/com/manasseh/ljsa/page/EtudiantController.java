@@ -112,8 +112,12 @@ public class EtudiantController implements Initializable {
                         }
                     });
                     dltBtn.setOnAction(event -> {
-                        action_pane.setVisible(false);
-                        deleteEtudiant(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
+                        try {
+                            action_pane.setVisible(false);
+                            deleteEtudiant(getTableView().getItems().get(getIndex()).getId(), "etudiants", "id");
+                        } catch(Exception e){
+                            popUp.error("erreur suppression", "Etudiant en cours d'utilisation");
+                        }
                     });
                     HBox hb = new HBox();
                     hb.setSpacing(2);
@@ -191,12 +195,12 @@ public class EtudiantController implements Initializable {
         if(verify(nom_input.getText(),prenom_input.getText(),numero_matricule_input.getText())){
             try {
                 etudiant = new Etudiant(0, numero_matricule_input.getText(), nom_input.getText(), prenom_input.getText(), classe_input.getValue().toString(), date_nais_picker.getValue().toString());
-                System.out.println(classe_input.getValue().toString());
                 dao.insert(etudiant);
                 new FadeOutRight(action_pane).play();
                 refresh();
                 clearInputs();
             } catch (Exception e) {
+                e.printStackTrace();
                 popUp.error("erreur","Erreur, essaye encore une fois");
             }
         }

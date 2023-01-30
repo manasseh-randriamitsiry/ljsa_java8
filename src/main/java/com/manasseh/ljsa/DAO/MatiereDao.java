@@ -59,7 +59,7 @@ public class MatiereDao extends DeleteDAO implements DAOInterface<Matiere>{
         String sql = "insert into "+tableName+" values(NULL,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
-        statement.setString(1,matiere.getDescription());
+        statement.setString(1,matiere.getDesignation());
         statement.setString(2,matiere.getAbreviation().toUpperCase());
         statement.setString(3,matiere.getDescription().toLowerCase());
         try {

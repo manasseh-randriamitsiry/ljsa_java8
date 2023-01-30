@@ -47,7 +47,7 @@ public class RelevePremiereController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nmat_input.setItems(etudiantDAO.listPremiere());
+        nmat_input.setItems(premiereDAO.listNmatriculePremiere());
         new AutoCompleteComboBoxListener<>(nmat_input);
         new AutoCompleteComboBoxListener<>(annee_debut);
         annee_debut.getItems().addAll(AnneeLists.getYearList(100));

@@ -183,4 +183,33 @@ public class PremiereDAO extends DeleteDAO implements DAOInterface<Premiere>{
         }
         return listCoeff;
     }
+    public int getTotal() throws SQLException {
+        int result = 0;
+//        int current_year = Integer.valueOf(String.valueOf(Year.now()));
+//        String sql = "select SUM(seconde.malagasy*seconde_note_coeff.malagasy+seconde.francais*seconde_note_coeff.francais+seconde.anglais*seconde_note_coeff.anglais+seconde.histogeo*seconde_note_coeff.histogeo+seconde.eac*seconde_note_coeff.eac+seconde.ses*seconde_note_coeff.ses+seconde.spc*seconde_note_coeff.spc+seconde.svt*seconde_note_coeff.svt+seconde.mats*seconde_note_coeff.mats+seconde.eps*seconde_note_coeff.eps+seconde.tice*seconde_note_coeff.tice)*5/(count(seconde.n_mat)*SUM(seconde_note_coeff.anglais+seconde_note_coeff.malagasy+seconde_note_coeff.francais+seconde_note_coeff.histogeo+seconde_note_coeff.eac+seconde_note_coeff.ses+seconde_note_coeff.spc+seconde_note_coeff.svt+seconde_note_coeff.mats+seconde_note_coeff.eps+seconde_note_coeff.tice)) as moyenne FROM seconde,seconde_note_coeff where seconde.annee_scolaire='"+current_year+"'";
+        String sql = "select count(n_matricule) as total from etudiants,classe where classe.classe=etudiants.classe and classe.level='2'";
+        DatabaseConnection connection = new DatabaseConnection();
+        Statement statement = connection.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()){
+            result = resultSet.getInt("total");
+        }
+        return result;
+    }
+    public ObservableList<Object> listNmatriculePremiere(){
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        DatabaseConnection connection = new DatabaseConnection();
+        String query = "SELECT n_mat FROM premiere order by n_mat ASC";
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                data.add(resultSet.getString(1));
+            }
+        } catch (SQLException error) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
+        }
+        return data;
+    }
 }

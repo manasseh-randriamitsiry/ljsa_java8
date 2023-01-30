@@ -17,7 +17,7 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         ObservableList<Terminale> listTerminales = FXCollections.observableArrayList();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
-        String query = "SELECT id,nmat,trimestre,annee_scolaire,terminale.mlg*terminale_note_coeff.mlg as mlg,terminale.frs*terminale_note_coeff.frs as frs,terminale.anglais*terminale_note_coeff.anglais as anglais,terminale.histogeo*terminale_note_coeff.histogeo as histogeo,terminale.phylo*terminale_note_coeff.phylo as phylo,terminale.math*terminale_note_coeff.math as math,terminale.spc*terminale_note_coeff.spc as spc,terminale.svt*terminale_note_coeff.svt as svt,terminale.ses*terminale_note_coeff.ses as ses,terminale.eps from terminale,terminale_note_coeff";
+        String query = "SELECT id,nmat,trimestre,annee_scolaire,terminale.mlg*terminale_note_coeff.mlg as mlg,terminale.frs*terminale_note_coeff.frs as frs,terminale.anglais*terminale_note_coeff.anglais as anglais,terminale.histogeo*terminale_note_coeff.histogeo as histogeo,terminale.phylo*terminale_note_coeff.phylo as phylo,terminale.math*terminale_note_coeff.math as math,terminale.spc*terminale_note_coeff.spc as spc,terminale.svt*terminale_note_coeff.svt as svt,terminale.ses*terminale_note_coeff.ses as ses,terminale.eps*terminale_note_coeff.eps as eps from terminale,terminale_note_coeff";
         listTerminales.clear();
         try {
             Statement statement = connection.createStatement();
@@ -50,7 +50,6 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
     public void update(Terminale update) throws SQLException {
         String sql = "UPDATE "+tableName+" SET `mlg` = ?, `frs` = ?, `anglais` = ?, `histogeo` = ?, `phylo` = ?, " +
                 "`math` = ?, `spc` = ?, `svt` = ?, `ses` = ?, `eps` = ?, `nmat` = ?, `trimestre` = ?, `annee_scolaire` = ? WHERE `id` = ?";
-
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1,update.getMalagasy());
@@ -183,6 +182,33 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         }
         return listCoeff;
     }
-
-
+    public int getTotal() throws SQLException {
+        int result = 0;
+//        int current_year = Integer.valueOf(String.valueOf(Year.now()));
+//        String sql = "select SUM(seconde.malagasy*seconde_note_coeff.malagasy+seconde.francais*seconde_note_coeff.francais+seconde.anglais*seconde_note_coeff.anglais+seconde.histogeo*seconde_note_coeff.histogeo+seconde.eac*seconde_note_coeff.eac+seconde.ses*seconde_note_coeff.ses+seconde.spc*seconde_note_coeff.spc+seconde.svt*seconde_note_coeff.svt+seconde.mats*seconde_note_coeff.mats+seconde.eps*seconde_note_coeff.eps+seconde.tice*seconde_note_coeff.tice)*5/(count(seconde.n_mat)*SUM(seconde_note_coeff.anglais+seconde_note_coeff.malagasy+seconde_note_coeff.francais+seconde_note_coeff.histogeo+seconde_note_coeff.eac+seconde_note_coeff.ses+seconde_note_coeff.spc+seconde_note_coeff.svt+seconde_note_coeff.mats+seconde_note_coeff.eps+seconde_note_coeff.tice)) as moyenne FROM seconde,seconde_note_coeff where seconde.annee_scolaire='"+current_year+"'";
+        String sql = "select count(n_matricule) as total from etudiants,classe where classe.classe=etudiants.classe and classe.level='3'";
+        DatabaseConnection connection = new DatabaseConnection();
+        Statement statement = connection.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()){
+            result = resultSet.getInt("total");
+        }
+        return result;
+    }
+    public ObservableList<Object> listNmatriculeTerminale(){
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        DatabaseConnection connection = new DatabaseConnection();
+        String query = "SELECT nmat FROM terminale order by nmat ASC";
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                data.add(resultSet.getString(1));
+            }
+        } catch (SQLException error) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
+        }
+        return data;
+    }
 }

@@ -5,7 +5,6 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
@@ -20,7 +19,6 @@ import com.manasseh.ljsa.utils.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -69,7 +67,7 @@ public class ReleveSecondeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nmat_input.setItems(etudiantDAO.listSeconde());
+        nmat_input.setItems(secondeDAO.listNmatriculeSeconde());
         new AutoCompleteComboBoxListener<>(nmat_input);
         new AutoCompleteComboBoxListener<>(annee_debut);
         annee_debut.getItems().addAll(AnneeLists.getYearList(100));

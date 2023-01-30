@@ -3,7 +3,6 @@ package com.manasseh.ljsa.page;
 import animatefx.animation.*;
 import com.manasseh.ljsa.DAO.ClasseDAO;
 import com.manasseh.ljsa.model.Classe;
-import com.manasseh.ljsa.utils.AnneeLists;
 import com.manasseh.ljsa.utils.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -83,6 +82,7 @@ public class ClasseController implements Initializable {
                             classeDAO.delete(getTableView().getItems().get(getIndex()).getId(), "classe", "id");
                             refreshTable();
                         } catch (SQLException | ClassNotFoundException e) {
+                            popUp.error("erreur suppression", "Valeur en cours d'utilisation");
                             throw new RuntimeException(e);
                         }
                     });

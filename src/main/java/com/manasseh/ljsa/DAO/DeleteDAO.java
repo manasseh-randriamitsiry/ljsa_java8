@@ -13,6 +13,7 @@ import java.util.Optional;
 
 public class DeleteDAO {
     public void delete(Integer id,String tableName,String idName) throws SQLException, ClassNotFoundException {
+        PopUp deleted = new PopUp();
         DatabaseConnection conn = new DatabaseConnection();
         Connection connection = conn.getConnection();
         String sql = "DELETE FROM "+tableName+" WHERE "+idName+"="+id;
@@ -26,8 +27,9 @@ public class DeleteDAO {
         if (option.get() == ButtonType.OK) {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                PopUp deleted = new PopUp();
                 deleted.success("Supprimée","suppression avec success");
+            } else {
+                deleted.error("erreur suppression", "Valeur en cours d'utilisation");
             }
         }
         statement.close();

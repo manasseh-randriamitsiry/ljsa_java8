@@ -98,7 +98,7 @@ public class MatiereController implements Initializable {
         btn_action.setOnAction(event -> {
             if (btn_action.getText().equals("Ajouter +")){
                 try {
-                    matiere = new Matiere(10,designation_input.getText(),abreviation_input.getText(),description_input.getText());
+                    matiere = new Matiere(1,designation_input.getText(),abreviation_input.getText(),description_input.getText());
                     dao.insert(matiere);
                     new FadeOutRight(action_pane).play();
                     refreshTable();
@@ -129,8 +129,8 @@ public class MatiereController implements Initializable {
 
     private void clearInputs() {
         description_input.setText("");
+        abreviation_input.setText("");
         designation_input.setText("");
-        description_input.setText("");
     }
 
     private void refreshTable() {
@@ -145,6 +145,8 @@ public class MatiereController implements Initializable {
         new FadeInRight(action_pane).play();
         action_pane.setVisible(true);
         matiere_label.setText("Matière: Ajout");
+        clearInputs();
+        btn_action.setText("Ajouter +");
     }
 
     public void close() {

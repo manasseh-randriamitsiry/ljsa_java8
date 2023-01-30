@@ -62,7 +62,6 @@
                <MenuItem mnemonicParsing="false" onAction="#releveTerminale" text="Terminale" />
             </items>
          </SplitMenuButton>
-         <Button alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="-2.0" layoutY="629.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#logout" prefHeight="35.0" prefWidth="194.0" styleClass="btn-logout" stylesheets="@../style.css" text="Deconnection" />
       </Pane>
    </left>
    <center>

@@ -7,8 +7,6 @@ import com.manasseh.ljsa.utils.PopUp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
-import java.text.DecimalFormat;
-import java.time.Year;
 
 public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
     PopUp popUp = new PopUp();
@@ -78,40 +76,6 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         } catch (SQLException e) {
             popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
             e.printStackTrace();
-        }
-        return list;
-    }
-    public ObservableList<Seconde> listNotes(String nmat) {
-        ObservableList<Seconde> list = FXCollections.observableArrayList();
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDb = connectNow.getConnection();
-        String query = "SELECT * FROM "+tableName+" where n_mat = ?";
-        try {
-            PreparedStatement statement = connectDb.prepareStatement(query);
-            statement.setString(1, nmat);
-//            Statement statement = connectDb.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
-                list.add(new Seconde(
-                        resultSet.getInt("id"),
-                        resultSet.getFloat("malagasy"),
-                        resultSet.getFloat("francais"),
-                        resultSet.getFloat("anglais"),
-                        resultSet.getFloat("histogeo"),
-                        resultSet.getFloat("eac"),
-                        resultSet.getFloat("ses"),
-                        resultSet.getFloat("spc"),
-                        resultSet.getFloat("svt"),
-                        resultSet.getFloat("mats"),
-                        resultSet.getFloat("eps"),
-                        resultSet.getFloat("tice"),
-                        resultSet.getString("n_mat"),
-                        resultSet.getInt("trimestre"),
-                        resultSet.getInt("annee_scolaire")
-                ));
-            }
-        } catch (SQLException ignored) {
-            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
         }
         return list;
     }
@@ -213,6 +177,7 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
             popUp.error("erreur ","Le numero matricule est dejà utilisé");
         }
         statement.close();
+
     }
     public ObservableList<Coefficient_seconde> listCoeff(){
         ObservableList<Coefficient_seconde> listCoeff = FXCollections.observableArrayList();
@@ -242,17 +207,33 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         }
         return listCoeff;
     }
-    public String getPourcentage() throws SQLException {
-        float result = 0;
-        int current_year = Integer.valueOf(String.valueOf(Year.now()));
-        String sql = "select SUM(seconde.malagasy*seconde_note_coeff.malagasy+seconde.francais*seconde_note_coeff.francais+seconde.anglais*seconde_note_coeff.anglais+seconde.histogeo*seconde_note_coeff.histogeo+seconde.eac*seconde_note_coeff.eac+seconde.ses*seconde_note_coeff.ses+seconde.spc*seconde_note_coeff.spc+seconde.svt*seconde_note_coeff.svt+seconde.mats*seconde_note_coeff.mats+seconde.eps*seconde_note_coeff.eps+seconde.tice*seconde_note_coeff.tice)*5/(count(seconde.n_mat)*SUM(seconde_note_coeff.anglais+seconde_note_coeff.malagasy+seconde_note_coeff.francais+seconde_note_coeff.histogeo+seconde_note_coeff.eac+seconde_note_coeff.ses+seconde_note_coeff.spc+seconde_note_coeff.svt+seconde_note_coeff.mats+seconde_note_coeff.eps+seconde_note_coeff.tice)) as moyenne FROM seconde,seconde_note_coeff where seconde.annee_scolaire='"+current_year+"'";
+    public int getTotal() throws SQLException {
+        int result = 0;
+//        int current_year = Integer.valueOf(String.valueOf(Year.now()));
+//        String sql = "select SUM(seconde.malagasy*seconde_note_coeff.malagasy+seconde.francais*seconde_note_coeff.francais+seconde.anglais*seconde_note_coeff.anglais+seconde.histogeo*seconde_note_coeff.histogeo+seconde.eac*seconde_note_coeff.eac+seconde.ses*seconde_note_coeff.ses+seconde.spc*seconde_note_coeff.spc+seconde.svt*seconde_note_coeff.svt+seconde.mats*seconde_note_coeff.mats+seconde.eps*seconde_note_coeff.eps+seconde.tice*seconde_note_coeff.tice)*5/(count(seconde.n_mat)*SUM(seconde_note_coeff.anglais+seconde_note_coeff.malagasy+seconde_note_coeff.francais+seconde_note_coeff.histogeo+seconde_note_coeff.eac+seconde_note_coeff.ses+seconde_note_coeff.spc+seconde_note_coeff.svt+seconde_note_coeff.mats+seconde_note_coeff.eps+seconde_note_coeff.tice)) as moyenne FROM seconde,seconde_note_coeff where seconde.annee_scolaire='"+current_year+"'";
+        String sql = "select count(n_matricule) as total from etudiants,classe where classe.classe=etudiants.classe and classe.level='1'";
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()){
-            result = resultSet.getFloat("moyenne");
+            result = resultSet.getInt("total");
         }
-        DecimalFormat df = new DecimalFormat("###.##");
-        return df.format(result);
+        return result;
+    }
+    public ObservableList<Object> listNmatriculeSeconde(){
+        ObservableList<Object> data = FXCollections.observableArrayList();
+        DatabaseConnection connection = new DatabaseConnection();
+        String query = "SELECT n_mat FROM seconde order by n_mat ASC";
+        try {
+            Statement statement = connection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                data.add(resultSet.getString(1));
+            }
+        } catch (SQLException error) {
+            popUp.error("erreur","Erreur de connection au base de donnée. Veuillez contacter l'administrateur");
+            error.printStackTrace();
+        }
+        return data;
     }
 }
