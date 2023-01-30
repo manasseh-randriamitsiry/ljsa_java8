@@ -120,6 +120,7 @@ public class TerminaleController implements Initializable{
                             terminale = getTableView().getItems().get(getIndex());
                             terminale_label.setText("Terminale: edition");
                             btn_action.setText("Mettre à jour");
+                            switchShow();
 
                             coefficientTerminale = table_terminale_coeff.getItems().get(0);
                             id_label.setText(terminale.getId().toString());
@@ -136,8 +137,6 @@ public class TerminaleController implements Initializable{
                             n_mat_input.getSelectionModel().select(terminale.getN_mat());
                             trimestre_input.setText(terminale.getTrimestre().toString());
                             annee_input.getSelectionModel().select(terminale.getAnnee_scolaire());
-                            btn_action.setText("Mettre à jour");
-
                             action_pane.setVisible(true);
                             new FadeInRight(action_pane).play();
                         } catch (NullPointerException e) {
