@@ -16,7 +16,6 @@ import com.manasseh.ljsa.utils.PopUp;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
