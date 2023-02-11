@@ -6,7 +6,6 @@ import com.manasseh.ljsa.utils.DatabaseConnection;
 import com.manasseh.ljsa.utils.PopUp;
 import com.manasseh.ljsa.model.Etudiant;
 import javafx.scene.chart.PieChart;
-
 import java.sql.*;
 
 public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
@@ -33,6 +32,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         statement.close();
     }
+    
     @Override
     public ObservableList<Etudiant> listAll(){
         ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
@@ -59,6 +59,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return listEtudiant;
     }
+    
     @Override
     public void update(Etudiant etudiant) throws SQLException{
         String sql = "update "+tableName+" set n_matricule = ?, nom=?, prenom=?, classe = ?,date_nais=? where id = ?";
@@ -82,6 +83,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         statement.close();
     }
+    
     public int nombreEtudiant() throws SQLException {
         int nombre = 0;
         String sql = "select count(*) from "+tableName;
@@ -93,6 +95,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return nombre;
     }
+    
     public Etudiant getByNmat(String n_matricule){
         DatabaseConnection connection = new DatabaseConnection();
         Etudiant etudiant = null;
@@ -116,6 +119,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return etudiant;
     }
+    
     public ObservableList<Object> listSeconde(){
         ObservableList<Object> data = FXCollections.observableArrayList();
         DatabaseConnection connection = new DatabaseConnection();
@@ -132,6 +136,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return data;
     }
+    
     public ObservableList<Object> listPremiere(){
         ObservableList<Object> data = FXCollections.observableArrayList();
         DatabaseConnection connection = new DatabaseConnection();
@@ -148,6 +153,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return data;
     }
+    
     public ObservableList<Object> listTerminal(){
         ObservableList<Object> data = FXCollections.observableArrayList();
         DatabaseConnection connection = new DatabaseConnection();
@@ -164,6 +170,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
         }
         return data;
     }
+    
     public ObservableList<PieChart.Data> chartEtudiant(){
         DatabaseConnection connection = new DatabaseConnection();
         ObservableList<PieChart.Data> pieChartdata= FXCollections.observableArrayList();
