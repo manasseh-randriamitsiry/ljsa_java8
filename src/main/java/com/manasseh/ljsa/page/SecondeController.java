@@ -399,6 +399,8 @@ public class SecondeController implements Initializable{
         nmat_btn.setVisible(false);
         annee_btn.setVisible(false);
         detail_btn.setVisible(false);
+        btn_action.setText("Coef: edit");
+        seconde_label.setText("Modification des coefficients");
 
         coefficient_seconde = seconde_table_coeffcient.getItems().get(0);
         mlg_input.setText(coefficient_seconde.getMalagasy().toString());
@@ -412,10 +414,7 @@ public class SecondeController implements Initializable{
         svt_input.setText(coefficient_seconde.getSvt().toString());
         tice_input.setText(coefficient_seconde.getTice().toString());
         eps_input.setText(coefficient_seconde.getEps().toString());
-//
-        btn_action.setText("Coef: edit");
-        seconde_label.setText("Modification des coefficients");
-//
+
         action_pane.setVisible(true);
         new FadeInRight(action_pane).play();
     }

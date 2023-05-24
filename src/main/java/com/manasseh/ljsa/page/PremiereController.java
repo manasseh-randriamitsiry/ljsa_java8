@@ -419,6 +419,8 @@ public class PremiereController implements Initializable{
         nmat_btn.setVisible(false);
         annee_btn.setVisible(false);
         detail_btn.setVisible(false);
+        btn_action.setText("Coef: edit");
+        premiere_label.setText("Modification des coefficients");
 
         coefficientPremiere = premiere_table_coeff.getItems().get(0);
         mlg_input.setText(coefficientPremiere.getMalagasy().toString());
@@ -433,9 +435,6 @@ public class PremiereController implements Initializable{
         tice_input.setText(coefficientPremiere.getTice().toString());
         eps_input.setText(coefficientPremiere.getEps().toString());
         phylo_input.setText(coefficientPremiere.getPhylo().toString());
-//
-        btn_action.setText("Coef: edit");
-        premiere_label.setText("Modification des coefficients");
 //
         action_pane.setVisible(true);
         new FadeInRight(action_pane).play();

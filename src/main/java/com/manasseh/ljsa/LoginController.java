@@ -40,13 +40,12 @@ public class LoginController extends ActivateDrag {
             popUp.error("erreur","les champ champs sont vides !");
         }
     }
-    public void login(ActionEvent event,String username, String password) {
+    public void login(ActionEvent event,String username, String password){
         info.setVisible(false);
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
         String query = "select count(1) from profs where nom_prof = '"+username.toUpperCase()+"' and n_matricule = '"+password.toUpperCase()+"'";
         try {
-
             if (username.equals("admin") && password.equals("randriamitsiry")){
                 loadAdminPage(event,"page/menu_admin");
                 popUp.success("Bienvenue",username+"!, je vous souhaite la bienvenue");

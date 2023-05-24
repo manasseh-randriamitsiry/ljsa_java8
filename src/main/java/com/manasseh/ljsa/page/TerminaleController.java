@@ -398,6 +398,10 @@ public class TerminaleController implements Initializable{
         nmat_btn.setVisible(false);
         annee_btn.setVisible(false);
         detail_btn.setVisible(false);
+        //
+        btn_action.setText("Coef: edit");
+        terminale_label.setText("Modification des coefficients");
+//
 
         coefficientTerminale = table_terminale_coeff.getItems().get(0);
         mlg_input.setText(coefficientTerminale.getMalagasy().toString());
@@ -411,10 +415,7 @@ public class TerminaleController implements Initializable{
         svt_input.setText(coefficientTerminale.getSvt().toString());
         phylo_input.setText(coefficientTerminale.getPhylosphie().toString());
         eps_input.setText(coefficientTerminale.getEps().toString());
-//
-        btn_action.setText("Coef: edit");
-        terminale_label.setText("Modification des coefficients");
-//
+
         action_pane.setVisible(true);
         new FadeInRight(action_pane).play();
     }

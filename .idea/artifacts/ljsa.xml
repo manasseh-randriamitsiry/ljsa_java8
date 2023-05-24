@@ -11,6 +11,7 @@
         <option name="icons">
           <JavaFxApplicationIcons>
             <option name="macIcon" value="$PROJECT_DIR$/src/main/resources/com/manasseh/ljsa/img/7ec265467ae56fe682433d0ab0eef64a_Noon.icns" />
+            <option name="windowsIcon" value="$PROJECT_DIR$/ljsa.ico" />
           </JavaFxApplicationIcons>
         </option>
         <option name="keystore" value="" />

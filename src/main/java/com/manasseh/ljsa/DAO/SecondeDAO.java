@@ -17,7 +17,7 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         ObservableList<Seconde> list = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "select seconde.malagasy*seconde_note_coeff.malagasy as malagasy,seconde.francais*seconde_note_coeff.francais as francais,seconde.anglais*seconde_note_coeff.anglais as anglais,seconde.histogeo*seconde_note_coeff.histogeo as histogeo,seconde.eac*seconde_note_coeff.eac as eac,seconde.ses*seconde_note_coeff.ses as ses,seconde.spc*seconde_note_coeff.spc as spc,seconde.svt*seconde_note_coeff.svt as svt,seconde.mats*seconde_note_coeff.mats as mats,seconde.eps*seconde_note_coeff.eps as eps,seconde.tice*seconde_note_coeff.tice as tice, n_mat, trimestre, annee_scolaire,id FROM seconde,seconde_note_coeff;";
+        String query = "select seconde.malagasy*seconde_note_coeff.c_malagasy as malagasy,seconde.francais*seconde_note_coeff.c_francais as francais,seconde.anglais*seconde_note_coeff.c_anglais as anglais,seconde.histogeo*seconde_note_coeff.c_histogeo as histogeo,seconde.eac*seconde_note_coeff.c_eac as eac,seconde.ses*seconde_note_coeff.c_ses as ses,seconde.spc*seconde_note_coeff.c_spc as spc,seconde.svt*seconde_note_coeff.c_svt as svt,seconde.mats*seconde_note_coeff.c_mats as mats,seconde.eps*seconde_note_coeff.c_eps as eps,seconde.tice*seconde_note_coeff.c_tice as tice, n_mat, trimestre, annee_scolaire,id FROM seconde,seconde_note_coeff;";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -50,7 +50,7 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         ObservableList<Seconde> list = FXCollections.observableArrayList();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDb = connectNow.getConnection();
-        String query = "select seconde.malagasy*seconde_note_coeff.malagasy as malagasy,seconde.francais*seconde_note_coeff.francais as francais,seconde.anglais*seconde_note_coeff.anglais as anglais,seconde.histogeo*seconde_note_coeff.histogeo as histogeo,seconde.eac*seconde_note_coeff.eac as eac,seconde.ses*seconde_note_coeff.ses as ses,seconde.spc*seconde_note_coeff.spc as spc,seconde.svt*seconde_note_coeff.svt as svt,seconde.mats*seconde_note_coeff.mats as mats,seconde.eps*seconde_note_coeff.eps as eps,seconde.tice*seconde_note_coeff.tice as tice, n_mat, trimestre, annee_scolaire,id FROM seconde,seconde_note_coeff where annee_scolaire between '"+startYear+"' and '"+endYear+"' and n_mat = '"+nMat+"' ;";
+        String query = "select seconde.malagasy*seconde_note_coeff.c_malagasy as malagasy,seconde.francais*seconde_note_coeff.c_francais as francais,seconde.anglais*seconde_note_coeff.c_anglais as anglais,seconde.histogeo*seconde_note_coeff.c_histogeo as histogeo,seconde.eac*seconde_note_coeff.c_eac as eac,seconde.ses*seconde_note_coeff.c_ses as ses,seconde.spc*seconde_note_coeff.c_spc as spc,seconde.svt*seconde_note_coeff.c_svt as svt,seconde.mats*seconde_note_coeff.c_mats as mats,seconde.eps*seconde_note_coeff.c_eps as eps,seconde.tice*seconde_note_coeff.c_tice as tice, n_mat, trimestre, annee_scolaire,id FROM seconde,seconde_note_coeff where annee_scolaire between '"+startYear+"' and '"+endYear+"' and n_mat = '"+nMat+"' ;";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -112,7 +112,7 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
         statement.close();
     }
     public void updateCoeff(Coefficient_seconde data) throws SQLException {
-        String sql = "UPDATE `seconde_note_coeff` SET `malagasy`=?,`francais`=?,`anglais`=?,`histogeo`=?,`eac`=?,`ses`=?,`spc`=?,`svt`=?,`mats`=?,`eps`=?,`tice`=? WHERE 1";
+        String sql = "UPDATE `seconde_note_coeff` SET `c_malagasy`=?,`c_francais`=?,`c_anglais`=?,`c_histogeo`=?,`c_eac`=?,`c_ses`=?,`c_spc`=?,`c_svt`=?,`c_mats`=?,`c_eps`=?,`c_tice`=? WHERE 1";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1, data.getMalagasy());
@@ -140,7 +140,7 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
     }
     public Integer getCoeffTotal() throws SQLException {
         int coeff = 1;
-        String sql = "SELECT SUM(anglais+eac+eps+francais+histogeo+malagasy+mats+ses+spc+svt+tice) as total FROM "+tableCoeffName;
+        String sql = "SELECT SUM(c_anglais+c_eac+c_eps+c_francais+c_histogeo+c_malagasy+c_mats+c_ses+c_spc+c_svt+c_tice) as total FROM "+tableCoeffName;
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -189,17 +189,17 @@ public class SecondeDAO extends DeleteDAO implements DAOInterface<Seconde>{
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 listCoeff.add(new Coefficient_seconde(
-                        resultSet.getInt("malagasy"),
-                        resultSet.getInt("francais"),
-                        resultSet.getInt("anglais"),
-                        resultSet.getInt("histogeo"),
-                        resultSet.getInt("eac"),
-                        resultSet.getInt("ses"),
-                        resultSet.getInt("spc"),
-                        resultSet.getInt("svt"),
-                        resultSet.getInt("mats"),
-                        resultSet.getInt("eps"),
-                        resultSet.getInt("tice")
+                        resultSet.getInt("c_malagasy"),
+                        resultSet.getInt("c_francais"),
+                        resultSet.getInt("c_anglais"),
+                        resultSet.getInt("c_histogeo"),
+                        resultSet.getInt("c_eac"),
+                        resultSet.getInt("c_ses"),
+                        resultSet.getInt("c_spc"),
+                        resultSet.getInt("c_svt"),
+                        resultSet.getInt("c_mats"),
+                        resultSet.getInt("c_eps"),
+                        resultSet.getInt("c_tice")
                 ));
             }
         } catch (SQLException ignored) {

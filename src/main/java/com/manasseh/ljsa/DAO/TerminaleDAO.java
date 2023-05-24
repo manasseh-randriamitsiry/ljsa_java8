@@ -17,7 +17,7 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         ObservableList<Terminale> listTerminales = FXCollections.observableArrayList();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
-        String query = "SELECT id,nmat,trimestre,annee_scolaire,terminale.mlg*terminale_note_coeff.mlg as mlg,terminale.frs*terminale_note_coeff.frs as frs,terminale.anglais*terminale_note_coeff.anglais as anglais,terminale.histogeo*terminale_note_coeff.histogeo as histogeo,terminale.phylo*terminale_note_coeff.phylo as phylo,terminale.math*terminale_note_coeff.math as math,terminale.spc*terminale_note_coeff.spc as spc,terminale.svt*terminale_note_coeff.svt as svt,terminale.ses*terminale_note_coeff.ses as ses,terminale.eps*terminale_note_coeff.eps as eps from terminale,terminale_note_coeff";
+        String query = "SELECT id,nmat,trimestre,annee_scolaire,terminale.mlg*terminale_note_coeff.c_malagasy as mlg,terminale.frs*terminale_note_coeff.c_francais as frs,terminale.anglais*terminale_note_coeff.c_anglais as anglais,terminale.histogeo*terminale_note_coeff.c_histogeo as histogeo,terminale.phylo*terminale_note_coeff.c_phylo as phylo,terminale.math*terminale_note_coeff.c_mats as math,terminale.spc*terminale_note_coeff.c_spc as spc,terminale.svt*terminale_note_coeff.c_svt as svt,terminale.ses*terminale_note_coeff.c_ses as ses,terminale.eps*terminale_note_coeff.c_eps as eps from terminale,terminale_note_coeff";
         listTerminales.clear();
         try {
             Statement statement = connection.createStatement();
@@ -110,7 +110,7 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
 
     public Integer getCoeffTotal() throws SQLException {
         int coeff = 1;
-        String sql = "SELECT SUM(mlg+frs+anglais+histogeo+phylo+math+spc+svt+ses+eps) as total FROM "+tableCoeffName;
+        String sql = "SELECT SUM(c_malagasy+c_francais+c_anglais+c_histogeo+c_phylo+c_mats+c_spc+c_svt+c_ses+c_eps) as total FROM "+tableCoeffName;
         DatabaseConnection connection = new DatabaseConnection();
         Statement statement = connection.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -121,7 +121,7 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
     }
 
     public void updateCoeff(Coefficient_terminale data) throws SQLException {
-        String sql = "UPDATE terminale_note_coeff SET mlg = ?,frs = ?,anglais = ?,histogeo = ?,phylo = ?,eps = ?,math = ?,spc = ?,svt = ?,ses = ? WHERE 1";
+        String sql = "UPDATE terminale_note_coeff SET c_malagasy = ?,c_francais = ?,c_anglais = ?,c_histogeo = ?,c_phylo = ?,c_eps = ?,c_mats = ?,c_spc = ?,c_svt = ?,c_ses = ? WHERE 1";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setFloat(1, data.getMalagasy());
@@ -134,13 +134,6 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
         statement.setFloat(8,data.getSpc());
         statement.setFloat(9,data.getSvt());
         statement.setFloat(10,data.getSes());
-
-        System.out.println("math:"+data.getMathematique());
-        System.out.println("phys:"+data.getSpc());
-        System.out.println("svt:"+data.getSvt());
-        System.out.println("eps:"+data.getEps());
-        System.out.println("ses:"+data.getSes());
-        System.out.println("ang:"+data.getAnglais());
 
         try{
             int res = statement.executeUpdate();
@@ -165,16 +158,16 @@ public class TerminaleDAO extends DeleteDAO implements DAOInterface<Terminale>{
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 listCoeff.add(new Coefficient_terminale(
-    resultSet.getInt("mlg"),
-    resultSet.getInt("frs"),
-    resultSet.getInt("anglais"),
-    resultSet.getInt("histogeo"),
-    resultSet.getInt("phylo"),
-    resultSet.getInt("eps"),
-    resultSet.getInt("math"),
-    resultSet.getInt("spc"),
-    resultSet.getInt("svt"),
-    resultSet.getInt("ses")
+                    resultSet.getInt("c_malagasy"),
+                    resultSet.getInt("c_francais"),
+                    resultSet.getInt("c_anglais"),
+                    resultSet.getInt("c_histogeo"),
+                    resultSet.getInt("c_phylo"),
+                    resultSet.getInt("c_eps"),
+                    resultSet.getInt("c_mats"),
+                    resultSet.getInt("c_spc"),
+                    resultSet.getInt("c_svt"),
+                    resultSet.getInt("c_ses")
                 ));
             }
         } catch (SQLException ignored) {

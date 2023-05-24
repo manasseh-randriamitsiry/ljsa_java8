@@ -15,7 +15,7 @@ public class DatabaseConnection {
             connection = DriverManager.getConnection(url,databaseUser,databasePassword);
         } catch (Exception e){
             PopUp error = new PopUp();
-            error.error("Erreur connection",e.getMessage());
+            error.error("erreur","verifie votre serveur");
         }
         return connection;
     }

@@ -1,4 +1,5 @@
--- BEGIN TABLE classe
+
+-- BEGIN TABLE classe
 DROP TABLE IF EXISTS classe;
 CREATE TABLE `classe` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -26,7 +27,9 @@ CREATE TABLE `etudiants` (
   KEY `classe` (`classe`),
   CONSTRAINT `etudiants_ibfk_1` FOREIGN KEY (`classe`) REFERENCES `classe` (`classe`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
--- END TABLE etudiants
+
+-- END TABLE etudiants
+
 -- BEGIN TABLE matiere
 DROP TABLE IF EXISTS matiere;
 CREATE TABLE `matiere` (
@@ -37,7 +40,8 @@ CREATE TABLE `matiere` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Inserting 3 rows into matiere
+-- Inserting 3 rows into matiere
+
 -- BEGIN TABLE premiere
 DROP TABLE IF EXISTS premiere;
 CREATE TABLE `premiere` (
@@ -60,7 +64,8 @@ CREATE TABLE `premiere` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Inserting 1 row into premiere
+-- Inserting 1 row into premiere
+
 -- BEGIN TABLE premiere_note_coeff
 DROP TABLE IF EXISTS premiere_note_coeff;
 CREATE TABLE `premiere_note_coeff` (
@@ -177,4 +182,6 @@ CREATE TABLE `terminale_note_coeff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 -- END TABLE terminale_note_coeff
-
+INSERT INTO `premiere_note_coeff` (`c_malagasy`, `c_francais`, `c_anglais`, `c_histogeo`, `c_eac`, `c_ses`, `c_spc`, `c_svt`, `c_mats`, `c_eps`, `c_tice`, `c_phylo`) VALUES ('2', '2', '2', '2', '1', '1', '1', '3', '3', '1', '1', '1');
+INSERT INTO `seconde_note_coeff` (`c_malagasy`, `c_francais`, `c_anglais`, `c_histogeo`, `c_eac`, `c_ses`, `c_spc`, `c_svt`, `c_mats`, `c_eps`, `c_tice`) VALUES ('2', '2', '2', '2', '1', '1', '1', '3', '3', '1', '1');
+INSERT INTO `terminale_note_coeff` (`c_malagasy`, `c_francais`, `c_anglais`, `c_histogeo`, `c_phylo`, `c_mats`, `c_spc`, `c_svt`, `c_ses`, `c_eps`) VALUES ('3', '2', '2', '2', '2', '3', '1', '3', '1', '1');
