@@ -49,14 +49,19 @@ public class MatiereDao extends DeleteDAO implements DAOInterface<Matiere>{
             } else {
                 popUp.error("Erreur ","Mise à jour avec erreur");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-            popUp.error("Erreur","Le matiere "+ matiere.getDesignation() +" est dejà enregisté");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("Erreur","Le matiere "+ matiere.getDesignation() +" est dejà enregisté");
+            } else {
+                popUp.error("Erreur","Erreur lors de la mise à jour");
+            }
+            e.printStackTrace();
         }
         statement.close();
     }
     @Override
     public void insert(Matiere matiere) throws SQLException {
-        String sql = "insert into "+tableName+" values(NULL,?,?,?)";
+        String sql = "insert into "+tableName+" (designation, abreviation, description) values(?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,matiere.getDesignation());
@@ -67,8 +72,9 @@ public class MatiereDao extends DeleteDAO implements DAOInterface<Matiere>{
             if (rowsInserted > 0) {
                 popUp.success("Success","insertion avec success");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
+        } catch (SQLException e){
             popUp.error("erreur ","Erreur durant l'ajout.");
+            e.printStackTrace();
         }
         statement.close();
     }

@@ -52,7 +52,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
     }
     @Override
     public void update(Classe data) throws SQLException {
-        String sql = "UPDATE "+tableName+" SET `classe` = ?, `effectif` = ?,`level` = ?  WHERE `id` = ?;";
+        String sql = "UPDATE "+tableName+" SET classe = ?, effectif = ?, level = ? WHERE id = ?";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
@@ -66,8 +66,12 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
             } else {
                 popUp.error("Erreur ","Mise à jour avec erreur");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-            popUp.error("Erreur","Le classe "+ data.getClasse() +" est dejà definis");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("Erreur","Le classe "+ data.getClasse() +" est dejà definis");
+            } else {
+                popUp.error("Erreur","Erreur lors de la mise à jour");
+            }
             e.printStackTrace();
         }
         statement.close();
@@ -85,7 +89,7 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
     }
     @Override
     public void insert(Classe data) throws SQLException {
-        String sql = "insert into "+tableName+" values(NULL,?,?,?)";
+        String sql = "insert into "+tableName+" (classe, effectif, level) values(?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,data.getClasse().toUpperCase());
@@ -96,8 +100,12 @@ public class ClasseDAO extends DeleteDAO implements DAOInterface<Classe>{
             if (rowsInserted > 0) {
                 popUp.success("Success","insertion avec success");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-            popUp.error("erreur ","Classe dejà enregistré");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("erreur ","Classe dejà enregistré");
+            } else {
+                popUp.error("erreur ","Erreur lors de l'insertion");
+            }
             e.printStackTrace();
         }
         statement.close();

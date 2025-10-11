@@ -13,7 +13,7 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
     String tableName = "etudiants";
     @Override
     public void insert(Etudiant etudiant) throws SQLException {
-        String sql = "insert into "+tableName+" values(NULL,?,?,?,?,?)";
+        String sql = "insert into "+tableName+" (n_matricule, nom, prenom, classe, date_nais) values(?,?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,etudiant.getN_mat_etudiant().toUpperCase());
@@ -26,9 +26,13 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
             if (rowsInserted > 0) {
                 popUp.success("Success","insertion avec success");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-//            e.printStackTrace();
-            popUp.error("erreur ","Le numero matricule est dejà utilisé");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("erreur ","Le numero matricule est dejà utilisé");
+            } else {
+                popUp.error("erreur ","Erreur lors de l'insertion");
+            }
+            e.printStackTrace();
         }
         statement.close();
     }
@@ -78,8 +82,13 @@ public class EtudiantDAO extends DeleteDAO implements DAOInterface<Etudiant> {
             } else {
                 popUp.error("Erreur ","Mise à jour avec erreur");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-            popUp.error("Erreur","Le numero matricule "+ etudiant.getN_mat_etudiant() +" est dejà prise");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("Erreur","Le numero matricule "+ etudiant.getN_mat_etudiant() +" est dejà prise");
+            } else {
+                popUp.error("Erreur","Erreur lors de la mise à jour");
+            }
+            e.printStackTrace();
         }
         statement.close();
     }

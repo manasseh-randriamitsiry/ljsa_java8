@@ -7,12 +7,10 @@ how to set up :
 -     Main
 -     JAVA_VERSION = 8;
 -     FX_VERSION = 8(Embabed with java8);
-- default sql config :
--     dbUser: root
--     password: 123456789
-- You can edit those sql config at:
--     src/main/java/com.manasseh.ljsa/utils/DatabaseConnection.java
-- then, import the sql file to the database:
--     ljsa.sql
+- Database: SQLite (no separate installation required)
+- The application will automatically create a SQLite database file (ljsa.db) in the project directory
+- To initialize the database schema, the application will use:
+-     ljsa_sqlite.sql
+- GitHub Actions: The project now uses a CI/CD workflow that builds JAR and EXE files
 - !!! don't forget to change your JAVA_VERSION to 8
 - enjoy

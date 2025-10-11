@@ -1,5 +1,6 @@
 package com.manasseh.ljsa;
 
+import com.manasseh.ljsa.utils.DatabaseInitializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +12,10 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-       FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        // Initialize the database
+        DatabaseInitializer.initializeDatabase();
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("page/menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         String style = Objects.requireNonNull(this.getClass().getResource("style.css")).toExternalForm();

@@ -11,7 +11,7 @@ public class ProfDAO extends DeleteDAO implements DAOInterface<Prof> {
     PopUp popUp = new PopUp();
     @Override
     public void insert(Prof prof) throws SQLException {
-        String sql = "insert into profs() values(NULL,?,?,?,?,?,?)";
+        String sql = "insert into profs (n_matricule, nom_prof, prenom_prof, date_nais, date_prise_service, date_cessation_service) values(?,?,?,?,?,?)";
         DatabaseConnection connection = new DatabaseConnection();
         PreparedStatement statement = connection.getConnection().prepareStatement(sql);
         statement.setString(1,prof.getN_mat().toUpperCase());
@@ -25,8 +25,13 @@ public class ProfDAO extends DeleteDAO implements DAOInterface<Prof> {
             if (rowsInserted > 0) {
                 popUp.success("Success","insertion avec success");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-            popUp.error("erreur ","Le numero matricule est dejà utilisé");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("erreur ","Le numero matricule est dejà utilisé");
+            } else {
+                popUp.error("erreur ","Erreur lors de l'insertion");
+            }
+            e.printStackTrace();
         }
         statement.close();
     }
@@ -76,8 +81,13 @@ public class ProfDAO extends DeleteDAO implements DAOInterface<Prof> {
             } else {
                 popUp.error("Erreur ","Mise à jour avec erreur");
             }
-        } catch (SQLIntegrityConstraintViolationException e){
-            popUp.error("Erreur","Le numero matricule "+ prof.getN_mat() +" est dejà prise");
+        } catch (SQLException e){
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                popUp.error("Erreur","Le numero matricule "+ prof.getN_mat() +" est dejà prise");
+            } else {
+                popUp.error("Erreur","Erreur lors de la mise à jour");
+            }
+            e.printStackTrace();
         }
         statement.close();
     }

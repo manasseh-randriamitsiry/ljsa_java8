@@ -12,23 +12,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  # 🧱 1️⃣ Linux job: Build the JAR with MySQL
+  # 🧱 1️⃣ Linux job: Build the JAR with SQLite
   build-jar:
     runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: 123456789
-          MYSQL_DATABASE: ljsa
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h localhost"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
 
     steps:
       - name: Checkout repository
@@ -40,21 +26,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Wait for MySQL
-        run: |
-          for i in {1..30}; do
-            if mysqladmin ping -h127.0.0.1 -uroot -p123456789 --silent; then
-              echo "MySQL is ready!"
-              break
-            fi
-            sleep 2
-          done
-
-      - name: Import SQL schema
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mysql-client
-          mysql -h127.0.0.1 -uroot -p123456789 ljsa < ljsa.sql
+      # No database service needed for SQLite
 
       - name: Build JAR
         run: mvn -B clean package -DskipTests --file pom.xml
@@ -90,17 +62,10 @@ jobs:
         run: choco install launch4j -y
 
       - name: Package JAR into EXE
+        shell: cmd
         run: |
           mkdir dist
-          launch4j ^
-            --dont-wrapJar ^
-            --outfile dist/ljsa.exe ^
-            --jar target\*.jar ^
-            --mainClass com.manasseh.ljsa.Main ^
-            --chdir . ^
-            --errTitle "LJSA Error" ^
-            --supportUrl "https://github.com/${{ github.repository }}" ^
-            --headerType gui
+          launch4j --dont-wrapJar --outfile dist/ljsa.exe --jar target/*.jar --mainClass com.manasseh.ljsa.Main --chdir . --errTitle "LJSA Error" --supportUrl "https://github.com/${{ github.repository }}" --headerType gui
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
