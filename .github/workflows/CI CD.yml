@@ -37,7 +37,7 @@ jobs:
           name: ljsa-jar
           path: target/*.jar
 
-  # 🪟 2️⃣ Windows job: Create standalone executable
+  # 🪟 2️⃣ Windows job: Create simple EXE wrapper
   package-exe:
     runs-on: windows-latest
     needs: build-jar
@@ -58,56 +58,39 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: List downloaded files
+      - name: Create simple EXE wrapper
         shell: cmd
         run: |
-          dir target
-
-      - name: Create standalone executable package
-        shell: cmd
-        run: |
-          echo Creating application directory...
-          mkdir ljsa-package
+          echo Creating application directory structure...
+          mkdir app
+          xcopy target\*.jar app\ /Y
           
-          echo Copying JAR file...
-          copy target\*.jar ljsa-package\
+          echo Creating batch wrapper...
+          echo @echo off > run.bat
+          echo cd /d "%%~dp0" >> run.bat
+          echo java -jar *.jar >> run.bat
+          echo if errorlevel 1 pause >> run.bat
           
-          echo Creating launcher script...
-          echo @echo off > ljsa-package\ljsa.exe
-          echo powershell -WindowStyle Hidden -Command "Start-Process java -ArgumentList '-jar', '%~dp0ljsa-1.0-SNAPSHOT.jar' -Wait" >> ljsa-package\ljsa.exe
+          echo Creating self-contained package...
+          mkdir package
+          xcopy app\*.jar package\ /Y
+          copy run.bat package\
           
-          echo Renaming launcher to EXE...
-          del ljsa-package\ljsa.exe
-          echo @echo off > ljsa-package\ljsa.bat
-          echo powershell -WindowStyle Hidden -Command "Start-Process java -ArgumentList '-jar', '%~dp0ljsa-1.0-SNAPSHOT.jar'" >> ljsa-package\ljsa.bat
+          echo Creating executable wrapper...
+          echo @echo off > ljsa.exe
+          echo cd /d "%%~dp0" >> ljsa.exe
+          echo java -jar *.jar >> ljsa.exe
+          echo if errorlevel 1 pause >> ljsa.exe
           
-          echo Creating README file...
-          echo LJSA Application > ljsa-package\README.txt
-          echo =============== >> ljsa-package\README.txt
-          echo To run the application, double-click on ljsa.bat >> ljsa-package\README.txt
-          echo Make sure you have Java 8 or higher installed on your system >> ljsa-package\README.txt
-          
-          echo Creating self-extracting archive...
-          powershell "Compress-Archive -Path 'ljsa-package\*' -DestinationPath 'ljsa-package.zip'"
-          
-          echo Creating self-extracting EXE with 7z...
-          echo ;!@Install@!UTF-8! > config.txt
-          echo Title="LJSA Application" >> config.txt
-          echo ExecuteFile="ljsa.bat" >> config.txt
-          echo ;!@InstallEnd@! >> config.txt
-          
-          REM Download 7z SFX module
-          curl -L -o 7zSfx.exe https://github.com/mcmilk/7z-bin/raw/master/sfx/win32/7zS2con.sfx
-          
-          REM Create self-extracting EXE
-          copy /b 7zSfx.exe+ljsa-package.zip ljsa.exe
-          
-          echo Creating dist directory...
+          echo Creating complete distribution...
           mkdir dist
           copy ljsa.exe dist\
-          copy target\*.jar dist\
+          xcopy app\*.jar dist\ /Y
+          
+          echo Verifying files...
+          dir dist\
 
-      - name: Upload EXE artifact
+      - name: Upload distribution artifact
         uses: actions/upload-artifact@v4
         with:
           name: ljsa-exe
@@ -120,7 +103,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
 
     steps:
-      - name: Download EXE artifact
+      - name: Download distribution artifact
         uses: actions/download-artifact@v4
         with:
           name: ljsa-exe
