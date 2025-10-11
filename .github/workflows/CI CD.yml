@@ -67,7 +67,7 @@ jobs:
           7z x launch4j.zip -olaunch4j
           
           echo Finding JAR file...
-          for /f "tokens=*" %%i in ('dir target\*.jar /b') do set JAR_FILE=%%i
+          for /f "tokens=*" %%i in ('dir target\*.jar /b ^| findstr /v "original"') do set JAR_FILE=%%i
           echo Found JAR file: %JAR_FILE%
           
           echo Creating launch4j configuration...
@@ -108,7 +108,9 @@ jobs:
         shell: cmd
         run: |
           echo Running launch4j to create EXE...
-          launch4j\launch4j ljsa.xml
+          cd launch4j
+          launch4j.exe ..\ljsa.xml
+          cd ..
           
           echo Checking if EXE was created...
           if exist ljsa.exe (
