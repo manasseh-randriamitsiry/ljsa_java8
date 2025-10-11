@@ -37,7 +37,7 @@ jobs:
           name: ljsa-jar
           path: target/*.jar
 
-  # 🪟 2️⃣ Windows job: Create EXE and release it
+  # 🪟 2️⃣ Windows job: Create standalone executable
   package-exe:
     runs-on: windows-latest
     needs: build-jar
@@ -63,73 +63,49 @@ jobs:
         run: |
           dir target
 
-      - name: Create EXE wrapper
+      - name: Create standalone executable package
         shell: cmd
         run: |
-          echo Creating batch file...
-          echo @echo off > ljsa.bat
-          echo java -jar "%%~dp0ljsa.jar" %%* >> ljsa.bat
+          echo Creating application directory...
+          mkdir ljsa-package
           
-          echo Creating SED file...
-          echo [Version] > ljsa.sed
-          echo Class=IEXPRESS >> ljsa.sed
-          echo SEDVersion=3 >> ljsa.sed
-          echo [Options] >> ljsa.sed
-          echo PackagePurpose=InstallApp >> ljsa.sed
-          echo ShowInstallProgramWindow=0 >> ljsa.sed
-          echo HideExtractAnimation=1 >> ljsa.sed
-          echo UseLongFileName=1 >> ljsa.sed
-          echo InsideCompressed=0 >> ljsa.sed
-          echo CAB_FixedSize=0 >> ljsa.sed
-          echo CAB_ResvCodeSigning=0 >> ljsa.sed
-          echo RebootMode=N >> ljsa.sed
-          echo InstallPrompt= >> ljsa.sed
-          echo DisplayLicense= >> ljsa.sed
-          echo FinishMessage= >> ljsa.sed
-          echo TargetName=ljsa.exe >> ljsa.sed
-          echo FriendlyName=LJSA Application >> ljsa.sed
-          echo AppLaunched=cmd /c ljsa.bat >> ljsa.sed
-          echo PostInstallCmd=^<None^> >> ljsa.sed
-          echo AdminQuietInstCmd= >> ljsa.sed
-          echo UserQuietInstCmd= >> ljsa.sed
-          echo SourceFiles=SourceFiles >> ljsa.sed
-          echo [Strings] >> ljsa.sed
-          echo InstallPrompt= >> ljsa.sed
-          echo DisplayLicense= >> ljsa.sed
-          echo FinishMessage= >> ljsa.sed
-          echo TargetName=ljsa.exe >> ljsa.sed
-          echo FriendlyName=LJSA Application >> ljsa.sed
-          echo AppLaunched=cmd /c ljsa.bat >> ljsa.sed
-          echo PostInstallCmd=^<None^> >> ljsa.sed
-          echo AdminQuietInstCmd= >> ljsa.sed
-          echo UserQuietInstCmd= >> ljsa.sed
+          echo Copying JAR file...
+          copy target\*.jar ljsa-package\
           
-          echo Creating SourceFiles directory...
-          mkdir SourceFiles
-          copy target\*.jar SourceFiles\
-          copy ljsa.bat SourceFiles\
+          echo Creating launcher script...
+          echo @echo off > ljsa-package\ljsa.exe
+          echo powershell -WindowStyle Hidden -Command "Start-Process java -ArgumentList '-jar', '%~dp0ljsa-1.0-SNAPSHOT.jar' -Wait" >> ljsa-package\ljsa.exe
           
-          echo Running iexpress...
-          iexpress /N /Q ljsa.sed
+          echo Renaming launcher to EXE...
+          del ljsa-package\ljsa.exe
+          echo @echo off > ljsa-package\ljsa.bat
+          echo powershell -WindowStyle Hidden -Command "Start-Process java -ArgumentList '-jar', '%~dp0ljsa-1.0-SNAPSHOT.jar'" >> ljsa-package\ljsa.bat
           
-          echo Listing current directory...
-          dir
-
-      - name: Prepare distribution
-        shell: cmd
-        run: |
+          echo Creating README file...
+          echo LJSA Application > ljsa-package\README.txt
+          echo =============== >> ljsa-package\README.txt
+          echo To run the application, double-click on ljsa.bat >> ljsa-package\README.txt
+          echo Make sure you have Java 8 or higher installed on your system >> ljsa-package\README.txt
+          
+          echo Creating self-extracting archive...
+          powershell "Compress-Archive -Path 'ljsa-package\*' -DestinationPath 'ljsa-package.zip'"
+          
+          echo Creating self-extracting EXE with 7z...
+          echo ;!@Install@!UTF-8! > config.txt
+          echo Title="LJSA Application" >> config.txt
+          echo ExecuteFile="ljsa.bat" >> config.txt
+          echo ;!@InstallEnd@! >> config.txt
+          
+          REM Download 7z SFX module
+          curl -L -o 7zSfx.exe https://github.com/mcmilk/7z-bin/raw/master/sfx/win32/7zS2con.sfx
+          
+          REM Create self-extracting EXE
+          copy /b 7zSfx.exe+ljsa-package.zip ljsa.exe
+          
+          echo Creating dist directory...
           mkdir dist
-          if exist ljsa.exe (
-            echo Found ljsa.exe, copying to dist...
-            copy ljsa.exe dist\
-          ) else (
-            echo ljsa.exe not found!
-            dir
-          )
+          copy ljsa.exe dist\
           copy target\*.jar dist\
-          
-          echo Contents of dist directory:
-          dir dist
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
