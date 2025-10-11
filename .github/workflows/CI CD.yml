@@ -92,7 +92,6 @@ jobs:
           name: javafx-build
           path: target/*.jar
     release:
-    runs-on: windows-latest
     needs: build
     if: startsWith(github.ref, 'refs/tags/v')
 
