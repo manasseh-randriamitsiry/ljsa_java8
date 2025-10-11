@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '8'
-          distribution: 'temurin'
+          distribution: 'liberica'
 
       # No database service needed for SQLite
 
@@ -56,7 +56,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '8'
-          distribution: 'temurin'
+          distribution: 'liberica'
 
       - name: Download and setup launch4j
         shell: cmd

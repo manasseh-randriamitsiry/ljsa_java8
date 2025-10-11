@@ -1,0 +1,446 @@
+[INFO] -------------------------------------------------------------
+Error:  COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[8,29] package javafx.beans.property does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[9,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[10,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[11,41] package javafx.collections.transformation does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[12,41] package javafx.collections.transformation does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[13,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[14,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[15,20] package javafx.scene does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[16,20] package javafx.scene does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[17,20] package javafx.scene does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[18,1] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[19,26] package javafx.scene.input does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[20,27] package javafx.scene.layout does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[21,27] package javafx.scene.layout does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[22,26] package javafx.scene.shape does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[23,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[24,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[25,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[26,19] package javafx.util does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[35,45] cannot find symbol
+  symbol: class Initializable
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[36,12] cannot find symbol
+  symbol:   class TableView
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[37,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[38,12] cannot find symbol
+  symbol:   class Button
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[39,12] cannot find symbol
+  symbol:   class TextField
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[40,12] cannot find symbol
+  symbol:   class ComboBox
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[41,12] cannot find symbol
+  symbol:   class ComboBox
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[42,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[43,12] cannot find symbol
+  symbol:   class Label
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[44,12] cannot find symbol
+  symbol:   class Pane
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[45,12] cannot find symbol
+  symbol:   class Circle
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[46,12] cannot find symbol
+  symbol:   class Button
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[47,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[48,12] cannot find symbol
+  symbol:   class TableView
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[49,12] cannot find symbol
+  symbol:   class Button
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[50,12] cannot find symbol
+  symbol:   class Button
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[51,12] cannot find symbol
+  symbol:   class Button
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[52,5] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[53,5] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[4,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[5,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java:[4,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java:[5,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java:[6,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DAOInterface.java:[2,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/utils/PopUp.java:[2,23] package javafx.geometry does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[3,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[4,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[8,26] package javafx.scene.chart does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[16,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.TerminaleDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[151,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.TerminaleDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[191,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.TerminaleDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DAOInterface.java:[5,5] cannot find symbol
+  symbol:   class ObservableList
+  location: interface com.manasseh.ljsa.DAO.DAOInterface<T>
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[41,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[132,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[149,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[166,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[183,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[183,35] package PieChart does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[19,29] package javafx.beans.property does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[20,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[22,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[23,1] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[24,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[25,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[37,49] cannot find symbol
+  symbol: class Initializable
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[38,12] cannot find symbol
+  symbol:   class Label
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[39,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[40,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[41,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[42,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[43,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[44,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[45,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[46,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[47,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[48,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[49,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[50,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[51,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[52,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[53,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[54,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[55,12] cannot find symbol
+  symbol:   class TableColumn
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[56,12] cannot find symbol
+  symbol:   class TableView
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[57,12] cannot find symbol
+  symbol:   class ComboBox
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[58,12] cannot find symbol
+  symbol:   class ComboBox
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[59,12] cannot find symbol
+  symbol:   class ComboBox
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[7,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[64,5] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[16,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[49,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[182,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[223,12] cannot find symbol
+  symbol:   class ObservableList
+  location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[4,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[6,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[7,26] package javafx.scene.chart does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[8,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[9,27] package javafx.scene.layout does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[15,40] cannot find symbol
+  symbol: class Initializable
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[16,12] cannot find symbol
+  symbol:   class Label
+  location: class com.manasseh.ljsa.page.HomeController
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.441 s
+[INFO] Finished at: 2025-10-11T19:00:18Z
+[INFO] ------------------------------------------------------------------------
+Error:  Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project ljsa: Compilation failure: Compilation failure: 
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[8,29] package javafx.beans.property does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[9,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[10,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[11,41] package javafx.collections.transformation does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[12,41] package javafx.collections.transformation does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[13,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[14,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[15,20] package javafx.scene does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[16,20] package javafx.scene does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[17,20] package javafx.scene does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[18,1] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[19,26] package javafx.scene.input does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[20,27] package javafx.scene.layout does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[21,27] package javafx.scene.layout does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[22,26] package javafx.scene.shape does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[23,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[24,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[25,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[26,19] package javafx.util does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[35,45] cannot find symbol
+Error:    symbol: class Initializable
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[36,12] cannot find symbol
+Error:    symbol:   class TableView
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[37,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[38,12] cannot find symbol
+Error:    symbol:   class Button
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[39,12] cannot find symbol
+Error:    symbol:   class TextField
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[40,12] cannot find symbol
+Error:    symbol:   class ComboBox
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[41,12] cannot find symbol
+Error:    symbol:   class ComboBox
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[42,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[43,12] cannot find symbol
+Error:    symbol:   class Label
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[44,12] cannot find symbol
+Error:    symbol:   class Pane
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[45,12] cannot find symbol
+Error:    symbol:   class Circle
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[46,12] cannot find symbol
+Error:    symbol:   class Button
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[47,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[48,12] cannot find symbol
+Error:    symbol:   class TableView
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[49,12] cannot find symbol
+Error:    symbol:   class Button
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[50,12] cannot find symbol
+Error:    symbol:   class Button
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[51,12] cannot find symbol
+Error:    symbol:   class Button
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[52,5] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/TerminaleController.java:[53,5] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.page.TerminaleController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[4,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[5,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java:[4,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java:[5,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DeleteDAO.java:[6,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DAOInterface.java:[2,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/utils/PopUp.java:[2,23] package javafx.geometry does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[3,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[4,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[8,26] package javafx.scene.chart does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[16,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.TerminaleDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[151,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.TerminaleDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/TerminaleDAO.java:[191,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.TerminaleDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/DAOInterface.java:[5,5] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: interface com.manasseh.ljsa.DAO.DAOInterface<T>
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[41,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[132,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[149,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[166,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[183,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.EtudiantDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/EtudiantDAO.java:[183,35] package PieChart does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[19,29] package javafx.beans.property does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[20,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[22,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[23,1] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[24,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[25,20] package javafx.stage does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[37,49] cannot find symbol
+Error:    symbol: class Initializable
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[38,12] cannot find symbol
+Error:    symbol:   class Label
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[39,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[40,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[41,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[42,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[43,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[44,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[45,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[46,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[47,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[48,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[49,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[50,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[51,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[52,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[53,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[54,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[55,12] cannot find symbol
+Error:    symbol:   class TableColumn
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[56,12] cannot find symbol
+Error:    symbol:   class TableView
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[57,12] cannot find symbol
+Error:    symbol:   class ComboBox
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[58,12] cannot find symbol
+Error:    symbol:   class ComboBox
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[59,12] cannot find symbol
+Error:    symbol:   class ComboBox
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[7,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/ReleveSecondeController.java:[64,5] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.page.ReleveSecondeController
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[16,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[49,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[182,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/DAO/SecondeDAO.java:[223,12] cannot find symbol
+Error:    symbol:   class ObservableList
+Error:    location: class com.manasseh.ljsa.DAO.SecondeDAO
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[4,26] package javafx.collections does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[6,19] package javafx.fxml does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[7,26] package javafx.scene.chart does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[8,28] package javafx.scene.control does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[9,27] package javafx.scene.layout does not exist
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[15,40] cannot find symbol
+Error:    symbol: class Initializable
+Error:  /home/runner/work/ljsa_java8/ljsa_java8/src/main/java/com/manasseh/ljsa/page/HomeController.java:[16,12] cannot find symbol
+Error:    symbol:   class Label
+Error:    location: class com.manasseh.ljsa.page.HomeController
+Error:  -> [Help 1]
+Error:  
+Error:  To see the full stack trace of the errors, re-run Maven with the -e switch.
+Error:  Re-run Maven using the -X switch to enable full debug logging.
+Error:  
+Error:  For more information about the errors and possible solutions, please read the following articles:
+Error:  [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Error: Process completed with exit code 1.
