@@ -67,59 +67,6 @@ jobs:
 
       - name: Run Tests
         run: mvn test
-
-      - name: Upload Build Artifact (JAR)
-        uses: actions/upload-artifact@v4
-        with:
-          name: javafx-build
-          path: target/*.jar
-jobs:
-  build:
-    runs-on: windows-latest
-
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: 123456789
-          MYSQL_DATABASE: ljsa
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h localhost"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
-        with:
-          java-version: '8'
-          distribution: 'temurin'
-
-      - name: Wait for MySQL to be ready
-        run: |
-          echo "Waiting for MySQL..."
-          for /l %%i in (1,1,30) do (
-            mysqladmin ping -h127.0.0.1 -uroot -p123456789 --silent && exit /b 0
-            timeout /t 2 >nul
-          )
-
-      - name: Import database schema
-        run: |
-          choco install mysql -y
-          "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" -h127.0.0.1 -uroot -p123456789 ljsa < ljsa.sql
-
-      - name: Build with Maven
-        run: mvn -B clean package -DskipTests --file pom.xml
-
-      - name: Install Launch4j
-        run: choco install launch4j -y
-
       - name: Package JAR into EXE
         run: |
           mkdir dist
@@ -139,7 +86,12 @@ jobs:
           name: ljsa-exe
           path: dist/ljsa.exe
 
-  release:
+      - name: Upload Build Artifact (JAR)
+        uses: actions/upload-artifact@v4
+        with:
+          name: javafx-build
+          path: target/*.jar
+    release:
     runs-on: windows-latest
     needs: build
     if: startsWith(github.ref, 'refs/tags/v')
@@ -160,3 +112,7 @@ jobs:
           files: dist/ljsa.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      
+
+  
