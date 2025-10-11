@@ -1,0 +1,162 @@
+name: JavaFX CI/CD
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: 123456789
+          MYSQL_DATABASE: ljsa
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+
+      - name: Wait for MySQL to be ready
+        run: |
+          echo "Waiting for MySQL to start..."
+          for i in {1..30}; do
+            if mysqladmin ping -h127.0.0.1 -uroot -p123456789 --silent; then
+              echo "MySQL is up!"
+              break
+            fi
+            sleep 2
+          done
+
+      - name: Import database
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-client
+          mysql -h127.0.0.1 -uroot -p123456789 ljsa < ljsa.sql
+
+      - name: Build with Maven
+        run: mvn -B clean package --file pom.xml
+
+      # If using Gradle instead of Maven, comment out the above and use this:
+      # - name: Build with Gradle
+      #   run: ./gradlew build
+
+      - name: Verify Database Config
+        run: |
+          echo "Check your database connection file:"
+          echo "src/main/java/com/manasseh/ljsa/utils/DatabaseConnection.java"
+          grep -E "dbUser|password" src/main/java/com/manasseh/ljsa/utils/DatabaseConnection.java || true
+
+      - name: Run Tests
+        run: mvn test
+
+      - name: Upload Build Artifact (JAR)
+        uses: actions/upload-artifact@v4
+        with:
+          name: javafx-build
+          path: target/*.jar
+jobs:
+  build:
+    runs-on: windows-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: 123456789
+          MYSQL_DATABASE: ljsa
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Wait for MySQL to be ready
+        run: |
+          echo "Waiting for MySQL..."
+          for /l %%i in (1,1,30) do (
+            mysqladmin ping -h127.0.0.1 -uroot -p123456789 --silent && exit /b 0
+            timeout /t 2 >nul
+          )
+
+      - name: Import database schema
+        run: |
+          choco install mysql -y
+          "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" -h127.0.0.1 -uroot -p123456789 ljsa < ljsa.sql
+
+      - name: Build with Maven
+        run: mvn -B clean package -DskipTests --file pom.xml
+
+      - name: Install Launch4j
+        run: choco install launch4j -y
+
+      - name: Package JAR into EXE
+        run: |
+          mkdir dist
+          launch4j ^
+            --dont-wrapJar ^
+            --outfile dist/ljsa.exe ^
+            --jar target\*.jar ^
+            --mainClass com.manasseh.ljsa.Main ^
+            --chdir . ^
+            --errTitle "LJSA Error" ^
+            --supportUrl "https://github.com/${{ github.repository }}" ^
+            --headerType gui
+
+      - name: Upload EXE as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ljsa-exe
+          path: dist/ljsa.exe
+
+  release:
+    runs-on: windows-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download built EXE
+        uses: actions/download-artifact@v4
+        with:
+          name: ljsa-exe
+          path: dist
+
+      - name: Publish GitHub Release with EXE
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/ljsa.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
