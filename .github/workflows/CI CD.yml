@@ -66,6 +66,9 @@ jobs:
           echo Extracting launch4j...
           7z x launch4j.zip -olaunch4j
           
+          echo Contents of launch4j directory:
+          dir launch4j
+          
           echo Finding JAR file...
           for /f "tokens=*" %%i in ('dir target\*.jar /b ^| findstr /v "original"') do set JAR_FILE=%%i
           echo Found JAR file: %JAR_FILE%
@@ -108,9 +111,20 @@ jobs:
         shell: cmd
         run: |
           echo Running launch4j to create EXE...
-          cd launch4j
-          launch4j.exe ..\ljsa.xml
-          cd ..
+          dir launch4j
+          
+          if exist launch4j\launch4j.exe (
+            echo Found launch4j.exe, running it...
+            launch4j\launch4j ..\ljsa.xml
+          ) else (
+            echo launch4j.exe not found, trying launch4jc.exe...
+            if exist launch4j\launch4jc.exe (
+              launch4j\launch4jc ..\ljsa.xml
+            ) else (
+              echo Neither launch4j.exe nor launch4jc.exe found
+              exit /b 1
+            )
+          )
           
           echo Checking if EXE was created...
           if exist ljsa.exe (
