@@ -58,17 +58,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Launch4j
+      - name: Download Launch4j
         shell: cmd
         run: |
-          choco install launch4j -y
-          refreshenv
+          curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.5.1/launch4j-3.5.1-win32.exe
+          7z x launch4j.zip -olaunch4j
 
       - name: Package JAR into EXE
         shell: cmd
         run: |
           mkdir dist
-          launch4j --dont-wrapJar --outfile dist/ljsa.exe --jar target/*.jar --mainClass com.manasseh.ljsa.Main --chdir . --errTitle "LJSA Error" --supportUrl "https://github.com/${{ github.repository }}" --headerType gui
+          launch4j\launch4j --dont-wrapJar --outfile dist/ljsa.exe --jar target/*.jar --mainClass com.manasseh.ljsa.Main --chdir . --errTitle "LJSA Error" --supportUrl "https://github.com/${{ github.repository }}" --headerType gui
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
