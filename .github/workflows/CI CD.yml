@@ -28,7 +28,7 @@ jobs:
 
       # No database service needed for SQLite
 
-      - name: Build JAR
+      - name: Build JAR with dependencies
         run: mvn -B clean package -DskipTests --file pom.xml
 
       - name: Upload JAR artifact
@@ -58,23 +58,68 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download and Setup Launch4j
-        shell: cmd
+      - name: Create EXE wrapper
+        shell: powershell
         run: |
-          curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip
-          7z x launch4j.zip -olaunch4j
+          # Create a batch file to run the JAR
+          echo '@echo off' > ljsa.bat
+          echo 'java -jar "%~dp0ljsa.jar" %*' >> ljsa.bat
+          
+          # Create a simple EXE wrapper using iexpress
+          # Create the SED file for iexpress
+          echo '[Version]' > ljsa.sed
+          echo 'Class=IEXPRESS' >> ljsa.sed
+          echo 'SEDVersion=3' >> ljsa.sed
+          echo '[Options]' >> ljsa.sed
+          echo 'PackagePurpose=InstallApp' >> ljsa.sed
+          echo 'ShowInstallProgramWindow=0' >> ljsa.sed
+          echo 'HideExtractAnimation=1' >> ljsa.sed
+          echo 'UseLongFileName=1' >> ljsa.sed
+          echo 'InsideCompressed=0' >> ljsa.sed
+          echo 'CAB_FixedSize=0' >> ljsa.sed
+          echo 'CAB_ResvCodeSigning=0' >> ljsa.sed
+          echo 'RebootMode=N' >> ljsa.sed
+          echo 'InstallPrompt=%InstallPrompt%' >> ljsa.sed
+          echo 'DisplayLicense=%DisplayLicense%' >> ljsa.sed
+          echo 'FinishMessage=%FinishMessage%' >> ljsa.sed
+          echo 'TargetName=%TargetName%' >> ljsa.sed
+          echo 'FriendlyName=%FriendlyName%' >> ljsa.sed
+          echo 'AppLaunched=%AppLaunched%' >> ljsa.sed
+          echo 'PostInstallCmd=%PostInstallCmd%' >> ljsa.sed
+          echo 'AdminQuietInstCmd=%AdminQuietInstCmd%' >> ljsa.sed
+          echo 'UserQuietInstCmd=%UserQuietInstCmd%' >> ljsa.sed
+          echo 'SourceFiles=SourceFiles' >> ljsa.sed
+          echo '[Strings]' >> ljsa.sed
+          echo 'InstallPrompt=' >> ljsa.sed
+          echo 'DisplayLicense=' >> ljsa.sed
+          echo 'FinishMessage=' >> ljsa.sed
+          echo 'TargetName=ljsa.exe' >> ljsa.sed
+          echo 'FriendlyName=LJSA Application' >> ljsa.sed
+          echo 'AppLaunched=cmd /c ljsa.bat' >> ljsa.sed
+          echo 'PostInstallCmd=<None>' >> ljsa.sed
+          echo 'AdminQuietInstCmd=' >> ljsa.sed
+          echo 'UserQuietInstCmd=' >> ljsa.sed
+          
+          # Create source files directory
+          mkdir SourceFiles
+          copy target\*.jar SourceFiles\
+          copy ljsa.bat SourceFiles\
+          
+          # Run iexpress to create the EXE
+          iexpress /N /Q ljsa.sed
 
-      - name: Package JAR into EXE
+      - name: Prepare distribution
         shell: cmd
         run: |
           mkdir dist
-          launch4j\launch4j --dont-wrapJar --outfile dist/ljsa.exe --jar target/*.jar --mainClass com.manasseh.ljsa.Main --chdir . --errTitle "LJSA Error" --supportUrl "https://github.com/${{ github.repository }}" --headerType gui
+          copy ljsa.exe dist\
+          copy target\*.jar dist\
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: ljsa-exe
-          path: dist/ljsa.exe
+          path: dist
 
   # 🚀 3️⃣ Release job: Publish GitHub release only for version tags
   release:
@@ -92,6 +137,8 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/ljsa.exe
+          files: |
+            dist/ljsa.exe
+            dist/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
