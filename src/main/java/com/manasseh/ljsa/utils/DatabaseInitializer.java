@@ -1,8 +1,7 @@
 package com.manasseh.ljsa.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +20,7 @@ public class DatabaseInitializer {
             
             if (connection != null) {
                 // Read and execute the SQL file
-                executeSqlFile(connection, "ljsa_sqlite.sql");
+                executeSqlFile(connection);
                 System.out.println("Database initialized successfully.");
             } else {
                 System.err.println("Failed to establish database connection.");
@@ -41,15 +40,22 @@ public class DatabaseInitializer {
     }
     
     /**
-     * Execute SQL statements from a file
+     * Execute SQL statements from the embedded resource file
      * @param connection Database connection
-     * @param filePath Path to the SQL file
      * @throws IOException If there's an error reading the file
      * @throws SQLException If there's an error executing SQL statements
      */
-    private static void executeSqlFile(Connection connection, String filePath) throws IOException, SQLException {
+    private static void executeSqlFile(Connection connection) throws IOException, SQLException {
         StringBuilder sql = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        
+        // Try to read from embedded resource first, then from file system
+        InputStream inputStream = DatabaseInitializer.class.getClassLoader().getResourceAsStream("ljsa_sqlite.sql");
+        if (inputStream == null) {
+            // Fallback to file system
+            inputStream = new FileInputStream("ljsa_sqlite.sql");
+        }
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 // Skip empty lines and comments

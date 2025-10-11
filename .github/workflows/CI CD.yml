@@ -1,4 +1,4 @@
-name: JavaFX CI/CD with Java 17 and EXE Release
+name: JavaFX CI/CD with Java 8 and EXE Release
 
 on:
   push:
@@ -20,10 +20,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '8'
           distribution: 'temurin'
 
       # No database service needed for SQLite
@@ -37,7 +37,7 @@ jobs:
           name: ljsa-jar
           path: target/*.jar
 
-  # 🪟 2️⃣ Windows job: Create simple EXE wrapper
+  # 🪟 2️⃣ Windows job: Create executable using launch4j
   package-exe:
     runs-on: windows-latest
     needs: build-jar
@@ -52,45 +52,82 @@ jobs:
           name: ljsa-jar
           path: target
 
-      - name: Set up JDK 17
+      - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '8'
           distribution: 'temurin'
 
-      - name: Create simple EXE wrapper
+      - name: Download and setup launch4j
         shell: cmd
         run: |
-          echo Creating application directory structure...
-          mkdir app
-          xcopy target\*.jar app\ /Y
+          echo Downloading launch4j...
+          curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip
+          echo Extracting launch4j...
+          7z x launch4j.zip -olaunch4j
           
-          echo Creating batch wrapper...
-          echo @echo off > run.bat
-          echo cd /d "%%~dp0" >> run.bat
-          echo java -jar *.jar >> run.bat
-          echo if errorlevel 1 pause >> run.bat
+          echo Finding JAR file...
+          for /f "tokens=*" %%i in ('dir target\*.jar /b') do set JAR_FILE=%%i
+          echo Found JAR file: %JAR_FILE%
           
-          echo Creating self-contained package...
-          mkdir package
-          xcopy app\*.jar package\ /Y
-          copy run.bat package\
+          echo Creating launch4j configuration...
+          echo ^<?xml version="1.0" encoding="UTF-8"?^> > ljsa.xml
+          echo ^<launch4jConfig^> >> ljsa.xml
+          echo   ^<dontWrapJar^>false^</dontWrapJar^> >> ljsa.xml
+          echo   ^<headerType^>gui^</headerType^> >> ljsa.xml
+          echo   ^<jar^>target/%JAR_FILE%^</jar^> >> ljsa.xml
+          echo   ^<outfile^>ljsa.exe^</outfile^> >> ljsa.xml
+          echo   ^<errTitle^>LJSA Error^</errTitle^> >> ljsa.xml
+          echo   ^<cmdLine^>^</cmdLine^> >> ljsa.xml
+          echo   ^<chdir^>^</chdir^> >> ljsa.xml
+          echo   ^<priority^>normal^</priority^> >> ljsa.xml
+          echo   ^<downloadUrl^>https://www.java.com/download/^</downloadUrl^> >> ljsa.xml
+          echo   ^<supportUrl^>^</supportUrl^> >> ljsa.xml
+          echo   ^<stayAlive^>false^</stayAlive^> >> ljsa.xml
+          echo   ^<restartOnCrash^>false^</restartOnCrash^> >> ljsa.xml
+          echo   ^<manifest^>^</manifest^> >> ljsa.xml
+          echo   ^<icon^>^</icon^> >> ljsa.xml
+          echo   ^<jre^> >> ljsa.xml
+          echo     ^<path^>^</path^> >> ljsa.xml
+          echo     ^<bundledJre64Bit^>false^</bundledJre64Bit^> >> ljsa.xml
+          echo     ^<bundledJreAsFallback^>false^</bundledJreAsFallback^> >> ljsa.xml
+          echo     ^<minVersion^>1.8.0^</minVersion^> >> ljsa.xml
+          echo     ^<maxVersion^>^</maxVersion^> >> ljsa.xml
+          echo     ^<jdkPreference^>preferJre^</jdkPreference^> >> ljsa.xml
+          echo     ^<runtimeBits^>64/32^</runtimeBits^> >> ljsa.xml
+          echo   ^</jre^> >> ljsa.xml
+          echo   ^<splash^> >> ljsa.xml
+          echo     ^<file^>^</file^> >> ljsa.xml
+          echo     ^<waitForWindow^>true^</waitForWindow^> >> ljsa.xml
+          echo     ^<timeout^>60^</timeout^> >> ljsa.xml
+          echo     ^<timeoutErr^>true^</timeoutErr^> >> ljsa.xml
+          echo   ^</splash^> >> ljsa.xml
+          echo ^</launch4jConfig^> >> ljsa.xml
+
+      - name: Create EXE using launch4j
+        shell: cmd
+        run: |
+          echo Running launch4j to create EXE...
+          launch4j\launch4j ljsa.xml
           
-          echo Creating executable wrapper...
-          echo @echo off > ljsa.exe
-          echo cd /d "%%~dp0" >> ljsa.exe
-          echo java -jar *.jar >> ljsa.exe
-          echo if errorlevel 1 pause >> ljsa.exe
+          echo Checking if EXE was created...
+          if exist ljsa.exe (
+            echo ljsa.exe created successfully
+            dir ljsa.exe
+          ) else (
+            echo Error: ljsa.exe was not created
+            dir
+            dir target\
+            type ljsa.xml
+            exit /b 1
+          )
           
-          echo Creating complete distribution...
+          echo Creating dist directory...
           mkdir dist
           copy ljsa.exe dist\
-          xcopy app\*.jar dist\ /Y
-          
-          echo Verifying files...
-          dir dist\
+          copy target\*.jar dist\
 
-      - name: Upload distribution artifact
+      - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: ljsa-exe
@@ -103,7 +140,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
 
     steps:
-      - name: Download distribution artifact
+      - name: Download EXE artifact
         uses: actions/download-artifact@v4
         with:
           name: ljsa-exe
