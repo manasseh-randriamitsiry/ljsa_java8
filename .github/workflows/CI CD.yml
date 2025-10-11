@@ -58,62 +58,78 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create EXE wrapper
-        shell: powershell
+      - name: List downloaded files
+        shell: cmd
         run: |
-          # Create a batch file to run the JAR
-          echo '@echo off' > ljsa.bat
-          echo 'java -jar "%~dp0ljsa.jar" %*' >> ljsa.bat
+          dir target
+
+      - name: Create EXE wrapper
+        shell: cmd
+        run: |
+          echo Creating batch file...
+          echo @echo off > ljsa.bat
+          echo java -jar "%%~dp0ljsa.jar" %%* >> ljsa.bat
           
-          # Create a simple EXE wrapper using iexpress
-          # Create the SED file for iexpress
-          echo '[Version]' > ljsa.sed
-          echo 'Class=IEXPRESS' >> ljsa.sed
-          echo 'SEDVersion=3' >> ljsa.sed
-          echo '[Options]' >> ljsa.sed
-          echo 'PackagePurpose=InstallApp' >> ljsa.sed
-          echo 'ShowInstallProgramWindow=0' >> ljsa.sed
-          echo 'HideExtractAnimation=1' >> ljsa.sed
-          echo 'UseLongFileName=1' >> ljsa.sed
-          echo 'InsideCompressed=0' >> ljsa.sed
-          echo 'CAB_FixedSize=0' >> ljsa.sed
-          echo 'CAB_ResvCodeSigning=0' >> ljsa.sed
-          echo 'RebootMode=N' >> ljsa.sed
-          echo 'InstallPrompt=%InstallPrompt%' >> ljsa.sed
-          echo 'DisplayLicense=%DisplayLicense%' >> ljsa.sed
-          echo 'FinishMessage=%FinishMessage%' >> ljsa.sed
-          echo 'TargetName=%TargetName%' >> ljsa.sed
-          echo 'FriendlyName=%FriendlyName%' >> ljsa.sed
-          echo 'AppLaunched=%AppLaunched%' >> ljsa.sed
-          echo 'PostInstallCmd=%PostInstallCmd%' >> ljsa.sed
-          echo 'AdminQuietInstCmd=%AdminQuietInstCmd%' >> ljsa.sed
-          echo 'UserQuietInstCmd=%UserQuietInstCmd%' >> ljsa.sed
-          echo 'SourceFiles=SourceFiles' >> ljsa.sed
-          echo '[Strings]' >> ljsa.sed
-          echo 'InstallPrompt=' >> ljsa.sed
-          echo 'DisplayLicense=' >> ljsa.sed
-          echo 'FinishMessage=' >> ljsa.sed
-          echo 'TargetName=ljsa.exe' >> ljsa.sed
-          echo 'FriendlyName=LJSA Application' >> ljsa.sed
-          echo 'AppLaunched=cmd /c ljsa.bat' >> ljsa.sed
-          echo 'PostInstallCmd=<None>' >> ljsa.sed
-          echo 'AdminQuietInstCmd=' >> ljsa.sed
-          echo 'UserQuietInstCmd=' >> ljsa.sed
+          echo Creating SED file...
+          echo [Version] > ljsa.sed
+          echo Class=IEXPRESS >> ljsa.sed
+          echo SEDVersion=3 >> ljsa.sed
+          echo [Options] >> ljsa.sed
+          echo PackagePurpose=InstallApp >> ljsa.sed
+          echo ShowInstallProgramWindow=0 >> ljsa.sed
+          echo HideExtractAnimation=1 >> ljsa.sed
+          echo UseLongFileName=1 >> ljsa.sed
+          echo InsideCompressed=0 >> ljsa.sed
+          echo CAB_FixedSize=0 >> ljsa.sed
+          echo CAB_ResvCodeSigning=0 >> ljsa.sed
+          echo RebootMode=N >> ljsa.sed
+          echo InstallPrompt= >> ljsa.sed
+          echo DisplayLicense= >> ljsa.sed
+          echo FinishMessage= >> ljsa.sed
+          echo TargetName=ljsa.exe >> ljsa.sed
+          echo FriendlyName=LJSA Application >> ljsa.sed
+          echo AppLaunched=cmd /c ljsa.bat >> ljsa.sed
+          echo PostInstallCmd=^<None^> >> ljsa.sed
+          echo AdminQuietInstCmd= >> ljsa.sed
+          echo UserQuietInstCmd= >> ljsa.sed
+          echo SourceFiles=SourceFiles >> ljsa.sed
+          echo [Strings] >> ljsa.sed
+          echo InstallPrompt= >> ljsa.sed
+          echo DisplayLicense= >> ljsa.sed
+          echo FinishMessage= >> ljsa.sed
+          echo TargetName=ljsa.exe >> ljsa.sed
+          echo FriendlyName=LJSA Application >> ljsa.sed
+          echo AppLaunched=cmd /c ljsa.bat >> ljsa.sed
+          echo PostInstallCmd=^<None^> >> ljsa.sed
+          echo AdminQuietInstCmd= >> ljsa.sed
+          echo UserQuietInstCmd= >> ljsa.sed
           
-          # Create source files directory
+          echo Creating SourceFiles directory...
           mkdir SourceFiles
           copy target\*.jar SourceFiles\
           copy ljsa.bat SourceFiles\
           
-          # Run iexpress to create the EXE
+          echo Running iexpress...
           iexpress /N /Q ljsa.sed
+          
+          echo Listing current directory...
+          dir
 
       - name: Prepare distribution
         shell: cmd
         run: |
           mkdir dist
-          copy ljsa.exe dist\
+          if exist ljsa.exe (
+            echo Found ljsa.exe, copying to dist...
+            copy ljsa.exe dist\
+          ) else (
+            echo ljsa.exe not found!
+            dir
+          )
           copy target\*.jar dist\
+          
+          echo Contents of dist directory:
+          dir dist
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
@@ -133,6 +149,11 @@ jobs:
         with:
           name: ljsa-exe
           path: dist
+
+      - name: List files for release
+        run: |
+          echo "Files in dist directory:"
+          ls -la dist/
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
