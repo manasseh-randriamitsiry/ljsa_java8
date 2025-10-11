@@ -58,10 +58,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download Launch4j
+      - name: Download and Setup Launch4j
         shell: cmd
         run: |
-          curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.5.1/launch4j-3.5.1-win32.exe
+          curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip
           7z x launch4j.zip -olaunch4j
 
       - name: Package JAR into EXE
