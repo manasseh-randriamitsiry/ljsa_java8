@@ -64,10 +64,10 @@ jobs:
           echo Downloading launch4j...
           curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip
           echo Extracting launch4j...
-          7z x launch4j.zip -olaunch4j
+          7z x launch4j.zip
           
-          echo Contents of launch4j directory:
-          dir launch4j
+          echo Contents of current directory:
+          dir
           
           echo Finding JAR file...
           for /f "tokens=*" %%i in ('dir target\*.jar /b ^| findstr /v "original"') do set JAR_FILE=%%i
@@ -111,15 +111,15 @@ jobs:
         shell: cmd
         run: |
           echo Running launch4j to create EXE...
-          dir launch4j
+          dir
           
-          if exist launch4j\launch4j.exe (
+          if exist launch4j.exe (
             echo Found launch4j.exe, running it...
-            launch4j\launch4j ..\ljsa.xml
+            launch4j.exe ljsa.xml
           ) else (
             echo launch4j.exe not found, trying launch4jc.exe...
-            if exist launch4j\launch4jc.exe (
-              launch4j\launch4jc ..\ljsa.xml
+            if exist launch4jc.exe (
+              launch4jc.exe ljsa.xml
             ) else (
               echo Neither launch4j.exe nor launch4jc.exe found
               exit /b 1
