@@ -59,7 +59,10 @@ jobs:
           distribution: 'temurin'
 
       - name: Install Launch4j
-        run: choco install launch4j -y
+        shell: cmd
+        run: |
+          choco install launch4j -y
+          refreshenv
 
       - name: Package JAR into EXE
         shell: cmd
