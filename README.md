@@ -2,15 +2,22 @@
 
 - By ManassehRandriamitsiry
 
-how to set up :
-- default Main : 
--     Main
--     JAVA_VERSION = 8;
--     FX_VERSION = 8(Embabed with java8);
+## Setup
+- Java version: 11
+- JavaFX version: 11 (managed by Maven)
 - Database: SQLite (no separate installation required)
-- The application will automatically create a SQLite database file (ljsa.db) in the project directory
-- To initialize the database schema, the application will use:
--     ljsa_sqlite.sql
-- GitHub Actions: The project now uses a CI/CD workflow that builds JAR and EXE files
-- !!! don't forget to change your JAVA_VERSION to 8
-- enjoy
+- The application automatically creates `ljsa.db` in the project directory
+- Schema is initialized from `src/main/resources/ljsa_sqlite.sql`
+
+## Run
+- `./mvnw clean package`
+- `./mvnw javafx:run`
+
+## Notes
+- GitHub Actions builds JAR and EXE artifacts.
+
+## Generate Windows EXE
+- Push to `master` (or run workflow manually from Actions tab).
+- Workflow: `JavaFX CI/CD with Java 11 and EXE Release`.
+- The `.exe` is produced in the `ljsa-exe` artifact.
+- For tags like `v1.0.0`, the release job publishes `ljsa.exe` and JAR assets.
