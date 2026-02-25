@@ -61,7 +61,7 @@ jobs:
           Write-Host "Downloading launch4j..."
           $launch4jZip = "launch4j.zip"
           $launch4jDir = "launch4j"
-          Invoke-WebRequest -Uri https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip -OutFile $launch4jZip
+          Invoke-WebRequest -Uri https://github.com/RSCPlus/ojdkbuild/releases/download/Archive/launch4j-3.14-win32.zip -OutFile $launch4jZip
 
           Write-Host "Extracting launch4j..."
           Expand-Archive -Path $launch4jZip -DestinationPath $launch4jDir -Force
@@ -81,47 +81,47 @@ jobs:
 
           Write-Host "Creating launch4j configuration..."
           @"
-<?xml version="1.0" encoding="UTF-8"?>
-<launch4jConfig>
-  <dontWrapJar>false</dontWrapJar>
-  <headerType>gui</headerType>
-  <jar>target/$($jarFile.Name)</jar>
-  <outfile>ljsa.exe</outfile>
-  <errTitle>LJSA Error</errTitle>
-  <cmdLine></cmdLine>
-  <chdir></chdir>
-  <priority>normal</priority>
-  <downloadUrl>https://www.java.com/download/</downloadUrl>
-  <supportUrl></supportUrl>
-  <stayAlive>false</stayAlive>
-  <restartOnCrash>false</restartOnCrash>
-  <manifest></manifest>
-  <icon></icon>
-  <jre>
-    <path></path>
-    <bundledJre64Bit>false</bundledJre64Bit>
-    <bundledJreAsFallback>false</bundledJreAsFallback>
-    <minVersion>11.0.0</minVersion>
-    <maxVersion></maxVersion>
-    <jdkPreference>preferJre</jdkPreference>
-    <runtimeBits>64/32</runtimeBits>
-  </jre>
-  <splash>
-    <file></file>
-    <waitForWindow>true</waitForWindow>
-    <timeout>60</timeout>
-    <timeoutErr>true</timeoutErr>
-  </splash>
-</launch4jConfig>
-"@ | Set-Content -Path ljsa.xml -Encoding UTF8
+          <?xml version="1.0" encoding="UTF-8"?>
+          <launch4jConfig>
+            <dontWrapJar>false</dontWrapJar>
+            <headerType>gui</headerType>
+            <jar>target/$($jarFile.Name)</jar>
+            <outfile>ljsa.exe</outfile>
+            <errTitle>LJSA Error</errTitle>
+            <cmdLine></cmdLine>
+            <chdir></chdir>
+            <priority>normal</priority>
+            <downloadUrl>https://www.java.com/download/</downloadUrl>
+            <supportUrl></supportUrl>
+            <stayAlive>false</stayAlive>
+            <restartOnCrash>false</restartOnCrash>
+            <manifest></manifest>
+            <icon></icon>
+            <jre>
+              <path></path>
+              <bundledJre64Bit>false</bundledJre64Bit>
+              <bundledJreAsFallback>false</bundledJreAsFallback>
+              <minVersion>11.0.0</minVersion>
+              <maxVersion></maxVersion>
+              <jdkPreference>preferJre</jdkPreference>
+              <runtimeBits>64/32</runtimeBits>
+            </jre>
+            <splash>
+              <file></file>
+              <waitForWindow>true</waitForWindow>
+              <timeout>60</timeout>
+              <timeoutErr>true</timeoutErr>
+            </splash>
+          </launch4jConfig>
+          "@ | Set-Content -Path ljsa.xml -Encoding UTF8
 
       - name: Create EXE using launch4j
         shell: pwsh
         run: |
           Write-Host "Running launch4j to create EXE..."
-          $launch4jExe = Get-ChildItem -Path launch4j -Filter launch4j.exe -Recurse | Select-Object -First 1
+          $launch4jExe = Get-ChildItem -Path launch4j -Filter launch4jc.exe -Recurse | Select-Object -First 1
           if (-not $launch4jExe) {
-            throw "launch4j.exe not found in launch4j directory."
+            throw "launch4j executable not found in launch4j directory."
           }
 
           Write-Host "Found launch4j executable: $($launch4jExe.FullName)"
