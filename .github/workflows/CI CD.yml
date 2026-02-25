@@ -56,99 +56,96 @@ jobs:
         run: mvn -B clean package -DskipTests --file pom.xml
 
       - name: Download and setup launch4j
-        shell: cmd
+        shell: pwsh
         run: |
-          echo Downloading launch4j...
-          curl -L -o launch4j.zip https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip
-          echo Extracting launch4j...
-          7z x launch4j.zip -olaunch4j
-          
-          echo Contents of launch4j directory:
-          dir launch4j
-          
-          echo Contents of current directory:
-          dir
-          
-          echo Finding JAR file...
-          for /f "tokens=*" %%i in ('dir target\*.jar /b ^| findstr /v "original"') do set JAR_FILE=%%i
-          echo Found JAR file: %JAR_FILE%
-          
-          echo Creating launch4j configuration...
-          echo ^<?xml version="1.0" encoding="UTF-8"?^> > ljsa.xml
-          echo ^<launch4jConfig^> >> ljsa.xml
-          echo   ^<dontWrapJar^>false^</dontWrapJar^> >> ljsa.xml
-          echo   ^<headerType^>gui^</headerType^> >> ljsa.xml
-          echo   ^<jar^>target/%JAR_FILE%^</jar^> >> ljsa.xml
-          echo   ^<outfile^>ljsa.exe^</outfile^> >> ljsa.xml
-          echo   ^<errTitle^>LJSA Error^</errTitle^> >> ljsa.xml
-          echo   ^<cmdLine^>^</cmdLine^> >> ljsa.xml
-          echo   ^<chdir^>^</chdir^> >> ljsa.xml
-          echo   ^<priority^>normal^</priority^> >> ljsa.xml
-          echo   ^<downloadUrl^>https://www.java.com/download/^</downloadUrl^> >> ljsa.xml
-          echo   ^<supportUrl^>^</supportUrl^> >> ljsa.xml
-          echo   ^<stayAlive^>false^</stayAlive^> >> ljsa.xml
-          echo   ^<restartOnCrash^>false^</restartOnCrash^> >> ljsa.xml
-          echo   ^<manifest^>^</manifest^> >> ljsa.xml
-          echo   ^<icon^>^</icon^> >> ljsa.xml
-          echo   ^<jre^> >> ljsa.xml
-          echo     ^<path^>^</path^> >> ljsa.xml
-          echo     ^<bundledJre64Bit^>false^</bundledJre64Bit^> >> ljsa.xml
-          echo     ^<bundledJreAsFallback^>false^</bundledJreAsFallback^> >> ljsa.xml
-          echo     ^<minVersion^>11.0.0^</minVersion^> >> ljsa.xml
-          echo     ^<maxVersion^>^</maxVersion^> >> ljsa.xml
-          echo     ^<jdkPreference^>preferJre^</jdkPreference^> >> ljsa.xml
-          echo     ^<runtimeBits^>64/32^</runtimeBits^> >> ljsa.xml
-          echo   ^</jre^> >> ljsa.xml
-          echo   ^<splash^> >> ljsa.xml
-          echo     ^<file^>^</file^> >> ljsa.xml
-          echo     ^<waitForWindow^>true^</waitForWindow^> >> ljsa.xml
-          echo     ^<timeout^>60^</timeout^> >> ljsa.xml
-          echo     ^<timeoutErr^>true^</timeoutErr^> >> ljsa.xml
-          echo   ^</splash^> >> ljsa.xml
-          echo ^</launch4jConfig^> >> ljsa.xml
+          Write-Host "Downloading launch4j..."
+          $launch4jZip = "launch4j.zip"
+          $launch4jDir = "launch4j"
+          Invoke-WebRequest -Uri https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip -OutFile $launch4jZip
+
+          Write-Host "Extracting launch4j..."
+          Expand-Archive -Path $launch4jZip -DestinationPath $launch4jDir -Force
+
+          Write-Host "Contents of launch4j directory:"
+          Get-ChildItem -Path $launch4jDir
+
+          Write-Host "Contents of current directory:"
+          Get-ChildItem -Path .
+
+          Write-Host "Finding JAR file..."
+          $jarFile = Get-ChildItem -Path target -Filter *.jar | Where-Object { $_.Name -notmatch "original" } | Select-Object -First 1
+          if (-not $jarFile) {
+            throw "JAR file not found in target directory."
+          }
+          Write-Host "Found JAR file: $($jarFile.Name)"
+
+          Write-Host "Creating launch4j configuration..."
+          @"
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>target/$($jarFile.Name)</jar>
+  <outfile>ljsa.exe</outfile>
+  <errTitle>LJSA Error</errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>https://www.java.com/download/</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>11.0.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <splash>
+    <file></file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>60</timeout>
+    <timeoutErr>true</timeoutErr>
+  </splash>
+</launch4jConfig>
+"@ | Set-Content -Path ljsa.xml -Encoding UTF8
 
       - name: Create EXE using launch4j
-        shell: cmd
+        shell: pwsh
         run: |
-          echo Running launch4j to create EXE...
-          dir launch4j
-          
-          if exist launch4j\launch4j.exe (
-            echo Found launch4j.exe, running it...
-            cd launch4j
-            launch4j.exe ..\ljsa.xml
-            cd ..
-          ) else (
-            echo launch4j.exe not found in launch4j directory
-            echo Trying to find launch4j executable...
-            for /f "tokens=*" %%i in ('dir launch4j\*.exe /b 2^>nul') do (
-              echo Found executable: %%i
-              cd launch4j
-              %%i ..\ljsa.xml
-              cd ..
-              goto :found
-            )
-            echo No executable found in launch4j directory
-            exit /b 1
-            :found
-          )
-          
-          echo Checking if EXE was created...
-          if exist ljsa.exe (
-            echo ljsa.exe created successfully
-            dir ljsa.exe
-          ) else (
-            echo Error: ljsa.exe was not created
-            dir
-            dir target\
-            type ljsa.xml
-            exit /b 1
-          )
-          
-          echo Creating dist directory...
-          mkdir dist
-          copy ljsa.exe dist\
-          copy target\*.jar dist\
+          Write-Host "Running launch4j to create EXE..."
+          $launch4jExe = Get-ChildItem -Path launch4j -Filter launch4j.exe -Recurse | Select-Object -First 1
+          if (-not $launch4jExe) {
+            throw "launch4j.exe not found in launch4j directory."
+          }
+
+          Write-Host "Found launch4j executable: $($launch4jExe.FullName)"
+          & $launch4jExe.FullName (Resolve-Path ljsa.xml)
+          if ($LASTEXITCODE -ne 0) {
+            throw "launch4j failed with exit code $LASTEXITCODE."
+          }
+
+          Write-Host "Checking if EXE was created..."
+          if (-not (Test-Path ljsa.exe)) {
+            Write-Host "Error: ljsa.exe was not created"
+            Get-ChildItem -Path .
+            Get-ChildItem -Path target
+            Get-Content ljsa.xml
+            throw "launch4j output missing."
+          }
+
+          Write-Host "ljsa.exe created successfully"
+          Get-ChildItem -Path ljsa.exe
+
+          Write-Host "Creating dist directory..."
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item -Path ljsa.exe -Destination dist
+          Copy-Item -Path target/*.jar -Destination dist
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
