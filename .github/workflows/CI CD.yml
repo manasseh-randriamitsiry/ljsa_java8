@@ -61,7 +61,7 @@ jobs:
           Write-Host "Downloading launch4j..."
           $launch4jZip = "launch4j.zip"
           $launch4jDir = "launch4j"
-          Invoke-WebRequest -Uri https://github.com/mrdon/launch4j/releases/download/launch4j-3.14/launch4j-3.14-win32.zip -OutFile $launch4jZip
+          Invoke-WebRequest -Uri https://downloads.sourceforge.net/project/launch4j/launch4j-3/3.14/launch4j-3.14-win32.zip -OutFile $launch4jZip
 
           Write-Host "Extracting launch4j..."
           Expand-Archive -Path $launch4jZip -DestinationPath $launch4jDir -Force
