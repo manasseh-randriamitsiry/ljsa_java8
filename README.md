@@ -20,4 +20,4 @@
 - Push to `master` (or run workflow manually from Actions tab).
 - Workflow: `JavaFX CI/CD with Java 11 and EXE Release`.
 - The `.exe` is produced in the `ljsa-exe` artifact.
-- For tags like `v1.0.0`, the release job publishes `ljsa.exe` and JAR assets.
+- For tags like `v1.0.0`, the release job publishes `ljsa.exe` and JAR assets. 
