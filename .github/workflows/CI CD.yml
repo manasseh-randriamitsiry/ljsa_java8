@@ -119,9 +119,9 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "Running launch4j to create EXE..."
-          $launch4jExe = Get-ChildItem -Path launch4j -Filter launch4j.exe -Recurse | Select-Object -First 1
+          $launch4jExe = Get-ChildItem -Path launch4j -Filter launch4jc.exe -Recurse | Select-Object -First 1
           if (-not $launch4jExe) {
-            throw "launch4j.exe not found in launch4j directory."
+            throw "launch4j executable not found in launch4j directory."
           }
 
           Write-Host "Found launch4j executable: $($launch4jExe.FullName)"
