@@ -114,7 +114,7 @@
     <itext.version>7.2.4</itext.version>
     <main.class>com.manasseh.ljsa.Main</main.class>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>21.0.2</javafx.version>
+    <javafx.version>11.0.2</javafx.version>
     <junit.version>5.9.0</junit.version>
   </properties>
 </project>
